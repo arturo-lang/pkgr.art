@@ -8,22 +8,47 @@ getCorrectVersion: function [versionString][
     ]
 ]
 
+getRepoInfo: function [owner, repo, details][
+    tgt: ~{tmp/|owner|-|repo|-|details\version|.zip}
+    download.as: tgt details\url
+    unzip "tmp" tgt
+    delete tgt
+
+    tgtFolder: first list "tmp"
+    infoData: # "|tgtFolder|/info.art"
+
+    delete.directory tgtFolder
+
+    return infoData
+]
+
 getRepoDetails: function [owner,repo][
-    u: ~"https://api.github.com/repos/|owner|/|repo|/releases"
-    data: read.json u
-    ;inspect data
-    loop data 'entry [
-        if ver: <= getCorrectVersion entry\name [
-            details: #[
-                timestamp: to :date entry\published_at
-                version: ver
-            ]
-            inspect details
-        ]   
+    try? [
+        u: ~"https://api.github.com/repos/|owner|/|repo|/releases"
+        data: read.json u
+
+        availableVersions: new []
+        loop data 'entry [
+            if ver: <= getCorrectVersion entry\name [
+
+                'availableVersions ++ #[
+                    version: ver
+                    timestamp: to :date entry\published_at
+                    url: entry\zipball_url
+                ]
+            ]   
+        ]
+        latest: first availableVersions
+
+        inspect getRepoInfo owner repo latest
+        availableVersions
+    ]
+    else [
+        null
     ]
 ]
 
 if standalone? ::
     owner: arg\0
     repo: arg\1
-    getRepoDetails owner repo
+    inspect getRepoDetails owner repo
