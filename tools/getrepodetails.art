@@ -76,7 +76,8 @@ getRepoDetails: function [owner,repo][
                 details: #[
                     description: infos\description
                     entry: infos\entry
-                    dependencies: infos\dependencies
+                    dependencies: infos\depends
+                    requirement: infos\requires
                 ]
             ]
             author: getAuthorInfo latest\author
