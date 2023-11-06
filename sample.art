@@ -1,0 +1,2 @@
+adder: function [x,y][x + y]
+print "package added"
