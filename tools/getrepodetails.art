@@ -1,5 +1,9 @@
 #!/usr/bin/env arturo
 
+;--------------------------------------------------
+; Helper methods
+;--------------------------------------------------
+
 getCorrectVersion: function [versionString][
     try? -> to :version versionString
     else [
@@ -47,6 +51,10 @@ getRepoDetails: function [owner,repo][
         null
     ]
 ]
+
+;--------------------------------------------------
+; Running directly from console
+;--------------------------------------------------
 
 if standalone? ::
     owner: arg\0
