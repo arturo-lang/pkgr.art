@@ -49,7 +49,7 @@ getRepoInfo: function [owner, repo, details][
 ]
 
 getRepoDetails: function [owner,repo][
-    ;try? [
+    try? [
         repoData: read.json ~"https://api.github.com/repos/|owner|/|repo|/releases"
         inspect repoData
         availableVersions: new []
@@ -84,10 +84,10 @@ getRepoDetails: function [owner,repo][
             license: getLicenseInfo owner repo
             tags: getTopicsInfo owner repo
         ]
-    ; ]
-    ; else [
-    ;     null
-    ; ]
+    ]
+    else [
+        null
+    ]
 ]
 
 ;--------------------------------------------------
