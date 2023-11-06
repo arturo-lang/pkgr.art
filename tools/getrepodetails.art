@@ -12,6 +12,28 @@ getCorrectVersion: function [versionString][
     ]
 ]
 
+getLicenseInfo: function [owner, repo][
+    lcns: read.json ~"https://api.github.com/repos/|owner|/|repo|/license"
+    return lcns\license\spdx_id
+]
+
+getTopicsInfo: function [owner, repo][
+    topics: read.json ~"https://api.github.com/repos/|owner|/|repo|/topics"
+    return topics\names
+]
+
+getAuthorInfo: function [user][
+    print "here"
+    authorData: read.json ~"https://api.github.com/users/|user|"
+    inspect authorData
+    return #[
+        name: authorData\name
+        nickname: user
+        avatar: authorData\avatar_url
+        url: authorData\html_url
+    ]
+]
+
 getRepoInfo: function [owner, repo, details][
     tgt: ~{tmp/|owner|-|repo|-|details\version|.zip}
     download.as: tgt details\url
@@ -19,7 +41,7 @@ getRepoInfo: function [owner, repo, details][
     delete tgt
 
     tgtFolder: first list "tmp"
-    infoData: # "|tgtFolder|/info.art"
+    infoData: # ~"|tgtFolder|/info.art"
 
     delete.directory tgtFolder
 
@@ -27,29 +49,44 @@ getRepoInfo: function [owner, repo, details][
 ]
 
 getRepoDetails: function [owner,repo][
-    try? [
-        u: ~"https://api.github.com/repos/|owner|/|repo|/releases"
-        data: read.json u
-
+    ;try? [
+        repoData: read.json ~"https://api.github.com/repos/|owner|/|repo|/releases"
+        inspect repoData
         availableVersions: new []
-        loop data 'entry [
+        loop repoData 'entry [
             if ver: <= getCorrectVersion entry\name [
 
                 'availableVersions ++ #[
                     version: ver
-                    timestamp: to :date entry\published_at
+                    date: to :date entry\published_at
                     url: entry\zipball_url
+                    author: entry\author\login
                 ]
             ]   
         ]
         latest: first availableVersions
 
-        inspect getRepoInfo owner repo latest
-        availableVersions
-    ]
-    else [
-        null
-    ]
+        infos: getRepoInfo owner repo latest
+
+        #[
+            latest: #[
+                version: latest\version
+                timestamp: latest\date
+                url: latest\url
+                details: #[
+                    description: infos\description
+                    entry: infos\entry
+                    dependencies: infos\dependencies
+                ]
+            ]
+            author: getAuthorInfo latest\author
+            license: getLicenseInfo owner repo
+            tags: getTopicsInfo owner repo
+        ]
+    ; ]
+    ; else [
+    ;     null
+    ; ]
 ]
 
 ;--------------------------------------------------
@@ -59,4 +96,4 @@ getRepoDetails: function [owner,repo][
 if standalone? ::
     owner: arg\0
     repo: arg\1
-    inspect getRepoDetails owner repo
+    print as.unwrapped.pretty.code getRepoDetails owner repo
