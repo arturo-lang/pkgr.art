@@ -1,0 +1,29 @@
+#!/usr/bin/env arturo
+
+getCorrectVersion: function [versionString][
+    try? -> to :version versionString
+    else [
+        try? -> to :version strip replace versionString "v" ""
+        else -> null
+    ]
+]
+
+getRepoDetails: function [owner,repo][
+    u: ~"https://api.github.com/repos/|owner|/|repo|/releases"
+    data: read.json u
+    ;inspect data
+    loop data 'entry [
+        if ver: <= getCorrectVersion entry\name [
+            details: #[
+                timestamp: to :date entry\published_at
+                version: ver
+            ]
+            inspect details
+        ]   
+    ]
+]
+
+if standalone? ::
+    owner: arg\0
+    repo: arg\1
+    getRepoDetails owner repo
