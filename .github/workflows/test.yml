@@ -1,4 +1,4 @@
-name: "Build & Test"
+name: "Verify Packages"
 on:
   push:
     branches:
@@ -18,7 +18,7 @@ defaults:
 
 jobs:  
   build:
-    name: "Build & Test"
+    name: "Verify Packages"
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
