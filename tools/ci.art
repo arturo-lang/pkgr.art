@@ -2,7 +2,7 @@ packages: # "packages/list.art"
 do relative "getrepodetails.art"
 
 do ::
-    ;IsCI?: true
+    IsCI?: true
     cnt: 1
     total: size packages
 
