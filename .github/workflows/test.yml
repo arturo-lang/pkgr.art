@@ -1,0 +1,46 @@
+name: "Build & Test"
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+  pull_request:
+    paths-ignore:
+      - 'docs/*'
+      - '*.yml'
+      - '*.md'
+      - 'LICENSE'
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+jobs:  
+  build:
+    name: "Build & Test"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        version:
+          - full
+    steps:
+      - name: "Cancel similar actions in progress"
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: "Setup Arturo"
+        uses: arturo-lang/arturo-action@main
+
+      - name: "Checkout"
+        uses: actions/checkout@main
+        with:
+          submodules: recursive
+
+      - name: Run unit tests
+        run: |
+          echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+          arturo tools/ci.art
