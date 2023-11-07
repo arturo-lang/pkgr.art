@@ -1,4 +1,4 @@
-name: "Verify Packages"
+name: "Packages"
 on:
   push:
     branches:
@@ -14,7 +14,7 @@ defaults:
     shell: bash -l {0}
 
 jobs:  
-  build:
+  Verify:
     runs-on: ubuntu-latest
     steps:
       - name: "Cancel similar actions in progress"
