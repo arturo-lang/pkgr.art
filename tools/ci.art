@@ -38,16 +38,18 @@ do ::
 
     (hasError?)? [
         unless empty? problemWithRepo [
+            print ""
             print "Couldn't retrieve repo info for:"
             print.lines problemWithRepo
         ]
         unless empty? problemWithReleases [
+            print ""
             print "Couldn't find valid release packages for:"
             print.lines problemWithReleases
         ]
         print separator
         print ""
-        panic.code:1 "Something went wrong. Let's fix everything before merging!"
+        panic.code:1 "Something went wrong.\nLet's fix everything before merging!"
     ][
         print separator
         print ""
