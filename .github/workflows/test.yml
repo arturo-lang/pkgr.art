@@ -1,16 +1,10 @@
 name: "Verify Packages"
 on:
-  push:
-    branches:
-      - '**'
-    tags-ignore:
-      - '**'
   pull_request:
     paths-ignore:
-      - 'docs/*'
+      - '*.html'
       - '*.yml'
       - '*.md'
-      - 'LICENSE'
 
 defaults:
   run:
