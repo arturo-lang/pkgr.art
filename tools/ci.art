@@ -3,6 +3,7 @@ do relative "getrepodetails.art"
 
 do ::
     IsCI?: true
+    inspect env
     cnt: 1
     total: size packages
 

@@ -75,17 +75,13 @@ getRepoInfo: function [owner, repo][
 getReleaseInfo: function [owner, repo, version, url][
     if IsCI? ->
         write.directory "tmp" ø
-        
+
     tgt: ~{tmp/|owner|-|repo|-|version|.zip}
     download.as: tgt url
     unzip "tmp" tgt
     delete tgt
 
-    tmpFolder: "tmp"
-    ;if IsCI? -> tmpFolder: relative tmpFolder
-
-    tgtFolder: first list tmpFolder
-    print ["tgtFolder:" tgtFolder]
+    tgtFolder: first list "tmp"
     infoFile: ~"|tgtFolder|/info.art"
 
     ret: #[]
@@ -118,7 +114,6 @@ getVersions: function [owner, repo][
     available: new []
     try [
         releases: getGH ~"repos/|owner|/|repo|/releases"
-        inspect releases
         loop releases 'release [
             if ver: <= extractCorrectVersion release\name [
                 if ver > greaterThan [
