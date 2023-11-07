@@ -1,5 +1,5 @@
 inspect # "packages/list.art"
-
+inspect path
 do "tools/getrepodetails.art"
 
 IsCI?: true
