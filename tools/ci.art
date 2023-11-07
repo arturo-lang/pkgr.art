@@ -2,21 +2,33 @@ packages: # "packages/list.art"
 do relative "getrepodetails.art"
 
 do ::
-    IsCI?: true
+    ;IsCI?: true
     cnt: 1
     total: size packages
 
     hasError?: false
     problemWithRepo: new []
+    problemWithReleases: new []
+
+    separator: repeat "=" 80
+
+    print separator
+    print " Verifying packages"
+    print separator
 
     loop packages [name,location][
         prints [pad to :string cnt 4 "/" pad.right to :string total 4 "|"]
         prints color #cyan "Processing: "
-        prints pad.right name 20 
+        prints pad.right name 40 
 
         [owner,repo]: split.by:"/" location
-        (getRepoInfo owner repo)? -> print color #green "[ ✅  OK   ]"                  
-        [
+        (repoD: <= getRepoInfo owner repo)?[
+            (empty? getVersions owner repo)?[
+                print color #orange "[ ❓ HMMM  ]" 
+                'problemWithReleases ++ ~"|owner|/|repo|"
+                hasError?: true
+            ] -> print color #green "[ ✅  OK   ]"                  
+        ][
             print color #red "[ ⛔️ ERROR ]"
             'problemWithRepo ++ ~"|owner|/|repo|"
             hasError?: true
@@ -29,8 +41,16 @@ do ::
             print "Couldn't retrieve repo info for:"
             print.lines problemWithRepo
         ]
+        unless empty? problemWithReleases [
+            print "Couldn't find valid release packages for:"
+            print.lines problemWithReleases
+        ]
+        print separator
+        print ""
         panic.code:1 "Something went wrong. Let's fix everything before merging!"
     ][
+        print separator
+        print ""
         print color #green "Everything went fine! 🔥🔥🔥"
         exit
     ]
