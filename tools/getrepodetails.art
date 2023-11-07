@@ -73,13 +73,16 @@ getRepoInfo: function [owner, repo][
 ]
 
 getReleaseInfo: function [owner, repo, version, url][
+    if IsCI? ->
+        write.directory "tmp" ø
+        
     tgt: ~{tmp/|owner|-|repo|-|version|.zip}
     download.as: tgt url
     unzip "tmp" tgt
     delete tgt
 
     tmpFolder: "tmp"
-    if IsCI? -> tmpFolder: relative tmpFolder
+    ;if IsCI? -> tmpFolder: relative tmpFolder
 
     tgtFolder: first list tmpFolder
     print ["tgtFolder:" tgtFolder]
