@@ -1,7 +1,7 @@
 #!/usr/bin/env arturo
 
 AccessToken: read "github.pat"
-IsCI?: false
+IsCI?: key? env 'GITHUB_ACTION      ; if it's set, we're inside a GitHub workflow
 
 ;--------------------------------------------------
 ; Helper methods

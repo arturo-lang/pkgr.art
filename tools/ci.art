@@ -2,8 +2,6 @@ packages: # "packages/list.art"
 do relative "getrepodetails.art"
 
 do ::
-    IsCI?: true
-    inspect env
     cnt: 1
     total: size packages
 
@@ -54,6 +52,6 @@ do ::
     ][
         print separator
         print ""
-        print color #green "Everything went fine! 🔥🔥🔥"
+        print [">" color #green "Everything went fine! 🔥🔥🔥"]
         exit
     ]
