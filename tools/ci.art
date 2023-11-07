@@ -1,6 +1,26 @@
-inspect # "packages/list.art"
+packages: # "packages/list.art"
 do relative "getrepodetails.art"
 
 do ::
     IsCI?: true
-    getGH "repos/arturo-lang/dummy-package"
+    cnt: 1
+    total: size packages
+
+    hasError?: false
+
+    loop packages [name,location][
+        prints ["[" cnt "/" total "]"]
+        prints color #cyan "- Processing: "
+        prints pad.right 20
+
+        [owner,repo]: split.by:"," location
+        
+        (data: <= getRepoInfo owner repo)? -> print color.green "[ OK ]"
+        [
+            print color.red "[ ERROR ]"
+            hasError?: true
+        ]
+    ]
+
+    if hasError? ->
+        panic.code:1 "Something went wrong. Let's stop here."
