@@ -1,8 +1,19 @@
 #!/usr/bin/env arturo
 
+AccessToken: read "github.pat"
+
 ;--------------------------------------------------
 ; Helper methods
 ;--------------------------------------------------
+
+getGithub: function [u][
+    got: request.get.headers: #[
+        "Accept": "application/vnd.github+json"
+        "Authorization": ~"Bearer |AccessToken|"
+        "X-GitHub-Api-Version": "2022-11-28"
+    ] u ø
+    return read.json got\body
+]
 
 getCorrectVersion: function [versionString][
     try? -> to :version versionString
