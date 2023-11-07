@@ -6,16 +6,16 @@ AccessToken: read "github.pat"
 ; Helper methods
 ;--------------------------------------------------
 
-getGithub: function [u][
+getGH: function [req][
     got: request.get.headers: #[
         "Accept": "application/vnd.github+json"
         "Authorization": ~"Bearer |AccessToken|"
         "X-GitHub-Api-Version": "2022-11-28"
-    ] u ø
+    ] ~{https://api.github.com/|req|} ø
     return read.json got\body
 ]
 
-getCorrectVersion: function [versionString][
+extractCorrectVersion: function [versionString][
     try? -> to :version versionString
     else [
         try? -> to :version strip replace versionString "v" ""
@@ -23,82 +23,99 @@ getCorrectVersion: function [versionString][
     ]
 ]
 
-getLicenseInfo: function [owner, repo][
-    lcns: read.json ~"https://api.github.com/repos/|owner|/|repo|/license"
-    return lcns\license\spdx_id
+;--------------------------------------------------
+; Main routines
+;--------------------------------------------------
+
+getReadme: function [owner, repo][
+    got: getGH ~"repos/|owner|/|repo|/readme"
+    if key? got 'download_url ->
+        return read got\download_url
+    return ø
 ]
 
-getTopicsInfo: function [owner, repo][
-    topics: read.json ~"https://api.github.com/repos/|owner|/|repo|/topics"
-    return topics\names
-]
-
-getAuthorInfo: function [user][
-    print "here"
-    authorData: read.json ~"https://api.github.com/users/|user|"
-    inspect authorData
-    return #[
-        name: authorData\name
-        nickname: user
-        avatar: authorData\avatar_url
-        url: authorData\html_url
-    ]
-]
-
-getRepoInfo: function [owner, repo, details][
-    tgt: ~{tmp/|owner|-|repo|-|details\version|.zip}
-    download.as: tgt details\url
-    unzip "tmp" tgt
-    delete tgt
-
-    tgtFolder: first list "tmp"
-    infoData: # ~"|tgtFolder|/info.art"
-
-    delete.directory tgtFolder
-
-    return infoData
-]
-
-getRepoDetails: function [owner,repo][
+getRepoInfo: function [owner, repo][
     try? [
-        repoData: read.json ~"https://api.github.com/repos/|owner|/|repo|/releases"
-        inspect repoData
-        availableVersions: new []
-        loop repoData 'entry [
-            if ver: <= getCorrectVersion entry\name [
-
-                'availableVersions ++ #[
-                    version: ver
-                    date: to :date entry\published_at
-                    url: entry\zipball_url
-                    author: entry\author\login
-                ]
-            ]   
-        ]
-        latest: first availableVersions
-
-        infos: getRepoInfo owner repo latest
-
+        got: getGH ~"repos/|owner|/|repo|"
         #[
-            latest: #[
-                version: latest\version
-                timestamp: latest\date
-                url: latest\url
-                details: #[
-                    description: infos\description
-                    entry: infos\entry
-                    dependencies: infos\depends
-                    requirement: infos\requires
-                ]
+            name: got\name
+            fullName: got\full_name
+            url: got\html_url
+            description: got\description
+            tags: got\topics
+            license: (got\license)? -> got\license\spdx_id -> "--"
+            readme: getReadme owner repo
+            stats: #[
+                stars: got\stargazers_count
+                watch: got\watchers_count
             ]
-            author: getAuthorInfo latest\author
-            license: getLicenseInfo owner repo
-            tags: getTopicsInfo owner repo
+            author: #[
+                name: got\owner\login
+                url: got\owner\html_url
+                avatar: got\owner\avatar_url
+            ]
         ]
     ]
     else [
         null
     ]
+]
+
+getReleaseInfo: function [owner, repo, version, url][
+    tgt: ~{tmp/|owner|-|repo|-|version|.zip}
+    download.as: tgt url
+    unzip "tmp" tgt
+    delete tgt
+
+    tgtFolder: first list "tmp"
+    infoFile: ~"|tgtFolder|/info.art"
+
+    ret: #[]
+
+    if exists? infoFile ->
+        ret: # infoFile
+
+    unless key? ret 'entry ->
+        ret\entry: "main.art"
+
+    unless ".art" = extract.extension ret\entry ->
+        ret\entry: ret\entry ++ ".art"
+
+    unless key? ret 'depends ->
+        ret\depends: []
+
+    unless key? ret 'requires ->
+        ret\requires: [> 0.0.0]
+
+    unless exists? ~{|tgtFolder|/|ret\entry|} ->
+        ret: null
+
+    delete.directory tgtFolder
+
+    return ret
+]
+
+getVersions: function [owner, repo][
+    greaterThan: (attr 'greaterThan) ?? 0.0.0
+    available: new []
+    try [
+        releases: getGH ~"repos/|owner|/|repo|/releases"
+        loop releases 'release [
+            if ver: <= extractCorrectVersion release\name [
+                if ver > greaterThan [
+                    if releaseInfo: <= getReleaseInfo owner repo ver release\zipball_url [
+                        'available ++ #[
+                            version: ver
+                            date: to :date release\published_at
+                            url: release\zipball_url
+                            info: releaseInfo
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ]
+    return available
 ]
 
 ;--------------------------------------------------
@@ -108,4 +125,5 @@ getRepoDetails: function [owner,repo][
 if standalone? ::
     owner: arg\0
     repo: arg\1
-    print as.unwrapped.pretty.code getRepoDetails owner repo
+    inspect getRepoInfo owner repo
+    print as.pretty.code getVersions owner repo
