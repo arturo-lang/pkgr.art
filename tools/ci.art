@@ -1,6 +1,8 @@
 inspect # "packages/list.art"
 inspect path
-do "tools/getrepodetails.art"
+print relative "getrepodetails.art"
+print relative "tools/getrepodetails.art"
+do relative "getrepodetails.art"
 
 IsCI?: true
 getGH "repos/arturo-lang/dummy-package"
