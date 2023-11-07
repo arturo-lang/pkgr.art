@@ -15,7 +15,6 @@ defaults:
 
 jobs:  
   build:
-    name: "Verify Packages"
     runs-on: ubuntu-latest
     steps:
       - name: "Cancel similar actions in progress"
