@@ -1,0 +1,49 @@
+name: "Deploy Packages"
+on:
+  pull_request:
+    types:
+      - closed
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    name: "Deploy Packages"
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "The PR was merged and deployed"
+
+# jobs:  
+#   build:
+#     name: "Deploy Packages"
+#     runs-on: ${{ matrix.os }}
+#     strategy:
+#       matrix:
+#         os:
+#           - ubuntu-latest
+#         version:
+#           - full
+#     steps:
+#       - name: "Cancel similar actions in progress"
+#         uses: styfle/cancel-workflow-action@0.6.0
+#         with:
+#           access_token: ${{ github.token }}
+
+#       - name: "Setup Arturo"
+#         uses: arturo-lang/arturo-action@main
+
+#       - name: "Checkout"
+#         uses: actions/checkout@main
+#         with:
+#           submodules: recursive
+
+#       - name: Run unit tests
+#         run: |
+#           echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+#           arturo tools/ci.art
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
