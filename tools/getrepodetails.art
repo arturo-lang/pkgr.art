@@ -12,6 +12,7 @@ getGH: function [req][
     apiVersion: "2022-11-28"
 
     (IsCI?)?[
+        print "we're here!"
         got: execute ~{!sh
             gh api -H "Accept: |accepting|" -H "X-GitHub-Api-Version: |apiVersion|" /|req|
         }

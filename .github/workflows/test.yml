@@ -44,3 +44,5 @@ jobs:
         run: |
           echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
           arturo tools/ci.art
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
