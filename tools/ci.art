@@ -1,12 +1,6 @@
 inspect # "packages/list.art"
-inspect path
-print "getrepodetails.art"
-print relative "getrepodetails.art"
+do relative "getrepodetails.art"
 
-print read "getrepodetails.art"
-print read relative "getrepodetails.art"
-
-; do relative "getrepodetails.art"
-
-; IsCI?: true
-; getGH "repos/arturo-lang/dummy-package"
+do ::
+    IsCI?: true
+    getGH "repos/arturo-lang/dummy-package"
