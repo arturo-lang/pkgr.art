@@ -7,20 +7,27 @@ do ::
     total: size packages
 
     hasError?: false
+    problemWithRepo: new []
 
     loop packages [name,location][
-        prints ["[" cnt "/" total "]"]
-        prints color #cyan "- Processing: "
-        prints pad.right 20
+        prints [pad to :string cnt 4 "/" pad.right to :string total 4 "|"]
+        prints color #cyan "Processing: "
+        prints pad.right name 20 
 
-        [owner,repo]: split.by:"," location
-        
-        (data: <= getRepoInfo owner repo)? -> print color.green "[ OK ]"
+        [owner,repo]: split.by:"/" location
+        (getRepoInfo owner repo)? -> print color #green "[ ✅  OK   ]"                  
         [
-            print color.red "[ ERROR ]"
+            print color #red "[ ⛔️ ERROR ]"
+            'problemWithRepo ++ ~"|owner|/|repo|"
             hasError?: true
         ]
+        cnt: cnt + 1
     ]
 
-    if hasError? ->
+    if hasError? [
+        unless empty? problemWithRepo [
+            print "Couldn't retrieve repo info for:"
+            print.lines problemWithRepo
+        ]
         panic.code:1 "Something went wrong. Let's stop here."
+    ]
