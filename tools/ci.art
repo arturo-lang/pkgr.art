@@ -24,10 +24,13 @@ do ::
         cnt: cnt + 1
     ]
 
-    if hasError? [
+    (hasError?)? [
         unless empty? problemWithRepo [
             print "Couldn't retrieve repo info for:"
             print.lines problemWithRepo
         ]
-        panic.code:1 "Something went wrong. Let's stop here."
+        panic.code:1 "Something went wrong. Let's fix everything before merging!"
+    ][
+        print color #green "Everything went fine! 🔥🔥🔥"
+        exit
     ]

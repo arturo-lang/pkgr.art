@@ -15,8 +15,6 @@ getGH: function [req][
         got: execute ~{!sh
             gh api -H "Accept: |accepting|" -H "X-GitHub-Api-Version: |apiVersion|" /|req|
         }
-        print "after executing"
-        print "|" ++ got ++ "|"
         return read.json got
     ][
         got: request.get.headers: #[
@@ -49,9 +47,7 @@ getReadme: function [owner, repo][
 
 getRepoInfo: function [owner, repo][
     try? [
-        print "in getRepoInfo - before got"
         got: getGH ~"repos/|owner|/|repo|"
-        print "in getRepoInfo - after got"
         #[
             name: got\name
             fullName: got\full_name
