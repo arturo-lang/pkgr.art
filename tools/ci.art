@@ -1,1 +1,6 @@
 inspect # "packages/list.art"
+
+do "tools/getrepodetails.art"
+
+IsCI?: true
+getGH "repos/arturo-lang/dummy-package"
