@@ -1,4 +1,4 @@
-name: "Deploy Packages"
+name: "Packages"
 on:
   pull_request:
     types:
@@ -9,7 +9,7 @@ defaults:
     shell: bash -l {0}
 
 jobs:
-  if_merged:
+  Deployment:
     if: github.event.pull_request.merged == true
     name: "Deploy Packages"
     runs-on: ubuntu-latest
