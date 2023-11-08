@@ -1,0 +1,1 @@
+write "packages/info/test.art" {print "Hello world!"}
