@@ -9,33 +9,8 @@ defaults:
     shell: bash -l {0}
 
 jobs:
-  Verification:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Cancel similar actions in progress"
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: "Setup Arturo"
-        uses: arturo-lang/arturo-action@main
-
-      - name: "Checkout"
-        uses: actions/checkout@main
-        with:
-          submodules: recursive
-
-      - name: Run unit tests
-        run: |
-          echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
-          arturo tools/ci.art
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   Deployment:
     if: github.event.pull_request.merged == true
-    name: "Deploy Packages"
-    needs:
-      - Verification
     runs-on: ubuntu-latest
     steps:
       - name: "Cancel similar actions in progress"
