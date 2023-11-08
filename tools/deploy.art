@@ -29,7 +29,7 @@ do ::
         write ~"|targetFolder|/info/|targetName|" as.unwrapped.pretty.code infoD
 
         versionD: getVersions owner repo
-        write ~"|targetFolder|/version/|targetName|" as.unwrapped.pretty.code versionD
+        write ~"|targetFolder|/version/|targetName|" as.pretty.code versionD
 
         print color #green "[ ✅  OK   ]"  
                     
