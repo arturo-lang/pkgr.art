@@ -1,0 +1,24 @@
+
+name: "dummy-package"
+fullName: "arturo-lang/dummy-package"
+url: "https://github.com/arturo-lang/dummy-package"
+description: "This package will serve merely as test for Arturo\'s package manager"
+tags: [
+                "test"
+        ]
+license: "MIT"
+readme: {
+                # dummy-package
+                This package will serve merely as test for Arturo's package manager
+                
+        }
+stats: #[
+        stars: 2
+        watch: 2
+        ]
+author: #[
+        name: "arturo-lang"
+        url: "https://github.com/arturo-lang"
+        avatar: "https://avatars.githubusercontent.com/u/55656888?v=4"
+        ]
+
