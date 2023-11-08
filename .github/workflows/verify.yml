@@ -4,9 +4,8 @@ on:
     branches:
       '!main'
   pull_request:
-    paths-ignore:
-      - '*.html'
-      - '*.md'
+    branches:
+      - main
 
 defaults:
   run:
