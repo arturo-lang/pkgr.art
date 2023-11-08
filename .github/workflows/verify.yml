@@ -1,5 +1,8 @@
-name: "Verify Packages"
+name: "Packages"
 on:
+  push:
+    branches:
+      '!main'
   pull_request:
     paths-ignore:
       - '*.html'
@@ -11,15 +14,8 @@ defaults:
     shell: bash -l {0}
 
 jobs:  
-  build:
-    name: "Verify Packages"
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-        version:
-          - full
+  Verify:
+    runs-on: ubuntu-latest
     steps:
       - name: "Cancel similar actions in progress"
         uses: styfle/cancel-workflow-action@0.6.0
