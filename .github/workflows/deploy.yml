@@ -41,7 +41,6 @@ jobs:
           author_email: yaniszaf@gmail.com
           message: 'CI Package Deployment'
           add: '*.art'
-          push: origin ${new_branch input} --force
 
 # jobs:  
 #   build:
