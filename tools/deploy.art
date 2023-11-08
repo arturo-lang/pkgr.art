@@ -1,2 +1,42 @@
-write "packages/info/test.art" {print "Hello world!"} 
-print "Wrote test.art @ packages/info" 
+packages: # "packages/list.art"
+do relative "getrepodetails.art"
+
+do ::
+    cnt: 1
+    total: size packages
+
+    hasError?: false
+    problemWithRepo: new []
+    problemWithReleases: new []
+
+    separator: repeat "=" 80
+
+    print separator
+    print " Deploying packages"
+    print separator
+
+    loop packages [name,location][
+        prints [pad to :string cnt 4 "/" pad.right to :string total 4 "|"]
+        prints color #cyan "Processing: "
+        prints pad.right name 40 
+
+        [owner,repo]: split.by:"/" location
+        
+        targetName: ~"|name|.art"
+        targetFolder: "packages"
+
+        infoD: getRepoInfo owner repo
+        write ~"|targetFolder|/info/|targetName|" as.unwrapped.pretty.code infoD
+
+        versionD: getVersions owner repo
+        write ~"|targetFolder|/version/|targetName|" as.unwrapped.pretty.code versionD
+
+        print color #green "[ ✅  OK   ]"  
+                    
+        cnt: cnt + 1
+    ]
+
+    print separator
+    print ""
+    print [">" color #green "Everything went fine! 🔥🔥🔥"]
+    exit
