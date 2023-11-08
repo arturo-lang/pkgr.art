@@ -1,1 +1,2 @@
 write "packages/info/test.art" {print "Hello world!"} 
+print "Wrote test.art @ packages/info"
