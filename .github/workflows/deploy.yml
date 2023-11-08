@@ -49,4 +49,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/pkgr.art
+            git reset --hard
             git pull
