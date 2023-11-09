@@ -1,8 +1,19 @@
 #!/usr/bin/env arturo
 
 packages: # "packages/list.art"
-
 entries: #[]
+
+compressHTML: function [file][
+    execute ~{!sh 
+        html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --use-short-doctype --minify-css true |file| -o |file|
+    }
+]
+
+compressCSS: function [file][
+    execute ~{!sh 
+        cleancss |file| -o |file|
+    }
+]
 
 loop packages [k,v][
     entries\[k]: #[
@@ -18,9 +29,17 @@ write "public/index.html"
       render.template read "website/index.html"
 
 ; and compress it
-execute "html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --use-short-doctype --minify-css true public/index.html -o public/index.html"
+compressHTML "public/index.html"
 
 ; compile scss
 execute "sass website/style.scss public/style.css"
 
-print "Done!"
+; and compress it too
+compressCSS "public/style.css"
+
+; copy resources
+loop list "website/images" 'file [
+    copy file replace file "website/" "public/"
+]
+
+print color #green "Done!"
