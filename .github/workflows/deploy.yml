@@ -27,6 +27,7 @@ jobs:
       - name: "Install Sass"
         run: |
           npm install -g sass
+          npm install -g html-minifier
 
       - name: "Setup Arturo"
         uses: arturo-lang/arturo-action@main
