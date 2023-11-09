@@ -23,6 +23,9 @@ loop packages [k,v][
     ]
 ]
 
+if odd? size entries ->
+    'entries ++ null
+
 inspect entries
 
 ; render homepage
