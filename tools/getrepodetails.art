@@ -48,7 +48,6 @@ getReadme: function [owner, repo][
 getRepoInfo: function [owner, repo][
     try? [
         got: getGH ~"repos/|owner|/|repo|"
-        inspect got
         licenseUrl: "--"
         if got\license [
             licenseInfo: read.json got\license\url
