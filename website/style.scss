@@ -28,6 +28,9 @@ html,body {
         border-bottom: 1px solid lightgray; 
 
         .title-wrapper {
+            display: inline-flex;
+            align-items: baseline;
+
             a.repo-name {
                 color: #82138d;
                 border-bottom: 1px dashed #82138d;
@@ -45,9 +48,12 @@ html,body {
 
         .stats-wrapper {
             padding-top: 0.25rem;
+            display: inline-flex;
+            align-items: baseline;
 
             .download-info {
                 color:#138D82;
+                font-weight: 400;
 
                 .download-icon {}
                 .download-count {}
@@ -55,6 +61,7 @@ html,body {
             
             .star-info {
                 color:orange;
+                font-weight: 400;
 
                 .star-icon {}
                 .star-count {}
@@ -90,7 +97,7 @@ html,body {
             padding-top:0; 
             padding-bottom: 0.25rem;
             font-weight: 500;
-            
+
             .repo-license-icon {}
             .repo-license-name {}
         }
