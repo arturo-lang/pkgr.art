@@ -12,3 +12,12 @@ loop packages [k,v][
 ]
 
 inspect entries
+
+; render homepage
+write "public/index.html"
+      render.template read "website/index.html"
+
+; compile scss
+execute "sass website/style.scss public/style.css"
+
+print "Done!"
