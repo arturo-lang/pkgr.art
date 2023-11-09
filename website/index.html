@@ -7,135 +7,20 @@
             <div class="column is-8 is-offset-2">
                 <!-- <p class="subtitle has-text-black">Latest packages</p> -->
 
-                <div class="columns is-tablet">
-                    <div class="column is-6">
-                        <div class="box package-box">
-                            <div class="package-header">
-                                <div class="columns is-mobile">
-                                    <div class="column is-6">
-                                        <div class="title-wrapper">
-                                            <h3 class="is-size-5">
-                                                <a href="#" class="repo-name">
-                                                    <b>dummy</b>
-                                                </a>&nbsp;
-                                            </h3>
-                                            <a href="#">
-                                                <span class="icon repo-icon">
-                                                    <i class="fa fa-github"></i>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="column is-6">
-                                        <div class="is-size-6 is-pulled-right stats-wrapper">
-                                            <div class="download-info">
-                                                <span class="icon download-icon">
-                                                    <i class="fas fa-download"></i>&nbsp;
-                                                </span>
-                                                <span class="download-count">256</span>
-                                            </div>&nbsp;·&nbsp;
-                                            <div class="star-info">
-                                                <span class="icon star-icon">
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                                <span class="star-count">123</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="package-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu ipsum id arcu congue sollicitudin ac interdum ante.</p>
-                            </div>
-                            <div class="package-footer">
-                                <hr/>
-                                <div class="columns is-mobile">
-                                    <div class="column is-6 repo-user">
-                                        <div class="is-pulled-left">
-                                            <span class="icon repo-user-icon">
-                                                <i class="fa fa-user-o"></i>
-                                            </span>&nbsp;
-                                            <a href="#" class="repo-user-name">drkameleon</a>
-                                        </div>
-                                    </div>
-                                    <div class="column is-6 repo-license">
-                                        <div class="is-pulled-right">
-                                            <span class="icon repo-license-icon">
-                                                <i class="fa fa-balance-scale"></i>
-                                            </span>&nbsp;
-                                            <a href="#" class="repo-license-name">MIT</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <|| loop entries [entryLeft, entryRight][||>
+                    <div class="columns is-tablet">
+                        <div class="column is-6">
+                            <|| entry: entryLeft ||>
+                            <||= read "website/components/package-box.html" ||>
+                        </div>
+                        <div class="column is-6">
+                            <|| unless null? entryRight [||>
+                                <|| entry: entryRight ||>
+                                <||= read "website/components/package-box.html" ||>
+                            <|| ] ||>
                         </div>
                     </div>
-                    <div class="column is-6">
-                        <div class="box package-box">
-                            <div class="package-header">
-                                <div class="columns is-mobile">
-                                    <div class="column is-6">
-                                        <div class="title-wrapper">
-                                            <h3 class="is-size-5">
-                                                <a href="#" class="repo-name">
-                                                    <b>dummy</b>
-                                                </a>&nbsp;
-                                            </h3>
-                                            <a href="#">
-                                                <span class="icon repo-icon">
-                                                    <i class="fa fa-github"></i>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="column is-6">
-                                        <div class="is-size-6 is-pulled-right stats-wrapper">
-                                            <div class="download-info">
-                                                <span class="icon download-icon">
-                                                    <i class="fas fa-download"></i>&nbsp;
-                                                </span>
-                                                <span class="download-count">256</span>
-                                            </div>&nbsp;·&nbsp;
-                                            <div class="star-info">
-                                                <span class="icon star-icon">
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                                <span class="star-count">123</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="package-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu ipsum id arcu congue sollicitudin ac interdum ante.</p>
-                            </div>
-                            <div class="package-footer">
-                                <hr/>
-                                <div class="columns is-mobile">
-                                    <div class="column is-6 repo-user">
-                                        <div class="is-pulled-left">
-                                            <span class="icon repo-user-icon">
-                                                <i class="fa fa-user-o"></i>
-                                            </span>&nbsp;
-                                            <a href="#" class="repo-user-name">drkameleon</a>
-                                        </div>
-                                    </div>
-                                    <div class="column is-6 repo-license">
-                                        <div class="is-pulled-right">
-                                            <span class="icon repo-license-icon">
-                                                <i class="fa fa-balance-scale"></i>
-                                            </span>&nbsp;
-                                            <a href="#" class="repo-license-name">MIT</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="columns is-tablet">
-                    
-                </div>
+                <|| ] ||>
             </div>
         </div>
     </div>
