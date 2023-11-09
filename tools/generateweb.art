@@ -1,1 +1,14 @@
 #!/usr/bin/env arturo
+
+packages: # "packages/list.art"
+
+entries: #[]
+
+loop packages [k,v][
+    entries\[k]: #[
+        info: # ~"packages/info/|k|.art"
+        version: do read ~"packages/version/|k|.art"
+    ]
+]
+
+inspect entries
