@@ -1,7 +1,7 @@
 #!/usr/bin/env arturo
 
 packages: # "packages/list.art"
-entries: #[]
+entries: new []
 
 compressHTML: function [file][
     execute ~{!sh 
@@ -16,7 +16,8 @@ compressCSS: function [file][
 ]
 
 loop packages [k,v][
-    entries\[k]: #[
+    'entries ++ #[
+        name: k
         info: # ~"packages/info/|k|.art"
         version: do read ~"packages/version/|k|.art"
     ]
