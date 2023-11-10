@@ -42,7 +42,7 @@ jobs:
       - name: Update package info
         run: |
           echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
-          arturo tools/deploy.art ci
+          arturo tools/deploy.art
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -52,7 +52,7 @@ jobs:
           author_name: drkameleon
           author_email: yaniszaf@gmail.com
           message: 'CI Package Deployment'
-          add: '*.art'
+          add: '.'
 
       - name: Update registry
         uses: appleboy/ssh-action@v1.0.0
