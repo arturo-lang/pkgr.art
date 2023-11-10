@@ -21,6 +21,7 @@ compressCSS: function [file][
 
 getProperMarkdown: function [md][
     ret: read.markdown md
+    ret: replace ret {/class="language-[^"]+"/} ""
     return ret
 ]
 
