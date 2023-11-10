@@ -153,7 +153,7 @@
                                     <span class="icon star-icon">
                                         <i class="fa fa-star"></i>
                                     </span>&nbsp;
-                                    <span class="star-count">123</span>
+                                    <span class="star-count" data-package="arturo-lang/dummy-package"></span>
                                 </div>
                             </div>
                             <hr/>
@@ -222,6 +222,20 @@
         <script src="file:///Users/drkameleon/Documents/Code/OpenSource/arturo-lang/pkgr.art/public/script.js"></script>
         <script>
             $(document).ready(function(){
+                $(".star-count").each(function (idx){
+                    console.log($(this));
+                    console.log($(this).data("package"));
+                    var repo = `https://api.github.com/search/repositories?q=${$(this).data("package")}`;
+                    console.log(repo);
+                    var currentElement = $(this);
+                    jQuery.getJSON(repo, function (got){
+                        console.log(got);
+                        console.log(got.items[0].stargazers_count);
+                        currentElement.html(got.items[0].stargazers_count);
+                        //$(this).html(got.items[0].stargazers_count);
+                    });
+                    //https://api.github.com/search/repositories?q=arturo-lang/arturo
+                });
                 var searchables = [
     {
         "value": "dummy",

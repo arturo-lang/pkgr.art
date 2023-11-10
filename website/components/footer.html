@@ -25,6 +25,13 @@
         <script src="<||= siteroot ||>/script.js"></script>
         <script>
             $(document).ready(function(){
+                $(".star-count").each(function (idx){
+                    var repo = `https://api.github.com/search/repositories?q=${$(this).data("package")}`;
+                    var currentElement = $(this);
+                    jQuery.getJSON(repo, function (got){
+                        currentElement.html(got.items[0].stargazers_count);
+                    });
+                });
                 var searchables = <||= searchable ||>;
                 var fuseOptions = {
                     isCaseSensitive: true,
