@@ -10,7 +10,7 @@
                         <|| (currentVersionIsLatest)? [ ||>
                         <h2 class="is-size-2"><b><||= entry\name ||></b></h2>
                         <|| ][ ||>
-                            <h2 class="is-size-2"><b><a href="<||= siteroot ||>/<||= entry\name ||>/index.html"><||= entry\name ||></a></b></h2>
+                            <h2 class="is-size-2"><b><a href="<||= getLink entry\name ø ||>"><||= entry\name ||></a></b></h2>
                         <|| ] ||>
                         <a href="<||= entry\info\url ||>">
                             <span class="icon repo-icon inside-package">
@@ -59,7 +59,7 @@
                                             <|| (currentVersion\version = ver\version)? [ ||>
                                             <li><b><||= ver\version ||></b><span class="has-text-grey">&nbsp;&#8212;&nbsp;<||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span></li>
                                             <|| ][ ||>
-                                                <li><a class="version-link" href="<||= siteroot ||>/<||= entry\name ||>/<||= ver\version ||>/index.html"><b><||= ver\version ||></b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;<||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span></li>
+                                                <li><a class="version-link" href="<||= getLink entry\name ver\version ||>"><b><||= ver\version ||></b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;<||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span></li>
                                             <|| ] ||>
                                         <|| ] ||>
                                     </ul>
@@ -108,7 +108,7 @@
                                 <|| ][ ||>
                                     <ul>
                                     <|| loop currentVersion\info\depends 'dep [ ||>
-                                        <li><a href="<||= siteroot ||>/<||= dep ||>/index.html"><||= dep ||></a></li>
+                                        <li><a href="<||= getLink entry\name ø ||>"><||= dep ||></a></li>
                                     <|| ] ||>
                                     </ul>
                                 <|| ] ||>
