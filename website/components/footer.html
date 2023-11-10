@@ -27,19 +27,7 @@
             $(document).ready(function(){
                 var searchables = <||= searchable ||>;
                 var fuseOptions = {
-                    // isCaseSensitive: false,
-                    // includeScore: false,
-                    // shouldSort: true,
-                    // includeMatches: false,
-                    // findAllMatches: false,
-                    // minMatchCharLength: 1,
-                    // location: 0,
-                    // threshold: 0.6,
-                    // distance: 100,
-                    // useExtendedSearch: false,
-                    // ignoreLocation: false,
-                    // ignoreFieldNorm: false,
-                    // fieldNormWeight: 1,
+                    isCaseSensitive: true,
                     keys: [
                         "value",
                         "tags",
@@ -57,9 +45,6 @@
 
                     $('#search-bar').autocomplete({
                         formatResult: function (suggestion, currentValue){
-                            console.log(`suggestion: ${suggestion}`);
-                            console.log(`currentValue: ${currentValue}`);
-                            console.log(suggestion.value);
                             return `
                                 <div class="columns" style="border-bottom:1px solid #DDD;">
                                     <div class="column is-8">
@@ -84,35 +69,13 @@
                             var result = {
                                 suggestions: sugg
                             }
-                            console.log(sugg);
-
-                            done(result);
-                            // var sugg = [];
-                            // for (var i=0; i < searchables.length; i++){
-                            //     searchable = searchables[i];
-
-                            //     if (searchable.value.includes(query))
-                            // }
-                            // console.log(`query: ${query}`);
-                            // console.log(searchable);
-                            // var result = {
-                            //     suggestions: [
-                            //         { "value": "United Arab Emirates", "data": "AE" },
-                            //         { "value": "United Kingdom",       "data": "UK" },
-                            //         { "value": "United States",        "data": "US" },
-                            //         { value: 'Andorra', data: 'AD' },
-                            //         { value: 'Greece', data: 'GR'},
-                            //         { value: 'Spain', data: 'ES'},
-                            //         { value: 'Zimbabwe', data: 'ZZ' }
-                            //     ]
-                            // };
 
                             done(result);
                         },
                         showNoSuggestionNotice: true,
-                        noSuggestionNotice: 'Sorry, no matching results',
+                        noSuggestionNotice: '<div class="columns" style="border-bottom:1px solid #DDD;"><div class="column is-12">No matches found :(</div></div>',
                         onSelect: function (suggestion) {
-                            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                            window.location = `https://${suggestion.value}.pkgr.art`;
                         }
                     });
                 }
