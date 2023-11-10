@@ -3,7 +3,8 @@
 packages: # "packages/list.art"
 entries: new []
 
-siteroot: "file:///Users/drkameleon/Documents/Code/OpenSource/arturo-lang/pkgr.art/public"
+siteroot: (key? env 'GITHUB_ACTION)? -> "https://pkgr.art"
+                                     -> "file:///Users/drkameleon/Documents/Code/OpenSource/arturo-lang/pkgr.art/public"
 isHome: false
 
 compressHTML: function [file][
@@ -27,8 +28,11 @@ searchable: new []
 
 loop packages [k,v][
     inf: # ~"packages/info/|k|.art"
-    ; inf\tags: ["database", "i18n", "sqlite", "mysql"]
     vers: do "@" ++ read ~"packages/version/|k|.art" 
+    ;--------------------------------
+    ; DEBUGGING!
+    ;--------------------------------
+    ; inf\tags: ["database", "i18n", "sqlite", "mysql"]
     ; vers\0\info\depends: ["boom", "zoom", "foom"]
     ; vers\0\info\requires: [> 0.9.83]
     'entries ++ #[
@@ -45,14 +49,17 @@ loop packages [k,v][
     ]
 ]
 
-entry2: new searchable\0
-entry2\value: "easyhtml"
+;--------------------------------
+; DEBUGGING!
+;--------------------------------
+; entry2: new searchable\0
+; entry2\value: "easyhtml"
 
-entry3: new searchable\0
-entry3\value: "artsembly"
+; entry3: new searchable\0
+; entry3\value: "artsembly"
 
-'searchable ++ entry2
-'searchable ++ entry3
+; 'searchable ++ entry2
+; 'searchable ++ entry3
 
 searchable: write.json ø searchable
 
