@@ -15,6 +15,109 @@
                 </p>
             </div>
         </footer>
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/devbridge-autocomplete@1.4.11/dist/jquery.autocomplete.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
+        <script src="<||= siteroot ||>/script.js"></script>
+        <script>
+            $(document).ready(function(){
+                var searchables = <||= searchable ||>;
+                var fuseOptions = {
+                    // isCaseSensitive: false,
+                    // includeScore: false,
+                    // shouldSort: true,
+                    // includeMatches: false,
+                    // findAllMatches: false,
+                    // minMatchCharLength: 1,
+                    // location: 0,
+                    // threshold: 0.6,
+                    // distance: 100,
+                    // useExtendedSearch: false,
+                    // ignoreLocation: false,
+                    // ignoreFieldNorm: false,
+                    // fieldNormWeight: 1,
+                    keys: [
+                        "value",
+                        "tags",
+                        "description"
+                    ]
+                };
+    
+                window.fuse = new Fuse(searchables, fuseOptions);
+                enableSearch();
+            });
+            window.searchIsEnabled = false;
+            function enableSearch(){
+                if (!window.searchIsEnabled){
+                    window.searchIsEnabled = true;
+
+                    $('#search-bar').autocomplete({
+                        formatResult: function (suggestion, currentValue){
+                            console.log(`suggestion: ${suggestion}`);
+                            console.log(`currentValue: ${currentValue}`);
+                            console.log(suggestion.value);
+                            return `
+                                <div class="columns" style="border-bottom:1px solid #DDD;">
+                                    <div class="column is-8">
+                                        <b>${suggestion.value}</b>
+                                    </div>
+                                    <div class="column is-4">
+                                        <div class="is-pulled-right has-text-grey">
+                                            ${suggestion.version}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        },
+                        lookup: function (query, done) {
+                            var got = window.fuse.search(query);
+                            var sugg = [];
+
+                            for (var i=0; i<got.length; i++){
+                                sugg.push(got[i].item);
+                            }
+                            console.log(got);
+                            var result = {
+                                suggestions: sugg
+                            }
+                            console.log(sugg);
+
+                            done(result);
+                            // var sugg = [];
+                            // for (var i=0; i < searchables.length; i++){
+                            //     searchable = searchables[i];
+
+                            //     if (searchable.value.includes(query))
+                            // }
+                            // console.log(`query: ${query}`);
+                            // console.log(searchable);
+                            // var result = {
+                            //     suggestions: [
+                            //         { "value": "United Arab Emirates", "data": "AE" },
+                            //         { "value": "United Kingdom",       "data": "UK" },
+                            //         { "value": "United States",        "data": "US" },
+                            //         { value: 'Andorra', data: 'AD' },
+                            //         { value: 'Greece', data: 'GR'},
+                            //         { value: 'Spain', data: 'ES'},
+                            //         { value: 'Zimbabwe', data: 'ZZ' }
+                            //     ]
+                            // };
+
+                            done(result);
+                        },
+                        showNoSuggestionNotice: true,
+                        noSuggestionNotice: 'Sorry, no matching results',
+                        onSelect: function (suggestion) {
+                            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                        }
+                    });
+                }
+            }
+        </script>
     </body>
 
 </html>
