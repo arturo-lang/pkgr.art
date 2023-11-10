@@ -42,7 +42,7 @@ jobs:
       - name: Update package info
         run: |
           echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
-          arturo tools/deploy.art
+          arturo tools/deploy.art ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
