@@ -1,7 +1,7 @@
 [
         #[
                 version: 0.0.4
-                date: to :date "2023-11-10T07:44:06+01:00"
+                date: to :date "2023-11-10T06:44:06+00:00"
                 url: "https://api.github.com/repos/arturo-lang/dummy-package/zipball/v0.0.4"
                 info: #[
                         entry: "main.art"
@@ -15,7 +15,7 @@
         ]
          #[
                 version: 0.0.3
-                date: to :date "2023-11-07T13:34:20+01:00"
+                date: to :date "2023-11-07T12:34:20+00:00"
                 url: "https://api.github.com/repos/arturo-lang/dummy-package/zipball/v0.0.3"
                 info: #[
                         entry: "main.art"
