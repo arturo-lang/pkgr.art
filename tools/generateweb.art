@@ -5,6 +5,9 @@ entries: new []
 
 siteroot: (key? env 'GITHUB_ACTION)? -> "https://pkgr.art"
                                      -> "file:///Users/drkameleon/Documents/Code/OpenSource/arturo-lang/pkgr.art/public"
+
+deploying?: key? env 'GITHUB_ACTION
+
 isHome: false
 
 compressHTML: function [file][
@@ -23,6 +26,21 @@ getProperMarkdown: function [md][
     ret: read.markdown md
     ret: replace ret {/class="language-[^"]+"/} ""
     return ret
+]
+
+getLink: function [loc, subv][
+    rett: ""
+    (deploying?)?[
+        rett: "https://" ++ loc ++ ".pkgr.art"
+        unless null? subv ->
+            rett: rett ++ "/" ++ to :string subv
+    ][
+        rett: siteroot ++ "/" ++ loc
+        unless null? subv ->
+            rett: rett ++ "/" ++ to :string subv
+        rett: rett ++ "/index.html"
+    ]
+    return rett
 ]
 
 searchable: new []
