@@ -1,0 +1,133 @@
+<||= read "website/components/header.html" ||>
+
+<||= read "website/components/search.html" ||>
+<section class="main-section">
+    <div class="container">
+        <div class="columns is-mobile">
+            <div class="column is-8-tablet is-offset-2-tablet is-10-mobile is-offset-1-mobile package-page">
+                <div class="columns package-title-wrapper">
+                    <div class="column is-8 package-title title-wrapper">
+                        <|| (currentVersionIsLatest)? [ ||>
+                        <h2 class="is-size-2"><b><||= entry\name ||></b></h2>
+                        <|| ][ ||>
+                            <h2 class="is-size-2"><b><a href="<||= siteroot ||>/<||= entry\name ||>/index.html"><||= entry\name ||></a></b></h2>
+                        <|| ] ||>
+                        <a href="<||= entry\info\url ||>">
+                            <span class="icon repo-icon inside-package">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="column is-4 package-link">
+                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;<||= entry\name ||>.pkgr.art</div>
+                    </div>
+                </div>
+                <div class="block package-description">
+                    <h3 class="is-size-5"><||= entry\info\description ||></h3>
+                </div>
+                <|| unless empty? entry\info\tags [ ||>
+                    <div class="block package-tags">
+                        <|| loop entry\info\tags 'tag [||>
+                            <span class="tag is-info is-light is-medium package-tag"><||= tag ||></span>
+                        <|| ] ||>
+                    </div>
+                <|| ] ||>
+                <div class="installation-instructions block">
+                    <input id="installation-code" class="input copy-code" value="arturo -p install <||= entry\name ||>" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
+                </div>
+                <article class="message is-success codecopied-message is-hidden">
+                    <div class="message-body">
+                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import '<||= entry\name ||></code>, directly inside your code.
+                    </div>
+                  </article>
+                <div class="columns">
+                    <div class="column is-9 left-column">
+                        <div class="left-wrapper">
+                            <div class="tabs left-tabs">
+                                <ul>
+                                <li id="readme-tab" class="is-active"><a onclick="showReadme()">Description</a></li>
+                                <li id="version-tab"><a onclick="showVersionHistory()">Version History</a></li>
+                                </ul>
+                            </div>
+                            <div class="box content left-container">
+                                <div class="readme">
+                                    <||= getProperMarkdown entry\info\readme ||>
+                                </div>
+                                <div class="version-history is-hidden">
+                                    <ul>
+                                        <|| loop entry\version 'ver [||>
+                                            <|| (currentVersion\version = ver\version)? [ ||>
+                                            <li><b><||= ver\version ||></b><span class="has-text-grey">&nbsp;&#8212;&nbsp;<||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span></li>
+                                            <|| ][ ||>
+                                                <li><a class="version-link" href="<||= siteroot ||>/<||= entry\name ||>/<||= ver\version ||>/index.html"><b><||= ver\version ||></b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;<||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span></li>
+                                            <|| ] ||>
+                                        <|| ] ||>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3 info-column">
+                        <div class="box info-wrapper" style="padding-top:0">
+                            <div class="block stats-wrapper" style="margin-bottom:0">
+                                <div class="download-info">
+                                    <span class="icon download-icon">
+                                        <i class="fas fa-download"></i>
+                                    </span>&nbsp;
+                                    <span class="download-count">256</span>
+                                </div>&nbsp;&nbsp;
+                                <div class="star-info">
+                                    <span class="icon star-icon">
+                                        <i class="fa fa-star"></i>
+                                    </span>&nbsp;
+                                    <span class="star-count">123</span>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="block package-author">
+                                <b>Author</b>
+                                <br>
+                                <a href="<||= entry\info\author\url ||>" class="repo-user-name"><||= entry\info\author\name ||></a>
+                            </div>
+                            <div class="block package-version">
+                                <b><|| if currentVersionIsLatest [||>Latest <|| ] ||>Version</b>
+                                <br>
+                                <||= currentVersion\version ||><br>
+                            </div>
+                            <div class="block package-license">
+                                <b>License</b>
+                                <br>
+                                <a href="<||= entry\info\license\url ||>" class="repo-license-name"><||= entry\info\license\name ||></a>
+                            </div>
+                            <hr/>
+                            <div class="block package-depends">
+                                <b>Dependencies</b>
+                                <br>
+                                <|| (empty? currentVersion\info\depends)? [ ||>
+                                    No dependencies
+                                <|| ][ ||>
+                                    <ul>
+                                    <|| loop currentVersion\info\depends 'dep [ ||>
+                                        <li><a href="<||= siteroot ||>/<||= dep ||>/index.html"><||= dep ||></a></li>
+                                    <|| ] ||>
+                                    </ul>
+                                <|| ] ||>
+                            </div>
+                            <div class="block package-requires">
+                                <b>Requires</b>
+                                <br>
+                                <|| (empty? currentVersion\info\requires)? [ ||>
+                                    Any version
+                                <|| ][ ||>
+                                    Arturo <||= to :string currentVersion\info\requires\0 ||>&nbsp;<||= to :string currentVersion\info\requires\1 ||>
+                                <|| ] ||>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<||= read "website/components/footer.html" ||>
