@@ -3,6 +3,9 @@
 packages: # "packages/list.art"
 entries: new []
 
+siteroot: "file:///Users/drkameleon/Documents/Code/OpenSource/arturo-lang/pkgr.art/public"
+isHome: false
+
 compressHTML: function [file][
     execute ~{!sh 
         html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --use-short-doctype --minify-css true |file| -o |file|
@@ -15,20 +18,71 @@ compressCSS: function [file][
     }
 ]
 
+getProperMarkdown: function [md][
+    ret: read.markdown md
+    return ret
+]
+
+searchable: new []
+
 loop packages [k,v][
+    inf: # ~"packages/info/|k|.art"
+    ; inf\tags: ["database", "i18n", "sqlite", "mysql"]
+    vers: do "@" ++ read ~"packages/version/|k|.art" 
+    ; vers\0\info\depends: ["boom", "zoom", "foom"]
+    ; vers\0\info\requires: [> 0.9.83]
     'entries ++ #[
         name: k
-        info: # ~"packages/info/|k|.art"
-        version: do read ~"packages/version/|k|.art"
+        info: inf
+        version: vers
+    ]
+
+    'searchable ++ #[
+        value: k,
+        description: inf\description,
+        tags: inf\tags,
+        version: vers\0\version
+    ]
+]
+
+entry2: new searchable\0
+entry2\value: "easyhtml"
+
+entry3: new searchable\0
+entry3\value: "artsembly"
+
+'searchable ++ entry2
+'searchable ++ entry3
+
+searchable: write.json ø searchable
+
+loop entries 'entry [
+    tgtName: ~{public/|entry\name|}
+    unless exists?.directory tgtName ->
+        write.directory tgtName ø
+
+    currentVersion: first entry\version
+    currentVersionIsLatest: true
+    write ~{|tgtName|/index.html}
+          render.template read "website/package.html"
+
+    loop entry\version 'vv [
+        versionTgt: ~{public/|entry\name|/|vv\version|}
+        unless exists?.directory versionTgt ->
+            write.directory versionTgt ø
+
+        currentVersion: vv
+        currentVersionIsLatest: false
+        write ~{|versionTgt|/index.html}
+              render.template read "website/package.html"
     ]
 ]
 
 if odd? size entries ->
     'entries ++ null
 
-inspect entries
-
 ; render homepage
+isHome: true
 write "public/index.html"
       render.template read "website/index.html"
 
@@ -45,5 +99,11 @@ compressCSS "public/style.css"
 loop list "website/images" 'file [
     copy file replace file "website/" "public/"
 ]
+
+; copy main javascript
+copy "website/script.js" "public/script.js"
+
+; copy searchable items
+copy "website/searchable.json" "public/searchable.json"
 
 print color #green "Done!"
