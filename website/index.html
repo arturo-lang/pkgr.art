@@ -1,185 +1,44 @@
+<||= read "website/components/header.html" ||>
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Arturo Packages</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
-    <!-- Bulma Version 0.9.x-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bulma@0.9.4/css/bulma.min.css,npm/prismjs@1.23.0/themes/prism-okaidia.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style/main.css">
-    <script src="https://kit.fontawesome.com/8bfb2fe6f4.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <section class="hero is-success is-fullheight">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="column is-4 is-offset-4">
-                    <figure class="avatar">
-                        <img src="images/logo.png">
-                    </figure>
-                    <h3 class="title has-text-black" style="font-family: 'Questrial'">Arturo <span class="animate-character">Packages</span></h3>
-                    <div class="control has-icons-left">
-                        <input class="input is-large" type="search" placeholder="Search anything" style="border-radius: 15px; text-align: center"/>
-                        <span class="icon is-medium is-left">
-                            <i class="fa fa-search"></i>
-                        </span>
-                    </div>
-                <div>
+<||= read "website/components/search.html" ||>
+<section class="main-section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-12 has-text-centered">
+                <h2 class="title" style="margin-top: 2rem; font-size: 1.5rem; font-weight: 500;">Latest additions</h2>
             </div>
         </div>
-    </section>
-    <section class="main-section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8 is-offset-2">
-                    <!-- <p class="subtitle has-text-black">Latest packages</p> -->
+        <div class="columns" style="margin-top:-2rem">
+            <div class="column is-8-tablet is-offset-2-tablet is-10-mobile is-offset-1-mobile">
+                <!-- <p class="subtitle has-text-black">Latest packages</p> -->
 
+                <|| loop entries [entryLeft, entryRight][||>
                     <div class="columns is-tablet">
                         <div class="column is-6">
-                            <div class="box" style="padding: 0 !important">
-                                <div style="border-bottom: 1px solid lightgray; padding: 1.25rem;">
-                                    <div class="columns is-mobile">
-                                        <div class="column is-6"><h3 class="is-size-5"><a href="#" class="repo-name"><b>dummy</b></a>&nbsp;<a href="#"><span class="icon has-text-grey" style="font-size:1rem"><i class="fa fa-github"></i></span></a></div>
-                                        <div class="column is-6"><h3 class="is-size-6 is-pulled-right" style="padding-top: 0.25rem;"><div class="download-info"><span class="icon"><i class="fas fa-download"></i>&nbsp;</span>256</div>&nbsp;·&nbsp;<div class="star-info"><span class="icon"><i class="fa fa-star"></i></span> 123</h3></div>
-                                    </div>
-                                </div>
-                                <div class="entry-body">
-                                    <p style="font-weight: 400; ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu ipsum id arcu congue sollicitudin ac interdum ante.</p>
-                                </div>
-                                <div style="padding: 1.25rem;">
-                                    <hr/>
-                                    <div class="columns is-mobile">
-                                        <div class="column is-6" style="padding-top:0; padding-bottom: 0.25rem">
-                                            <div class="is-pulled-left" style="font-weight: 500"><span class="icon"><i class="fa fa-user-o"></i></span>&nbsp;<a href="#">drkameleon</a></div>
-                                        </div>
-                                        <div class="column is-6" style="padding-top:0; padding-bottom: 0.25rem">
-                                            <div class="is-pulled-right has-text-grey" style="font-weight: 500"><span class="icon"><i class="fa fa-balance-scale"></i></span>&nbsp;<a href="#">MIT</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <|| entry: entryLeft ||>
+                            <||= read "website/components/package-box.html" ||>
                         </div>
                         <div class="column is-6">
-                            <div class="box" style="padding: 0 !important">
-                                <div style="border-bottom: 1px solid lightgray; padding: 1.25rem;">
-                                    <div class="columns is-mobile">
-                                        <div class="column is-6"><h3 class="is-size-5"><a href="#" class="repo-name"><b>dummy</b></a></div>
-                                        <div class="column is-6"><h3 class="is-size-6 is-pulled-right" style="padding-top: 0.25rem;"><span class="icon"><i class="fa fa-star"></i></span> 123 <a href="#"><span class="icon"><i class="fa fa-github"></i></span></a></h3></div>
-                                    </div>
-                                </div>
-                                <div class="entry-body">
-                                    <p style="font-weight: 400;">Lorem ipsum dolor sit amet</p>
-                                </div>
-                                <div style="padding: 1.25rem;">
-                                    <hr/>
-                                    <div class="columns is-mobile">
-                                        <div class="column is-6" style="padding-top:0; padding-bottom: 0.25rem">
-                                            <div class="is-pulled-left" style="font-weight: 500"><span class="icon"><i class="fa fa-user-o"></i></span>&nbsp;<a href="#">drkameleon</a></div>
-                                        </div>
-                                        <div class="column is-6" style="padding-top:0; padding-bottom: 0.25rem">
-                                            <div class="is-pulled-right has-text-grey" style="font-weight: 500"><span class="icon"><i class="fa fa-balance-scale"></i></span>&nbsp;<a href="#">MIT</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <|| unless null? entryRight [||>
+                                <|| entry: entryRight ||>
+                                <||= read "website/components/package-box.html" ||>
+                            <|| ] ||>
                         </div>
                     </div>
-                    <div class="columns is-tablet">
-                        <div class="column is-6">
-                            <div class="box" style="padding: 0 !important">
-                                <div style="border-bottom: 1px solid lightgray; padding: 1.25rem;">
-                                    <div class="columns is-mobile">
-                                        <div class="column is-6"><h3 class="is-size-5"><a href="#" class="repo-name"><b>dummy</b></a></div>
-                                        <div class="column is-6"><h3 class="is-size-6 is-pulled-right" style="padding-top: 0.25rem;"><span class="icon"><i class="fa fa-star"></i></span> 123 <a href="#"><span class="icon"><i class="fa fa-github"></i></span></a></h3></div>
-                                    </div>
-                                </div>
-                                <div class="entry-body">
-                                    <p style="font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu ipsum id arcu congue sollicitudin ac interdum ante.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu ipsum id arcu congue sollicitudin ac interdum ante.</p>
-                                </div>
-                                <div style="padding: 1.25rem;">
-                                    <hr/>
-                                    <div class="columns is-mobile">
-                                        <div class="column is-6" style="padding-top:0; padding-bottom: 0.25rem">
-                                            <div class="is-pulled-left" style="font-weight: 500"><span class="icon"><i class="fa fa-user-o"></i></span>&nbsp;<a href="#">drkameleon</a></div>
-                                        </div>
-                                        <div class="column is-6" style="padding-top:0; padding-bottom: 0.25rem">
-                                            <div class="is-pulled-right has-text-grey" style="font-weight: 500"><span class="icon"><i class="fa fa-balance-scale"></i></span>&nbsp;<a href="#">MIT</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column is-6">
-                            <div class="box" style="padding: 0 !important">
-                                <div style="border-bottom: 1px solid lightgray; padding: 1.25rem;">
-                                    <div class="columns is-mobile">
-                                        <div class="column is-6"><h3 class="is-size-5"><a href="#" class="repo-name"><b>dummy</b></a></div>
-                                        <div class="column is-6"><h3 class="is-size-6 is-pulled-right" style="padding-top: 0.25rem;"><span class="icon"><i class="fa fa-star"></i></span> 123 <a href="#"><span class="icon"><i class="fa fa-github"></i></span></a></h3></div>
-                                    </div>
-                                </div>
-                                <div class="entry-body">
-                                    <p style="font-weight: 400; ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu ipsum id arcu congue sollicitudin ac interdum ante.</p>
-                                </div>
-                                <div style="padding: 1.25rem;">
-                                    <hr/>
-                                    <div class="columns is-mobile">
-                                        <div class="column is-6" style="padding-top:0; padding-bottom: 0.25rem">
-                                            <div class="is-pulled-left" style="font-weight: 500"><span class="icon"><i class="fa fa-user-o"></i></span>&nbsp;<a href="#">drkameleon</a></div>
-                                        </div>
-                                        <div class="column is-6" style="padding-top:0; padding-bottom: 0.25rem">
-                                            <div class="is-pulled-right has-text-grey" style="font-weight: 500"><span class="icon"><i class="fa fa-balance-scale"></i></span>&nbsp;<a href="#">MIT</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <|| ] ||>
             </div>
         </div>
-        <div class="container has-text-centered">
-            <div class="columns">
-                <div class="column is-12" style="padding:4rem; font-size: 1.2rem">
-                    <p class="has-text-grey">
-                        <a href="../">How do I use a package?</a>&nbsp;·&nbsp;
-                        <a href="../">How do I create a new package?</a>&nbsp;·&nbsp;
-                    </p>
-                </div>
+    </div>
+    <div class="container has-text-centered">
+        <div class="columns">
+            <div class="column is-12" style="padding:4rem; font-size: 1.2rem">
+                <p class="has-text-grey">
+                    <a class="simple-link" href="https://github.com/arturo-lang/pkgr.art" target="_blank">How do I use a package?</a>&nbsp;·&nbsp;
+                    <a class="simple-link" href="https://github.com/arturo-lang/pkgr.art" target="_blank">How do I create a new package?</a>&nbsp;·&nbsp;
+                </p>
             </div>
         </div>
-    </section>
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <p class="block">
-                <a class="footer-icon home" aria-label="home" rel="noopener" href="https://arturo-lang.io" target="_blank"><i class="fas fa-home"></i></a>&nbsp;&nbsp;&nbsp;
-                <a class="footer-icon github" aria-label="github" rel="noopener" href="https://github.com/arturo-lang" target="_blank"><i class="fab fa-github"></i></a>&nbsp;&nbsp;&nbsp;
-                <a class="footer-icon twitter" aria-label="twitter" rel="noopener" href="https://twitter.com/ArturoLanguage" target="_blank"><i class="fab fa-twitter"></i></a>&nbsp;&nbsp;
-                <a class="footer-icon discord" aria-label="discord" rel="noopener" href="https://discord.gg/YdVK2CB" target="_blank"><i class="fab fa-discord"></i></a>
-            </p>
-        </div>
-        <div class="content has-text-centered">
-            <p class="block">
-                <strong>Arturo Programming Language</strong><br>Copyright &copy; 2019-2023 Yanis Zafirópulos<br><br>
-                <small class="is-size-7-touch">Website built and generated using Arturo + Webize.<span class="is-hidden-touch"> Running on <a rel="noopener" href="https://m.do.co/c/d9efb97aa0f2" target="_blank">DigitalOcean</a>.</span></small><br>
-                <small class="is-size-7-touch">Source code <span class="is-hidden-touch">licensed </span>under <a href="https://opensource.org/licenses/mit-license.php">MIT</a>. Website <span class="is-hidden-touch">content licensed </span><span class="is-hidden-desktop">under </span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.</small>
-            </p>
-        </div>
-    </footer>
-    <script async type="text/javascript" src="../js/bulma.js"></script>
-</body>
+    </div>
+</section>
 
-</html>
+<||= read "website/components/footer.html" ||>

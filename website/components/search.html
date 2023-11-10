@@ -1,0 +1,28 @@
+<section class="hero main-hero <|| (isHome)? [||>is-fullheight<|| ] [||>is-hidden<|| ] ||>">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4 main-header">
+                <|| if isHome [||>
+                    <figure class="logo">
+                        <img src="<||= siteroot ||>/images/logo.png">
+                    </figure>
+                <|| ] ||>
+                <h1 class="title has-text-black main-title">
+                    <a href="<||= siteroot ||>/index.html">
+                        <b>Arturo</b>&nbsp;<span class="animate-character">Packages</span>
+                    </a>
+                </h1>
+                <div class="control has-icons-left">
+                    <input id="search-bar" class="input is-large main-search" type="search" placeholder="I'm looking for..."/>
+                    <span class="icon is-medium is-left">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+            <div>
+        </div>
+    </div>
+</section>
+
+<|| unless isHome [ ||>
+    <div class="hero search-line" onclick="showSearch()">&nbsp;<i class="showsearch-icon fas fa-caret-square-down" onclick="showSearch()"></i>&nbsp;</div>
+<||]||>

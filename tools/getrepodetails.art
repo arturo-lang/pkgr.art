@@ -48,13 +48,21 @@ getReadme: function [owner, repo][
 getRepoInfo: function [owner, repo][
     try? [
         got: getGH ~"repos/|owner|/|repo|"
+        licenseUrl: "--"
+        if got\license [
+            licenseInfo: read.json got\license\url
+            licenseUrl: licenseInfo\html_url
+        ]
         #[
             name: got\name
             fullName: got\full_name
             url: got\html_url
             description: got\description
             tags: got\topics
-            license: (got\license)? -> got\license\spdx_id -> "--"
+            license: #[
+                name: (got\license)? -> got\license\spdx_id -> "--"
+                url: licenseUrl
+            ]
             readme: getReadme owner repo
             stats: #[
                 stars: got\stargazers_count

@@ -1,0 +1,123 @@
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p class="block">
+                    <a class="footer-icon home" aria-label="home" rel="noopener" href="https://arturo-lang.io" target="_blank"><i class="fas fa-home"></i></a>&nbsp;&nbsp;&nbsp;
+                    <a class="footer-icon github" aria-label="github" rel="noopener" href="https://github.com/arturo-lang" target="_blank"><i class="fab fa-github"></i></a>&nbsp;&nbsp;&nbsp;
+                    <a class="footer-icon twitter" aria-label="twitter" rel="noopener" href="https://twitter.com/ArturoLanguage" target="_blank"><i class="fab fa-twitter"></i></a>&nbsp;&nbsp;
+                    <a class="footer-icon discord" aria-label="discord" rel="noopener" href="https://discord.gg/YdVK2CB" target="_blank"><i class="fab fa-discord"></i></a>
+                </p>
+            </div>
+            <div class="content has-text-centered">
+                <p class="block">
+                    <strong>Arturo Programming Language</strong><br>Copyright &copy; 2019-2023 Yanis Zafirópulos<br><br>
+                    <small class="is-size-7-touch">Website built and generated using Arturo + Webize.<span class="is-hidden-touch"> Running on <a rel="noopener" href="https://m.do.co/c/d9efb97aa0f2" target="_blank">DigitalOcean</a>.</span></small><br>
+                    <small class="is-size-7-touch">Source code <span class="is-hidden-touch">licensed </span>under <a href="https://opensource.org/licenses/mit-license.php">MIT</a>. Website <span class="is-hidden-touch">content licensed </span><span class="is-hidden-desktop">under </span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.</small>
+                </p>
+            </div>
+        </footer>
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/devbridge-autocomplete@1.4.11/dist/jquery.autocomplete.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
+        <script src="<||= siteroot ||>/script.js"></script>
+        <script>
+            $(document).ready(function(){
+                var searchables = <||= searchable ||>;
+                var fuseOptions = {
+                    // isCaseSensitive: false,
+                    // includeScore: false,
+                    // shouldSort: true,
+                    // includeMatches: false,
+                    // findAllMatches: false,
+                    // minMatchCharLength: 1,
+                    // location: 0,
+                    // threshold: 0.6,
+                    // distance: 100,
+                    // useExtendedSearch: false,
+                    // ignoreLocation: false,
+                    // ignoreFieldNorm: false,
+                    // fieldNormWeight: 1,
+                    keys: [
+                        "value",
+                        "tags",
+                        "description"
+                    ]
+                };
+    
+                window.fuse = new Fuse(searchables, fuseOptions);
+                enableSearch();
+            });
+            window.searchIsEnabled = false;
+            function enableSearch(){
+                if (!window.searchIsEnabled){
+                    window.searchIsEnabled = true;
+
+                    $('#search-bar').autocomplete({
+                        formatResult: function (suggestion, currentValue){
+                            console.log(`suggestion: ${suggestion}`);
+                            console.log(`currentValue: ${currentValue}`);
+                            console.log(suggestion.value);
+                            return `
+                                <div class="columns" style="border-bottom:1px solid #DDD;">
+                                    <div class="column is-8">
+                                        <b>${suggestion.value}</b>
+                                    </div>
+                                    <div class="column is-4">
+                                        <div class="is-pulled-right has-text-grey">
+                                            ${suggestion.version}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        },
+                        lookup: function (query, done) {
+                            var got = window.fuse.search(query);
+                            var sugg = [];
+
+                            for (var i=0; i<got.length; i++){
+                                sugg.push(got[i].item);
+                            }
+                            console.log(got);
+                            var result = {
+                                suggestions: sugg
+                            }
+                            console.log(sugg);
+
+                            done(result);
+                            // var sugg = [];
+                            // for (var i=0; i < searchables.length; i++){
+                            //     searchable = searchables[i];
+
+                            //     if (searchable.value.includes(query))
+                            // }
+                            // console.log(`query: ${query}`);
+                            // console.log(searchable);
+                            // var result = {
+                            //     suggestions: [
+                            //         { "value": "United Arab Emirates", "data": "AE" },
+                            //         { "value": "United Kingdom",       "data": "UK" },
+                            //         { "value": "United States",        "data": "US" },
+                            //         { value: 'Andorra', data: 'AD' },
+                            //         { value: 'Greece', data: 'GR'},
+                            //         { value: 'Spain', data: 'ES'},
+                            //         { value: 'Zimbabwe', data: 'ZZ' }
+                            //     ]
+                            // };
+
+                            done(result);
+                        },
+                        showNoSuggestionNotice: true,
+                        noSuggestionNotice: 'Sorry, no matching results',
+                        onSelect: function (suggestion) {
+                            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                        }
+                    });
+                }
+            }
+        </script>
+    </body>
+
+</html>
