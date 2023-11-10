@@ -43,6 +43,22 @@ getLink: function [loc, subv][
     return rett
 ]
 
+createSpecFile: function [package, versionToProcess, targetFolder][
+    ret: #[
+        name: package\name,
+        description: package\info\description
+        license: package\info\license\name
+        author: package\info\author\name
+        version: versionToProcess\version
+        url: versionToProcess\url
+        entry: versionToProcess\info\entry
+        depends: versionToProcess\info\depends
+        requires: versionToProcess\info\requires
+    ]
+
+    write ~"|targetFolder|/spec" replace strip as.pretty.unwrapped.code ret {/\[\n\n\s+\]/} "[]"
+]
+
 searchable: new []
 
 loop packages [k,v][
@@ -94,6 +110,8 @@ loop entries 'entry [
     write ~{|tgtName|/index.html}
           render.template read "website/package.html"
 
+    createSpecFile entry currentVersion tgtName
+
     loop entry\version 'vv [
         versionTgt: ~{public/|entry\name|/|vv\version|}
         unless exists?.directory versionTgt ->
@@ -103,6 +121,8 @@ loop entries 'entry [
         currentVersionIsLatest: false
         write ~{|versionTgt|/index.html}
               render.template read "website/package.html"
+
+        createSpecFile entry vv versionTgt
     ]
 ]
 
