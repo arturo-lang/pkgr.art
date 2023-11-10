@@ -3,8 +3,8 @@
 packages: # "packages/list.art"
 entries: new []
 
-siteroot: (not? empty? arg)? -> "https://pkgr.art"
-                             -> "file:///Users/drkameleon/Documents/Code/OpenSource/arturo-lang/pkgr.art/public"
+siteroot: (key? env 'GITHUB_ACTION)? -> "https://pkgr.art"
+                                     -> "file:///Users/drkameleon/Documents/Code/OpenSource/arturo-lang/pkgr.art/public"
 isHome: false
 
 compressHTML: function [file][
