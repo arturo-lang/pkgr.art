@@ -131,9 +131,15 @@
 </section>
 <script>
     $(document).ready(function(){
-        $.get("https://pkgr.art/getdownloads.php?pkg=<||= entry\name ||>", function (data, status){
-            $("#<||=entry\name ||>-downloads").html(data);
-        });
+        <|| (currentVersionIsLatest)?[ ||>
+            $.get("https://pkgr.art/getdownloads.php?pkg=<||= entry\name ||>", function (data, status){
+                $("#<||=entry\name ||>-downloads").html(data);
+            });
+        <|| ][ ||>
+            $.get("https://pkgr.art/getdownloads.php?pkg=<||= entry\name ||>&ver=<||= currentVersion\version ||>", function (data, status){
+                $("#<||=entry\name ||>-downloads").html(data);
+            });
+        <|| ] ||>
     });
 </script>
 
