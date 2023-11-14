@@ -74,7 +74,7 @@
                                     <span class="icon download-icon">
                                         <i class="fas fa-download"></i>
                                     </span>&nbsp;
-                                    <span class="download-count">256</span>
+                                    <span id= "<||= entry\name ||>-downloads" class="download-count">-</span>
                                 </div>&nbsp;&nbsp;
                                 <div class="star-info">
                                     <span class="icon star-icon">
@@ -129,5 +129,12 @@
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function(){
+        $.get("https://pkgr.art/getdownloads.php?pkg=<||= entry\name ||>", function (data, status){
+            $("#<||=entry\name ||>-downloads").html(data);
+        });
+    });
+</script>
 
 <||= read "website/components/footer.html" ||>
