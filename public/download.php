@@ -4,6 +4,8 @@ $pkg = $_GET["pkg"];
 $ver = $_GET["ver"];
 $mgk = $_GET["mgk"];
 
+header("Access-Control-Allow-Origin: *");
+
 if (($pkg != "") && ($ver != "") && ($mgk == "18966")) {
     if ((is_dir("/var/www/pkgr.art/public/" . $pkg)) && 
         (is_dir("/var/www/pkgr.art/public/" . $pkg . "/" . $ver))) {
