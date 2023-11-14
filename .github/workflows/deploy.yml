@@ -65,3 +65,5 @@ jobs:
             cd /var/www/pkgr.art
             git reset --hard
             git pull
+            sudo chown -R www-data:www-data /var/www/pkg_stats 
+            sudo chmod -R 777 /var/www/pkg_stats
