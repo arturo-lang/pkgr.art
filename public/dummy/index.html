@@ -147,7 +147,7 @@
                                     <span class="icon download-icon">
                                         <i class="fas fa-download"></i>
                                     </span>&nbsp;
-                                    <span class="download-count">256</span>
+                                    <span id= "dummy-downloads" class="download-count">-</span>
                                 </div>&nbsp;&nbsp;
                                 <div class="star-info">
                                     <span class="icon star-icon">
@@ -194,6 +194,13 @@
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function(){
+        $.get("https://pkgr.art/getdownloads.php?pkg=dummy", function (data, status){
+            $("#dummy-downloads").html(data);
+        });
+    });
+</script>
 
         <footer class="footer">
             <div class="content has-text-centered">
