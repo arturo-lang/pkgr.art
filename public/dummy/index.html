@@ -202,9 +202,11 @@
 </section>
 <script>
     $(document).ready(function(){
-        $.get("https://pkgr.art/getdownloads.php?pkg=dummy", function (data, status){
-            $("#dummy-downloads").html(data);
-        });
+        
+            $.get("https://pkgr.art/getdownloads.php?pkg=dummy", function (data, status){
+                $("#dummy-downloads").html(data);
+            });
+        
     });
 </script>
 
