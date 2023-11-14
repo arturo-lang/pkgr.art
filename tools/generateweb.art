@@ -150,7 +150,7 @@ loop list "website/images" 'file [
 copy "website/script.js" "public/script.js"
 
 ; copy main javascript
-copy "website/spec.php" "public/spec.php"
+copy "website/download.php" "public/download.php"
 
 ; copy searchable items
 copy "website/searchable.json" "public/searchable.json"
