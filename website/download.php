@@ -1,19 +1,27 @@
 <?php
 
 $pkg = $_GET["pkg"];
-$ver = $_GET["version"];
+$ver = $_GET["ver"];
 $mgk = $_GET["mgk"];
 
 if (($pkg != "") && ($ver != "") && ($mgk == "18966")) {
-    $filename = "../../" . $pkg . "-" . $ver . ".cnt";
-
+    $filename = "/var/www/pkg_stats/" . $pkg . "-" . $ver . ".cnt";
     $cnt = 0;
     if (file_exists($filename)){
         $cnt = intval(file_get_contents($filename));
     }
+    else {
+        touch($filename);
+        chmod($filename, 0777);
+    }
     $cnt = $cnt + 1;
 
-    file_put_contents($cnt, $filename);
+    $openFile = fopen($filename, "w+") or die("Can't open file");
+    fwrite($openFile, strval($cnt));
+    fclose($openFile);
+    fclose($myfile); 
+
+    echo $cnt;  
 }
 
 ?>
