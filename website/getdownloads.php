@@ -10,14 +10,14 @@ if ($pkg != "") {
 
         $cnt = 0;
         if (isset($_GET["ver"])){
-            $cnt = intval(file_get_contents("/var/www/pkg_stats/" . $pkg . "-" . str_replace("_",".",$_GET["ver"])));
+            $cnt = intval(file_get_contents("/var/www/pkg_stats/" . $pkg . "-" . str_replace("_",".",$_GET["ver"]) . ".cnt"));
         }
         else {
             $files = glob("/var/www/pkg_stats/" . $pkg . "-*");
             
             foreach ($files as $file) {
                 if (is_file($file)) {
-                    $cnt = intval(file_get_contents($file));
+                    $cnt = $cnt + intval(file_get_contents($file));
                 }
             }
         }
