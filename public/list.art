@@ -1,0 +1,8 @@
+
+dummy: #[
+        description: "This package will serve merely as test for Arturo\'s package manager"
+        tags: [
+                        "test"
+                ]
+        ]
+
