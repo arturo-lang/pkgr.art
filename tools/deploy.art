@@ -15,6 +15,8 @@ do ::
     print " Deploying packages"
     print separator
 
+    listWithDescriptions: #[]
+
     loop packages [name,location][
         prints [pad to :string cnt 4 "/" pad.right to :string total 4 "|"]
         prints color #cyan "Processing: "
@@ -32,9 +34,16 @@ do ::
         write ~"|targetFolder|/version/|targetName|" as.pretty.code versionD
 
         print color #green "[ ✅  OK   ]"  
+
+        listWithDescriptions\[name]: #[
+            description: infoD\description
+            tags: infoD\tags
+        ]
                     
         cnt: cnt + 1
     ]
+
+    write ~"public/list.art" as.unwrapped.pretty.code listWithDescriptions
 
     print separator
     print ""

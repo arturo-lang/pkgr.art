@@ -152,7 +152,6 @@ copy "website/script.js" "public/script.js"
 ; copy server scripts
 copy "website/download.php" "public/download.php"
 copy "website/getdownloads.php" "public/getdownloads.php"
-copy "website/getlist.php" "public/getlist.php"
 
 ; copy searchable items
 copy "website/searchable.json" "public/searchable.json"
