@@ -6,6 +6,7 @@
   <img src="https://img.shields.io/badge/language-Arturo-orange.svg?style=for-the-badge">
   <img src="https://img.shields.io/github/actions/workflow/status/arturo-lang/pkgr.art/verify.yml?branch=main&style=for-the-badge">
 </p>
+
 --- 
  
 <!--ts-->
@@ -13,6 +14,7 @@
 * [What is a package?](#what-is-a-package)
 * [Creating packages](#creating-packages)
   * [How do I create a package?](#how-do-I-create-a-package)
+    * [More configuration](#more-configuration) 
   * [How do I publish a new package?](#how-do-I-publish-a-new-package)
 * [Using packages](#using-packages)
   * [How do I use a package?](#how-do-I-use-a-package)
@@ -40,7 +42,7 @@ As I said above, a package can be just a folder with one single file in it (`mai
 
 But of course, you can fine-tune more in case you wish.
 
-#### The `info.art` configuration file
+#### More configuration
 
 The way to fine-tune a package is by including an extra `info.art` in your package which is meant to add extra info about how your package behaves.
 
