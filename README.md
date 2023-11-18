@@ -4,7 +4,7 @@
   <br><br>
   <img src="https://img.shields.io/github/license/arturo-lang/pkgr.art?style=for-the-badge">
   <img src="https://img.shields.io/badge/language-Arturo-orange.svg?style=for-the-badge">
-  <img src="https://img.shields.io/github/actions/workflow/status/arturo-lang/pkgr.art/verify.yml?branch=main&style=for-the-badge">
+  <img src="https://img.shields.io/github/actions/workflow/status/arturo-lang/pkgr.art/verify.yml?style=for-the-badge">
 </p>
 
 --- 
