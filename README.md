@@ -44,9 +44,9 @@ But of course, you can fine-tune more in case you wish.
 
 #### More configuration
 
-The way to fine-tune a package is by including an extra `info.art` in your package which is meant to add extra info about how your package behaves.
+The way to fine-tune a package is by including an extra `info.art` in your package, which is meant to add extra info about how your package behaves.
 
-Let's have a look at an example `info.art` configuration:
+Let's take a look at an example `info.art` configuration:
 
 ```red
 entry: "mayownmain"
@@ -66,7 +66,7 @@ As you can see, that's no rocket science.
 
 ### How do I "publish" a new package?
 
-In order to publish a new package so that it's universally available via the main package registry (pkgr.art), all you have to do is add a tiny PR to this repo, and add a only line entry to the [`packages/list.art`](https://github.com/arturo-lang/pkgr.art/blob/main/packages/list.art) file. Yes, it's as easy as that: a name you want for your package and the repo (owner/repo) of your project. Once the PR has been merged, your package will be instantly available!
+In order to publish a new package so that it's universally available via the main package registry (pkgr.art), all you have to do is add a tiny PR to this repo, and add a one-line entry to the [`packages/list.art`](https://github.com/arturo-lang/pkgr.art/blob/main/packages/list.art) file. Yes, it's as easy as that: a name you want for your package and the repo (owner/repo) of your project. Once the PR has been merged, your package will be instantly available!
 
 Also: you don't have to add any description/documentation or anything like that. What will be extracted is exactly what you have in the repo - so, make sure everything is neat and tidy in there! 😉
 
@@ -84,7 +84,7 @@ The main way of using a package is by `import`ing in your Arturo code. And it's 
 import "dummy"
 ```
 
-If the package has not already been downloaded, it will and you will be able to use it just fine without noticing anything. If it's already there, then it will be used automatically.
+If the package has not already been downloaded, it will be and you will be able to use it just fine without noticing anything. If it's already there, then it will be used automatically.
 
 A few examples, taken from `import`'s own documentation that show a few more bells and whistles:
 
