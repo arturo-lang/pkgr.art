@@ -1,4 +1,4 @@
-<p align="center"><img align="center" width="350" src="https://raw.githubusercontent.com/arturo-lang/pkgr/main/logo.png"/></p>
+<p align="center"><img align="center" width="350" src="https://raw.githubusercontent.com/arturo-lang/pkgr.art/main/logo.png"/></p>
 <p align="center">
   <b>The main registry for Arturo's package manager</b>
   <br><br>
