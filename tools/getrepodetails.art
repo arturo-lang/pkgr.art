@@ -27,10 +27,9 @@ getGH: function [req][
 ]
 
 extractCorrectVersion: function [versionString][
-    try? -> to :version versionString
-    else [
-        try? -> to :version strip replace versionString "v" ""
-        else -> null
+    if throws? -> to :version versionString [
+        if throws? -> to :version strip replace versionString "v" ""
+            -> null
     ]
 ]
 
@@ -46,7 +45,7 @@ getReadme: function [owner, repo][
 ]
 
 getRepoInfo: function [owner, repo][
-    try? [
+    if throws? [
         got: getGH ~"repos/|owner|/|repo|"
         licenseUrl: "--"
         if got\license [
@@ -74,10 +73,7 @@ getRepoInfo: function [owner, repo][
                 avatar: got\owner\avatar_url
             ]
         ]
-    ]
-    else [
-        null
-    ]
+    ] -> null
 ]
 
 getReleaseInfo: function [owner, repo, version, url][
@@ -123,7 +119,7 @@ getVersions: function [owner, repo][
     try [
         releases: getGH ~"repos/|owner|/|repo|/releases"
         loop releases 'release [
-            if ver: <= extractCorrectVersion release\name [
+            if ver: <= extractCorrectVersion release\tag_name [
                 if ver > greaterThan [
                     if releaseInfo: <= getReleaseInfo owner repo ver release\zipball_url [
                         'available ++ #[
