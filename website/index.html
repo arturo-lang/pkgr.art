@@ -11,17 +11,14 @@
         <div class="columns" style="margin-top:-2rem">
             <div class="column is-8-tablet is-offset-2-tablet is-10-mobile is-offset-1-mobile">
                 <!-- <p class="subtitle has-text-black">Latest packages</p> -->
-
                 <|| loop entries [entryLeft, entryRight][||>
                     <div class="columns is-tablet">
                         <div class="column is-6">
-                            <|| entry: entryLeft ||>
-                            <||= read "website/components/package-box.html" ||>
+                            <||= getPackageBox entryLeft ||>
                         </div>
                         <div class="column is-6">
                             <|| unless null? entryRight [||>
-                                <|| entry: entryRight ||>
-                                <||= read "website/components/package-box.html" ||>
+                                <||= getPackageBox entryRight ||>
                             <|| ] ||>
                         </div>
                     </div>
@@ -33,8 +30,8 @@
         <div class="columns">
             <div class="column is-12" style="padding:4rem; font-size: 1.2rem">
                 <p class="has-text-grey">
-                    <a class="simple-link" href="https://github.com/arturo-lang/pkgr.art" target="_blank">How do I use a package?</a>&nbsp;·&nbsp;
-                    <a class="simple-link" href="https://github.com/arturo-lang/pkgr.art" target="_blank">How do I create a new package?</a>&nbsp;·&nbsp;
+                    <a class="simple-link" href="https://github.com/arturo-lang/pkgr.art?tab=readme-ov-file#using-packages" target="_blank">How do I use a package?</a>&nbsp;·&nbsp;
+                    <a class="simple-link" href="https://github.com/arturo-lang/pkgr.art?tab=readme-ov-file#creating-packages" target="_blank">How do I create a new package?</a>&nbsp;·&nbsp;
                 </p>
             </div>
         </div>
