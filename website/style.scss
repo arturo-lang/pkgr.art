@@ -203,6 +203,56 @@ a.version-link {
                 box-shadow: none;
                 padding-top: 2rem;
                 padding-bottom: 2rem;
+
+                .readme {
+                    blockquote {
+                        &.alert {
+                            padding-top: 0.5rem;
+                            padding-bottom: 0.5rem;
+                            
+                            background-color: inherit !important;
+                            border-left-width: 5px;
+                            border-left-style: solid;
+
+                            .alert-message {
+                                i {
+                                    margin-right: 0.5rem;
+                                }
+                            }
+            
+                            &.alert-tip         { 
+                                border-left-color: #428546; 
+                                .alert-message {
+                                    color: #428546;
+                                }
+                            }
+                            &.alert-note        { 
+                                border-left-color: #296BD3; 
+                                .alert-message {
+                                    color: #296BD3;
+                                }
+                            }
+                            &.alert-important   { 
+                                border-left-color: #7A58D7; 
+                                .alert-message {
+                                    color: #7A58D7;
+                                }
+                            }
+                            &.alert-warning     { 
+                                border-left-color: #936821; 
+                                .alert-message {
+                                    color: #936821;
+                                }
+                            }
+                            &.alert-caution     { 
+                                border-left-color: #BF3536;
+                                .alert-message {
+                                    color: #BF3536;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
