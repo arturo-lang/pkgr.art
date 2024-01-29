@@ -43,6 +43,10 @@ getLink: function [loc, subv][
     return rett
 ]
 
+getPackageBox: function [entry][
+    render.template read "website/components/package-box.html"
+]
+
 createSpecFile: function [package, versionToProcess, targetFolder][
     ret: #[
         name: package\name,
