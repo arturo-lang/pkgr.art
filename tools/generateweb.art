@@ -23,6 +23,9 @@ compressCSS: function [file][
 ]
 
 getProperMarkdown: function [md][
+    ; write "tmp.md" md
+    ; ret: execute ~{ruby |relative "gfm.rb"| tmp.md}
+    ; print ["Got:\n" ret]
     ret: read.markdown md
     ret: replace ret {/class="language-[^"]+"/} ""
     return ret
@@ -45,6 +48,32 @@ getLink: function [loc, subv][
 
 getPackageBox: function [entry][
     render.template read "website/components/package-box.html"
+]
+
+getCleanTags: function [taglist][
+    filter taglist 'tag [
+        contains? ["arturo" "arturo-lang" "package"] tag
+    ]
+]
+
+postprocessAlerts: function [src][
+    replace src [
+        {/<blockquote>\n<p>\[!TIP\]/}
+        {/<blockquote>\n<p>\[!NOTE\]/}
+        {/<blockquote>\n<p>\[!IMPORTANT\]/}
+        {/<blockquote>\n<p>\[!WARNING\]/}
+        {/<blockquote>\n<p>\[!CAUTION\]/}
+     ][
+        "<blockquote class='alert alert-tip'>\n<p><b class='alert-message'><i class='far fa-lightbulb'></i>Tip</b><br>\n"
+        "<blockquote class='alert alert-note'>\n<p><b class='alert-message'><i class='fas fa-info-circle'></i>Note</b><br>\n"
+        "<blockquote class='alert alert-important'>\n<p><b class='alert-message'>Important</b><br>\n"
+        "<blockquote class='alert alert-warning'>\n<p><b class='alert-message'><i class='fas fa-exclamation-triangle'></i>Warning</b><br>\n"
+        "<blockquote class='alert alert-caution'>\n<p><b class='alert-message'><i class='far fa-times-circle'></i>Caution</b><br>\n"
+     ]
+]
+
+postprocessHTML: function [htm][
+    return postprocessAlerts htm
 ]
 
 createSpecFile: function [package, versionToProcess, targetFolder][
@@ -110,7 +139,7 @@ loop entries 'entry [
     currentVersion: first entry\version
     currentVersionIsLatest: true
     write ~{|tgtName|/index.html}
-          render.template read "website/package.html"
+          postprocessHTML render.template read "website/package.html"
 
     createSpecFile entry currentVersion tgtName
 
@@ -122,7 +151,7 @@ loop entries 'entry [
         currentVersion: vv
         currentVersionIsLatest: false
         write ~{|versionTgt|/index.html}
-              render.template read "website/package.html"
+              postprocessHTML render.template read "website/package.html"
 
         createSpecFile entry vv versionTgt
     ]
