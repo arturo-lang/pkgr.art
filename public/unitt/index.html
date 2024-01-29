@@ -62,34 +62,40 @@
                 <div class="columns package-title-wrapper">
                     <div class="column is-8 package-title title-wrapper">
                         
-                            <h2 class="is-size-2"><b><a href="https://dummy.pkgr.art">dummy</a></b></h2>
+                        <h2 class="is-size-2"><b>unitt</b></h2>
                         
-                        <a href="https://github.com/arturo-lang/dummy-package">
+                        <a href="https://github.com/RickBarretto/unitt">
                             <span class="icon repo-icon inside-package">
                                 <i class="fa fa-github"></i>
                             </span>
                         </a>
                     </div>
                     <div class="column is-4 package-link">
-                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;dummy.pkgr.art</div>
+                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;unitt.pkgr.art</div>
                     </div>
                 </div>
                 <div class="block package-description">
-                    <h3 class="is-size-5">This package will serve merely as test for Arturo's package manager</h3>
+                    <h3 class="is-size-5">DRAFT - Unitt is a basic unit-test tool for the Arturo Programming language.</h3>
                 </div>
                 
                     <div class="block package-tags">
                         
-                            <span class="tag is-info is-light is-medium package-tag">test</span>
+                            <span class="tag is-info is-light is-medium package-tag">arturo</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">arturo-lang</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">package</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">unit-tests</span>
                         
                     </div>
                 
                 <div class="installation-instructions block">
-                    <input id="installation-code" class="input copy-code" value="arturo -p install dummy" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
+                    <input id="installation-code" class="input copy-code" value="arturo -p install unitt" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
                 </div>
                 <article class="message is-success codecopied-message is-hidden">
                     <div class="message-body">
-                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "dummy"</code>, directly inside your code.
+                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "unitt"</code>, directly inside your code.
                     </div>
                   </article>
                 <div class="columns">
@@ -103,42 +109,127 @@
                             </div>
                             <div class="box content left-container">
                                 <div class="readme">
-                                    <h1>dummy-package</h1>
-<p>This package will serve merely as test for Arturo's package manager</p>
-<ul>
-<li><a href="#at-a-glance">At A Glance</a></li>
-<li><a href="#try-dummy">Try Dummy</a><ul>
-<li><a href="#more-dummy">More dummy</a></li>
-<li><a href="#and-more">And more</a></li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut odio elit. Aenean facilisis placerat massa. Pellentesque feugiat nisi tortor, nec sodales felis bibendum at. Curabitur nec risus at elit varius ultricies. Nunc sed finibus justo. Integer posuere nunc vel leo pharetra luctus. Morbi at mauris vel nulla fermentum rutrum. Sed vel velit lacinia lorem scelerisque consectetur.</p>
-<h2>At A Glance</h2>
-<p>Sed pharetra diam metus, ac congue lectus ullamcorper scelerisque. Phasellus eget tempus purus. Maecenas sagittis efficitur orci quis aliquam. Quisque libero magna, commodo quis consequat sed, finibus eu tellus. Aenean tincidunt commodo risus ac egestas.</p>
-<p>Morbi id posuere nisl. Integer arcu eros, suscipit a felis vel, porta bibendum neque. Ut dictum lacinia lectus nec vulputate. Aliquam iaculis tellus eget euismod eleifend. Curabitur eget ipsum lacinia, volutpat turpis non, dapibus leo. Etiam id sem vel massa dignissim pretium quis id turpis. Morbi hendrerit scelerisque dolor nec mollis. In ornare imperdiet sapien vel gravida. Nulla molestie augue id eros eleifend, faucibus pellentesque sem malesuada.</p>
-<h2>Try Dummy</h2>
-<p>Nullam posuere bibendum interdum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut commodo urna eget faucibus viverra. Aliquam orci sapien, vestibulum at fermentum ac, vulputate et tellus. Fusce nunc tortor, facilisis scelerisque elit eu, tempus congue nisi. Vestibulum pulvinar ipsum at scelerisque aliquam.</p>
-<h3>More dummy</h3>
-<p>Aenean pretium risus quis erat sodales bibendum. Aliquam nec leo nisi. Proin enim purus, scelerisque non venenatis at, consequat vitae sem. Nam sit amet nunc vel tellus maximus volutpat. Nulla sollicitudin turpis justo, quis scelerisque sapien aliquam quis. Quisque rutrum quis lectus in auctor.</p>
-<pre><code >a: function [x][
-  print [&quot;this is a test:&quot; x]
+                                    <h1 align="center">
+    Unitt
+</h1>
+<p align="center">
+    <i>Unitt</i> is a basic unit-test tool for the
+    <a href="https://github.com/arturo-lang/arturo/">
+        Arturo Programming language
+    </a>
+    <br><br>
+    <img
+        alt="Arturo logo"
+        width="20"
+        src="https://github.com/arturo-lang/arturo/raw/master/docs/images/logo.png#gh-light-mode-only"
+    />
+    <img
+        alt="Arturo logo"
+        width="20"
+        src="https://github.com/arturo-lang/arturo/raw/master/docs/images/logo-lightgray.png#gh-dark-mode-only"
+    />
+</p>
+<h2>At a Glance</h2>
+<p align="center">
+<img
+    alt="Running Unitt from terminal"
+    width="720"
+    src="./docs/running unitt screenshot.png"
+/>
+</p>
+<h2>Trying Unitt</h2>
+<p><em>Unitt</em> may be splited into two sections: <em>the tester</em> and <em>the tests</em>.</p>
+<p><em>The tester</em> is the section responsible to find, run and return error codes to the final user.
+While <em>the tests</em> are responsible to group the rules and logic of the tests.</p>
+<h3>Initial setup</h3>
+<p>It's recomended that your <em>runner</em> be at the root of your directory, right before your <em>tests</em> folder.</p>
+<p>All of your <em>tests</em> must begin with the <code>test</code> prefix and end with the <code>.art</code> extension to be found,
+since you may want to mix them with some other files.</p>
+<p>Being that said, that is the right way of setting up your <em>tester</em>:</p>
+<p>Let's consider that you have the following directory:</p>
+<pre><code>src/
+    ...
+tests/
+    ...
+main.art
+tester.art
+</code></pre>
+<p>Into your <code>tester.art</code>, you must:</p>
+<pre><code >import {unitt}
+
+do ::
+    runTests &quot;tests&quot;
+</code></pre>
+<p>To run it, call:</p>
+<pre><code>arturo tester.art
+</code></pre>
+<blockquote>
+<p>[!TIP]
+You may want to use a hashbang to don't need to call arturo for every run.</p>
+</blockquote>
+<h3>The <em>tests</em> itself</h3>
+<p>A real example of tests:</p>
+<pre><code >test &quot;appending binaries with integer is working&quot; [
+    b: to :binary 0
+    assert -&gt; as.binary 2 = append b 1
+    assert -&gt; as.binary 1 = b ++ 1
+]
+
+test.prop &quot;appending binaries with integer returns a binary&quot; [
+    b: to :binary 0
+    assert -&gt; binary? append b 1
+    assert -&gt; binary? b ++ 1
 ]
 </code></pre>
-<h3>And more</h3>
-<p>Cras id accumsan purus. In pulvinar laoreet dui id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas tincidunt, turpis a pulvinar bibendum, urna quam suscipit purus, a commodo tortor purus ut odio. Aliquam sollicitudin, sapien a fermentum fermentum, augue eros cursus sem, ut porta mi leo sit amet velit. Mauris ornare sem quis erat bibendum malesuada. Nulla facilisi.</p>
+<p>This will show you:</p>
+<pre><code>❌ - assert that appending binaries with integer is working
+     assertion : [as binary 1 = append b 1]
+
+✅ - assert that appending binaries with integer is working
+     assertion : [as binary 1 = b ++ 1]
+
+✅ ~ assert that appending binaries with integer returns a binary
+     assertion : [binary? append b 1]
+
+✅ - assert that appending binaries with integer returns a binary
+     assertion : [binary? b ++ 1]
+</code></pre>
+<blockquote>
+<p>[!NOTE]
+Property-based tests have <code>~</code> as separator.</p>
+</blockquote>
+<h2>Documentation</h2>
+<h3><em>Runner</em></h3>
+<ul>
+<li><code>runTests: $[folder :string]</code>:
+The <em>runner function</em>, this function will look for <em>tests</em> inside the relative <code>folder</code>.
+Remember that all <em>tests</em> must begin with the <code>test</code> prefix, and be an <code>.art</code> extension.</li>
+</ul>
+<h3><em>Tests</em></h3>
+<ul>
+<li><code>test: $[description :string, testCase :block]</code>:
+The test case itself, you need to pass a clear description to it,
+And the logic that you're trying to assert.<ul>
+<li><code>.prop</code>:
+Indicates that a test is property-based.</li>
+</ul>
+</li>
+<li><code>assert: $[condition :block]</code>:
+A function that is only available inside the <code>test</code> case,
+makes an assertion given the <code>condition</code>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Background photo on <a href="#at-a-glance">&quot;At a Glance&quot;</a>
+by <a href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Jack Anstey</a> on <a href="https://unsplash.com/photos/aerial-photography-of-road-zS4lUqLEiNA?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
+</blockquote>
 
                                 </div>
                                 <div class="version-history is-hidden">
                                     <ul>
                                         
                                             
-                                                <li><a class="version-link" href="https://dummy.pkgr.art/0.0.4"><b>0.0.4</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;10&nbsp;November&nbsp;2023</span></li>
-                                            
-                                        
-                                            
-                                            <li><b>0.0.3</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;7&nbsp;November&nbsp;2023</span></li>
+                                            <li><b>0.1.2-pre</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;29&nbsp;January&nbsp;2024</span></li>
                                             
                                         
                                     </ul>
@@ -153,25 +244,25 @@
                                     <span class="icon download-icon">
                                         <i class="fas fa-download"></i>
                                     </span>&nbsp;
-                                    <span id= "dummy-downloads" class="download-count">-</span>
+                                    <span id= "unitt-downloads" class="download-count">-</span>
                                 </div>&nbsp;&nbsp;
                                 <div class="star-info">
                                     <span class="icon star-icon">
                                         <i class="fa fa-star"></i>
                                     </span>&nbsp;
-                                    <span class="star-count" data-package="arturo-lang/dummy-package"></span>
+                                    <span class="star-count" data-package="RickBarretto/unitt"></span>
                                 </div>
                             </div>
                             <hr/>
                             <div class="block package-author">
                                 <b>Author</b>
                                 <br>
-                                <a href="https://github.com/arturo-lang" class="repo-user-name">arturo-lang</a>
+                                <a href="https://github.com/RickBarretto" class="repo-user-name">RickBarretto</a>
                             </div>
                             <div class="block package-version">
-                                <b>Version</b>
+                                <b>Latest Version</b>
                                 <br>
-                                0.0.3<br>
+                                0.1.2-pre<br>
                             </div>
                             <div class="block package-license">
                                 <b>License</b>
@@ -190,7 +281,7 @@
                                 <b>Requires</b>
                                 <br>
                                 
-                                    Any version
+                                    Arturo >&nbsp;0.9.83
                                 
                             </div>
                         </div>
@@ -203,8 +294,8 @@
 <script>
     $(document).ready(function(){
         
-            $.get("https://pkgr.art/getdownloads.php?pkg=dummy&ver=0.0.3", function (data, status){
-                $("#dummy-downloads").html(data);
+            $.get("https://pkgr.art/getdownloads.php?pkg=unitt", function (data, status){
+                $("#unitt-downloads").html(data);
             });
         
     });

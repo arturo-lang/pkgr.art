@@ -5,4 +5,13 @@ dummy: #[
                         "test"
                 ]
         ]
+unitt: #[
+        description: "DRAFT - Unitt is a basic unit-test tool for the Arturo Programming language."
+        tags: [
+                        "arturo"
+                         "arturo-lang"
+                         "package"
+                         "unit-tests"
+                ]
+        ]
 

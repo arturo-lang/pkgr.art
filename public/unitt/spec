@@ -1,0 +1,12 @@
+name: "unitt"
+description: "DRAFT - Unitt is a basic unit-test tool for the Arturo Programming language."
+license: "MIT"
+author: "RickBarretto"
+version: 0.1.2-pre
+url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.2-pre"
+entry: "unitt.art"
+depends: []
+requires: [
+                >
+                 0.9.83
+        ]
