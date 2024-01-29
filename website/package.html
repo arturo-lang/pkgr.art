@@ -25,9 +25,10 @@
                 <div class="block package-description">
                     <h3 class="is-size-5"><||= entry\info\description ||></h3>
                 </div>
-                <|| unless empty? entry\info\tags [ ||>
+                <|| filteredTags: getCleanTags entry\info\tags ||>
+                <|| unless empty? filteredTags [ ||>
                     <div class="block package-tags">
-                        <|| loop entry\info\tags 'tag [||>
+                        <|| loop filteredTags 'tag [||>
                             <span class="tag is-info is-light is-medium package-tag"><||= tag ||></span>
                         <|| ] ||>
                     </div>
