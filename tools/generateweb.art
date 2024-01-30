@@ -57,6 +57,10 @@ getCleanTags: function [taglist][
     ]
 ]
 
+octicon: function [icon][
+    read ~"website/icons/|icon|.svg"
+]
+
 postprocessAlerts: function [src][
     replace src [
         {/<blockquote>\n<p>\[!TIP\]/}
@@ -64,9 +68,9 @@ postprocessAlerts: function [src][
         {/<blockquote>\n<p>\[!IMPORTANT\]/}
         {/<blockquote>\n<p>\[!WARNING\]/}
         {/<blockquote>\n<p>\[!CAUTION\]/}
-     ][
+     ]@[
         "<blockquote class='alert alert-tip'>\n<p><b class='alert-message'><i class='far fa-lightbulb'></i>Tip</b><br>\n"
-        "<blockquote class='alert alert-note'>\n<p><b class='alert-message'><i class='fas fa-info-circle'></i>Note</b><br>\n"
+        ~"<blockquote class='alert alert-note'>\n<p><b class='alert-message'>|octicon 'info|Note</b><br>\n"
         "<blockquote class='alert alert-important'>\n<p><b class='alert-message'>Important</b><br>\n"
         "<blockquote class='alert alert-warning'>\n<p><b class='alert-message'><i class='fas fa-exclamation-triangle'></i>Warning</b><br>\n"
         "<blockquote class='alert alert-caution'>\n<p><b class='alert-message'><i class='far fa-times-circle'></i>Caution</b><br>\n"
