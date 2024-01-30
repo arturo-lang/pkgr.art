@@ -23,10 +23,11 @@ compressCSS: function [file][
 ]
 
 getProperMarkdown: function [md][
-    ; write "tmp.md" md
-    ; ret: execute ~{ruby |relative "gfm.rb"| tmp.md}
+    write "tmp.md" md
+    ret: execute ~{ruby |relative "gfm.rb"| tmp.md}
     ; print ["Got:\n" ret]
-    ret: read.markdown md
+    ; ret: read.markdown md
+    delete "tmp.md"
     ret: replace ret {/class="language-[^"]+"/} ""
     return ret
 ]
