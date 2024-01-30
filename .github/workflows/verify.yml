@@ -26,6 +26,8 @@ jobs:
         with:
           ruby-version: 3.3
           bundler-cache: true
+
+      - name: "Install gems"
         run: |
           gem install commonmarker
 
