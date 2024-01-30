@@ -126,6 +126,16 @@ a.version-link {
     }
 }
 
+@mixin alertStyle($color) {
+    border-left-color: $color; 
+    .alert-message {
+        color: $color;
+        svg {
+            fill: $color;
+        }
+    }
+}
+
 .package-page {
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -228,39 +238,19 @@ a.version-link {
                             }
             
                             &.alert-tip         { 
-                                border-left-color: #428546; 
-                                .alert-message {
-                                    color: #428546;
-                                    fill: #428546
-                                }
+                                @include alertStyle(#428546);
                             }
                             &.alert-note        { 
-                                border-left-color: #296BD3; 
-                                .alert-message {
-                                    color: #296BD3;
-                                    fill: #296BD3;
-                                }
+                                @include alertStyle(#296BD3); 
                             }
                             &.alert-important   { 
-                                border-left-color: #7A58D7; 
-                                .alert-message {
-                                    color: #7A58D7;
-                                    fill: #7A58D7;
-                                }
+                                @include alertStyle(#7A58D7); 
                             }
                             &.alert-warning     { 
-                                border-left-color: #936821; 
-                                .alert-message {
-                                    color: #936821;
-                                    fill: #936821;
-                                }
+                                @include alertStyle(#936821); 
                             }
                             &.alert-caution     { 
-                                border-left-color: #BF3536;
-                                .alert-message {
-                                    color: #BF3536;
-                                    fill: #BF3536;
-                                }
+                                @include alertStyle(#BF3536);
                             }
                         }
                     }
