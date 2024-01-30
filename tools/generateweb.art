@@ -23,10 +23,11 @@ compressCSS: function [file][
 ]
 
 getProperMarkdown: function [md][
-    ; write "tmp.md" md
-    ; ret: execute ~{ruby |relative "gfm.rb"| tmp.md}
+    write "tmp.md" md
+    ret: execute ~{ruby |relative "gfm.rb"| tmp.md}
     ; print ["Got:\n" ret]
-    ret: read.markdown md
+    ; ret: read.markdown md
+    delete "tmp.md"
     ret: replace ret {/class="language-[^"]+"/} ""
     return ret
 ]
@@ -72,8 +73,18 @@ postprocessAlerts: function [src][
      ]
 ]
 
-postprocessHTML: function [htm][
-    return postprocessAlerts htm
+postprocessImages: function [src,repoName][
+    replace src [
+        {#gh-dark-mode-only"}
+        {src="./}
+    ]@[
+        {#gh-dark-mode-only" style="display:none"}
+        ~{src="https://raw.githubusercontent.com/|repoName|/master/}
+    ]
+]
+
+postprocessHTML: function [htm, repoName][
+    postprocessImages postprocessAlerts htm repoName
 ]
 
 createSpecFile: function [package, versionToProcess, targetFolder][
@@ -117,6 +128,10 @@ loop packages [k,v][
     ]
 ]
 
+processPackagePage: function [repoName][
+    postprocessHTML render.template read "website/package.html" repoName
+]
+
 ;--------------------------------
 ; DEBUGGING!
 ;--------------------------------
@@ -138,8 +153,7 @@ loop entries 'entry [
 
     currentVersion: first entry\version
     currentVersionIsLatest: true
-    write ~{|tgtName|/index.html}
-          postprocessHTML render.template read "website/package.html"
+    write ~{|tgtName|/index.html} processPackagePage entry\info\fullName
 
     createSpecFile entry currentVersion tgtName
 
@@ -150,8 +164,7 @@ loop entries 'entry [
 
         currentVersion: vv
         currentVersionIsLatest: false
-        write ~{|versionTgt|/index.html}
-              postprocessHTML render.template read "website/package.html"
+        write ~{|versionTgt|/index.html} processPackagePage entry\info\fullName
 
         createSpecFile entry vv versionTgt
     ]

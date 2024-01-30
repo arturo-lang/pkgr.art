@@ -53,7 +53,7 @@ entry: "mayownmain"
 depends: [
   [someOtherPackage >= 0.0.2]
 ]
-requires: 0.9.83
+requires: [> 0.9.83]
 ```
 
 As you can see, all this file *may* contain - note: all fields are optional - is basically a few more details:
