@@ -73,13 +73,18 @@ postprocessAlerts: function [src][
      ]
 ]
 
-postprocessImages: function [src][
-    replace src {#gh-dark-mode-only"} {#gh-dark-mode-only" style="display:none"}
+postprocessImages: function [src,repoName][
+    replace src [
+        {#gh-dark-mode-only"}
+        {src="./}
+    ]@[
+        {#gh-dark-mode-only" style="display:none"}
+        ~{src="https://raw.githubusercontent.com/|repoName|/master/}
+    ]
 ]
 
-postprocessHTML: function [htm][
-    return 
-        postprocessImages postprocessAlerts htm
+postprocessHTML: function [htm, repoName][
+    postprocessImages postprocessAlerts htm repoName
 ]
 
 createSpecFile: function [package, versionToProcess, targetFolder][
@@ -123,6 +128,10 @@ loop packages [k,v][
     ]
 ]
 
+processPackagePage: function [repoName][
+    postprocessHTML render.template read "website/package.html" repoName
+]
+
 ;--------------------------------
 ; DEBUGGING!
 ;--------------------------------
@@ -144,8 +153,7 @@ loop entries 'entry [
 
     currentVersion: first entry\version
     currentVersionIsLatest: true
-    write ~{|tgtName|/index.html}
-          postprocessHTML render.template read "website/package.html"
+    write ~{|tgtName|/index.html} processPackagePage entry\info\fullName
 
     createSpecFile entry currentVersion tgtName
 
@@ -156,8 +164,7 @@ loop entries 'entry [
 
         currentVersion: vv
         currentVersionIsLatest: false
-        write ~{|versionTgt|/index.html}
-              postprocessHTML render.template read "website/package.html"
+        write ~{|versionTgt|/index.html} processPackagePage entry\info\fullName
 
         createSpecFile entry vv versionTgt
     ]
