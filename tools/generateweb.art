@@ -73,8 +73,13 @@ postprocessAlerts: function [src][
      ]
 ]
 
+postprocessImages: function [src][
+    replace src {#gh-dark-mode-only"} {#gh-dark-mode-only" style="display:none"}
+]
+
 postprocessHTML: function [htm][
-    return postprocessAlerts htm
+    return 
+        postprocessImages postprocessAlerts htm
 ]
 
 createSpecFile: function [package, versionToProcess, targetFolder][
