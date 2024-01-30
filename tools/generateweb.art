@@ -128,8 +128,9 @@ loop packages [k,v][
     ]
 ]
 
-processPackagePage: function [repoName][
-    postprocessHTML render.template read "website/package.html" repoName
+processPackagePage: function [entry][
+    packageTitle: entry\info\name| ++ " | "
+    postprocessHTML render.template read "website/package.html" entry\info\fullName
 ]
 
 ;--------------------------------
@@ -153,7 +154,7 @@ loop entries 'entry [
 
     currentVersion: first entry\version
     currentVersionIsLatest: true
-    write ~{|tgtName|/index.html} processPackagePage entry\info\fullName
+    write ~{|tgtName|/index.html} processPackagePage entry
 
     createSpecFile entry currentVersion tgtName
 
@@ -164,7 +165,7 @@ loop entries 'entry [
 
         currentVersion: vv
         currentVersionIsLatest: false
-        write ~{|versionTgt|/index.html} processPackagePage entry\info\fullName
+        write ~{|versionTgt|/index.html} processPackagePage entry
 
         createSpecFile entry vv versionTgt
     ]
@@ -175,6 +176,7 @@ if odd? size entries ->
 
 ; render homepage
 isHome: true
+packageTitle: ""
 write "public/index.html"
       render.template read "website/index.html"
 
