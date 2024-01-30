@@ -31,6 +31,16 @@ jobs:
           npm install -g clean-css
           npm install -g clean-css-cli
 
+      - name: "Install Ruby"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
+
+      - name: "Install gems"
+        run: |
+          gem install commonmarker
+
       - name: "Setup Arturo"
         uses: arturo-lang/arturo-action@main
 
