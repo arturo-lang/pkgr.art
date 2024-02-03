@@ -151,14 +151,14 @@
 />
 </p>
 <h2><a href="#trying-unitt" aria-hidden="true" class="anchor" id="trying-unitt"></a>Trying Unitt</h2>
-<p><em>Unitt</em> may be splited into two sections: <em>the tester</em> and <em>the tests</em>.</p>
-<p><em>The tester</em> is the section responsible to find, run and return error codes to the final user.
+<p><em>Unitt</em> may be splited into two sections: <em>runner</em> and <em>the tests</em>.</p>
+<p><em>The runner</em> is the section responsible to find, run and return error codes to the final user.
 While <em>the tests</em> are responsible to group the rules and logic of the tests.</p>
 <h3><a href="#initial-setup" aria-hidden="true" class="anchor" id="initial-setup"></a>Initial setup</h3>
 <p>It's recomended that your <em>runner</em> be at the root of your directory, right before your <em>tests</em> folder.</p>
 <p>All of your <em>tests</em> must begin with the <code>test</code> prefix and end with the <code>.art</code> extension to be found,
 since you may want to mix them with some other files.</p>
-<p>Being that said, that is the right way of setting up your <em>tester</em>:</p>
+<p>Being that said, that is the right way of setting up your <em>runner</em>:</p>
 <p>Let's consider that you have the following directory:</p>
 <pre><code>src/
     ...
@@ -183,7 +183,9 @@ You may want to use a hashbang to don't need to call arturo for every run.</p>
 </blockquote>
 <h3><a href="#the-tests-itself" aria-hidden="true" class="anchor" id="the-tests-itself"></a>The <em>tests</em> itself</h3>
 <p>A real example of tests:</p>
-<pre lang="art"><code>test &quot;appending binaries with integer is working&quot; [
+<pre lang="art"><code>unix?: true
+
+test &quot;appending binaries with integer is working&quot; [
     b: to :binary 0
     assert -&gt; as.binary 2 = append b 1
     assert -&gt; as.binary 1 = b ++ 1
@@ -193,6 +195,10 @@ test.prop &quot;appending binaries with integer returns a binary&quot; [
     b: to :binary 0
     assert -&gt; binary? append b 1
     assert -&gt; binary? b ++ 1
+]
+
+test.skip: unix? &quot;split is working for windows's paths&quot; [
+    assert -&gt; [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split.path &quot;.\\splited\\path&quot;
 ]
 </code></pre>
 <p>This will show you:</p>
@@ -207,18 +213,58 @@ test.prop &quot;appending binaries with integer returns a binary&quot; [
 
 ✅ - assert that appending binaries with integer returns a binary
      assertion : [binary? b ++ 1]
+
+⏩ - assert that split is working for windows's paths      
+      skipped!
 </code></pre>
 <blockquote class='alert alert-note'>
 <p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</b><br>
 
 Property-based tests have <code>~</code> as separator.</p>
 </blockquote>
+<h3><a href="#the-runner" aria-hidden="true" class="anchor" id="the-runner"></a>The <em>Runner</em></h3>
+<p>Basically, you can run your <em>tests units</em> without a <em>runner</em>.
+But there are some reasons why you should prefer to use a <code>runTests</code> function to run them.</p>
+<p>First, your <em>runner</em>'s output will give you important information about the current run.
+This will show you the file being runned,
+the tests's status
+and at the end a summary of failed, skipped and passed tests:</p>
+<pre><code>===== Statistics =====
+
+⏏️   TOTAL: 24 assertions
+✅  PASSED: 20 assertions
+⏩ SKIPPED: 4 assertions
+❌  FAILED: 4 assertions
+
+===== ========== =====
+</code></pre>
+<p>Also, the runner is able to return an error code,
+so that is great if you're working with <em>Continuous Integration</em>.</p>
 <h2><a href="#documentation" aria-hidden="true" class="anchor" id="documentation"></a>Documentation</h2>
 <h3><a href="#runner" aria-hidden="true" class="anchor" id="runner"></a><em>Runner</em></h3>
 <ul>
 <li><code>runTests: $[folder :string]</code>:
 The <em>runner function</em>, this function will look for <em>tests</em> inside the relative <code>folder</code>.
-Remember that all <em>tests</em> must begin with the <code>test</code> prefix, and be an <code>.art</code> extension.</li>
+Remember that all <em>tests</em> must begin with the <code>test</code> prefix, and be an <code>.art</code> extension.
+<ul>
+<li><code>.failFast</code>:
+Fails on the first error found.
+This works at file scope due to our current way of running tests.</li>
+<li><code>.pattern :string</code>:
+Defines what is a test-file via a kind-of <em>glob</em> pattern.
+Use a <code>*</code> as spliter.
+<ul>
+<li>Obs.: That is a kind-of <em>glob</em> pattern, not a real one.
+So just use one and only one <code>*</code> to split the pre and suffix.</li>
+</ul>
+</li>
+<li><code>.suppress</code>:
+Suppress <code>panic</code>, this means:
+this won't terminate your tests,
+won't return an error code
+and won't print a <code>panic</code> message.</li>
+</ul>
+</li>
 </ul>
 <h3><a href="#tests" aria-hidden="true" class="anchor" id="tests"></a><em>Tests</em></h3>
 <ul>
@@ -228,6 +274,9 @@ And the logic that you're trying to assert.
 <ul>
 <li><code>.prop</code>:
 Indicates that a test is property-based.</li>
+<li><code>.skip :logical</code>:
+Skips tests for some condition.
+If none condition is given, this will just skip the test.</li>
 </ul>
 </li>
 <li><code>assert: $[condition :block]</code>:
@@ -245,7 +294,15 @@ by <a href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm
                                     <ul>
                                         
                                             
-                                            <li><b>0.1.2-pre</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;29&nbsp;January&nbsp;2024</span></li>
+                                            <li><b>0.1.4</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;3&nbsp;February&nbsp;2024</span></li>
+                                            
+                                        
+                                            
+                                                <li><a class="version-link" href="https://unitt.pkgr.art/0.1.3-pre"><b>0.1.3-pre</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;31&nbsp;January&nbsp;2024</span></li>
+                                            
+                                        
+                                            
+                                                <li><a class="version-link" href="https://unitt.pkgr.art/0.1.2-pre"><b>0.1.2-pre</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;29&nbsp;January&nbsp;2024</span></li>
                                             
                                         
                                     </ul>
@@ -278,7 +335,7 @@ by <a href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm
                             <div class="block package-version">
                                 <b>Latest Version</b>
                                 <br>
-                                0.1.2-pre<br>
+                                0.1.4<br>
                             </div>
                             <div class="block package-license">
                                 <b>License</b>
@@ -365,7 +422,7 @@ by <a href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm
             "package",
             "unit-tests"
         ],
-        "version": "0.1.2-pre"
+        "version": "0.1.4"
     }
 ];
                 var fuseOptions = {

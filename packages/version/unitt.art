@@ -1,5 +1,35 @@
 [
         #[
+                version: 0.1.4
+                date: to :date "2024-02-03T00:41:47+00:00"
+                url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.4"
+                info: #[
+                        entry: "unitt.art"
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                ]
+        ]
+         #[
+                version: 0.1.3-pre
+                date: to :date "2024-01-31T02:06:00+00:00"
+                url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.3-pre"
+                info: #[
+                        entry: "unitt.art"
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                ]
+        ]
+         #[
                 version: 0.1.2-pre
                 date: to :date "2024-01-29T11:17:23+00:00"
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.2-pre"
