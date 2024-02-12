@@ -81,7 +81,9 @@ a.version-link {
 }
 
 .package-box {
-    margin-top: 2rem;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+
     padding: 0 !important;
 
     & > * {
