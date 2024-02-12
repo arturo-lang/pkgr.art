@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>dummy &bull; Arturo Packages</title>
+        <title>unidecode &bull; Arturo Packages</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bulma@0.9.4/css/bulma.min.css,npm/prismjs@1.23.0/themes/prism-okaidia.min.css" />
@@ -80,35 +80,43 @@
                 <div class="columns package-title-wrapper">
                     <div class="column is-8 package-title title-wrapper">
                         
-                            <h2 class="is-size-2"><b><a href="https://dummy.pkgr.art">dummy</a></b></h2>
+                            <h2 class="is-size-2"><b><a href="https://unidecode.pkgr.art">unidecode</a></b></h2>
                         
-                        <a href="https://github.com/arturo-lang/dummy-package">
+                        <a href="https://github.com/drkameleon/unidecode.art">
                             <span class="icon repo-icon inside-package">
                                 <i class="fa fa-github"></i>
                             </span>
                         </a>
                     </div>
                     <div class="column is-4 package-link">
-                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;dummy.pkgr.art</div>
+                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;unidecode.pkgr.art</div>
                     </div>
                 </div>
                 <div class="block package-description">
-                    <h3 class="is-size-5">This package will serve merely as test for Arturo's package manager</h3>
+                    <h3 class="is-size-5">Unicode -> ASCII converter</h3>
                 </div>
                 
                 
                     <div class="block package-tags">
                         
-                            <span class="tag is-info is-light is-medium package-tag">test</span>
+                            <span class="tag is-info is-light is-medium package-tag">arturo package</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">ascii</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">unicode</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">unicode converter</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">unidecode</span>
                         
                     </div>
                 
                 <div class="installation-instructions block">
-                    <input id="installation-code" class="input copy-code" value="arturo -p install dummy" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
+                    <input id="installation-code" class="input copy-code" value="arturo -p install unidecode" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
                 </div>
                 <article class="message is-success codecopied-message is-hidden">
                     <div class="message-body">
-                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "dummy"</code>, directly inside your code.
+                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "unidecode"</code>, directly inside your code.
                     </div>
                   </article>
                 <div class="columns">
@@ -122,43 +130,63 @@
                             </div>
                             <div class="box content left-container">
                                 <div class="readme">
-                                    <h1>dummy-package</h1>
-<p>This package will serve merely as test for Arturo's package manager</p>
-<ul>
-<li><a href="#at-a-glance">At A Glance</a></li>
-<li><a href="#try-dummy">Try Dummy</a>
-<ul>
-<li><a href="#more-dummy">More dummy</a></li>
-<li><a href="#and-more">And more</a></li>
-</ul>
-</li>
-</ul>
-<hr />
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut odio elit. Aenean facilisis placerat massa. Pellentesque feugiat nisi tortor, nec sodales felis bibendum at. Curabitur nec risus at elit varius ultricies. Nunc sed finibus justo. Integer posuere nunc vel leo pharetra luctus. Morbi at mauris vel nulla fermentum rutrum. Sed vel velit lacinia lorem scelerisque consectetur.</p>
-<h2>At A Glance</h2>
-<p>Sed pharetra diam metus, ac congue lectus ullamcorper scelerisque. Phasellus eget tempus purus. Maecenas sagittis efficitur orci quis aliquam. Quisque libero magna, commodo quis consequat sed, finibus eu tellus. Aenean tincidunt commodo risus ac egestas.</p>
-<p>Morbi id posuere nisl. Integer arcu eros, suscipit a felis vel, porta bibendum neque. Ut dictum lacinia lectus nec vulputate. Aliquam iaculis tellus eget euismod eleifend. Curabitur eget ipsum lacinia, volutpat turpis non, dapibus leo. Etiam id sem vel massa dignissim pretium quis id turpis. Morbi hendrerit scelerisque dolor nec mollis. In ornare imperdiet sapien vel gravida. Nulla molestie augue id eros eleifend, faucibus pellentesque sem malesuada.</p>
-<h2>Try Dummy</h2>
-<p>Nullam posuere bibendum interdum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut commodo urna eget faucibus viverra. Aliquam orci sapien, vestibulum at fermentum ac, vulputate et tellus. Fusce nunc tortor, facilisis scelerisque elit eu, tempus congue nisi. Vestibulum pulvinar ipsum at scelerisque aliquam.</p>
-<h3>More dummy</h3>
-<p>Aenean pretium risus quis erat sodales bibendum. Aliquam nec leo nisi. Proin enim purus, scelerisque non venenatis at, consequat vitae sem. Nam sit amet nunc vel tellus maximus volutpat. Nulla sollicitudin turpis justo, quis scelerisque sapien aliquam quis. Quisque rutrum quis lectus in auctor.</p>
-<pre lang="red"><code>a: function [x][
-  print [&quot;this is a test:&quot; x]
-]
+                                    <h1 align="center">
+    Unidecode
+</h1>
+<p align="center">
+     <i>Unicode -> ASCII converter package for  Arturo</i> 
+</p>
+<hr/>
+<h3>What does this package do?</h3>
+<p>Let's say you have a Unicode string, with different characters, in different languages, e.g. characters with accents, in cyrillic, Mandarin Chinese, etc and - for whatever reason - want to have a <em>close approximation</em> to what it would be like using only ASCII characters, then this package is for you.</p>
+<blockquote class='alert alert-tip'>
+<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</b><br>
+
+The package has been based on <a rel="nofollow" target="_blank" href="https://nim-lang.org/docs/unidecode.html#unidecode%2Cstring">Nim's implementation</a>, of the same name - which in turn has been based on the Python's Unidecode module by Tomaz Solc.</p>
+</blockquote>
+<h3>How do I use it?</h3>
+<p>Simply <code>import</code> it and use the included <code>unidecode</code> function:</p>
+<pre lang="arturo"><code>import &quot;unidecode&quot;!
+
+print unidecode &quot;доброе утро!&quot;
+; will print:
+; dobroe utro!
 </code></pre>
-<h3>And more</h3>
-<p>Cras id accumsan purus. In pulvinar laoreet dui id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas tincidunt, turpis a pulvinar bibendum, urna quam suscipit purus, a commodo tortor purus ut odio. Aliquam sollicitudin, sapien a fermentum fermentum, augue eros cursus sem, ut porta mi leo sit amet velit. Mauris ornare sem quis erat bibendum malesuada. Nulla facilisi.</p>
+<blockquote class='alert alert-important'>
+<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</b><br>
+
+The package cannot possibly guarantee that the output will be &quot;accurate&quot;, not is it 100% easy to say what would be accurate in every possible case - it's an <em>approximate</em> Unicode -&gt; ASCII transformation. So, if you need a better solution for your specific needs, you might be better of writing a custom solution yourself!</p>
+</blockquote>
+<hr/>
+<h3>License</h3>
+<p>MIT License</p>
+<p>Copyright (c) 2024 Yanis Zafirópulos</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
 
                                 </div>
                                 <div class="version-history is-hidden">
                                     <ul>
                                         
                                             
-                                                <li><a class="version-link" href="https://dummy.pkgr.art/0.0.4"><b>0.0.4</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;10&nbsp;November&nbsp;2023</span></li>
+                                            <li><b>0.0.2</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;12&nbsp;February&nbsp;2024</span></li>
                                             
                                         
                                             
-                                            <li><b>0.0.3</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;7&nbsp;November&nbsp;2023</span></li>
+                                                <li><a class="version-link" href="https://unidecode.pkgr.art/0.0.1"><b>0.0.1</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;12&nbsp;February&nbsp;2024</span></li>
                                             
                                         
                                     </ul>
@@ -173,25 +201,25 @@
                                     <span class="icon download-icon">
                                         <i class="fas fa-download"></i>
                                     </span>&nbsp;
-                                    <span id= "dummy-downloads" class="download-count">-</span>
+                                    <span id= "unidecode-downloads" class="download-count">-</span>
                                 </div>&nbsp;&nbsp;
                                 <div class="star-info">
                                     <span class="icon star-icon">
                                         <i class="fa fa-star"></i>
                                     </span>&nbsp;
-                                    <span class="star-count" data-package="arturo-lang/dummy-package"></span>
+                                    <span class="star-count" data-package="drkameleon/unidecode.art"></span>
                                 </div>
                             </div>
                             <hr/>
                             <div class="block package-author">
                                 <b>Author</b>
                                 <br>
-                                <a href="https://github.com/arturo-lang" class="repo-user-name">arturo-lang</a>
+                                <a href="https://github.com/drkameleon" class="repo-user-name">drkameleon</a>
                             </div>
                             <div class="block package-version">
                                 <b>Version</b>
                                 <br>
-                                0.0.3<br>
+                                0.0.2<br>
                             </div>
                             <div class="block package-license">
                                 <b>License</b>
@@ -210,7 +238,7 @@
                                 <b>Requires</b>
                                 <br>
                                 
-                                    Any version
+                                    Arturo >&nbsp;0.9.83
                                 
                             </div>
                         </div>
@@ -223,8 +251,8 @@
 <script>
     $(document).ready(function(){
         
-            $.get("https://pkgr.art/getdownloads.php?pkg=dummy&ver=0.0.3", function (data, status){
-                $("#dummy-downloads").html(data);
+            $.get("https://pkgr.art/getdownloads.php?pkg=unidecode&ver=0.0.2", function (data, status){
+                $("#unidecode-downloads").html(data);
             });
         
     });
