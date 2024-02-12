@@ -52,9 +52,8 @@ getPackageBox: function [entry][
 ]
 
 getCleanTags: function [taglist][
-    filter taglist 'tag [
-        contains? ["arturo" "arturo-lang" "package"] tag
-    ]
+    taglist | filter 'tag [contains? ["arturo" "arturo-lang" "arturo-language", "pkgr-art", "package"] tag]
+            | map 'tag [replace tag "-" " "]
 ]
 
 octicon: function [icon][
