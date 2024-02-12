@@ -81,7 +81,9 @@ a.version-link {
 }
 
 .package-box {
-    margin-top: 2rem;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+
     padding: 0 !important;
 
     & > * {
@@ -257,6 +259,27 @@ a.version-link {
 
                     code {
                         color: inherit !important;
+                    }
+
+                    a {
+                        color: #485fc7 !important;
+                        text-decoration: underline !important;
+                    }
+
+                    .footnote-ref {
+                        a {
+                            &::before {
+                                content: '[';
+                            }
+                            &::after {
+                                content: ']';
+                            }
+                        }
+                    }
+
+                    .footnotes {
+                        border-top: 1px solid #d0d7de;
+                        font-size: small;
                     }
                 }
             }

@@ -29,6 +29,7 @@ getProperMarkdown: function [md][
     ; ret: read.markdown md
     delete "tmp.md"
     ret: replace ret {/class="language-[^"]+"/} ""
+    ret: replace ret {<a href="http} {<a rel="nofollow" target="_blank" href="http}
     return ret
 ]
 
@@ -52,9 +53,8 @@ getPackageBox: function [entry][
 ]
 
 getCleanTags: function [taglist][
-    filter taglist 'tag [
-        contains? ["arturo" "arturo-lang" "package"] tag
-    ]
+    taglist | filter 'tag [contains? ["arturo" "arturo-lang" "arturo-language", "pkgr-art", "package"] tag]
+            | map 'tag [replace tag "-" " "]
 ]
 
 octicon: function [icon][
@@ -133,7 +133,7 @@ loop packages [k,v][
 ]
 
 processPackagePage: function [entry][
-    packageTitle: entry\info\name ++ " &bull; "
+    packageTitle: entry\name ++ " &bull; "
     postprocessHTML render.template read "website/package.html" entry\info\fullName
 ]
 
@@ -173,6 +173,10 @@ loop entries 'entry [
 
         createSpecFile entry vv versionTgt
     ]
+]
+
+entries: arrange.descending entries 'entry [
+    entry\version\0\date
 ]
 
 if odd? size entries ->
