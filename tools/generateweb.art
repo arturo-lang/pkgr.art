@@ -29,6 +29,7 @@ getProperMarkdown: function [md][
     ; ret: read.markdown md
     delete "tmp.md"
     ret: replace ret {/class="language-[^"]+"/} ""
+    ret: replace ret {<a href="http} {<a rel="nofollow" target="_blank" href="http}
     return ret
 ]
 
