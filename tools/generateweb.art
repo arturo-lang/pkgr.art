@@ -133,7 +133,7 @@ loop packages [k,v][
 ]
 
 processPackagePage: function [entry][
-    packageTitle: entry\info\name ++ " &bull; "
+    packageTitle: entry\name ++ " &bull; "
     postprocessHTML render.template read "website/package.html" entry\info\fullName
 ]
 
