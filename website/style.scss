@@ -261,6 +261,11 @@ a.version-link {
                         color: inherit !important;
                     }
 
+                    a {
+                        color: #485fc7 !important;
+                        text-decoration: underline !important;
+                    }
+
                     .footnote-ref {
                         a {
                             &::before {
