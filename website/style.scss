@@ -266,6 +266,10 @@ a.version-link {
                         text-decoration: underline !important;
                     }
 
+                    hr {
+                        height: 0.25rem;
+                    }
+
                     .footnote-ref {
                         a {
                             &::before {
