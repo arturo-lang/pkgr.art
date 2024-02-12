@@ -1,2 +1,3 @@
 dummy: "arturo-lang/dummy-package"
+states: "RickBarretto/states.art"
 unitt: "RickBarretto/unitt"
