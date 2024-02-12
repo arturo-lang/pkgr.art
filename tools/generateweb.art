@@ -175,6 +175,10 @@ loop entries 'entry [
     ]
 ]
 
+entries: arrange.descending entries 'entry [
+    entry\version\0\date
+]
+
 if odd? size entries ->
     'entries ++ null
 
