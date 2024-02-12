@@ -53,7 +53,7 @@ getPackageBox: function [entry][
 ]
 
 getCleanTags: function [taglist][
-    taglist | filter 'tag [contains? ["arturo" "arturo-lang" "arturo-language", "pkgr-art", "package"] tag]
+    taglist | filter 'tag [contains? ["arturo", "arturo-lang", "arturo-language", "arturo-package", "pkgr-art", "package"] tag]
             | map 'tag [replace tag "-" " "]
 ]
 
