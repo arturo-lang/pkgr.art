@@ -16,6 +16,18 @@ states: #[
                          "pkgr-art"
                 ]
         ]
+unidecode: #[
+        description: "Unicode -> ASCII converter"
+        tags: [
+                        "arturo"
+                         "arturo-language"
+                         "arturo-package"
+                         "ascii"
+                         "unicode"
+                         "unicode-converter"
+                         "unidecode"
+                ]
+        ]
 unitt: #[
         description: "DRAFT - Unitt is a basic unit-test tool for the Arturo Programming language."
         tags: [

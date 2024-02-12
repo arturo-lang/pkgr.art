@@ -1,0 +1,17 @@
+[
+        #[
+                version: 0.0.1
+                date: to :date "2024-02-12T12:16:32+00:00"
+                url: "https://api.github.com/repos/drkameleon/unidecode.art/zipball/v0.0.1"
+                info: #[
+                        entry: "unidecode.art"
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                        depends: [
+
+                        ]
+                ]
+        ]
+]

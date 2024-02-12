@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>unitt &bull; Arturo Packages</title>
+        <title>unidecode &bull; Arturo Packages</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bulma@0.9.4/css/bulma.min.css,npm/prismjs@1.23.0/themes/prism-okaidia.min.css" />
@@ -80,35 +80,43 @@
                 <div class="columns package-title-wrapper">
                     <div class="column is-8 package-title title-wrapper">
                         
-                            <h2 class="is-size-2"><b><a href="https://unitt.pkgr.art">unitt</a></b></h2>
+                            <h2 class="is-size-2"><b><a href="https://unidecode.pkgr.art">unidecode</a></b></h2>
                         
-                        <a href="https://github.com/RickBarretto/unitt">
+                        <a href="https://github.com/drkameleon/unidecode.art">
                             <span class="icon repo-icon inside-package">
                                 <i class="fa fa-github"></i>
                             </span>
                         </a>
                     </div>
                     <div class="column is-4 package-link">
-                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;unitt.pkgr.art</div>
+                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;unidecode.pkgr.art</div>
                     </div>
                 </div>
                 <div class="block package-description">
-                    <h3 class="is-size-5">DRAFT - Unitt is a basic unit-test tool for the Arturo Programming language.</h3>
+                    <h3 class="is-size-5">Unicode -> ASCII converter</h3>
                 </div>
                 
                 
                     <div class="block package-tags">
                         
-                            <span class="tag is-info is-light is-medium package-tag">unit tests</span>
+                            <span class="tag is-info is-light is-medium package-tag">arturo package</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">ascii</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">unicode</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">unicode converter</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">unidecode</span>
                         
                     </div>
                 
                 <div class="installation-instructions block">
-                    <input id="installation-code" class="input copy-code" value="arturo -p install unitt" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
+                    <input id="installation-code" class="input copy-code" value="arturo -p install unidecode" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
                 </div>
                 <article class="message is-success codecopied-message is-hidden">
                     <div class="message-body">
-                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "unitt"</code>, directly inside your code.
+                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "unidecode"</code>, directly inside your code.
                     </div>
                   </article>
                 <div class="columns">
@@ -122,186 +130,70 @@
                             </div>
                             <div class="box content left-container">
                                 <div class="readme">
-                                    <h1 align="center">
-    Unitt
-</h1>
-<p align="center">
-    <i>Unitt</i> is a basic unit-test tool for the 
-    <a rel="nofollow" target="_blank" href="https://github.com/arturo-lang/arturo/">
-        Arturo Programming language
-    </a>
-    <br><br>
+                                    <h1 align="center" style="display:inline-flex">
     <img 
         alt="Arturo logo" 
-        width="20" 
+        width="30" 
+        align="left"
         src="https://github.com/arturo-lang/arturo/raw/master/docs/images/logo.png#gh-light-mode-only"
     />
     <img 
         alt="Arturo logo" 
-        width="20" 
+        width="30" 
+        align="left"
         src="https://github.com/arturo-lang/arturo/raw/master/docs/images/logo-lightgray.png#gh-dark-mode-only" style="display:none" 
-    />
-</p>
-<h2>At a Glance</h2>
+    /> Unidecode
+</h1>
 <p align="center">
-<img 
-    alt="Running Unitt from terminal"
-    width="720"
-    src="https://raw.githubusercontent.com/RickBarretto/unitt/master/docs/running unitt screenshot.png"
-/>
+     <i>Unicode -> ASCII converter package for  Arturo</i> 
 </p>
-<h2>Trying Unitt</h2>
-<p><em>Unitt</em> may be splited into two sections: <em>runner</em> and <em>the tests</em>.</p>
-<p><em>The runner</em> is the section responsible to find, run and return error codes to the final user.
-While <em>the tests</em> are responsible to group the rules and logic of the tests.</p>
-<h3>Initial setup</h3>
-<p>It's recomended that your <em>runner</em> be at the root of your directory, right before your <em>tests</em> folder.</p>
-<p>All of your <em>tests</em> must begin with the <code>test</code> prefix and end with the <code>.art</code> extension to be found,
-since you may want to mix them with some other files.</p>
-<p>Being that said, that is the right way of setting up your <em>runner</em>:</p>
-<p>Let's consider that you have the following directory:</p>
-<pre><code>src/
-    ...
-tests/
-    ...
-main.art
-tester.art
-</code></pre>
-<p>Into your <code>tester.art</code>, you must:</p>
-<pre lang="art"><code>import {unitt}!
-
-runTests &quot;tests&quot;
-</code></pre>
-<p>To run it, call:</p>
-<pre><code>arturo tester.art
-</code></pre>
+<hr/>
+<h3>What does this package do?</h3>
+<p>Let's say you have a Unicode string, with different characters, in different languages, e.g. characters with accents, in cyrillic, Mandarin Chinese, etc and - for whatever reason - want to have a <em>close approximation</em> to what it would be like using only ASCII characters, then this package is for you.</p>
 <blockquote class='alert alert-tip'>
 <p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</b><br>
 
-You may want to use a hashbang to don't need to call arturo for every run.</p>
+The package has been based on <a rel="nofollow" target="_blank" href="https://nim-lang.org/docs/unidecode.html#unidecode%2Cstring">Nim's implementation</a>, of the same name - which in turn has been based on the Python's Unidecode module by Tomaz Solc.</p>
 </blockquote>
-<h3>The <em>tests</em> itself</h3>
-<p>A real example of tests:</p>
-<pre lang="art"><code>unix?: true
+<h3>How do I use it?</h3>
+<p>Simply <code>import</code> it and use the included <code>unidecode</code> function:</p>
+<pre lang="arturo"><code>import &quot;unidecode&quot;!
 
-test &quot;appending binaries with integer is working&quot; [
-    b: to :binary 0
-    assert -&gt; as.binary 2 = append b 1
-    assert -&gt; as.binary 1 = b ++ 1
-]
-
-test.prop &quot;appending binaries with integer returns a binary&quot; [
-    b: to :binary 0
-    assert -&gt; binary? append b 1
-    assert -&gt; binary? b ++ 1
-]
-
-test.skip: unix? &quot;split is working for windows's paths&quot; [
-    assert -&gt; [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split.path &quot;.\\splited\\path&quot;
-]
+print unidecode &quot;доброе утро!&quot;
+; will print:
+; dobroe utro!
 </code></pre>
-<p>This will show you:</p>
-<pre><code>❌ - assert that appending binaries with integer is working
-     assertion : [as binary 1 = append b 1]
+<blockquote class='alert alert-important'>
+<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</b><br>
 
-✅ - assert that appending binaries with integer is working
-     assertion : [as binary 1 = b ++ 1]
-
-✅ ~ assert that appending binaries with integer returns a binary
-     assertion : [binary? append b 1]
-
-✅ - assert that appending binaries with integer returns a binary
-     assertion : [binary? b ++ 1]
-
-⏩ - assert that split is working for windows's paths      
-      skipped!
-</code></pre>
-<blockquote class='alert alert-note'>
-<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</b><br>
-
-Property-based tests have <code>~</code> as separator.</p>
+The package cannot possibly guarantee that the output will be &quot;accurate&quot;, not is it 100% easy to say what would be accurate in every possible case - it's an <em>approximate</em> Unicode -&gt; ASCII transformation. So, if you need a better solution for your specific needs, you might be better of writing a custom solution yourself!</p>
 </blockquote>
-<h3>The <em>Runner</em></h3>
-<p>Basically, you can run your <em>tests units</em> without a <em>runner</em>.
-But there are some reasons why you should prefer to use a <code>runTests</code> function to run them.</p>
-<p>First, your <em>runner</em>'s output will give you important information about the current run.
-This will show you the file being runned,
-the tests's status
-and at the end a summary of failed, skipped and passed tests:</p>
-<pre><code>===== Statistics =====
-
-⏏️   TOTAL: 24 assertions
-✅  PASSED: 20 assertions
-⏩ SKIPPED: 4 assertions
-❌  FAILED: 4 assertions
-
-===== ========== =====
-</code></pre>
-<p>Also, the runner is able to return an error code,
-so that is great if you're working with <em>Continuous Integration</em>.</p>
-<h2>Documentation</h2>
-<h3><em>Runner</em></h3>
-<ul>
-<li><code>runTests: $[folder :string]</code>:
-The <em>runner function</em>, this function will look for <em>tests</em> inside the relative <code>folder</code>.
-Remember that all <em>tests</em> must begin with the <code>test</code> prefix, and be an <code>.art</code> extension.
-<ul>
-<li><code>.failFast</code>:
-Fails on the first error found.
-This works at file scope due to our current way of running tests.</li>
-<li><code>.pattern :string</code>:
-Defines what is a test-file via a kind-of <em>glob</em> pattern.
-Use a <code>*</code> as spliter.
-<ul>
-<li>Obs.: That is a kind-of <em>glob</em> pattern, not a real one.
-So just use one and only one <code>*</code> to split the pre and suffix.</li>
-</ul>
-</li>
-<li><code>.suppress</code>:
-Suppress <code>panic</code>, this means:
-this won't terminate your tests,
-won't return an error code
-and won't print a <code>panic</code> message.</li>
-</ul>
-</li>
-</ul>
-<h3><em>Tests</em></h3>
-<ul>
-<li><code>test: $[description :string, testCase :block]</code>:
-The test case itself, you need to pass a clear description to it,
-And the logic that you're trying to assert.
-<ul>
-<li><code>.prop</code>:
-Indicates that a test is property-based.</li>
-<li><code>.skip :logical</code>:
-Skips tests for some condition.
-If none condition is given, this will just skip the test.</li>
-</ul>
-</li>
-<li><code>assert: $[condition :block]</code>:
-A function that is only available inside the <code>test</code> case,
-makes an assertion given the <code>condition</code>.</li>
-</ul>
-<hr />
-<blockquote>
-<p>Background photo on <a href="#at-a-glance">&quot;At a Glance&quot;</a>
-by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Jack Anstey</a> on <a rel="nofollow" target="_blank" href="https://unsplash.com/photos/aerial-photography-of-road-zS4lUqLEiNA?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
-</blockquote>
+<hr/>
+<h3>License</h3>
+<p>MIT License</p>
+<p>Copyright (c) 2024 Yanis Zafirópulos</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
 
                                 </div>
                                 <div class="version-history is-hidden">
                                     <ul>
                                         
                                             
-                                            <li><b>0.1.4</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;3&nbsp;February&nbsp;2024</span></li>
-                                            
-                                        
-                                            
-                                                <li><a class="version-link" href="https://unitt.pkgr.art/0.1.3-pre"><b>0.1.3-pre</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;31&nbsp;January&nbsp;2024</span></li>
-                                            
-                                        
-                                            
-                                                <li><a class="version-link" href="https://unitt.pkgr.art/0.1.2-pre"><b>0.1.2-pre</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;29&nbsp;January&nbsp;2024</span></li>
+                                            <li><b>0.0.1</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;12&nbsp;February&nbsp;2024</span></li>
                                             
                                         
                                     </ul>
@@ -316,25 +208,25 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
                                     <span class="icon download-icon">
                                         <i class="fas fa-download"></i>
                                     </span>&nbsp;
-                                    <span id= "unitt-downloads" class="download-count">-</span>
+                                    <span id= "unidecode-downloads" class="download-count">-</span>
                                 </div>&nbsp;&nbsp;
                                 <div class="star-info">
                                     <span class="icon star-icon">
                                         <i class="fa fa-star"></i>
                                     </span>&nbsp;
-                                    <span class="star-count" data-package="RickBarretto/unitt"></span>
+                                    <span class="star-count" data-package="drkameleon/unidecode.art"></span>
                                 </div>
                             </div>
                             <hr/>
                             <div class="block package-author">
                                 <b>Author</b>
                                 <br>
-                                <a href="https://github.com/RickBarretto" class="repo-user-name">RickBarretto</a>
+                                <a href="https://github.com/drkameleon" class="repo-user-name">drkameleon</a>
                             </div>
                             <div class="block package-version">
                                 <b>Version</b>
                                 <br>
-                                0.1.4<br>
+                                0.0.1<br>
                             </div>
                             <div class="block package-license">
                                 <b>License</b>
@@ -366,8 +258,8 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
 <script>
     $(document).ready(function(){
         
-            $.get("https://pkgr.art/getdownloads.php?pkg=unitt&ver=0.1.4", function (data, status){
-                $("#unitt-downloads").html(data);
+            $.get("https://pkgr.art/getdownloads.php?pkg=unidecode&ver=0.0.1", function (data, status){
+                $("#unidecode-downloads").html(data);
             });
         
     });
