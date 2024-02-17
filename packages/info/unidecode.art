@@ -76,8 +76,8 @@ readme: {
                 SOFTWARE.
         }
 stats: #[
-        stars: 1
-        watch: 1
+        stars: 3
+        watch: 3
         ]
 author: #[
         name: "drkameleon"

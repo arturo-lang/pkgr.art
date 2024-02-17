@@ -276,12 +276,26 @@ Indicates that a test is property-based.</li>
 <li><code>.skip :logical</code>:
 Skips tests for some condition.
 If none condition is given, this will just skip the test.</li>
+<li><code>.static: :block</code>:
+Defines what will and what won't be evaluated.</li>
+<li><code>.static: :logical</code>:
+Disable runtime evaluation, and forces static display.</li>
 </ul>
 </li>
 <li><code>assert: $[condition :block]</code>:
 A function that is only available inside the <code>test</code> case,
 makes an assertion given the <code>condition</code>.</li>
+<li><code>suite: $[description :string tests :block]</code>:
+Visually groups tests together.</li>
 </ul>
+<blockquote class='alert alert-warning'>
+<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</b><br>
+
+Never import this lib as <code>.lean</code>, or this will break the current code.
+This happens due to the nature of Arturo (being concatenative),
+and the way we importings are working right now.
+This may change in future.</p>
+</blockquote>
 <hr />
 <blockquote>
 <p>Background photo on <a href="#at-a-glance">&quot;At a Glance&quot;</a>
@@ -291,6 +305,10 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
                                 </div>
                                 <div class="version-history is-hidden">
                                     <ul>
+                                        
+                                            
+                                                <li><a class="version-link" href="https://unitt.pkgr.art/0.2.0"><b>0.2.0</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;17&nbsp;February&nbsp;2024</span></li>
+                                            
                                         
                                             
                                                 <li><a class="version-link" href="https://unitt.pkgr.art/0.1.4"><b>0.1.4</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;3&nbsp;February&nbsp;2024</span></li>
@@ -448,7 +466,7 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
             "package",
             "unit-tests"
         ],
-        "version": "0.1.4"
+        "version": "0.2.0"
     }
 ];
                 var fuseOptions = {
