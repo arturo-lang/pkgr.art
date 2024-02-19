@@ -155,10 +155,10 @@
 <p><em>The runner</em> is the section responsible to find, run and return error codes to the final user.
 While <em>the tests</em> are responsible to group the rules and logic of the tests.</p>
 <h3>Initial setup</h3>
-<p>It's recomended that your <em>runner</em> be at the root of your directory, right before your <em>tests</em> folder.</p>
+<p>It's recomended that your <em>tester</em> be at the root of your directory, right before your <em>tests</em> folder.</p>
 <p>All of your <em>tests</em> must begin with the <code>test</code> prefix and end with the <code>.art</code> extension to be found,
 since you may want to mix them with some other files.</p>
-<p>Being that said, that is the right way of setting up your <em>runner</em>:</p>
+<p>Being that said, that is the right way of setting up your <em>tester</em>:</p>
 <p>Let's consider that you have the following directory:</p>
 <pre><code>src/
     ...
@@ -170,7 +170,7 @@ tester.art
 <p>Into your <code>tester.art</code>, you must:</p>
 <pre lang="art"><code>import {unitt}!
 
-runTests &quot;tests&quot;
+runTests findTests &quot;tests&quot;
 </code></pre>
 <p>To run it, call:</p>
 <pre><code>arturo tester.art
@@ -180,41 +180,66 @@ runTests &quot;tests&quot;
 
 You may want to use a hashbang to don't need to call arturo for every run.</p>
 </blockquote>
+<blockquote class='alert alert-tip'>
+<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</b><br>
+
+If you want be able to test some specific tests from the CLI, you can:</p>
+<pre lang="art"><code> import {unitt}!
+ 
+ runTests (empty? arg)? 
+     -&gt; findTests &quot;tests&quot;
+     -&gt; arg
+</code></pre>
+</blockquote>
 <h3>The <em>tests</em> itself</h3>
 <p>A real example of tests:</p>
-<pre lang="art"><code>unix?: true
+<pre lang="art"><code>import {unitt}!
 
-test &quot;appending binaries with integer is working&quot; [
-    b: to :binary 0
-    assert -&gt; as.binary 2 = append b 1
-    assert -&gt; as.binary 1 = b ++ 1
+unix?: true
+
+suite &quot;test binary appending&quot; [
+    test &quot;operation with integer works&quot; [
+        b: to :binary 0
+        assert -&gt; as.binary 2 = append b 1
+        assert -&gt; as.binary 1 = b ++ 1
+    ]
+
+    test.prop &quot;operate binaries with integer returns a binary&quot; [
+        b: to :binary 0
+        assert -&gt; binary? append b 1
+        assert -&gt; binary? b ++ 1
+    ]
 ]
 
-test.prop &quot;appending binaries with integer returns a binary&quot; [
-    b: to :binary 0
-    assert -&gt; binary? append b 1
-    assert -&gt; binary? b ++ 1
-]
-
-test.skip: unix? &quot;split is working for windows's paths&quot; [
+test.skip: unix? &quot;split works for windows's paths&quot; [
     assert -&gt; [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split.path &quot;.\\splited\\path&quot;
+]
+
+test &quot;split is works for unix path&quot; [
+    assert -&gt; [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split.path &quot;./splited/path&quot;
 ]
 </code></pre>
 <p>This will show you:</p>
-<pre><code>❌ - assert that appending binaries with integer is working
-     assertion : [as binary 1 = append b 1]
+<pre><code>Suite: test binary appending 
 
-✅ - assert that appending binaries with integer is working
-     assertion : [as binary 1 = b ++ 1]
+    ❌ - assert that operation with integer works
+         assertion: as .binary 2 = append  1
 
-✅ ~ assert that appending binaries with integer returns a binary
-     assertion : [binary? append b 1]
+    ❌ - assert that operation with integer works
+         assertion: as .binary 1 =  ++ 1
 
-✅ - assert that appending binaries with integer returns a binary
-     assertion : [binary? b ++ 1]
+    ✅ ~ assert that operate binaries with integer returns a binary
+         assertion: binary? append  1
 
-⏩ - assert that split is working for windows's paths      
-      skipped!
+    ✅ ~ assert that operate binaries with integer returns a binary
+         assertion: binary?  ++ 1
+
+
+⏩ - assert that split works for windows's paths 
+     skipped!
+
+✅ - assert that split is works for unix path
+     assertion: [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split .path &quot;./splited/path&quot;
 </code></pre>
 <blockquote class='alert alert-note'>
 <p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</b><br>
@@ -242,14 +267,25 @@ so that is great if you're working with <em>Continuous Integration</em>.</p>
 <h2>Documentation</h2>
 <h3><em>Runner</em></h3>
 <ul>
-<li><code>runTests: $[folder :string]</code>:
-The <em>runner function</em>, this function will look for <em>tests</em> inside the relative <code>folder</code>.
-Remember that all <em>tests</em> must begin with the <code>test</code> prefix, and be an <code>.art</code> extension.
+<li><code>runTests: $[tests [:string]]</code>:
+The <em>runner function</em>, this executes all <code>tests</code>,
+show statistics and return a value.
 <ul>
 <li><code>.failFast</code>:
 Fails on the first error found.
 This works at file scope due to our current way of running tests.</li>
-<li><code>.pattern :string</code>:
+<li><code>.suppress</code>:
+Suppress <code>panic</code>, this means:
+this won't terminate your tests,
+won't return an error code
+and won't print a <code>panic</code> message.</li>
+</ul>
+</li>
+<li><code>findTests: $[folder :string]</code>:
+The <em>finder function</em>, this function will look for <em>tests</em> inside the relative <code>folder</code>.
+The default <em>test</em> pattern is &quot;test*.art&quot;.
+<ul>
+<li><code>.thatMatches :string</code>:
 Defines what is a test-file via a kind-of <em>glob</em> pattern.
 Use a <code>*</code> as spliter.
 <ul>
@@ -257,11 +293,6 @@ Use a <code>*</code> as spliter.
 So just use one and only one <code>*</code> to split the pre and suffix.</li>
 </ul>
 </li>
-<li><code>.suppress</code>:
-Suppress <code>panic</code>, this means:
-this won't terminate your tests,
-won't return an error code
-and won't print a <code>panic</code> message.</li>
 </ul>
 </li>
 </ul>
@@ -307,7 +338,11 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
                                     <ul>
                                         
                                             
-                                            <li><b>0.2.0</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;17&nbsp;February&nbsp;2024</span></li>
+                                            <li><b>1.0.0</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;17&nbsp;February&nbsp;2024</span></li>
+                                            
+                                        
+                                            
+                                                <li><a class="version-link" href="https://unitt.pkgr.art/0.2.0"><b>0.2.0</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;17&nbsp;February&nbsp;2024</span></li>
                                             
                                         
                                             
@@ -352,7 +387,7 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
                             <div class="block package-version">
                                 <b>Latest Version</b>
                                 <br>
-                                0.2.0<br>
+                                1.0.0<br>
                             </div>
                             <div class="block package-license">
                                 <b>License</b>
@@ -466,7 +501,7 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
             "package",
             "unit-tests"
         ],
-        "version": "0.2.0"
+        "version": "1.0.0"
     }
 ];
                 var fuseOptions = {
