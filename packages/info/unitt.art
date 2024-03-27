@@ -2,7 +2,7 @@
 name: "unitt"
 fullName: "RickBarretto/unitt"
 url: "https://github.com/RickBarretto/unitt"
-description: "DRAFT - Unitt is a basic unit-test tool for the Arturo Programming language."
+description: "Unitt is a lean unit-test tool for the Arturo Programming language."
 tags: [
                 "arturo"
                  "arturo-lang"
@@ -19,7 +19,7 @@ readme: {
                 </h1>
                 
                 <p align="center">
-                    <i>Unitt</i> is a basic unit-test tool for the 
+                    <i>Unitt</i> is a lean unit-test tool for the 
                     <a href="https://github.com/arturo-lang/arturo/">
                         Arturo Programming language
                     </a>
