@@ -55,12 +55,12 @@ readme: {
                 
                 ### Initial setup
                 
-                It's recomended that your *runner* be at the root of your directory, right before your *tests* folder.
+                It's recomended that your *tester* be at the root of your directory, right before your *tests* folder.
                 
                 All of your *tests* must begin with the `test` prefix and end with the `.art` extension to be found,
                 since you may want to mix them with some other files.
                 
-                Being that said, that is the right way of setting up your *runner*:
+                Being that said, that is the right way of setting up your *tester*:
                 
                 Let's consider that you have the following directory:
                 
@@ -76,10 +76,9 @@ readme: {
                 Into your `tester.art`, you must:
                 
                 ```art
-                import {unitt}
+                import {unitt}!
                 
-                do ::
-                    runTests "tests"
+                runTests findTests "tests"
                 ```
                 
                 To run it, call:
@@ -91,47 +90,71 @@ readme: {
                 > [!TIP] 
                 > You may want to use a hashbang to don't need to call arturo for every run.
                 
+                > [!TIP]
+                > If you want be able to test some specific tests from the CLI, you can:
+                > ```art
+                >  import {unitt}!
+                >  
+                >  runTests (empty? arg)? 
+                >      -> findTests "tests"
+                >      -> arg
+                > ```
+                
                 ### The *tests* itself
                 
                 A real example of tests:
                 
                 ```art
+                import {unitt}!
+                
                 unix?: true
                 
-                test "appending binaries with integer is working" [
-                    b: to :binary 0
-                    assert -> as.binary 2 = append b 1
-                    assert -> as.binary 1 = b ++ 1
+                suite "test binary appending" [
+                    test "operation with integer works" [
+                        b: to :binary 0
+                        assert -> as.binary 2 = append b 1
+                        assert -> as.binary 1 = b ++ 1
+                    ]
+                
+                    test.prop "operate binaries with integer returns a binary" [
+                        b: to :binary 0
+                        assert -> binary? append b 1
+                        assert -> binary? b ++ 1
+                    ]
                 ]
                 
-                test.prop "appending binaries with integer returns a binary" [
-                    b: to :binary 0
-                    assert -> binary? append b 1
-                    assert -> binary? b ++ 1
-                ]
-                
-                test.skip: unix? "split is working for windows's paths" [
+                test.skip: unix? "split works for windows's paths" [
                     assert -> ["." "splited" "path"] = split.path ".\\splited\\path"
+                ]
+                
+                test "split is works for unix path" [
+                    assert -> ["." "splited" "path"] = split.path "./splited/path"
                 ]
                 ```
                 
                 This will show you:
                 
                 ```
-                ❌ - assert that appending binaries with integer is working
-                     assertion : [as binary 1 = append b 1]
+                Suite: test binary appending 
                 
-                ✅ - assert that appending binaries with integer is working
-                     assertion : [as binary 1 = b ++ 1]
+                    ❌ - assert that operation with integer works
+                         assertion: as .binary 2 = append  1
                 
-                ✅ ~ assert that appending binaries with integer returns a binary
-                     assertion : [binary? append b 1]
+                    ❌ - assert that operation with integer works
+                         assertion: as .binary 1 =  ++ 1
                 
-                ✅ - assert that appending binaries with integer returns a binary
-                     assertion : [binary? b ++ 1]
+                    ✅ ~ assert that operate binaries with integer returns a binary
+                         assertion: binary? append  1
                 
-                ⏩ - assert that split is working for windows's paths      
-                      skipped!
+                    ✅ ~ assert that operate binaries with integer returns a binary
+                         assertion: binary?  ++ 1
+                
+                
+                ⏩ - assert that split works for windows's paths 
+                     skipped!
+                
+                ✅ - assert that split is works for unix path
+                     assertion: ["." "splited" "path"] = split .path "./splited/path"
                 ```
                 
                 > [!NOTE]
@@ -164,22 +187,25 @@ readme: {
                 ## Documentation
                 
                 ### *Runner*
-                - `runTests: $[folder :string]`:
-                    The *runner function*, this function will look for *tests* inside the relative `folder`.
-                    Remember that all *tests* must begin with the `test` prefix, and be an `.art` extension.
+                - `runTests: $[tests [:string]]`:
+                    The *runner function*, this executes all `tests`,
+                    show statistics and return a value. 
                     - `.failFast`:
                         Fails on the first error found. 
                         This works at file scope due to our current way of running tests.
-                    - `.pattern :string`:
-                        Defines what is a test-file via a kind-of *glob* pattern.
-                        Use a `*` as spliter. 
-                        - Obs.: That is a kind-of *glob* pattern, not a real one. 
-                          So just use one and only one `*` to split the pre and suffix.
                     - `.suppress`: 
                         Suppress `panic`, this means: 
                         this won't terminate your tests, 
                         won't return an error code
                         and won't print a `panic` message. 
+                - `findTests: $[folder :string]`:
+                    The *finder function*, this function will look for *tests* inside the relative `folder`.
+                    The default *test* pattern is "test*.art".
+                    - `.thatMatches :string`:
+                        Defines what is a test-file via a kind-of *glob* pattern.
+                        Use a `*` as spliter. 
+                        - Obs.: That is a kind-of *glob* pattern, not a real one. 
+                          So just use one and only one `*` to split the pre and suffix.
                 
                 ### *Tests*
                 - `test: $[description :string, testCase :block]`:
@@ -190,9 +216,22 @@ readme: {
                     - `.skip :logical`:
                         Skips tests for some condition. 
                         If none condition is given, this will just skip the test.
+                    - `.static: :block`:
+                        Defines what will and what won't be evaluated.
+                    - `.static: :logical`:
+                        Disable runtime evaluation, and forces static display.
                 - `assert: $[condition :block]`:
                     A function that is only available inside the `test` case,
                     makes an assertion given the `condition`.
+                - `suite: $[description :string tests :block]`:
+                    Visually groups tests together.
+                
+                
+                > [!WARNING]
+                > Never import this lib as `.lean`, or this will break the current code.
+                > This happens due to the nature of Arturo (being concatenative), 
+                > and the way we importings are working right now.
+                > This may change in future.
                 
                 ---
                 

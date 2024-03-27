@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>unitt &bull; Arturo Packages</title>
+        <title>states &bull; Arturo Packages</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bulma@0.9.4/css/bulma.min.css,npm/prismjs@1.23.0/themes/prism-okaidia.min.css" />
@@ -80,35 +80,37 @@
                 <div class="columns package-title-wrapper">
                     <div class="column is-8 package-title title-wrapper">
                         
-                            <h2 class="is-size-2"><b><a href="https://unitt.pkgr.art">unitt</a></b></h2>
+                        <h2 class="is-size-2"><b>states</b></h2>
                         
-                        <a href="https://github.com/RickBarretto/unitt">
+                        <a href="https://github.com/RickBarretto/states.art">
                             <span class="icon repo-icon inside-package">
                                 <i class="fa fa-github"></i>
                             </span>
                         </a>
                     </div>
                     <div class="column is-4 package-link">
-                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;unitt.pkgr.art</div>
+                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;states.pkgr.art</div>
                     </div>
                 </div>
                 <div class="block package-description">
-                    <h3 class="is-size-5">DRAFT - Unitt is a basic unit-test tool for the Arturo Programming language.</h3>
+                    <h3 class="is-size-5">:states is a lean Finite State Machine package for the Arturo Programming Language</h3>
                 </div>
                 
                 
                     <div class="block package-tags">
                         
-                            <span class="tag is-info is-light is-medium package-tag">unit tests</span>
+                            <span class="tag is-info is-light is-medium package-tag">finite state machine</span>
+                        
+                            <span class="tag is-info is-light is-medium package-tag">fsm</span>
                         
                     </div>
                 
                 <div class="installation-instructions block">
-                    <input id="installation-code" class="input copy-code" value="arturo -p install unitt" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
+                    <input id="installation-code" class="input copy-code" value="arturo -p install states" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
                 </div>
                 <article class="message is-success codecopied-message is-hidden">
                     <div class="message-body">
-                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "unitt"</code>, directly inside your code.
+                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "states"</code>, directly inside your code.
                     </div>
                   </article>
                 <div class="columns">
@@ -123,10 +125,14 @@
                             <div class="box content left-container">
                                 <div class="readme">
                                     <h1 align="center">
-    Unitt
+    <i>:states</i>
 </h1>
 <p align="center">
-    <i>Unitt</i> is a basic unit-test tool for the 
+    <i>:states</i> is a basic
+    <a rel="nofollow" target="_blank" href="https://en.wikipedia.org/wiki/Finite-state_machine">
+        Finite State Machine (FSM)
+    </a>
+    package for the 
     <a rel="nofollow" target="_blank" href="https://github.com/arturo-lang/arturo/">
         Arturo Programming language
     </a>
@@ -143,218 +149,76 @@
     />
 </p>
 <h2>At a Glance</h2>
-<p align="center">
-<img 
-    alt="Running Unitt from terminal"
-    width="720"
-    src="https://raw.githubusercontent.com/RickBarretto/unitt/master/docs/running unitt screenshot.png"
-/>
-</p>
-<h2>Trying Unitt</h2>
-<p><em>Unitt</em> may be splited into two sections: <em>runner</em> and <em>the tests</em>.</p>
-<p><em>The runner</em> is the section responsible to find, run and return error codes to the final user.
-While <em>the tests</em> are responsible to group the rules and logic of the tests.</p>
-<h3>Initial setup</h3>
-<p>It's recomended that your <em>tester</em> be at the root of your directory, right before your <em>tests</em> folder.</p>
-<p>All of your <em>tests</em> must begin with the <code>test</code> prefix and end with the <code>.art</code> extension to be found,
-since you may want to mix them with some other files.</p>
-<p>Being that said, that is the right way of setting up your <em>tester</em>:</p>
-<p>Let's consider that you have the following directory:</p>
-<pre><code>src/
-    ...
-tests/
-    ...
-main.art
-tester.art
-</code></pre>
-<p>Into your <code>tester.art</code>, you must:</p>
-<pre lang="art"><code>import {unitt}!
-
-runTests findTests &quot;tests&quot;
-</code></pre>
-<p>To run it, call:</p>
-<pre><code>arturo tester.art
-</code></pre>
+<p><img src="https://raw.githubusercontent.com/RickBarretto/states.art/master/docs/running%20states-art%20screenshot.png" alt="Running states.art screenshot" /></p>
+<h2>Inspiration</h2>
+<p>This package was highly inspired by <a rel="nofollow" target="_blank" href="https://x.com/harph"><em>Harrington Joseph</em></a>'s <sup class="footnote-ref"><a href="#fn-harph" id="fnref-harph" data-footnote-ref>1</a></sup> talk <a rel="nofollow" target="_blank" href="https://youtu.be/I1Mzx_tSpew">&quot;<em>When Booleans Are Not Enough... State Machines?</em>&quot;</a> <sup class="footnote-ref"><a href="#fn-talk" id="fnref-talk" data-footnote-ref>2</a></sup>.
+By consequence, this is inspired by the <a rel="nofollow" target="_blank" href="https://github.com/pytransitions/transitions">pytransitions</a> package.</p>
 <blockquote class='alert alert-tip'>
 <p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</b><br>
 
-You may want to use a hashbang to don't need to call arturo for every run.</p>
+If you want to know why you need a FSM, I recommend you to watch his talk first.</p>
 </blockquote>
-<blockquote class='alert alert-tip'>
-<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</b><br>
+<h2>Trying <em>:states</em></h2>
+<p>Defining a finite state-machine is simple like that:</p>
+<pre lang="art"><code>import {states}!
 
-If you want be able to test some specific tests from the CLI, you can:</p>
-<pre lang="art"><code> import {unitt}!
- 
- runTests (empty? arg)? 
-     -&gt; findTests &quot;tests&quot;
-     -&gt; arg
+turnstile: to :states ['locked [
+    push        /  locked    ~&gt;  locked
+    push        /  unlocked  ~&gt;  locked
+    insertCoin  /  locked    ~&gt;  unlocked
+    insertCoin  /  unlocked  ~&gt;  unlocked
+]]
 </code></pre>
-</blockquote>
-<h3>The <em>tests</em> itself</h3>
-<p>A real example of tests:</p>
-<pre lang="art"><code>import {unitt}!
-
-unix?: true
-
-suite &quot;test binary appending&quot; [
-    test &quot;operation with integer works&quot; [
-        b: to :binary 0
-        assert -&gt; as.binary 2 = append b 1
-        assert -&gt; as.binary 1 = b ++ 1
-    ]
-
-    test.prop &quot;operate binaries with integer returns a binary&quot; [
-        b: to :binary 0
-        assert -&gt; binary? append b 1
-        assert -&gt; binary? b ++ 1
-    ]
-]
-
-test.skip: unix? &quot;split works for windows's paths&quot; [
-    assert -&gt; [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split.path &quot;.\\splited\\path&quot;
-]
-
-test &quot;split is works for unix path&quot; [
-    assert -&gt; [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split.path &quot;./splited/path&quot;
-]
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The first parameter is the initial state,</li>
+<li>The second parameter is the definition os the transitions,
+this must follow the following order: <em>event</em>, <em>source</em>, <em>fate</em>, being or not separated by symbols.</li>
+<li>You can choose what symbol to use to separate them, or even choose by don't use them, making this a trilema.</li>
+</ul>
+<p><strong>Getting the current state</strong></p>
+<p>To get the current state, you must call the <code>state</code> method:</p>
+<pre lang="art"><code>turnstile\state 
+; =&gt; locked
 </code></pre>
-<p>This will show you:</p>
-<pre><code>Suite: test binary appending 
+<p><strong>Transitioning between states</strong></p>
+<p>There are two equivalent ways of transitioning between states, you can use <code>&lt;fsm&gt;/&lt;event&gt;</code> or <code>&lt;fsm&gt;\changeFrom '&lt;event&gt;</code>:</p>
+<pre lang="art"><code>turnstile\state                   
+; =&gt; locked
+turnstile\push                   
+; =&gt; locked
+turnstile\insertCoin             
+; =&gt; unlocked
+turnstile\insertCoin             
+; =&gt; unlocked
 
-    ❌ - assert that operation with integer works
-         assertion: as .binary 2 = append  1
-
-    ❌ - assert that operation with integer works
-         assertion: as .binary 1 =  ++ 1
-
-    ✅ ~ assert that operate binaries with integer returns a binary
-         assertion: binary? append  1
-
-    ✅ ~ assert that operate binaries with integer returns a binary
-         assertion: binary?  ++ 1
-
-
-⏩ - assert that split works for windows's paths 
-     skipped!
-
-✅ - assert that split is works for unix path
-     assertion: [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split .path &quot;./splited/path&quot;
+turnstile\changeFrom 'push       
+; =&gt; locked
+turnstile\changeFrom 'insertCoin 
+; =&gt; unlocked
 </code></pre>
-<blockquote class='alert alert-note'>
-<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</b><br>
-
-Property-based tests have <code>~</code> as separator.</p>
-</blockquote>
-<h3>The <em>Runner</em></h3>
-<p>Basically, you can run your <em>tests units</em> without a <em>runner</em>.
-But there are some reasons why you should prefer to use a <code>runTests</code> function to run them.</p>
-<p>First, your <em>runner</em>'s output will give you important information about the current run.
-This will show you the file being runned,
-the tests's status
-and at the end a summary of failed, skipped and passed tests:</p>
-<pre><code>===== Statistics =====
-
-⏏️   TOTAL: 24 assertions
-✅  PASSED: 20 assertions
-⏩ SKIPPED: 4 assertions
-❌  FAILED: 4 assertions
-
-===== ========== =====
-</code></pre>
-<p>Also, the runner is able to return an error code,
-so that is great if you're working with <em>Continuous Integration</em>.</p>
-<h2>Documentation</h2>
-<h3><em>Runner</em></h3>
-<ul>
-<li><code>runTests: $[tests [:string]]</code>:
-The <em>runner function</em>, this executes all <code>tests</code>,
-show statistics and return a value.
-<ul>
-<li><code>.failFast</code>:
-Fails on the first error found.
-This works at file scope due to our current way of running tests.</li>
-<li><code>.suppress</code>:
-Suppress <code>panic</code>, this means:
-this won't terminate your tests,
-won't return an error code
-and won't print a <code>panic</code> message.</li>
-</ul>
-</li>
-<li><code>findTests: $[folder :string]</code>:
-The <em>finder function</em>, this function will look for <em>tests</em> inside the relative <code>folder</code>.
-The default <em>test</em> pattern is &quot;test*.art&quot;.
-<ul>
-<li><code>.thatMatches :string</code>:
-Defines what is a test-file via a kind-of <em>glob</em> pattern.
-Use a <code>*</code> as spliter.
-<ul>
-<li>Obs.: That is a kind-of <em>glob</em> pattern, not a real one.
-So just use one and only one <code>*</code> to split the pre and suffix.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3><em>Tests</em></h3>
-<ul>
-<li><code>test: $[description :string, testCase :block]</code>:
-The test case itself, you need to pass a clear description to it,
-And the logic that you're trying to assert.
-<ul>
-<li><code>.prop</code>:
-Indicates that a test is property-based.</li>
-<li><code>.skip :logical</code>:
-Skips tests for some condition.
-If none condition is given, this will just skip the test.</li>
-<li><code>.static: :block</code>:
-Defines what will and what won't be evaluated.</li>
-<li><code>.static: :logical</code>:
-Disable runtime evaluation, and forces static display.</li>
-</ul>
-</li>
-<li><code>assert: $[condition :block]</code>:
-A function that is only available inside the <code>test</code> case,
-makes an assertion given the <code>condition</code>.</li>
-<li><code>suite: $[description :string tests :block]</code>:
-Visually groups tests together.</li>
-</ul>
-<blockquote class='alert alert-warning'>
-<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</b><br>
-
-Never import this lib as <code>.lean</code>, or this will break the current code.
-This happens due to the nature of Arturo (being concatenative),
-and the way we importings are working right now.
-This may change in future.</p>
-</blockquote>
 <hr />
 <blockquote>
 <p>Background photo on <a href="#at-a-glance">&quot;At a Glance&quot;</a>
 by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Jack Anstey</a> on <a rel="nofollow" target="_blank" href="https://unsplash.com/photos/aerial-photography-of-road-zS4lUqLEiNA?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
 </blockquote>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-harph">
+<p>You can find him on <a rel="nofollow" target="_blank" href="https://x.com/harph">Twitter</a> or <a rel="nofollow" target="_blank" href="https://github.com/harph">Github</a> as @harph. <a href="#fnref-harph" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-talk">
+<p>&quot;<em>When Booleans Are Not Enough... State Machines?</em>&quot; by <em>Harrington Joseph</em> can be found in two places, on the Channel <a rel="nofollow" target="_blank" href="https://www.youtube.com/@NextDayVideo"><em>Next Day Video</em></a> Presented on <a rel="nofollow" target="_blank" href="https://youtu.be/I1Mzx_tSpew"><em>PyTexas 2019</em></a> and on the Channel <a rel="nofollow" target="_blank" href="https://www.youtube.com/@SFPython"><em>SF Python</em></a> presented on <a rel="nofollow" target="_blank" href="https://youtu.be/H25eAdwZYwg"><em>SF Python Meetup Feb 2019</em></a>. <a href="#fnref-talk" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+</ol>
+</section>
 
                                 </div>
                                 <div class="version-history is-hidden">
                                     <ul>
                                         
                                             
-                                                <li><a class="version-link" href="https://unitt.pkgr.art/1.0.0"><b>1.0.0</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;17&nbsp;February&nbsp;2024</span></li>
-                                            
-                                        
-                                            
-                                                <li><a class="version-link" href="https://unitt.pkgr.art/0.2.0"><b>0.2.0</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;17&nbsp;February&nbsp;2024</span></li>
-                                            
-                                        
-                                            
-                                                <li><a class="version-link" href="https://unitt.pkgr.art/0.1.4"><b>0.1.4</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;3&nbsp;February&nbsp;2024</span></li>
-                                            
-                                        
-                                            
-                                                <li><a class="version-link" href="https://unitt.pkgr.art/0.1.3-pre"><b>0.1.3-pre</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;31&nbsp;January&nbsp;2024</span></li>
-                                            
-                                        
-                                            
-                                            <li><b>0.1.2-pre</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;29&nbsp;January&nbsp;2024</span></li>
+                                            <li><b>0.1.0</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;11&nbsp;February&nbsp;2024</span></li>
                                             
                                         
                                     </ul>
@@ -369,13 +233,13 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
                                     <span class="icon download-icon">
                                         <i class="fas fa-download"></i>
                                     </span>&nbsp;
-                                    <span id= "unitt-downloads" class="download-count">-</span>
+                                    <span id= "states-downloads" class="download-count">-</span>
                                 </div>&nbsp;&nbsp;
                                 <div class="star-info">
                                     <span class="icon star-icon">
                                         <i class="fa fa-star"></i>
                                     </span>&nbsp;
-                                    <span class="star-count" data-package="RickBarretto/unitt"></span>
+                                    <span class="star-count" data-package="RickBarretto/states.art"></span>
                                 </div>
                             </div>
                             <hr/>
@@ -385,9 +249,9 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
                                 <a href="https://github.com/RickBarretto" class="repo-user-name">RickBarretto</a>
                             </div>
                             <div class="block package-version">
-                                <b>Version</b>
+                                <b>Latest Version</b>
                                 <br>
-                                0.1.2-pre<br>
+                                0.1.0<br>
                             </div>
                             <div class="block package-license">
                                 <b>License</b>
@@ -419,8 +283,8 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
 <script>
     $(document).ready(function(){
         
-            $.get("https://pkgr.art/getdownloads.php?pkg=unitt&ver=0.1.2-pre", function (data, status){
-                $("#unitt-downloads").html(data);
+            $.get("https://pkgr.art/getdownloads.php?pkg=states", function (data, status){
+                $("#states-downloads").html(data);
             });
         
     });
