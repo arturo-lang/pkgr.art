@@ -5,6 +5,24 @@ dummy: #[
                         "test"
                 ]
         ]
+grafito: #[
+        description: "Portable, Serverless & Lightweight SQLite-based Graph Database in Arturo"
+        tags: [
+                        "arturo"
+                         "cross-platform"
+                         "database"
+                         "database-engine"
+                         "graph"
+                         "graph-database"
+                         "graphdb"
+                         "portable"
+                         "portable-database"
+                         "query-language"
+                         "serverless"
+                         "sqlite"
+                         "sqlite3"
+                ]
+        ]
 states: #[
         description: ":states is a lean Finite State Machine package for the Arturo Programming Language"
         tags: [
