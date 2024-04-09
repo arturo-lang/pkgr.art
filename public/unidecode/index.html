@@ -128,8 +128,52 @@
                             </div>
                             <div class="box content left-container">
                                 <div class="readme">
-                                    tools/gfm.rb:3:in `read': Is a directory @ io_fread - tmp.md (Errno::EISDIR)
-	from tools/gfm.rb:3:in `<main>'
+                                    <h1 align="center">
+    Unidecode
+</h1>
+<p align="center">
+     <i>Unicode -> ASCII converter package for  Arturo</i> 
+</p>
+<hr/>
+<h3>What does this package do?</h3>
+<p>Let's say you have a Unicode string, with different characters, in different languages, e.g. characters with accents, in cyrillic, Mandarin Chinese, etc and - for whatever reason - want to have a <em>close approximation</em> to what it would be like using only ASCII characters, then this package is for you.</p>
+<blockquote class='alert alert-tip'>
+<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</b><br>
+
+The package has been based on <a rel="nofollow" target="_blank" href="https://nim-lang.org/docs/unidecode.html#unidecode%2Cstring">Nim's implementation</a>, of the same name - which in turn has been based on the Python's Unidecode module by Tomaz Solc.</p>
+</blockquote>
+<h3>How do I use it?</h3>
+<p>Simply <code>import</code> it and use the included <code>unidecode</code> function:</p>
+<pre lang="arturo"><code>import &quot;unidecode&quot;!
+
+print unidecode &quot;доброе утро!&quot;
+; will print:
+; dobroe utro!
+</code></pre>
+<blockquote class='alert alert-important'>
+<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</b><br>
+
+The package cannot possibly guarantee that the output will be &quot;accurate&quot;, not is it 100% easy to say what would be accurate in every possible case - it's an <em>approximate</em> Unicode -&gt; ASCII transformation. So, if you need a better solution for your specific needs, you might be better of writing a custom solution yourself!</p>
+</blockquote>
+<hr/>
+<h3>License</h3>
+<p>MIT License</p>
+<p>Copyright (c) 2024 Yanis Zafirópulos</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
 
                                 </div>
                                 <div class="version-history is-hidden">
