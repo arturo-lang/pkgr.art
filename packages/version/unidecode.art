@@ -1,7 +1,7 @@
 [
         #[
                 version: 0.0.2
-                date: to :date "2024-02-12T13:32:46+01:00"
+                date: to :date "2024-02-12T12:32:46+00:00"
                 url: "https://api.github.com/repos/drkameleon/unidecode.art/zipball/v0.0.2"
                 info: #[
                         entry: "unidecode.art"
@@ -16,7 +16,7 @@
         ]
          #[
                 version: 0.0.1
-                date: to :date "2024-02-12T13:16:32+01:00"
+                date: to :date "2024-02-12T12:16:32+00:00"
                 url: "https://api.github.com/repos/drkameleon/unidecode.art/zipball/v0.0.1"
                 info: #[
                         entry: "unidecode.art"
