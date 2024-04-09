@@ -1,5 +1,5 @@
 name: "unitt"
-description: "DRAFT - Unitt is a basic unit-test tool for the Arturo Programming language."
+description: "Unitt is a basic unit-test tool for the Arturo Programming language."
 license: "MIT"
 author: "RickBarretto"
 version: 1.0.0
