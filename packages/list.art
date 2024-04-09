@@ -1,4 +1,5 @@
 dummy: "arturo-lang/dummy-package"
+grafito: "arturo-lang/grafito"
 states: "RickBarretto/states.art"
 unidecode: "drkameleon/unidecode.art"
 unitt: "RickBarretto/unitt"
