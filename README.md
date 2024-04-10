@@ -59,6 +59,7 @@ requires: [> 0.9.83]
 As you can see, all this file *may* contain - note: all fields are optional - is basically a few more details:
 
 - **entry**: an alternative entry file, if you don't want to use `main.art`
+- **executable**: an "executable" file, if you set this pointing to a file within the package, then - when installing it - an (Bash-based, for now) executable will be installed in `$HOME/.arturo/packages/bin` (just make sure this path is in your $PATH variable and you'll be able to execute the given package from anywhere ;-))
 - **depends**: a list of dependencies (= other packages your own package needs)
 - **requires**: the minimum Arturo version your package is meant to work with
 
