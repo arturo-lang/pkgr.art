@@ -100,7 +100,7 @@ createSpecFile: function [package, versionToProcess, targetFolder][
         version: versionToProcess\version
         url: versionToProcess\url
         entry: versionToProcess\info\entry
-        executables: versionToProcess\info\executables
+        executable: versionToProcess\info\executable
         depends: versionToProcess\info\depends
         requires: versionToProcess\info\requires
     ]
