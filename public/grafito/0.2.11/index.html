@@ -80,7 +80,7 @@
                 <div class="columns package-title-wrapper">
                     <div class="column is-8 package-title title-wrapper">
                         
-                        <h2 class="is-size-2"><b>grafito</b></h2>
+                            <h2 class="is-size-2"><b><a href="https://grafito.pkgr.art">grafito</a></b></h2>
                         
                         <a href="https://github.com/arturo-lang/grafito">
                             <span class="icon repo-icon inside-package">
@@ -700,7 +700,7 @@ SOFTWARE.</p>
                                 <a href="https://github.com/arturo-lang" class="repo-user-name">arturo-lang</a>
                             </div>
                             <div class="block package-version">
-                                <b>Latest Version</b>
+                                <b>Version</b>
                                 <br>
                                 0.2.11<br>
                             </div>
@@ -743,7 +743,7 @@ SOFTWARE.</p>
 <script>
     $(document).ready(function(){
         
-            $.get("https://pkgr.art/getdownloads.php?pkg=grafito", function (data, status){
+            $.get("https://pkgr.art/getdownloads.php?pkg=grafito&ver=0.2.11", function (data, status){
                 $("#grafito-downloads").html(data);
             });
         

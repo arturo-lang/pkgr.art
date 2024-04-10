@@ -1,5 +1,21 @@
 [
         #[
+                version: 0.2.11
+                date: to :date "2024-04-10T16:24:55+00:00"
+                url: "https://api.github.com/repos/arturo-lang/grafito/zipball/v0.2.11"
+                info: #[
+                        entry: "grafito.art"
+                        executable: "grafito.art"
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                ]
+        ]
+         #[
                 version: 0.2.10
                 date: to :date "2024-04-10T15:56:06+00:00"
                 url: "https://api.github.com/repos/arturo-lang/grafito/zipball/v0.2.10"
