@@ -12,6 +12,7 @@
                                 >
                                  0.9.83
                         ]
+                        executable: false
                 ]
         ]
 ]

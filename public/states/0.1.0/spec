@@ -5,6 +5,7 @@ author: "RickBarretto"
 version: 0.1.0
 url: "https://api.github.com/repos/RickBarretto/states.art/zipball/v0.1.0"
 entry: "states.art"
+executable: false
 depends: []
 requires: [
                 >

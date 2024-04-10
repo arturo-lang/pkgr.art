@@ -1,5 +1,20 @@
 [
         #[
+                version: 0.0.5
+                date: to :date "2024-04-10T15:10:26+00:00"
+                url: "https://api.github.com/repos/arturo-lang/dummy-package/zipball/v0.0.5"
+                info: #[
+                        entry: "main.art"
+                        executable: "main.art"
+                        depends: [
+
+                        ]
+                        requires: [
+
+                        ]
+                ]
+        ]
+         #[
                 version: 0.0.4
                 date: to :date "2023-11-10T06:44:06+00:00"
                 url: "https://api.github.com/repos/arturo-lang/dummy-package/zipball/v0.0.4"
@@ -11,6 +26,7 @@
                         requires: [
 
                         ]
+                        executable: false
                 ]
         ]
          #[
@@ -25,6 +41,7 @@
                         requires: [
 
                         ]
+                        executable: false
                 ]
         ]
 ]

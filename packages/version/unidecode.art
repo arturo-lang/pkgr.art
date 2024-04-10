@@ -9,6 +9,7 @@
                                 >
                                  0.9.83
                         ]
+                        executable: false
                         depends: [
 
                         ]
@@ -24,6 +25,7 @@
                                 >
                                  0.9.83
                         ]
+                        executable: false
                         depends: [
 
                         ]
