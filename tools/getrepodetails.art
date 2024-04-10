@@ -101,6 +101,11 @@ getReleaseInfo: function [owner, repo, version, url][
 
     unless key? ret 'executables ->
         ret\executables: []
+    
+    ret\executables: map ret\executables 'xc [
+        (".art" = extract.extension xc)? -> xc
+                                         -> xc ++ ".art"
+    ]
 
     unless key? ret 'depends ->
         ret\depends: []
