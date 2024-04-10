@@ -101,6 +101,17 @@
                                 <a href="<||= entry\info\license\url ||>" class="repo-license-name"><||= entry\info\license\name ||></a>
                             </div>
                             <hr/>
+                            <div class="block package-executable">
+                                <b>Executable</b>
+                                <br>
+                                <|| (currentVersion\info\executable)? [ ||>
+                                    <span class="icon check-square-icon">
+                                        <i class="fas fa-check-square"></i>
+                                    </span>
+                                <|| ][ ||>
+                                    Not executable
+                                <|| ] ||>
+                            </div>
                             <div class="block package-depends">
                                 <b>Dependencies</b>
                                 <br>
