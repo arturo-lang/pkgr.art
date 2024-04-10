@@ -299,7 +299,11 @@ a.version-link {
             .package-author {}
             .package-version {}
             .package-license {}
-            .package-executable {}
+            .package-executable {
+                .icon {
+                    margin-left: -3px;
+                }
+            }
             .package-depends {
                 ul {
                     list-style: outside;
