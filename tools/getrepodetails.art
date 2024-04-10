@@ -105,6 +105,9 @@ getReleaseInfo: function [owner, repo, version, url][
     unless key? ret 'requires ->
         ret\requires: [> 0.0.0]
 
+    unless key? ret 'executables ->
+        ret\executables: []
+
     unless exists? ~{|tgtFolder|/|ret\entry|} ->
         ret: null
 
