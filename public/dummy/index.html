@@ -89,7 +89,7 @@
                         </a>
                     </div>
                     <div class="column is-4 package-link">
-                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;dummy.pkgr.art</div>
+                        <div class="is-pulled-right has-text-grey is-hidden-mobile"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;dummy.pkgr.art</div>
                     </div>
                 </div>
                 <div class="block package-description">
@@ -171,8 +171,8 @@
                         </div>
                     </div>
                     <div class="column is-3 info-column">
-                        <div class="box info-wrapper" style="padding-top:0">
-                            <div class="block stats-wrapper" style="margin-bottom:0">
+                        <div class="box info-wrapper">
+                            <div class="block stats-wrapper">
                                 <div class="download-info">
                                     <span class="icon download-icon">
                                         <i class="fas fa-download"></i>
@@ -193,9 +193,11 @@
                                 <a href="https://github.com/arturo-lang" class="repo-user-name">arturo-lang</a>
                             </div>
                             <div class="block package-version">
-                                <b>Latest Version</b>
+                                <b>Version</b>
                                 <br>
-                                0.0.5<br>
+                                <div class="package-version-wrapper">
+                                    0.0.5<span class="tag is-success latest-version-tag">Latest</span>
+                                </div>
                             </div>
                             <div class="block package-license">
                                 <b>License</b>
