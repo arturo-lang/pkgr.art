@@ -154,8 +154,9 @@ searchable: write.json ø searchable
 
 loop entries 'entry [
     tgtName: ~{public/|entry\name|}
-    unless directory? tgtName ->
+    unless directory? tgtName [
         write.directory tgtName ø
+    ]
 
     currentVersion: first entry\version
     currentVersionIsLatest: true
@@ -165,8 +166,9 @@ loop entries 'entry [
 
     loop entry\version 'vv [
         versionTgt: ~{public/|entry\name|/|vv\version|}
-        unless directory? versionTgt ->
+        unless directory? versionTgt [
             write.directory versionTgt ø
+        ]
 
         currentVersion: vv
         currentVersionIsLatest: false
