@@ -19,7 +19,7 @@
                         </a>
                     </div>
                     <div class="column is-4 package-link">
-                        <div class="is-pulled-right has-text-grey"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;<||= entry\name ||>.pkgr.art</div>
+                        <div class="is-pulled-right has-text-grey is-hidden-mobile"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;<||= entry\name ||>.pkgr.art</div>
                     </div>
                 </div>
                 <div class="block package-description">
@@ -69,8 +69,8 @@
                         </div>
                     </div>
                     <div class="column is-3 info-column">
-                        <div class="box info-wrapper" style="padding-top:0">
-                            <div class="block stats-wrapper" style="margin-bottom:0">
+                        <div class="box info-wrapper">
+                            <div class="block stats-wrapper">
                                 <div class="download-info">
                                     <span class="icon download-icon">
                                         <i class="fas fa-download"></i>
@@ -91,9 +91,11 @@
                                 <a href="<||= entry\info\author\url ||>" class="repo-user-name"><||= entry\info\author\name ||></a>
                             </div>
                             <div class="block package-version">
-                                <b><|| if currentVersionIsLatest [||>Latest <|| ] ||>Version</b>
+                                <b>Version</b>
                                 <br>
-                                <||= currentVersion\version ||><br>
+                                <div class="package-version-wrapper">
+                                    <||= currentVersion\version ||><|| if currentVersionIsLatest [||><span class="tag is-success latest-version-tag">Latest</span><|| ] ||>
+                                </div>
                             </div>
                             <div class="block package-license">
                                 <b>License</b>

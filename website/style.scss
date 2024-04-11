@@ -1,9 +1,18 @@
 $arturoColor: #501056;
 $arturoColorLight: #82138d;
 
+$backgroundColor: #fafafa;
+$footerColor: #f3f3f3;
+
+$borderColor: #e8e8e8;
+
 html,body {
     font-family: 'Source Sans 3', sans-serif;
     font-weight: 400;
+}
+
+body {
+    background: $backgroundColor;
 }
 
 a.simple-link {
@@ -184,7 +193,7 @@ a.version-link {
         text-align: center;
 
         input.copy-code {
-            border: 3px solid #eee;
+            border: 3px solid $borderColor;
             font-weight: bold;
             color: #888;
             cursor: pointer;
@@ -207,10 +216,36 @@ a.version-link {
 
     .left-column {
         .left-wrapper {
-            border: 3px solid #eee;
+            border: 3px solid $borderColor;
 
             .left-tabs {
                 margin-bottom: 0;
+                background: #fff;
+                
+                ul {
+                    border-bottom-color: $borderColor;
+
+                    li {
+                        a {
+                            &:hover {
+                                color: $arturoColorLight;
+                                border-bottom-color: #dbdbdb;
+                            }
+                        }
+
+                        &.is-active {
+                            a {
+                                font-weight: 600;
+                                color: $arturoColorLight;
+                                border-bottom-color: $arturoColorLight;
+
+                                &:hover {
+                                    border-bottom-color: $arturoColorLight;
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             .left-container {
@@ -295,9 +330,34 @@ a.version-link {
     .info-column {
         .info-wrapper {
             box-shadow: none !important;
+            padding: 0;
+            padding-top: 0.5rem;
+            background: $backgroundColor;
+
+            hr {
+                background-color: #eee;
+            }
+
+            .stats-wrapper {
+                display: flex;
+                justify-content: space-evenly;
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin-bottom: 0;
+            }
 
             .package-author {}
-            .package-version {}
+            .package-version {
+                .package-version-wrapper {
+                    display: inline-flex;
+                    align-items: center;
+
+                    .latest-version-tag {
+                        height: fit-content;
+                        margin-left: 0.75rem;
+                    }
+                }
+            }
             .package-license {}
             .package-executable {
                 .icon {
@@ -366,16 +426,17 @@ a {
 .footer {
     padding-bottom: 3em;
     position: relative;
-    border-top: 1px solid #EEE;
+    border-top: 1px solid $borderColor;
+    background-color: $footerColor;
 
     small {
-        color: #BBB;
+        color: #aaa;
 
         a {
-            color: #888;
+            color: #777;
 
             &:hover {
-                border-bottom: 1px solid #888;
+                border-bottom: 1px solid #777;
             }
         }
     }
@@ -384,7 +445,7 @@ a {
         text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px;
         font-size: 40px;
         font-weight: bold;
-        color: #DDD;
+        color: #d7d7d7;
 
         &.home:hover {
             border: 0;

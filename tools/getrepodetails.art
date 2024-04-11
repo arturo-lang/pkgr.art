@@ -77,8 +77,9 @@ getRepoInfo: function [owner, repo][
 ]
 
 getReleaseInfo: function [owner, repo, version, url][
-    if IsCI? ->
+    if IsCI? [
         write.directory "tmp" ø
+    ]
 
     tgt: ~{tmp/|owner|-|repo|-|version|.zip}
     download.as: tgt url
