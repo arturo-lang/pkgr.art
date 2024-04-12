@@ -38,7 +38,7 @@
                         <div class="left-wrapper">
                             <div class="tabs left-tabs">
                                 <ul>
-                                    <li id="readme-tab" class="is-active"><a onclick="showReadme()">Description</a></li>
+                                    <li id="overview-tab" class="is-active"><a onclick="showOverview()">Overview</a></li>
                                     <li id="version-tab"><a onclick="showVersionHistory()">Version History</a></li>
                                     <li class="maximize-button">
                                         <a onclick="toggleDocSize()">
@@ -50,7 +50,7 @@
                                 </ul>
                             </div>
                             <div class="box content left-container">
-                                <div class="readme">
+                                <div class="overview">
                                     <||= getProperMarkdown entry\info\readme ||>
                                 </div>
                                 <div class="version-history is-hidden">

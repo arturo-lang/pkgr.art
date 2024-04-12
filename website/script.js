@@ -343,19 +343,19 @@ function showSearch(){
     enableSearch();
 }
 
-function showReadme(){
-    $("#readme-tab").addClass("is-active");
+function showOverview(){
+    $("#overview-tab").addClass("is-active");
     $("#version-tab").removeClass("is-active");
 
-    $(".readme").removeClass("is-hidden");
+    $(".overview").removeClass("is-hidden");
     $(".version-history").addClass("is-hidden");
 }
 
 function showVersionHistory(){
-    $("#readme-tab").removeClass("is-active");
+    $("#overview-tab").removeClass("is-active");
     $("#version-tab").addClass("is-active");
 
-    $(".readme").addClass("is-hidden");
+    $(".overview").addClass("is-hidden");
     $(".version-history").removeClass("is-hidden");
 }
 
