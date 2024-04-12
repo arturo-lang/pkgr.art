@@ -33,14 +33,6 @@
                         <|| ] ||>
                     </div>
                 <|| ] ||>
-                <div class="installation-instructions block">
-                    <input id="installation-code" class="input copy-code" value="arturo -p install <||= entry\name ||>" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
-                </div>
-                <article class="message is-success codecopied-message is-hidden">
-                    <div class="message-body">
-                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "<||= entry\name ||>"</code>, directly inside your code.
-                    </div>
-                  </article>
                 <div class="columns">
                     <div class="column is-9 left-column">
                         <div class="left-wrapper">
@@ -84,7 +76,16 @@
                                     <span class="star-count" data-package="<||= replace entry\info\url "https://github.com/" "" ||>"></span>
                                 </div>
                             </div>
-                            <hr/>
+                            <div class="package-instructions">
+                                <div class="installation-instructions block">
+                                    <input id="installation-code" class="input copy-code" value="arturo -p install <||= entry\name ||>" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
+                                </div>
+                                <article class="message is-success codecopied-message is-hidden">
+                                    <div class="message-body">
+                                        <b>Copied!</b> Paste it into your terminal to install the package, and/or just import the package via <code>import "<||= entry\name ||>"</code> &mdash; directly inside your code.
+                                    </div>
+                                </article>
+                            </div>
                             <div class="block package-author">
                                 <b>Author</b>
                                 <br>
