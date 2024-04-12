@@ -1,14 +1,15 @@
 $arturoColor: #501056;
 $arturoColorLight: #82138d;
 
-$backgroundColor: #fafafa;
-$footerColor: #f3f3f3;
+$backgroundColor: #f5f5f7;//#fafafa;
+$footerColor: #f0f0f3;
 
-$borderColor: #e8e8e8;
+$borderColor: #e0e0e0;
 
 html,body {
-    font-family: 'Source Sans 3', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
+    letter-spacing: -0.39px;
 }
 
 body {
@@ -166,7 +167,7 @@ a.version-link {
     .package-description {}
 
     .package-tags {
-        line-height: 2.4rem;
+        line-height: 2.1rem;
 
         .package-tag {
             border: 1px solid;
@@ -178,7 +179,8 @@ a.version-link {
             }
             
             &:not(body).is-medium {
-                font-size: 1rem;
+                font-size: 0.85rem;
+                cursor: default;
             }
             &:not(body).is-info {
                 background-color: $arturoColor;
@@ -341,7 +343,7 @@ a.version-link {
             .stats-wrapper {
                 display: flex;
                 justify-content: space-evenly;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 font-weight: bold;
                 margin-bottom: 0;
             }
@@ -355,6 +357,7 @@ a.version-link {
                     .latest-version-tag {
                         height: fit-content;
                         margin-left: 0.75rem;
+                        font-weight: 500;
                     }
                 }
             }
@@ -430,7 +433,7 @@ a {
     background-color: $footerColor;
 
     small {
-        color: #aaa;
+        color: #999;
 
         a {
             color: #777;
