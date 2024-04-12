@@ -371,9 +371,11 @@ a.version-link {
                 }
 
                 .codecopied-message {
-                    color: #257953;
-                    background: transparent;
-                    border: 1px dashed #257953;
+                    code {
+                        color: #257953;
+                        background: transparent;
+                        border: 1px dashed #257953;
+                    }
                 }
             }
 
