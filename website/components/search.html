@@ -12,7 +12,15 @@
                         <!--<b>Arturo</b><br>--><span class="animate-character">Packager</span><br>
                     </a>
                 </h1>
-                <span class="subnote">The official package registry for the Arturo programming language</span>
+                <|| if isHome [||>
+                    <div style="flex-direction: column;
+                    display: flex !important;
+                    margin-bottom: 1rem;
+                    margin-top: -1.2rem;">
+                        <span class="subnote">The official package registry</span>
+                        <span class="subnote">for the Arturo programming language</span>
+                    </div>
+                <|| ] ||>
                 <div class="control has-icons-left">
                     <input id="search-bar" class="input is-large main-search" type="search" placeholder="I'm looking for..."/>
                     <span class="icon is-medium is-left">
