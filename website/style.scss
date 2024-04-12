@@ -207,7 +207,8 @@ a.version-link {
 
     .left-column {
         .left-wrapper {
-            border: 3px solid $borderColor;
+            border: 1px solid $borderColor;
+            border-right: 2px solid $borderColor;
 
             .left-tabs {
                 margin-bottom: 0;
@@ -341,7 +342,6 @@ a.version-link {
                 display: flex;
                 justify-content: flex-start;
                 font-size: 1.1rem;
-                font-weight: bold;
                 margin-bottom: 0;
             }
 
@@ -354,18 +354,25 @@ a.version-link {
                     margin-left: -1.7rem;
             
                     input.copy-code {
-                        border: 3px solid $borderColor;
                         font-weight: bold;
                         font-size: 0.85rem;
                         color: #888;
                         cursor: pointer;
                         padding-left: 1.7rem;
                         text-overflow: ellipsis;
+
+                        border-top: 2px solid $borderColor;
+                        border-bottom: 2px solid $borderColor;
+                        border-right: 2px solid $borderColor;
+                        border-left: 0;
+                        border-radius: 0;
+                        border-top-right-radius: 12px;
+                        border-bottom-right-radius: 12px;
             
                         &:focus {
-                            border: 3px solid #999;
+                            border-color: #999;
                             color: #444;
-                            border-left-color: $borderColor;
+                            //border-left-color: $borderColor;
                         }
                     }
                     .help-button {
@@ -382,11 +389,11 @@ a.version-link {
                 .codecopied-message {
                     font-size: 0.75rem;
                     margin-bottom: 1rem;
-                    margin-left: -1.7rem;
+                    margin-left: calc(-1.7rem + 1px);
 
                     .message-body {
                         border-radius: 0;
-                        border-left-width: 3px;
+                        border-left-width: 2px;
                         code {
                             color: #257953;
                             background: transparent;
@@ -555,9 +562,10 @@ a {
     padding-top: 0.25rem;
     display: inline-flex;
     align-items: baseline;
+    font-weight: bold;
 
     .download-info {
-        color:#494FC0; //#138D82;
+        color:#48817D;//#494FC0; //#138D82;
 
         .download-icon {}
         .download-count {}
