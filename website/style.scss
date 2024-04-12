@@ -46,7 +46,23 @@ a.version-link {
     }
 
     .main-title {
-        font-family: 'Questrial';
+        b {
+            font-weight: 500;
+        }
+
+        span {
+            &.animate-character {
+                font-weight: 600;
+            }
+        }
+    }
+
+    span {
+        &.subnote {
+            font-size: small;
+            font-weight: 400;
+            color: darkgray;
+        }
     }
 
     input.main-search {
@@ -189,33 +205,6 @@ a.version-link {
         }
     }
 
-    .installation-instructions {
-        display: flex;
-        align-items: center;
-        text-align: center;
-
-        input.copy-code {
-            border: 3px solid $borderColor;
-            font-weight: bold;
-            color: #888;
-            cursor: pointer;
-
-            &:focus {
-                border: 3px solid #999;
-                color: #444;
-            }
-        }
-        .help-button {
-            a {
-                color: #888;
-
-                &:hover {
-                    color: #444;
-                }
-            }
-        }
-    }
-
     .left-column {
         .left-wrapper {
             border: 3px solid $borderColor;
@@ -346,6 +335,46 @@ a.version-link {
                 font-size: 1.1rem;
                 font-weight: bold;
                 margin-bottom: 0;
+            }
+
+            .package-instructions {
+                .installation-instructions {
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                    margin-top: 1rem;
+                    margin-left: -1.7rem;
+            
+                    input.copy-code {
+                        border: 3px solid $borderColor;
+                        font-weight: bold;
+                        font-size: 0.9rem;
+                        color: #888;
+                        cursor: pointer;
+                        padding-left: 1.7rem;
+            
+                        &:focus {
+                            border: 3px solid #999;
+                            color: #444;
+                            border-left-color: $borderColor;
+                        }
+                    }
+                    .help-button {
+                        a {
+                            color: #888;
+            
+                            &:hover {
+                                color: #444;
+                            }
+                        }
+                    }
+                }
+
+                .codecopied-message {
+                    color: #257953;
+                    background: transparent;
+                    border: 1px dashed #257953;
+                }
             }
 
             .package-author {}
