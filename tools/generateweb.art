@@ -30,6 +30,8 @@ getProperMarkdown: function [md][
     delete "tmp.md"
     ret: replace ret {/class="language-[^"]+"/} ""
     ret: replace ret {<pre lang="red"><code>} {<pre class="language-arturo"><code class="language-arturo">}
+    ret: replace ret {<pre lang="arturo"><code>} {<pre class="language-arturo"><code class="language-arturo">}
+    ret: replace ret {<pre lang="art"><code>} {<pre class="language-arturo"><code class="language-arturo">}
     ret: replace ret {<a href="http} {<a rel="nofollow" target="_blank" href="http}
     return ret
 ]
