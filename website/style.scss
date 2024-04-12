@@ -429,6 +429,37 @@ a.version-link {
                 }
             }
             .package-requires {}
+
+            //
+
+            .package-subgroup {
+                display: flex;
+                align-items: center;
+                cursor: default;
+
+                .subgroup-detail {
+                    
+                    a {
+                        &:hover {
+                            border-bottom: 1px dotted #000;
+                        }
+                    }
+                }
+                .subgroup-icon {
+                    margin-left: auto;
+                    text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px;
+                    color: #e5e5e7;
+                    font-size: 1.2rem;
+                }
+
+                &:hover {
+                    color: #000;
+
+                    .subgroup-icon {
+                        color: #d5d5d7;
+                    }
+                }
+            }
         }
     }
 }

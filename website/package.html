@@ -93,37 +93,72 @@
                                     </div>
                                 </article>
                             </div>
-                            <div class="block package-author">
-                                <b>Author</b>
-                                <br>
-                                <a href="<||= entry\info\author\url ||>" class="repo-user-name"><||= entry\info\author\name ||></a>
-                            </div>
-                            <div class="block package-version">
-                                <b>Version</b>
-                                <br>
-                                <div class="package-version-wrapper">
-                                    <||= currentVersion\version ||><|| if currentVersionIsLatest [||><span class="tag is-success latest-version-tag">Latest</span><|| ] ||>
+                            <div class="block package-author package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Author</b>
+                                    <br>
+                                    <a href="<||= entry\info\author\url ||>" class="repo-user-name"><||= entry\info\author\name ||></a>
                                 </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-user"></i>
+                                </span>
                             </div>
-                            <div class="block package-license">
-                                <b>License</b>
-                                <br>
-                                <a href="<||= entry\info\license\url ||>" class="repo-license-name"><||= entry\info\license\name ||></a>
+                            <div class="block package-version package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Version</b>
+                                    <br>
+                                    <div class="package-version-wrapper">
+                                        <||= currentVersion\version ||><|| if currentVersionIsLatest [||><span class="tag is-success latest-version-tag">Latest</span><|| ] ||>
+                                    </div>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </span>
+                            </div>
+                            <div class="block package-license package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>License</b>
+                                    <br>
+                                    <a href="<||= entry\info\license\url ||>" class="repo-license-name"><||= entry\info\license\name ||></a>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </span>
                             </div>
                             <hr/>
-                            <div class="block package-executable">
-                                <b>Executable?</b>
-                                <br>
-                                <|| (currentVersion\info\executable)? [ ||>
-                                    <span class="icon">
-                                        <i class="fas fa-check"></i>
-                                    </span> Yes
-                                <|| ][ ||>
-                                    <span class="icon">
-                                        <i class="fas fa-times"></i>
-                                    </span> No
-                                <|| ] ||>
+                            <div class="block package-executable package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Executable?</b>
+                                    <br>
+                                    <|| (currentVersion\info\executable)? [ ||>
+                                        <span class="icon">
+                                            <i class="fas fa-check"></i>
+                                        </span> Yes
+                                    <|| ][ ||>
+                                        <span class="icon">
+                                            <i class="fas fa-times"></i>
+                                        </span> No
+                                    <|| ] ||>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-terminal"></i>
+                                </span>
                             </div>
+                            <div class="block package-requires package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Requires</b>
+                                    <br>
+                                    <|| (empty? currentVersion\info\requires)? [ ||>
+                                        Any version
+                                    <|| ][ ||>
+                                        Arturo <||= to :string currentVersion\info\requires\0 ||>&nbsp;<||= to :string currentVersion\info\requires\1 ||>
+                                    <|| ] ||>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-link"></i>
+                                </span>
+                            </div>
+                            <!--
                             <div class="block package-depends">
                                 <b>Dependencies</b>
                                 <br>
@@ -145,7 +180,7 @@
                                 <|| ][ ||>
                                     Arturo <||= to :string currentVersion\info\requires\0 ||>&nbsp;<||= to :string currentVersion\info\requires\1 ||>
                                 <|| ] ||>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
