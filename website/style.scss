@@ -235,6 +235,14 @@ a.version-link {
                                 }
                             }
                         }
+
+                        &.maximize-button {
+                            margin-left: auto;
+
+                            a {
+                                padding-right: 0;
+                            }
+                        }
                     }
                 }
             }

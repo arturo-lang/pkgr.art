@@ -358,3 +358,9 @@ function showVersionHistory(){
     $(".readme").addClass("is-hidden");
     $(".version-history").removeClass("is-hidden");
 }
+
+function toggleDocSize(){
+    $(".left-column").toggleClass("is-9");
+    $(".left-column").toggleClass("is-12");
+    $(".info-column").toggleClass("is-hidden");
+}
