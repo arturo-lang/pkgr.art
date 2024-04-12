@@ -323,6 +323,14 @@ a.version-link {
                         font-size: small;
                     }
                 }
+
+                .version-history {}
+                .dependencies {
+                    ul {
+                        list-style: outside;
+                        margin-left: 1.5rem;
+                    }
+                }
             }
         }
     }
@@ -420,12 +428,6 @@ a.version-link {
             .package-executable {
                 .icon {
                     margin-left: -3px;
-                }
-            }
-            .package-depends {
-                ul {
-                    list-style: outside;
-                    margin-left: 1.5rem;
                 }
             }
             .package-requires {}

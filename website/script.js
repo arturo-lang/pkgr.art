@@ -346,17 +346,31 @@ function showSearch(){
 function showOverview(){
     $("#overview-tab").addClass("is-active");
     $("#version-tab").removeClass("is-active");
+    $("#dependencies-tab").removeClass("is-active");
 
     $(".overview").removeClass("is-hidden");
     $(".version-history").addClass("is-hidden");
+    $(".dependencies").addClass("is-hidden");
 }
 
 function showVersionHistory(){
     $("#overview-tab").removeClass("is-active");
     $("#version-tab").addClass("is-active");
+    $("#dependencies-tab").removeClass("is-active");
 
     $(".overview").addClass("is-hidden");
     $(".version-history").removeClass("is-hidden");
+    $(".dependencies").addClass("is-hidden");
+}
+
+function showDependencies(){
+    $("#overview-tab").removeClass("is-active");
+    $("#version-tab").removeClass("is-active");
+    $("#dependencies-tab").addClass("is-active");
+
+    $(".overview").addClass("is-hidden");
+    $(".version-history").addClass("is-hidden");
+    $(".dependencies").removeClass("is-hidden");
 }
 
 function toggleDocSize(){
