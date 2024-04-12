@@ -85,11 +85,11 @@
                             </div>
                             <div class="package-instructions">
                                 <div class="installation-instructions block">
-                                    <input id="installation-code" class="input copy-code" value="arturo -p install <||= entry\name ||>" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
+                                    <input id="installation-code" class="input copy-code" value="import '<||= entry\name ||>" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
                                 </div>
                                 <article class="message is-success codecopied-message is-hidden">
                                     <div class="message-body">
-                                        <b>Copied!</b> Paste it into your terminal to install the package, and/or just import the package via <code>import "<||= entry\name ||>"</code> &mdash; directly inside your code.
+                                        <b>Copied!</b> Paste into your script to import the package directly &mdash; and/or install the package from your terminal via with:<br><code>arturo -p install <||= entry\name ||></code>
                                     </div>
                                 </article>
                             </div>
