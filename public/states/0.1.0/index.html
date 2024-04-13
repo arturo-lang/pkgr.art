@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>  
+<html lang="en">  
     <head>
         <!-- Meta -->
         <meta charset="utf-8">
@@ -9,10 +9,10 @@
         <title>states &bull; Arturo Packages</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bulma@0.9.4/css/bulma.min.css,npm/prismjs@1.23.0/themes/prism-okaidia.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bulma@0.9.4/css/bulma.min.css,npm/prismjs@1.29.0/themes/prism.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Questrial&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Inter:wght@0..900&display=swap" rel="stylesheet">
 
         <!-- FavIcon -->
         <link rel="apple-touch-icon" sizes="57x57" href="https://pkgr.art/favico/apple-icon-57x57.png">
@@ -56,16 +56,17 @@
                 
                 <h1 class="title has-text-black main-title">
                     <a href="https://pkgr.art/">
-                        <b>Arturo</b>&nbsp;<span class="animate-character">Packages</span>
+                        <!--<b>Arturo</b><br>--><span class="animate-character">Packager</span><br>
                     </a>
                 </h1>
                 <div class="control has-icons-left">
-                    <input id="search-bar" class="input is-large main-search" type="search" placeholder="I'm looking for..."/>
+                    <input id="search-bar" class="input is-large main-search" type="search" placeholder="I'm looking for...">
                     <span class="icon is-medium is-left">
                         <i class="fa fa-search"></i>
                     </span>
                 </div>
-            <div>
+                
+            </div>
         </div>
     </div>
 </section>
@@ -76,58 +77,65 @@
 <section class="main-section">
     <div class="container">
         <div class="columns is-mobile">
-            <div class="column is-8-tablet is-offset-2-tablet is-10-mobile is-offset-1-mobile package-page">
-                <div class="columns package-title-wrapper">
-                    <div class="column is-8 package-title title-wrapper">
-                        
-                            <h2 class="is-size-2"><b><a href="https://states.pkgr.art">states</a></b></h2>
-                        
-                        <a href="https://github.com/RickBarretto/states.art">
-                            <span class="icon repo-icon inside-package">
-                                <i class="fa fa-github"></i>
-                            </span>
-                        </a>
+            <div class="column is-8-tablet is-offset-2-tablet is-12-mobile is-offset-0-mobile package-page">
+                <div class="column is-12 is-10-mobile is-offset-1-mobile" style="margin-bottom: 1rem;">
+                    <div class="columns package-title-wrapper">
+                        <div class="column is-8 package-title title-wrapper">
+                            
+                            <h2 class="is-size-2"><b>states</b></h2>
+                            
+                            
+                        </div>
+                        <div class="column is-4 package-link">
+                            <div class="is-pulled-right has-text-grey is-hidden-mobile">
+                                <a target="_blank" href="https://github.com/RickBarretto/states.art">
+                                    <span class="icon repo-icon inside-package">
+                                        <i class="fa fa-github"></i>
+                                    </span>
+                                </a>
+                                <!-- <span class="icon">
+                                    <i class="fas fa-cube"></i>
+                                </span>&nbsp;states.pkgr.art -->
+                            </div>
+                        </div>
                     </div>
-                    <div class="column is-4 package-link">
-                        <div class="is-pulled-right has-text-grey is-hidden-mobile"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;states.pkgr.art</div>
+                    <div class="block package-description">
+                        <h3 class="is-size-5">:states is a lean Finite State Machine package for the Arturo Programming Language</h3>
                     </div>
+                    
+                    
+                        <div class="block package-tags">
+                            
+                                <span class="tag is-info is-light is-medium package-tag">finite state machine</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">fsm</span>
+                            
+                        </div>
+                    
                 </div>
-                <div class="block package-description">
-                    <h3 class="is-size-5">:states is a lean Finite State Machine package for the Arturo Programming Language</h3>
-                </div>
-                
-                
-                    <div class="block package-tags">
-                        
-                            <span class="tag is-info is-light is-medium package-tag">finite state machine</span>
-                        
-                            <span class="tag is-info is-light is-medium package-tag">fsm</span>
-                        
-                    </div>
-                
-                <div class="installation-instructions block">
-                    <input id="installation-code" class="input copy-code" value="arturo -p install states" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
-                </div>
-                <article class="message is-success codecopied-message is-hidden">
-                    <div class="message-body">
-                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "states"</code>, directly inside your code.
-                    </div>
-                  </article>
                 <div class="columns">
                     <div class="column is-9 left-column">
                         <div class="left-wrapper">
                             <div class="tabs left-tabs">
                                 <ul>
-                                <li id="readme-tab" class="is-active"><a onclick="showReadme()">Description</a></li>
-                                <li id="version-tab"><a onclick="showVersionHistory()">Version History</a></li>
+                                    <li id="overview-tab" class="is-active"><a onclick="showOverview()">Overview</a></li>
+                                    <li id="version-tab"><a onclick="showVersionHistory()"><span>Versions</span><span class="no-of-versions">1</span></a></li>
+                                    <li id="dependencies-tab"><a onclick="showDependencies()">Dependencies</a></li>
+                                    <li class="maximize-button is-hidden-mobile">
+                                        <a onclick="toggleDocSize()">
+                                            <div class="icon">
+                                                <i class="fas fa-angle-double-right"></i>
+                                            </div>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="box content left-container">
-                                <div class="readme">
-                                    <h1 align="center">
+                                <div class="overview">
+                                    <h1 style="text-align:center">
     <i>:states</i>
 </h1>
-<p align="center">
+<p style="text-align:center">
     <i>:states</i> is a basic
     <a rel="nofollow" target="_blank" href="https://en.wikipedia.org/wiki/Finite-state_machine">
         Finite State Machine (FSM)
@@ -141,15 +149,15 @@
         alt="Arturo logo" 
         width="20" 
         src="https://github.com/arturo-lang/arturo/raw/master/docs/images/logo.png#gh-light-mode-only"
-    />
+    >
     <img 
         alt="Arturo logo" 
         width="20" 
         src="https://github.com/arturo-lang/arturo/raw/master/docs/images/logo-lightgray.png#gh-dark-mode-only" style="display:none" 
-    />
+    >
 </p>
 <h2>At a Glance</h2>
-<p><img src="https://raw.githubusercontent.com/RickBarretto/states.art/master/docs/running%20states-art%20screenshot.png" alt="Running states.art screenshot" /></p>
+<p><img src="https://raw.githubusercontent.com/RickBarretto/states.art/master/docs/running%20states-art%20screenshot.png" alt="Running states.art screenshot" ></p>
 <h2>Inspiration</h2>
 <p>This package was highly inspired by <a rel="nofollow" target="_blank" href="https://x.com/harph"><em>Harrington Joseph</em></a>'s <sup class="footnote-ref"><a href="#fn-harph" id="fnref-harph" data-footnote-ref>1</a></sup> talk <a rel="nofollow" target="_blank" href="https://youtu.be/I1Mzx_tSpew">&quot;<em>When Booleans Are Not Enough... State Machines?</em>&quot;</a> <sup class="footnote-ref"><a href="#fn-talk" id="fnref-talk" data-footnote-ref>2</a></sup>.
 By consequence, this is inspired by the <a rel="nofollow" target="_blank" href="https://github.com/pytransitions/transitions">pytransitions</a> package.</p>
@@ -160,7 +168,7 @@ If you want to know why you need a FSM, I recommend you to watch his talk first.
 </blockquote>
 <h2>Trying <em>:states</em></h2>
 <p>Defining a finite state-machine is simple like that:</p>
-<pre lang="art"><code>import {states}!
+<pre class="language-arturo"><code class="language-arturo">import {states}!
 
 turnstile: to :states ['locked [
     push        /  locked    ~&gt;  locked
@@ -178,12 +186,12 @@ this must follow the following order: <em>event</em>, <em>source</em>, <em>fate<
 </ul>
 <p><strong>Getting the current state</strong></p>
 <p>To get the current state, you must call the <code>state</code> method:</p>
-<pre lang="art"><code>turnstile\state 
+<pre class="language-arturo"><code class="language-arturo">turnstile\state 
 ; =&gt; locked
 </code></pre>
 <p><strong>Transitioning between states</strong></p>
 <p>There are two equivalent ways of transitioning between states, you can use <code>&lt;fsm&gt;/&lt;event&gt;</code> or <code>&lt;fsm&gt;\changeFrom '&lt;event&gt;</code>:</p>
-<pre lang="art"><code>turnstile\state                   
+<pre class="language-arturo"><code class="language-arturo">turnstile\state                   
 ; =&gt; locked
 turnstile\push                   
 ; =&gt; locked
@@ -197,7 +205,7 @@ turnstile\changeFrom 'push
 turnstile\changeFrom 'insertCoin 
 ; =&gt; unlocked
 </code></pre>
-<hr />
+<hr >
 <blockquote>
 <p>Background photo on <a href="#at-a-glance">&quot;At a Glance&quot;</a>
 by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Jack Anstey</a> on <a rel="nofollow" target="_blank" href="https://unsplash.com/photos/aerial-photography-of-road-zS4lUqLEiNA?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
@@ -215,18 +223,38 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
 
                                 </div>
                                 <div class="version-history is-hidden">
-                                    <ul>
-                                        
+                                    <div class="version-summary">
+                                        <b>Last updated:</b><br><span id="last-version-ago"></span>
+                                    </div>
+                                    <table class="table is-striped is-hoverable">
+                                        <tbody>
                                             
-                                            <li><b>0.1.0</b><span class="has-text-grey">&nbsp;&#8212;&nbsp;11&nbsp;February&nbsp;2024</span></li>
+                                                
+                                                    <tr>
+                                                        <td>
+                                                            <b>0.1.0</b>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey">11&nbsp;February&nbsp;2024</span>
+                                                        </td>
+                                                    </tr>
+                                                
                                             
-                                        
-                                    </ul>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="dependencies is-hidden without-dependencies">
+                                    
+                                        <span class="icon">
+                                            <i class="far fa-laugh-wink"></i>
+                                        </span><br>
+                                        No dependencies.
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="column is-3 info-column">
+                    <div class="column is-3 is-10-mobile is-offset-1-mobile info-column">
                         <div class="box info-wrapper">
                             <div class="block stats-wrapper">
                                 <div class="download-info">
@@ -242,47 +270,74 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
                                     <span class="star-count" data-package="RickBarretto/states.art"></span>
                                 </div>
                             </div>
-                            <hr/>
-                            <div class="block package-author">
-                                <b>Author</b>
-                                <br>
-                                <a href="https://github.com/RickBarretto" class="repo-user-name">RickBarretto</a>
-                            </div>
-                            <div class="block package-version">
-                                <b>Version</b>
-                                <br>
-                                <div class="package-version-wrapper">
-                                    0.1.0
+                            <div class="package-instructions">
+                                <div class="installation-instructions block">
+                                    <input id="installation-code" class="input copy-code" value="import 'states" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
+                                </div>
+                                <div class="message is-success codecopied-message is-hidden">
+                                    <div class="message-body">
+                                        <b>Copied!</b> Paste into your script to import the package directly &mdash; and/or install the package from your terminal via with:<br><code>arturo -p install states </code>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="block package-license">
-                                <b>License</b>
-                                <br>
-                                <a href="http://choosealicense.com/licenses/mit/" class="repo-license-name">MIT</a>
+                            <div class="block package-author package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Author</b>
+                                    <br>
+                                    <a target="_blank" href="https://github.com/RickBarretto" class="repo-user-name">RickBarretto</a>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-user"></i>
+                                </span>
                             </div>
-                            <hr/>
-                            <div class="block package-executable">
-                                <b>Executable?</b>
-                                <br>
-                                
-                                    <span class="icon">
-                                        <i class="fas fa-times"></i>
-                                    </span> No
-                                
+                            <div class="block package-version package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Version</b>
+                                    <br>
+                                    <div class="package-version-wrapper">
+                                        <a target="_blank" href="https://github.com/RickBarretto/states.art/releases/tag/v0.1.0">0.1.0</a><span class="tag is-success latest-version-tag">Latest</span>
+                                    </div>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-code-branch"></i>
+                                </span>
                             </div>
-                            <div class="block package-depends">
-                                <b>Dependencies</b>
-                                <br>
-                                
-                                    No dependencies
-                                
+                            <div class="block package-license package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>License</b>
+                                    <br>
+                                    <a target="_blank" href="http://choosealicense.com/licenses/mit/" class="repo-license-name">MIT</a>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </span>
                             </div>
-                            <div class="block package-requires">
-                                <b>Requires</b>
-                                <br>
-                                
-                                    Arturo >&nbsp;0.9.83
-                                
+                            <hr>
+                            <div class="block package-executable package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Executable?</b>
+                                    <br>
+                                    
+                                        <span class="icon">
+                                            <i class="fas fa-times"></i>
+                                        </span> No
+                                    
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </span>
+                            </div>
+                            <div class="block package-requires package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Requires</b>
+                                    <br>
+                                    
+                                        Arturo >&nbsp;0.9.83
+                                    
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -294,10 +349,78 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
 <script>
     $(document).ready(function(){
         
-            $.get("https://pkgr.art/getdownloads.php?pkg=states&ver=0.1.0", function (data, status){
+            $.get("https://pkgr.art/getdownloads.php?pkg=states", function (data, status){
                 $("#states-downloads").html(data);
             });
         
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        TimeAgo.addDefaultLocale({
+            "locale": "en",
+            "long": {
+                "year": {
+                    "previous": "last year",
+                    "past": {
+                        "one": "{0} year ago",
+                        "other": "{0} years ago"
+                    }
+                },
+                "quarter": {
+                    "previous": "last quarter",
+                    "past": {
+                        "one": "{0} quarter ago",
+                        "other": "{0} quarters ago"
+                    }
+                },
+                "month": {
+                    "previous": "last month",
+                    "past": {
+                        "one": "{0} month ago",
+                        "other": "{0} months ago"
+                    }
+                },
+                "week": {
+                    "previous": "last week",
+                    "past": {
+                        "one": "{0} week ago",
+                        "other": "{0} weeks ago"
+                    }
+                },
+                "day": {
+                    "previous": "yesterday",
+                    "past": {
+                        "one": "{0} day ago",
+                        "other": "{0} days ago"
+                    }
+                },
+                "hour": {
+                    "past": {
+                        "one": "{0} hour ago",
+                        "other": "{0} hours ago"
+                    }
+                },
+                "minute": {
+                    "past": {
+                        "one": "{0} minute ago",
+                        "other": "{0} minutes ago"
+                    }
+                },
+                "second": {
+                    "current": "now",
+                    "past": {
+                        "one": "{0} second ago",
+                        "other": "{0} seconds ago"
+                    },
+                }
+            },
+            "now": {
+                "now": {
+                    "current": "now",
+                    "past": "just now"
+                }
+            }
+        });
+        $("#last-version-ago").html(new TimeAgo('en').format(Date.parse("2024-02-11T12:46:54+00:00"), 'long'));
     });
 </script>
 
@@ -319,8 +442,10 @@ by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm
             </div>
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/devbridge-autocomplete@1.4.11/dist/jquery.autocomplete.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
         <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/javascript-time-ago@2.5.9/bundle/javascript-time-ago.js"></script>
         <script src="https://pkgr.art/script.js"></script>
         <script>
             $(document).ready(function(){
