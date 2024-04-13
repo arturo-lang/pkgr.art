@@ -222,18 +222,28 @@ a.version-link {
     .left-column {
         .left-wrapper {
             border: 1px solid $borderColor;
-            border-right-width: 2px;
-            border-bottom-width: 2px;
-            border-radius: 6px;
+
+            @media screen and (min-width: $mobileWidth) {
+                border-radius: 6px;
+                border-right-width: 2px;
+                border-bottom-width: 2px;
+            }
 
             .left-tabs {
                 margin-bottom: 0;
                 background: #fff;
-                border-top-left-radius: 6px;
-                border-top-right-radius: 6px;
+
+                @media screen and (min-width: $mobileWidth) {
+                    border-top-left-radius: 6px;
+                    border-top-right-radius: 6px;
+                }
                 
                 ul {
                     border-bottom-color: $borderColor;
+
+                    @media screen and (max-width: $mobileWidth) {
+                        justify-content: center;
+                    }
 
                     li {
                         a {
@@ -296,8 +306,14 @@ a.version-link {
                 box-shadow: none;
                 padding-top: 2rem;
                 padding-bottom: 2rem;
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
+
+                border-radius: 0;
+                
+                @media screen and (min-width: $mobileWidth) {
+                    border-radius: 6px;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                }
 
                 .overview {
                     blockquote {
@@ -370,11 +386,42 @@ a.version-link {
                     }
                 }
 
-                .version-history {}
+                .version-history {
+                    @media screen and (min-width: $mobileWidth) {
+                        min-height: 450px;
+                    }
+
+                    ul {
+                        margin-top: 0;
+                    }
+                }
+
                 .dependencies {
                     ul {
                         list-style: outside;
                         margin-left: 1.5rem;
+                    }
+
+                    @media screen and (min-width: $mobileWidth) {
+                        min-height: 450px;
+                    }
+
+                    &.without-dependencies {
+                        display:flex; 
+                        flex-direction: column;
+                        justify-content:center;
+                        align-items:center;
+                        color: #BBB;
+                        font-weight: 500;
+
+                        .icon {
+                            font-size: 5rem;
+                            margin-bottom: 1rem;
+
+                            @media screen and (max-width: $mobileWidth) {
+                                margin-top: 2rem;
+                            }
+                        }
                     }
                 }
             }
@@ -432,15 +479,19 @@ a.version-link {
                         text-overflow: ellipsis;
 
                         border-top: 1px solid $borderColor;
-                        border-bottom: 2px solid $borderColor;
-                        border-right: 2px solid $borderColor;
-                        border-radius: 0;
+                        border-bottom: 1px solid $borderColor;
+                        border-right: 1px solid $borderColor;
+                        border-left: 1px solid $borderColor;
+                        border-radius: 7px;
 
                         @media screen and (min-width: $mobileWidth) {
                             padding-left: calc(1.7rem - 1px);
                             border-left: 0;
+                            border-radius: 0;
                             border-top-right-radius: 7px;
                             border-bottom-right-radius: 7px;
+                            border-bottom-width: 2px;
+                            border-right-width: 2px;
                         }
             
                         &:focus {
@@ -471,6 +522,11 @@ a.version-link {
                     .message-body {
                         border-radius: 0;
                         border-left-width: 2px;
+
+                        @media screen and (min-width: $mobileWidth) {
+                            padding-left: calc(1.7rem - 1px);
+                        }
+                        
                         code {
                             color: #257953;
                             background: transparent;

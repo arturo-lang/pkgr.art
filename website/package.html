@@ -62,19 +62,38 @@
                                     <||= getProperMarkdown entry\info\readme ||>
                                 </div>
                                 <div class="version-history is-hidden">
-                                    <ul>
-                                        <|| loop entry\version 'ver [||>
-                                            <|| (currentVersion\version = ver\version)? [ ||>
-                                            <li><b><||= ver\version ||></b><span class="has-text-grey">&nbsp;&#8212;&nbsp;<||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span></li>
-                                            <|| ][ ||>
-                                                <li><a class="version-link" href="<||= getLink entry\name ver\version ||>"><b><||= ver\version ||></b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;<||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span></li>
+                                    <table class="table is-striped is-hoverable">
+                                        <tbody>
+                                            <|| loop entry\version 'ver [||>
+                                                <|| (currentVersion\version = ver\version)? [ ||>
+                                                    <tr>
+                                                        <td>
+                                                            <b><||= ver\version ||></b>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey"><||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span>
+                                                        </td>
+                                                    </tr>
+                                                <|| ][ ||>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="version-link" href="<||= getLink entry\name ver\version ||>"><b><||= ver\version ||></b></a>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey"><||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span>
+                                                        </td>
+                                                    </tr>
+                                                <|| ] ||>
                                             <|| ] ||>
-                                        <|| ] ||>
-                                    </ul>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="dependencies is-hidden">
+                                <div class="dependencies is-hidden<|| if empty? currentVersion\info\depends [||> without-dependencies<||]||>">
                                     <|| (empty? currentVersion\info\depends)? [ ||>
-                                        No dependencies
+                                        <span class="icon">
+                                            <i class="far fa-laugh-wink"></i>
+                                        </span><br>
+                                        No dependencies.
                                     <|| ][ ||>
                                         <ul>
                                         <|| loop currentVersion\info\depends 'dep [ ||>
