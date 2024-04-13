@@ -219,11 +219,15 @@ a.version-link {
     .left-column {
         .left-wrapper {
             border: 1px solid $borderColor;
-            border-right: 2px solid $borderColor;
+            border-right-width: 2px;
+            border-bottom-width: 2px;
+            border-radius: 6px;
 
             .left-tabs {
                 margin-bottom: 0;
                 background: #fff;
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
                 
                 ul {
                     border-bottom-color: $borderColor;
@@ -281,6 +285,8 @@ a.version-link {
                 box-shadow: none;
                 padding-top: 2rem;
                 padding-bottom: 2rem;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
 
                 .overview {
                     blockquote {
@@ -388,17 +394,17 @@ a.version-link {
                     align-items: center;
                     text-align: center;
                     margin-top: 1rem;
-                    margin-left: -1.7rem;
+                    margin-left: calc(-1.7rem + 1px);
             
                     input.copy-code {
                         font-weight: bold;
                         font-size: 0.85rem;
                         color: #888;
                         cursor: pointer;
-                        padding-left: 1.7rem;
+                        padding-left: calc(1.7rem - 1px);
                         text-overflow: ellipsis;
 
-                        border-top: 2px solid $borderColor;
+                        border-top: 1px solid $borderColor;
                         border-bottom: 2px solid $borderColor;
                         border-right: 2px solid $borderColor;
                         border-left: 0;
