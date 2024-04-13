@@ -1,7 +1,7 @@
 [
         #[
                 version: 1.1.2
-                date: to :date "2024-03-27T01:09:56+00:00"
+                date: to :date "2024-03-27T02:09:56+01:00"
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v1.1.2"
                 info: #[
                         entry: "unitt.art"
@@ -17,7 +17,7 @@
         ]
          #[
                 version: 1.0.0
-                date: to :date "2024-02-17T20:48:40+00:00"
+                date: to :date "2024-02-17T21:48:40+01:00"
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v1.0.0"
                 info: #[
                         entry: "unitt.art"
@@ -33,7 +33,7 @@
         ]
          #[
                 version: 0.2.0
-                date: to :date "2024-02-17T03:19:20+00:00"
+                date: to :date "2024-02-17T04:19:20+01:00"
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.2.0"
                 info: #[
                         entry: "unitt.art"
@@ -49,7 +49,7 @@
         ]
          #[
                 version: 0.1.4
-                date: to :date "2024-02-03T00:41:47+00:00"
+                date: to :date "2024-02-03T01:41:47+01:00"
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.4"
                 info: #[
                         entry: "unitt.art"
@@ -65,7 +65,7 @@
         ]
          #[
                 version: 0.1.3-pre
-                date: to :date "2024-01-31T02:06:00+00:00"
+                date: to :date "2024-01-31T03:06:00+01:00"
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.3-pre"
                 info: #[
                         entry: "unitt.art"
@@ -81,7 +81,7 @@
         ]
          #[
                 version: 0.1.2-pre
-                date: to :date "2024-01-29T11:17:23+00:00"
+                date: to :date "2024-01-29T12:17:23+01:00"
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.2-pre"
                 info: #[
                         entry: "unitt.art"
