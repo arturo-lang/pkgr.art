@@ -175,6 +175,9 @@ loop entries 'entry [
 
         currentVersion: vv
         currentVersionIsLatest: false
+        if currentVersion = first entry\version ->
+            currentVersionIsLatest: true
+
         write ~{|versionTgt|/index.html} processPackagePage entry
 
         createSpecFile entry vv versionTgt
