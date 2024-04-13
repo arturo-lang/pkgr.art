@@ -106,11 +106,11 @@
                                 <div class="installation-instructions block">
                                     <input id="installation-code" class="input copy-code" value="import<|| if not? currentVersionIsLatest [||>.version:<||= currentVersion\version ||> <||]||>'<||= entry\name ||>" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
                                 </div>
-                                <article class="message is-success codecopied-message is-hidden">
+                                <div class="message is-success codecopied-message is-hidden">
                                     <div class="message-body">
                                         <b>Copied!</b> Paste into your script to import the package directly &mdash; and/or install the package from your terminal via with:<br><code>arturo -p install <||= entry\name ||> <|| if not? currentVersionIsLatest [||><||= currentVersion\version ||><||]||></code>
                                     </div>
-                                </article>
+                                </div>
                             </div>
                             <div class="block package-author package-subgroup">
                                 <div class="subgroup-detail">
