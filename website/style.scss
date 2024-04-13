@@ -394,6 +394,20 @@ a.version-link {
                     ul {
                         margin-top: 0;
                     }
+
+                    .version-summary {
+                        margin-bottom: 1.5rem;
+                        text-align:center;
+
+                        b {
+                            font-weight: 600;
+                        }
+                    }
+
+                    table {
+                        border-top: 1px solid #dbdbdb;
+                        border-bottom: 1px solid #dbdbdb;
+                    }
                 }
 
                 .dependencies {
@@ -526,7 +540,7 @@ a.version-link {
                         @media screen and (min-width: $mobileWidth) {
                             padding-left: calc(1.7rem - 1px);
                         }
-                        
+
                         code {
                             color: #257953;
                             background: transparent;
@@ -574,11 +588,8 @@ a.version-link {
                 }
                 .subgroup-icon {
                     margin-left: auto;
-                    //text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px;
-                    //color: #e5e5e7;
                     color: darken($backgroundColor, 10%);
                     font-size: 1.2rem;
-                    //display: none;
                 }
 
                 &:hover {
@@ -586,13 +597,12 @@ a.version-link {
 
                     .subgroup-icon {
                         color: #d5d5d7;
-                        //display: block;
-                        background-color: #666666;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: rgba(245,245,245,0.5) 1px 1px 1px;
+                        background-color: #777777;
+                        -webkit-background-clip: text;
+                        -moz-background-clip: text;
+                        background-clip: text;
+                        color: transparent;
+                        text-shadow: rgba(245,245,245,0.5) 1px 1px 1px;
                     }
                 }
             }
