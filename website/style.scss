@@ -664,19 +664,19 @@ a {
             border-bottom: 1px solid #b603c6;
         }
     }
+}
 
-    .repo-icon {
-        color:black;
-        font-size: 1rem;
+.repo-icon {
+    color:black;
+    font-size: 1rem;
 
-        &.inside-package {
-            color: #ccc;
-            font-size: 2rem;
-            margin-left: 1rem;
-            
-            &:hover {
-                color: #555;
-            }
+    &.inside-package {
+        color: #ccc;
+        font-size: 2rem;
+        margin-left: 1rem;
+        
+        &:hover {
+            color: #555;
         }
     }
 }

@@ -12,14 +12,19 @@
                         <|| ][ ||>
                             <h2 class="is-size-2"><b><a href="<||= getLink entry\name ø ||>"><||= entry\name ||></a></b></h2>
                         <|| ] ||>
-                        <a href="<||= entry\info\url ||>">
-                            <span class="icon repo-icon inside-package">
-                                <i class="fa fa-github"></i>
-                            </span>
-                        </a>
+                        
                     </div>
                     <div class="column is-4 package-link">
-                        <div class="is-pulled-right has-text-grey is-hidden-mobile"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;<||= entry\name ||>.pkgr.art</div>
+                        <div class="is-pulled-right has-text-grey is-hidden-mobile">
+                            <a href="<||= entry\info\url ||>">
+                                <span class="icon repo-icon inside-package">
+                                    <i class="fa fa-github"></i>
+                                </span>
+                            </a>
+                            <!-- <span class="icon">
+                                <i class="fas fa-cube"></i>
+                            </span>&nbsp;<||= entry\name ||>.pkgr.art -->
+                        </div>
                     </div>
                 </div>
                 <div class="block package-description">
