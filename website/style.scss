@@ -592,11 +592,11 @@ a.version-link {
             .package-author {}
             .package-version {
                 .package-version-wrapper {
-                    display: inline-flex;
-                    align-items: center;
+                    //display: inline-flex;
+                    //align-items: center;
 
                     .latest-version-tag {
-                        height: fit-content;
+                        height: 14px;
                         margin-left: 0.75rem;
                         font-weight: 500;
                     }
