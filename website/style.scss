@@ -61,7 +61,7 @@ a.version-link {
         &.subnote {
             font-size: small;
             font-weight: 300;
-            color: #777788;
+            color: #666677;
         }
     }
 
@@ -97,7 +97,7 @@ a.version-link {
         position: sticky;
         z-index: 1000;
 
-        background: #fff;//linear-gradient(to bottom,#fafafa 0,rgba(0.0,0.0,0.0,.05) 100%);
+        background: linear-gradient(to bottom,#fafafa 0,rgba(0.0,0.0,0.0,.05) 100%);
         border-color: #b5b5b5;
 
         .showsearch-icon {
@@ -384,6 +384,7 @@ a.version-link {
             padding: 0;
             padding-top: 0.5rem;
             background: $backgroundColor;
+            margin-bottom: 2rem;
 
             hr {
                 background-color: #eee;
