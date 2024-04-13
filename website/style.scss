@@ -60,11 +60,17 @@ a.version-link {
         }
     }
 
-    span {
-        &.subnote {
-            font-size: small;
-            font-weight: 300;
-            color: #666677;
+    .subnote-wrapper {
+        flex-direction: column;
+        display: flex !important;
+        margin-bottom: 1rem;
+        margin-top: 2rem;
+        span {
+            &.subnote {
+                font-size: 16px;
+                font-weight: 300;
+                color: #889;
+            }
         }
     }
 
@@ -295,6 +301,24 @@ a.version-link {
                                     &:hover {
                                         color: white;
                                     }
+                                }
+                            }
+                        }
+
+                        &#version-tab {
+                            a {
+                                display: flex;
+    
+                                .no-of-versions {
+                                    margin-left: 0.5rem;
+                                    border-radius: 50px;
+                                    background: #eee;
+                                    padding: 2px;
+                                    width: 23px;
+                                    height: 23px;
+                                    font-size: 13px;
+                                    text-align: center;
+                                    align-content: center;
                                 }
                             }
                         }
