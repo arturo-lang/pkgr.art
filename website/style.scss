@@ -470,6 +470,7 @@ a.version-link {
                     text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px;
                     color: #e5e5e7;
                     font-size: 1.2rem;
+                    display: none;
                 }
 
                 &:hover {
@@ -477,6 +478,7 @@ a.version-link {
 
                     .subgroup-icon {
                         color: #d5d5d7;
+                        display: block;
                     }
                 }
             }
