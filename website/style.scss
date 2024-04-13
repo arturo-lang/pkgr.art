@@ -6,6 +6,9 @@ $footerColor: #f0f0f3;
 
 $borderColor: #e0e0e0;
 
+$mobileWidth: 768px;
+$tabletWidth: 1023px;
+
 html,body {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -392,9 +395,20 @@ a.version-link {
 
             .stats-wrapper {
                 display: flex;
-                justify-content: flex-start;
                 font-size: 1.1rem;
-                margin-bottom: 0;
+                margin-bottom: 1rem;
+                margin-top: 3rem;
+
+                justify-content: center;
+
+                @media screen and (min-width: $mobileWidth) {
+                    justify-content: flex-start;
+                }
+
+                .star-info {
+                    margin-left: 0.5rem;
+                }
+                
             }
 
             .package-instructions {
@@ -403,23 +417,29 @@ a.version-link {
                     align-items: center;
                     text-align: center;
                     margin-top: 1rem;
-                    margin-left: calc(-1.7rem + 1px);
+
+                    @media screen and (min-width: $mobileWidth) {
+                        margin-left: calc(-1.7rem + 1px);
+                    }
             
                     input.copy-code {
                         font-weight: bold;
                         font-size: 0.85rem;
                         color: #888;
                         cursor: pointer;
-                        padding-left: calc(1.7rem - 1px);
                         text-overflow: ellipsis;
 
                         border-top: 1px solid $borderColor;
                         border-bottom: 2px solid $borderColor;
                         border-right: 2px solid $borderColor;
-                        border-left: 0;
                         border-radius: 0;
-                        border-top-right-radius: 7px;
-                        border-bottom-right-radius: 7px;
+
+                        @media screen and (min-width: $mobileWidth) {
+                            padding-left: calc(1.7rem - 1px);
+                            border-left: 0;
+                            border-top-right-radius: 7px;
+                            border-bottom-right-radius: 7px;
+                        }
             
                         &:focus {
                             border-color: #999;
@@ -441,7 +461,10 @@ a.version-link {
                 .codecopied-message {
                     font-size: 0.75rem;
                     margin-bottom: 1rem;
-                    margin-left: calc(-1.7rem + 1px);
+
+                    @media screen and (min-width: $mobileWidth) {
+                        margin-left: calc(-1.7rem + 1px);
+                    }
 
                     .message-body {
                         border-radius: 0;
