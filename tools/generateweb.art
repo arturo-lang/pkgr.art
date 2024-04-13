@@ -29,6 +29,12 @@ getProperMarkdown: function [md][
     ; ret: read.markdown md
     delete "tmp.md"
     ret: replace ret {/class="language-[^"]+"/} ""
+    ret: replace ret {<pre lang="red"><code>} {<pre class="language-arturo"><code class="language-arturo">}
+    ret: replace ret {<pre lang="arturo"><code>} {<pre class="language-arturo"><code class="language-arturo">}
+    ret: replace ret {<pre lang="art"><code>} {<pre class="language-arturo"><code class="language-arturo">}
+    ret: replace ret "/>" ">"
+    ret: replace ret { align="center"} { style="text-align:center"}
+    ret: replace ret {/<img width="[^"]+"/} {<img}
     ret: replace ret {<a href="http} {<a rel="nofollow" target="_blank" href="http}
     return ret
 ]
@@ -172,6 +178,9 @@ loop entries 'entry [
 
         currentVersion: vv
         currentVersionIsLatest: false
+        if currentVersion = first entry\version ->
+            currentVersionIsLatest: true
+
         write ~{|versionTgt|/index.html} processPackagePage entry
 
         createSpecFile entry vv versionTgt

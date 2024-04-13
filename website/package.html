@@ -4,71 +4,111 @@
 <section class="main-section">
     <div class="container">
         <div class="columns is-mobile">
-            <div class="column is-8-tablet is-offset-2-tablet is-10-mobile is-offset-1-mobile package-page">
-                <div class="columns package-title-wrapper">
-                    <div class="column is-8 package-title title-wrapper">
-                        <|| (currentVersionIsLatest)? [ ||>
-                        <h2 class="is-size-2"><b><||= entry\name ||></b></h2>
-                        <|| ][ ||>
-                            <h2 class="is-size-2"><b><a href="<||= getLink entry\name ø ||>"><||= entry\name ||></a></b></h2>
-                        <|| ] ||>
-                        <a href="<||= entry\info\url ||>">
-                            <span class="icon repo-icon inside-package">
-                                <i class="fa fa-github"></i>
-                            </span>
-                        </a>
+            <div class="column is-8-tablet is-offset-2-tablet is-12-mobile is-offset-0-mobile package-page">
+                <div class="column is-12 is-10-mobile is-offset-1-mobile" style="margin-bottom: 1rem;">
+                    <div class="columns package-title-wrapper">
+                        <div class="column is-8 package-title title-wrapper">
+                            <|| (currentVersionIsLatest)? [ ||>
+                            <h2 class="is-size-2"><b><||= entry\name ||></b></h2>
+                            <|| ][ ||>
+                                <h2 class="is-size-2"><b><a href="<||= getLink entry\name ø ||>"><||= entry\name ||></a></b></h2>
+                            <|| ] ||>
+                            
+                        </div>
+                        <div class="column is-4 package-link">
+                            <div class="is-pulled-right has-text-grey is-hidden-mobile">
+                                <a target="_blank" href="<||= entry\info\url ||>">
+                                    <span class="icon repo-icon inside-package">
+                                        <i class="fa fa-github"></i>
+                                    </span>
+                                </a>
+                                <!-- <span class="icon">
+                                    <i class="fas fa-cube"></i>
+                                </span>&nbsp;<||= entry\name ||>.pkgr.art -->
+                            </div>
+                        </div>
                     </div>
-                    <div class="column is-4 package-link">
-                        <div class="is-pulled-right has-text-grey is-hidden-mobile"><span class="icon"><i class="fas fa-cube"></i></span>&nbsp;<||= entry\name ||>.pkgr.art</div>
+                    <div class="block package-description">
+                        <h3 class="is-size-5"><||= entry\info\description ||></h3>
                     </div>
+                    <|| filteredTags: getCleanTags entry\info\tags ||>
+                    <|| unless empty? filteredTags [ ||>
+                        <div class="block package-tags">
+                            <|| loop filteredTags 'tag [||>
+                                <span class="tag is-info is-light is-medium package-tag"><||= tag ||></span>
+                            <|| ] ||>
+                        </div>
+                    <|| ] ||>
                 </div>
-                <div class="block package-description">
-                    <h3 class="is-size-5"><||= entry\info\description ||></h3>
-                </div>
-                <|| filteredTags: getCleanTags entry\info\tags ||>
-                <|| unless empty? filteredTags [ ||>
-                    <div class="block package-tags">
-                        <|| loop filteredTags 'tag [||>
-                            <span class="tag is-info is-light is-medium package-tag"><||= tag ||></span>
-                        <|| ] ||>
-                    </div>
-                <|| ] ||>
-                <div class="installation-instructions block">
-                    <input id="installation-code" class="input copy-code" value="arturo -p install <||= entry\name ||>" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
-                </div>
-                <article class="message is-success codecopied-message is-hidden">
-                    <div class="message-body">
-                        <b>Yay!</b> The code has been copied to your clipboard!<br>Paste it into your terminal to install the package, and/or just import the package via <code>import "<||= entry\name ||>"</code>, directly inside your code.
-                    </div>
-                  </article>
                 <div class="columns">
                     <div class="column is-9 left-column">
                         <div class="left-wrapper">
                             <div class="tabs left-tabs">
                                 <ul>
-                                <li id="readme-tab" class="is-active"><a onclick="showReadme()">Description</a></li>
-                                <li id="version-tab"><a onclick="showVersionHistory()">Version History</a></li>
+                                    <li id="overview-tab" class="is-active"><a onclick="showOverview()">Overview</a></li>
+                                    <li id="version-tab"><a onclick="showVersionHistory()"><span>Versions</span><span class="no-of-versions"><||= size entry\version ||></span></a></li>
+                                    <li id="dependencies-tab"><a onclick="showDependencies()">Dependencies</a></li>
+                                    <li class="maximize-button is-hidden-mobile">
+                                        <a onclick="toggleDocSize()">
+                                            <div class="icon">
+                                                <i class="fas fa-angle-double-right"></i>
+                                            </div>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="box content left-container">
-                                <div class="readme">
+                                <div class="overview">
                                     <||= getProperMarkdown entry\info\readme ||>
                                 </div>
                                 <div class="version-history is-hidden">
-                                    <ul>
-                                        <|| loop entry\version 'ver [||>
-                                            <|| (currentVersion\version = ver\version)? [ ||>
-                                            <li><b><||= ver\version ||></b><span class="has-text-grey">&nbsp;&#8212;&nbsp;<||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span></li>
-                                            <|| ][ ||>
-                                                <li><a class="version-link" href="<||= getLink entry\name ver\version ||>"><b><||= ver\version ||></b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;<||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span></li>
+                                    <div class="version-summary">
+                                        <b>Last updated:</b><br><span id="last-version-ago"></span>
+                                    </div>
+                                    <table class="table is-striped is-hoverable">
+                                        <tbody>
+                                            <|| loop entry\version 'ver [||>
+                                                <|| (currentVersion\version = ver\version)? [ ||>
+                                                    <tr>
+                                                        <td>
+                                                            <b><||= ver\version ||></b>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey"><||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span>
+                                                        </td>
+                                                    </tr>
+                                                <|| ][ ||>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="version-link" href="<||= getLink entry\name ver\version ||>"><b><||= ver\version ||></b></a>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey"><||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span>
+                                                        </td>
+                                                    </tr>
+                                                <|| ] ||>
                                             <|| ] ||>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="dependencies is-hidden<|| if empty? currentVersion\info\depends [||> without-dependencies<||]||>">
+                                    <|| (empty? currentVersion\info\depends)? [ ||>
+                                        <span class="icon">
+                                            <i class="far fa-laugh-wink"></i>
+                                        </span><br>
+                                        No dependencies.
+                                    <|| ][ ||>
+                                        <ul>
+                                        <|| loop currentVersion\info\depends 'dep [ ||>
+                                            <li><a href="<||= getLink entry\name ø ||>"><||= dep ||></a></li>
                                         <|| ] ||>
-                                    </ul>
+                                        </ul>
+                                    <|| ] ||>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="column is-3 info-column">
+                    <div class="column is-3 is-10-mobile is-offset-1-mobile info-column">
                         <div class="box info-wrapper">
                             <div class="block stats-wrapper">
                                 <div class="download-info">
@@ -84,59 +124,80 @@
                                     <span class="star-count" data-package="<||= replace entry\info\url "https://github.com/" "" ||>"></span>
                                 </div>
                             </div>
-                            <hr/>
-                            <div class="block package-author">
-                                <b>Author</b>
-                                <br>
-                                <a href="<||= entry\info\author\url ||>" class="repo-user-name"><||= entry\info\author\name ||></a>
-                            </div>
-                            <div class="block package-version">
-                                <b>Version</b>
-                                <br>
-                                <div class="package-version-wrapper">
-                                    <||= currentVersion\version ||><|| if currentVersionIsLatest [||><span class="tag is-success latest-version-tag">Latest</span><|| ] ||>
+                            <div class="package-instructions">
+                                <div class="installation-instructions block">
+                                    <input id="installation-code" class="input copy-code" value="import<|| if not? currentVersionIsLatest [||>.version:<||= currentVersion\version ||><||]||> '<||= entry\name ||>" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
+                                </div>
+                                <div class="message is-success codecopied-message is-hidden">
+                                    <div class="message-body">
+                                        <b>Copied!</b> Paste into your script to import the package directly &mdash; and/or install the package from your terminal via with:<br><code>arturo -p install <||= entry\name ||> <|| if not? currentVersionIsLatest [||><||= currentVersion\version ||><||]||></code>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="block package-license">
-                                <b>License</b>
-                                <br>
-                                <a href="<||= entry\info\license\url ||>" class="repo-license-name"><||= entry\info\license\name ||></a>
+                            <div class="block package-author package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Author</b>
+                                    <br>
+                                    <a target="_blank" href="<||= entry\info\author\url ||>" class="repo-user-name"><||= entry\info\author\name ||></a>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-user"></i>
+                                </span>
                             </div>
-                            <hr/>
-                            <div class="block package-executable">
-                                <b>Executable?</b>
-                                <br>
-                                <|| (currentVersion\info\executable)? [ ||>
-                                    <span class="icon">
-                                        <i class="fas fa-check"></i>
-                                    </span> Yes
-                                <|| ][ ||>
-                                    <span class="icon">
-                                        <i class="fas fa-times"></i>
-                                    </span> No
-                                <|| ] ||>
+                            <div class="block package-version package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Version</b>
+                                    <br>
+                                    <div class="package-version-wrapper">
+                                        <a target="_blank" href="<||= currentVersion\link ||>"><||= currentVersion\version ||></a><|| if currentVersionIsLatest [||><span class="tag is-success latest-version-tag">Latest</span><|| ] ||>
+                                    </div>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-code-branch"></i>
+                                </span>
                             </div>
-                            <div class="block package-depends">
-                                <b>Dependencies</b>
-                                <br>
-                                <|| (empty? currentVersion\info\depends)? [ ||>
-                                    No dependencies
-                                <|| ][ ||>
-                                    <ul>
-                                    <|| loop currentVersion\info\depends 'dep [ ||>
-                                        <li><a href="<||= getLink entry\name ø ||>"><||= dep ||></a></li>
+                            <div class="block package-license package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>License</b>
+                                    <br>
+                                    <a target="_blank" href="<||= entry\info\license\url ||>" class="repo-license-name"><||= entry\info\license\name ||></a>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </span>
+                            </div>
+                            <hr>
+                            <div class="block package-executable package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Executable?</b>
+                                    <br>
+                                    <|| (currentVersion\info\executable)? [ ||>
+                                        <span class="icon">
+                                            <i class="fas fa-check"></i>
+                                        </span> Yes
+                                    <|| ][ ||>
+                                        <span class="icon">
+                                            <i class="fas fa-times"></i>
+                                        </span> No
                                     <|| ] ||>
-                                    </ul>
-                                <|| ] ||>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </span>
                             </div>
-                            <div class="block package-requires">
-                                <b>Requires</b>
-                                <br>
-                                <|| (empty? currentVersion\info\requires)? [ ||>
-                                    Any version
-                                <|| ][ ||>
-                                    Arturo <||= to :string currentVersion\info\requires\0 ||>&nbsp;<||= to :string currentVersion\info\requires\1 ||>
-                                <|| ] ||>
+                            <div class="block package-requires package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Requires</b>
+                                    <br>
+                                    <|| (empty? currentVersion\info\requires)? [ ||>
+                                        Any version
+                                    <|| ][ ||>
+                                        Arturo <||= to :string currentVersion\info\requires\0 ||>&nbsp;<||= to :string currentVersion\info\requires\1 ||>
+                                    <|| ] ||>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -156,6 +217,74 @@
                 $("#<||=entry\name ||>-downloads").html(data);
             });
         <|| ] ||>
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        TimeAgo.addDefaultLocale({
+            "locale": "en",
+            "long": {
+                "year": {
+                    "previous": "last year",
+                    "past": {
+                        "one": "{0} year ago",
+                        "other": "{0} years ago"
+                    }
+                },
+                "quarter": {
+                    "previous": "last quarter",
+                    "past": {
+                        "one": "{0} quarter ago",
+                        "other": "{0} quarters ago"
+                    }
+                },
+                "month": {
+                    "previous": "last month",
+                    "past": {
+                        "one": "{0} month ago",
+                        "other": "{0} months ago"
+                    }
+                },
+                "week": {
+                    "previous": "last week",
+                    "past": {
+                        "one": "{0} week ago",
+                        "other": "{0} weeks ago"
+                    }
+                },
+                "day": {
+                    "previous": "yesterday",
+                    "past": {
+                        "one": "{0} day ago",
+                        "other": "{0} days ago"
+                    }
+                },
+                "hour": {
+                    "past": {
+                        "one": "{0} hour ago",
+                        "other": "{0} hours ago"
+                    }
+                },
+                "minute": {
+                    "past": {
+                        "one": "{0} minute ago",
+                        "other": "{0} minutes ago"
+                    }
+                },
+                "second": {
+                    "current": "now",
+                    "past": {
+                        "one": "{0} second ago",
+                        "other": "{0} seconds ago"
+                    },
+                }
+            },
+            "now": {
+                "now": {
+                    "current": "now",
+                    "past": "just now"
+                }
+            }
+        });
+        $("#last-version-ago").html(new TimeAgo('en').format(Date.parse("<||= to :string get first entry\version 'date ||>"), 'long'));
     });
 </script>
 
