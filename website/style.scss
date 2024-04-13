@@ -60,22 +60,32 @@ a.version-link {
     span {
         &.subnote {
             font-size: small;
-            font-weight: 400;
-            color: #888;
+            font-weight: 300;
+            color: #777788;
         }
     }
 
     input.main-search {
         border-radius: 15px; 
         text-align: center;
+        border-color: #b5b5b5;
     }
 }
 
 .hero {
     background: #F2F6FA;
-    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.1) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.1) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #fafafa 0%,rgba(0,0,0,0.1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,10,0.15) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 50%,rgba(0,0,10,0.15) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #fafafa 0%,rgba(0,0,10,0.15) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    //background: radial-gradient(circle at 10% 20%, rgba(216, 241, 230, 0.46) 0.1%, rgba(233, 226, 226, 0.28) 90.1%);
+    //background: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%);
+    //background: linear-gradient(to right, #868f96 0%, #596164 100%);
+    //background: #282829;
+
+    // background-image: url(images/gray-bg.jpg);
+    // background-size: cover;
+
+
     border-bottom: 1px solid rgba(0,0,0,0.2);
 
     &.search-line {
@@ -87,7 +97,8 @@ a.version-link {
         position: sticky;
         z-index: 1000;
 
-        background: linear-gradient(to bottom,#fafafa 0,rgba(0.0,0.0,0.0,.05) 100%);
+        background: #fff;//linear-gradient(to bottom,#fafafa 0,rgba(0.0,0.0,0.0,.05) 100%);
+        border-color: #b5b5b5;
 
         .showsearch-icon {
             color: #ccc;
@@ -533,6 +544,7 @@ a {
     -webkit-text-fill-color: transparent;
     animation: textclip 5s linear infinite;
     display: inline-block;
+    line-height: 2.6rem;
 }
 
 @keyframes textclip {
