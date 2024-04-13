@@ -377,4 +377,7 @@ function toggleDocSize(){
     $(".left-column").toggleClass("is-9");
     $(".left-column").toggleClass("is-12");
     $(".info-column").toggleClass("is-hidden");
+    $(".maximize-button").toggleClass("is-on");
+    $(".maximize-button a i").toggleClass("fa-angle-double-right").toggleClass("fa-angle-double-left");
+
 }

@@ -242,6 +242,24 @@ a.version-link {
 
                             a {
                                 padding-right: 0;
+                                color: #CCC;
+                            
+                                &:hover {
+                                    color: #666;
+                                }
+                            }
+
+                            &.is-on {
+                                a {
+                                    .icon {
+                                        background: $arturoColorLight;
+                                        color: white;
+                                    }
+
+                                    &:hover {
+                                        color: white;
+                                    }
+                                }
                             }
                         }
                     }
