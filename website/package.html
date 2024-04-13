@@ -17,7 +17,7 @@
                         </div>
                         <div class="column is-4 package-link">
                             <div class="is-pulled-right has-text-grey is-hidden-mobile">
-                                <a href="<||= entry\info\url ||>">
+                                <a target="_blank" href="<||= entry\info\url ||>">
                                     <span class="icon repo-icon inside-package">
                                         <i class="fa fa-github"></i>
                                     </span>
@@ -138,7 +138,7 @@
                                 <div class="subgroup-detail">
                                     <b>Author</b>
                                     <br>
-                                    <a href="<||= entry\info\author\url ||>" class="repo-user-name"><||= entry\info\author\name ||></a>
+                                    <a target="_blank" href="<||= entry\info\author\url ||>" class="repo-user-name"><||= entry\info\author\name ||></a>
                                 </div>
                                 <span class="icon subgroup-icon">
                                     <i class="fas fa-user"></i>
@@ -149,7 +149,7 @@
                                     <b>Version</b>
                                     <br>
                                     <div class="package-version-wrapper">
-                                        <||= currentVersion\version ||><|| if currentVersionIsLatest [||><span class="tag is-success latest-version-tag">Latest</span><|| ] ||>
+                                        <a target="_blank" href="<||= currentVersion\link ||>"><||= currentVersion\version ||></a><|| if currentVersionIsLatest [||><span class="tag is-success latest-version-tag">Latest</span><|| ] ||>
                                     </div>
                                 </div>
                                 <span class="icon subgroup-icon">
@@ -160,7 +160,7 @@
                                 <div class="subgroup-detail">
                                     <b>License</b>
                                     <br>
-                                    <a href="<||= entry\info\license\url ||>" class="repo-license-name"><||= entry\info\license\name ||></a>
+                                    <a target="_blank" href="<||= entry\info\license\url ||>" class="repo-license-name"><||= entry\info\license\name ||></a>
                                 </div>
                                 <span class="icon subgroup-icon">
                                     <i class="fas fa-balance-scale"></i>
