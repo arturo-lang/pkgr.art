@@ -69,7 +69,9 @@ a.version-link {
             &.subnote {
                 font-size: 16px;
                 font-weight: 300;
-                color: #889;
+                color: #556;
+                text-shadow: 0px 1px 0px white;
+                -webkit-font-smoothing: antialiased;
             }
         }
     }
@@ -132,6 +134,8 @@ a.version-link {
 
     padding: 0 !important;
 
+    box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.07), 0 0 0 1px rgba(10,10,10,.02);
+
     & > * {
         padding: 1.25rem;
     }
@@ -170,6 +174,16 @@ a.version-link {
 
             .repo-license-icon {}
             .repo-license-name {}
+        }
+    }
+}
+
+.main-section {
+    .package-listing {
+        .package-listing-header {
+            margin-top: 3.5rem; 
+            font-size: 1.6rem; 
+            font-weight: 500;
         }
     }
 }
@@ -382,6 +396,7 @@ a.version-link {
 
                     code {
                         color: inherit !important;
+                        font-family: "Fira Code", monospace !important;
                     }
 
                     a {
@@ -788,6 +803,10 @@ a {
     a.repo-name {
         color: #82138d;
         border-bottom: 1px dashed #82138d;
+
+        b {
+            font-weight: 600;
+        }
 
         &:hover {
             color: #b603c6;
