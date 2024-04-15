@@ -5,6 +5,29 @@ dummy: #[
                         "test"
                 ]
         ]
+states: #[
+        description: ":states is a lean Finite State Machine package for the Arturo Programming Language"
+        tags: [
+                        "arturo"
+                         "arturo-language"
+                         "finite-state-machine"
+                         "fsm"
+                         "package"
+                         "pkgr-art"
+                ]
+        ]
+unidecode: #[
+        description: "Unicode -> ASCII converter"
+        tags: [
+                        "arturo"
+                         "arturo-language"
+                         "arturo-package"
+                         "ascii"
+                         "unicode"
+                         "unicode-converter"
+                         "unidecode"
+                ]
+        ]
 unitt: #[
         description: "DRAFT - Unitt is a basic unit-test tool for the Arturo Programming language."
         tags: [

@@ -99,7 +99,7 @@
                 
                     <div class="block package-tags">
                         
-                            <span class="tag is-info is-light is-medium package-tag">unit-tests</span>
+                            <span class="tag is-info is-light is-medium package-tag">unit tests</span>
                         
                     </div>
                 
@@ -127,7 +127,7 @@
 </h1>
 <p align="center">
     <i>Unitt</i> is a basic unit-test tool for the 
-    <a href="https://github.com/arturo-lang/arturo/">
+    <a rel="nofollow" target="_blank" href="https://github.com/arturo-lang/arturo/">
         Arturo Programming language
     </a>
     <br><br>
@@ -142,7 +142,7 @@
         src="https://github.com/arturo-lang/arturo/raw/master/docs/images/logo-lightgray.png#gh-dark-mode-only" style="display:none" 
     />
 </p>
-<h2><a href="#at-a-glance" aria-hidden="true" class="anchor" id="at-a-glance"></a>At a Glance</h2>
+<h2>At a Glance</h2>
 <p align="center">
 <img 
     alt="Running Unitt from terminal"
@@ -150,15 +150,15 @@
     src="https://raw.githubusercontent.com/RickBarretto/unitt/master/docs/running unitt screenshot.png"
 />
 </p>
-<h2><a href="#trying-unitt" aria-hidden="true" class="anchor" id="trying-unitt"></a>Trying Unitt</h2>
+<h2>Trying Unitt</h2>
 <p><em>Unitt</em> may be splited into two sections: <em>runner</em> and <em>the tests</em>.</p>
 <p><em>The runner</em> is the section responsible to find, run and return error codes to the final user.
 While <em>the tests</em> are responsible to group the rules and logic of the tests.</p>
-<h3><a href="#initial-setup" aria-hidden="true" class="anchor" id="initial-setup"></a>Initial setup</h3>
-<p>It's recomended that your <em>runner</em> be at the root of your directory, right before your <em>tests</em> folder.</p>
+<h3>Initial setup</h3>
+<p>It's recomended that your <em>tester</em> be at the root of your directory, right before your <em>tests</em> folder.</p>
 <p>All of your <em>tests</em> must begin with the <code>test</code> prefix and end with the <code>.art</code> extension to be found,
 since you may want to mix them with some other files.</p>
-<p>Being that said, that is the right way of setting up your <em>runner</em>:</p>
+<p>Being that said, that is the right way of setting up your <em>tester</em>:</p>
 <p>Let's consider that you have the following directory:</p>
 <pre><code>src/
     ...
@@ -168,10 +168,9 @@ main.art
 tester.art
 </code></pre>
 <p>Into your <code>tester.art</code>, you must:</p>
-<pre lang="art"><code>import {unitt}
+<pre lang="art"><code>import {unitt}!
 
-do ::
-    runTests &quot;tests&quot;
+runTests findTests &quot;tests&quot;
 </code></pre>
 <p>To run it, call:</p>
 <pre><code>arturo tester.art
@@ -181,48 +180,73 @@ do ::
 
 You may want to use a hashbang to don't need to call arturo for every run.</p>
 </blockquote>
-<h3><a href="#the-tests-itself" aria-hidden="true" class="anchor" id="the-tests-itself"></a>The <em>tests</em> itself</h3>
+<blockquote class='alert alert-tip'>
+<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</b><br>
+
+If you want be able to test some specific tests from the CLI, you can:</p>
+<pre lang="art"><code> import {unitt}!
+ 
+ runTests (empty? arg)? 
+     -&gt; findTests &quot;tests&quot;
+     -&gt; arg
+</code></pre>
+</blockquote>
+<h3>The <em>tests</em> itself</h3>
 <p>A real example of tests:</p>
-<pre lang="art"><code>unix?: true
+<pre lang="art"><code>import {unitt}!
 
-test &quot;appending binaries with integer is working&quot; [
-    b: to :binary 0
-    assert -&gt; as.binary 2 = append b 1
-    assert -&gt; as.binary 1 = b ++ 1
+unix?: true
+
+suite &quot;test binary appending&quot; [
+    test &quot;operation with integer works&quot; [
+        b: to :binary 0
+        assert -&gt; as.binary 2 = append b 1
+        assert -&gt; as.binary 1 = b ++ 1
+    ]
+
+    test.prop &quot;operate binaries with integer returns a binary&quot; [
+        b: to :binary 0
+        assert -&gt; binary? append b 1
+        assert -&gt; binary? b ++ 1
+    ]
 ]
 
-test.prop &quot;appending binaries with integer returns a binary&quot; [
-    b: to :binary 0
-    assert -&gt; binary? append b 1
-    assert -&gt; binary? b ++ 1
-]
-
-test.skip: unix? &quot;split is working for windows's paths&quot; [
+test.skip: unix? &quot;split works for windows's paths&quot; [
     assert -&gt; [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split.path &quot;.\\splited\\path&quot;
+]
+
+test &quot;split is works for unix path&quot; [
+    assert -&gt; [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split.path &quot;./splited/path&quot;
 ]
 </code></pre>
 <p>This will show you:</p>
-<pre><code>❌ - assert that appending binaries with integer is working
-     assertion : [as binary 1 = append b 1]
+<pre><code>Suite: test binary appending 
 
-✅ - assert that appending binaries with integer is working
-     assertion : [as binary 1 = b ++ 1]
+    ❌ - assert that operation with integer works
+         assertion: as .binary 2 = append  1
 
-✅ ~ assert that appending binaries with integer returns a binary
-     assertion : [binary? append b 1]
+    ❌ - assert that operation with integer works
+         assertion: as .binary 1 =  ++ 1
 
-✅ - assert that appending binaries with integer returns a binary
-     assertion : [binary? b ++ 1]
+    ✅ ~ assert that operate binaries with integer returns a binary
+         assertion: binary? append  1
 
-⏩ - assert that split is working for windows's paths      
-      skipped!
+    ✅ ~ assert that operate binaries with integer returns a binary
+         assertion: binary?  ++ 1
+
+
+⏩ - assert that split works for windows's paths 
+     skipped!
+
+✅ - assert that split is works for unix path
+     assertion: [&quot;.&quot; &quot;splited&quot; &quot;path&quot;] = split .path &quot;./splited/path&quot;
 </code></pre>
 <blockquote class='alert alert-note'>
 <p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</b><br>
 
 Property-based tests have <code>~</code> as separator.</p>
 </blockquote>
-<h3><a href="#the-runner" aria-hidden="true" class="anchor" id="the-runner"></a>The <em>Runner</em></h3>
+<h3>The <em>Runner</em></h3>
 <p>Basically, you can run your <em>tests units</em> without a <em>runner</em>.
 But there are some reasons why you should prefer to use a <code>runTests</code> function to run them.</p>
 <p>First, your <em>runner</em>'s output will give you important information about the current run.
@@ -240,24 +264,16 @@ and at the end a summary of failed, skipped and passed tests:</p>
 </code></pre>
 <p>Also, the runner is able to return an error code,
 so that is great if you're working with <em>Continuous Integration</em>.</p>
-<h2><a href="#documentation" aria-hidden="true" class="anchor" id="documentation"></a>Documentation</h2>
-<h3><a href="#runner" aria-hidden="true" class="anchor" id="runner"></a><em>Runner</em></h3>
+<h2>Documentation</h2>
+<h3><em>Runner</em></h3>
 <ul>
-<li><code>runTests: $[folder :string]</code>:
-The <em>runner function</em>, this function will look for <em>tests</em> inside the relative <code>folder</code>.
-Remember that all <em>tests</em> must begin with the <code>test</code> prefix, and be an <code>.art</code> extension.
+<li><code>runTests: $[tests [:string]]</code>:
+The <em>runner function</em>, this executes all <code>tests</code>,
+show statistics and return a value.
 <ul>
 <li><code>.failFast</code>:
 Fails on the first error found.
 This works at file scope due to our current way of running tests.</li>
-<li><code>.pattern :string</code>:
-Defines what is a test-file via a kind-of <em>glob</em> pattern.
-Use a <code>*</code> as spliter.
-<ul>
-<li>Obs.: That is a kind-of <em>glob</em> pattern, not a real one.
-So just use one and only one <code>*</code> to split the pre and suffix.</li>
-</ul>
-</li>
 <li><code>.suppress</code>:
 Suppress <code>panic</code>, this means:
 this won't terminate your tests,
@@ -265,8 +281,22 @@ won't return an error code
 and won't print a <code>panic</code> message.</li>
 </ul>
 </li>
+<li><code>findTests: $[folder :string]</code>:
+The <em>finder function</em>, this function will look for <em>tests</em> inside the relative <code>folder</code>.
+The default <em>test</em> pattern is &quot;test*.art&quot;.
+<ul>
+<li><code>.thatMatches :string</code>:
+Defines what is a test-file via a kind-of <em>glob</em> pattern.
+Use a <code>*</code> as spliter.
+<ul>
+<li>Obs.: That is a kind-of <em>glob</em> pattern, not a real one.
+So just use one and only one <code>*</code> to split the pre and suffix.</li>
 </ul>
-<h3><a href="#tests" aria-hidden="true" class="anchor" id="tests"></a><em>Tests</em></h3>
+</li>
+</ul>
+</li>
+</ul>
+<h3><em>Tests</em></h3>
 <ul>
 <li><code>test: $[description :string, testCase :block]</code>:
 The test case itself, you need to pass a clear description to it,
@@ -277,21 +307,43 @@ Indicates that a test is property-based.</li>
 <li><code>.skip :logical</code>:
 Skips tests for some condition.
 If none condition is given, this will just skip the test.</li>
+<li><code>.static: :block</code>:
+Defines what will and what won't be evaluated.</li>
+<li><code>.static: :logical</code>:
+Disable runtime evaluation, and forces static display.</li>
 </ul>
 </li>
 <li><code>assert: $[condition :block]</code>:
 A function that is only available inside the <code>test</code> case,
 makes an assertion given the <code>condition</code>.</li>
+<li><code>suite: $[description :string tests :block]</code>:
+Visually groups tests together.</li>
 </ul>
+<blockquote class='alert alert-warning'>
+<p><b class='alert-message'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</b><br>
+
+Never import this lib as <code>.lean</code>, or this will break the current code.
+This happens due to the nature of Arturo (being concatenative),
+and the way we importings are working right now.
+This may change in future.</p>
+</blockquote>
 <hr />
 <blockquote>
 <p>Background photo on <a href="#at-a-glance">&quot;At a Glance&quot;</a>
-by <a href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Jack Anstey</a> on <a href="https://unsplash.com/photos/aerial-photography-of-road-zS4lUqLEiNA?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
+by <a rel="nofollow" target="_blank" href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Jack Anstey</a> on <a rel="nofollow" target="_blank" href="https://unsplash.com/photos/aerial-photography-of-road-zS4lUqLEiNA?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
 </blockquote>
 
                                 </div>
                                 <div class="version-history is-hidden">
                                     <ul>
+                                        
+                                            
+                                                <li><a class="version-link" href="https://unitt.pkgr.art/1.0.0"><b>1.0.0</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;17&nbsp;February&nbsp;2024</span></li>
+                                            
+                                        
+                                            
+                                                <li><a class="version-link" href="https://unitt.pkgr.art/0.2.0"><b>0.2.0</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;17&nbsp;February&nbsp;2024</span></li>
+                                            
                                         
                                             
                                                 <li><a class="version-link" href="https://unitt.pkgr.art/0.1.4"><b>0.1.4</b></a><span class="has-text-grey">&nbsp;&#8212;&nbsp;3&nbsp;February&nbsp;2024</span></li>
@@ -414,6 +466,33 @@ by <a href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm
         "version": "0.0.4"
     },
     {
+        "value": "states",
+        "description": ":states is a lean Finite State Machine package for the Arturo Programming Language",
+        "tags": [
+            "arturo",
+            "arturo-language",
+            "finite-state-machine",
+            "fsm",
+            "package",
+            "pkgr-art"
+        ],
+        "version": "0.1.0"
+    },
+    {
+        "value": "unidecode",
+        "description": "Unicode -> ASCII converter",
+        "tags": [
+            "arturo",
+            "arturo-language",
+            "arturo-package",
+            "ascii",
+            "unicode",
+            "unicode-converter",
+            "unidecode"
+        ],
+        "version": "0.0.2"
+    },
+    {
         "value": "unitt",
         "description": "DRAFT - Unitt is a basic unit-test tool for the Arturo Programming language.",
         "tags": [
@@ -422,7 +501,7 @@ by <a href="https://unsplash.com/@jack_anstey?utm_content=creditCopyText&amp;utm
             "package",
             "unit-tests"
         ],
-        "version": "0.1.4"
+        "version": "1.0.0"
     }
 ];
                 var fuseOptions = {
