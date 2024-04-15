@@ -144,19 +144,7 @@ processPackagePage: function [entry][
     postprocessHTML render.template read "website/package.html" entry\info\fullName
 ]
 
-;--------------------------------
-; DEBUGGING!
-;--------------------------------
-; entry2: new searchable\0
-; entry2\value: "easyhtml"
-
-; entry3: new searchable\0
-; entry3\value: "artsembly"
-
-; 'searchable ++ entry2
-; 'searchable ++ entry3
-
-searchable: write.json ø searchable
+searchable: write.compact.json ø searchable
 
 loop entries 'entry [
     tgtName: ~{public/|entry\name|}
@@ -167,6 +155,7 @@ loop entries 'entry [
     currentVersion: first entry\version
     currentVersionIsLatest: true
     write ~{|tgtName|/index.html} processPackagePage entry
+    compressHTML ~{|tgtName|/index.html}
 
     createSpecFile entry currentVersion tgtName
 
@@ -182,6 +171,7 @@ loop entries 'entry [
             currentVersionIsLatest: true
 
         write ~{|versionTgt|/index.html} processPackagePage entry
+        compressHTML ~{|versionTgt|/index.html}
 
         createSpecFile entry vv versionTgt
     ]

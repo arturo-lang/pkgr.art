@@ -9,6 +9,13 @@ $borderColor: #e0e0e0;
 $mobileWidth: 768px;
 $tabletWidth: 1023px;
 
+/* Specify in CSS */
+pre, code { font-family: 'Fira Code', monospace !important; }
+
+@supports (font-variation-settings: normal) {
+  pre, code { font-family: 'Fira Code VF', monospace !important; }
+}
+
 html,body {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -393,10 +400,18 @@ a.version-link {
                             }
                         }
                     }
+                    
 
-                    code {
+                    pre, code {
+                        -webkit-font-feature-settings: "ss03", "ss04", "ss05", "ss07", "ss09", "cv01", "cv02", "cv20", "cv22", "cv23", "calt";;
+                        -moz-font-feature-settings: "ss03", "ss04", "ss05", "ss07", "ss09", "cv01", "cv02", "cv20", "cv22", "cv23", "calt";
+                        font-feature-settings: "ss03", "ss04", "ss05", "ss07", "ss09", "cv01", "cv02", "cv20", "cv22", "cv23", "calt";
+                        text-rendering: optimizelegibility;
+                    }
+
+                    code:not([class*=language-]),
+                    pre:not([class*=language-]) {
                         color: inherit !important;
-                        font-family: "Fira Code", monospace !important;
                     }
 
                     a {

@@ -22,9 +22,6 @@
                                         <i class="fa fa-github"></i>
                                     </span>
                                 </a>
-                                <!-- <span class="icon">
-                                    <i class="fas fa-cube"></i>
-                                </span>&nbsp;<||= entry\name ||>.pkgr.art -->
                             </div>
                         </div>
                     </div>
@@ -218,73 +215,8 @@
             });
         <|| ] ||>
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        TimeAgo.addDefaultLocale({
-            "locale": "en",
-            "long": {
-                "year": {
-                    "previous": "last year",
-                    "past": {
-                        "one": "{0} year ago",
-                        "other": "{0} years ago"
-                    }
-                },
-                "quarter": {
-                    "previous": "last quarter",
-                    "past": {
-                        "one": "{0} quarter ago",
-                        "other": "{0} quarters ago"
-                    }
-                },
-                "month": {
-                    "previous": "last month",
-                    "past": {
-                        "one": "{0} month ago",
-                        "other": "{0} months ago"
-                    }
-                },
-                "week": {
-                    "previous": "last week",
-                    "past": {
-                        "one": "{0} week ago",
-                        "other": "{0} weeks ago"
-                    }
-                },
-                "day": {
-                    "previous": "yesterday",
-                    "past": {
-                        "one": "{0} day ago",
-                        "other": "{0} days ago"
-                    }
-                },
-                "hour": {
-                    "past": {
-                        "one": "{0} hour ago",
-                        "other": "{0} hours ago"
-                    }
-                },
-                "minute": {
-                    "past": {
-                        "one": "{0} minute ago",
-                        "other": "{0} minutes ago"
-                    }
-                },
-                "second": {
-                    "current": "now",
-                    "past": {
-                        "one": "{0} second ago",
-                        "other": "{0} seconds ago"
-                    },
-                }
-            },
-            "now": {
-                "now": {
-                    "current": "now",
-                    "past": "just now"
-                }
-            }
-        });
-        $("#last-version-ago").html(new TimeAgo('en').format(Date.parse("<||= to :string get first entry\version 'date ||>"), 'long'));
+    document.addEventListener("DOMContentLoaded",()=>{
+        TimeAgo.addDefaultLocale({locale:"en",long:{year:{previous:"last year",past:{one:"{0} year ago",other:"{0} years ago"}},quarter:{previous:"last quarter",past:{one:"{0} quarter ago",other:"{0} quarters ago"}},month:{previous:"last month",past:{one:"{0} month ago",other:"{0} months ago"}},week:{previous:"last week",past:{one:"{0} week ago",other:"{0} weeks ago"}},day:{previous:"yesterday",past:{one:"{0} day ago",other:"{0} days ago"}},hour:{past:{one:"{0} hour ago",other:"{0} hours ago"}},minute:{past:{one:"{0} minute ago",other:"{0} minutes ago"}},second:{current:"now",past:{one:"{0} second ago",other:"{0} seconds ago"}}},now:{now:{current:"now",past:"just now"}}}),$("#last-version-ago").html(new TimeAgo("en").format(Date.parse("<||= to :string get first entry\version 'date ||>"),"long"))
     });
 </script>
 
