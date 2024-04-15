@@ -144,18 +144,6 @@ processPackagePage: function [entry][
     postprocessHTML render.template read "website/package.html" entry\info\fullName
 ]
 
-;--------------------------------
-; DEBUGGING!
-;--------------------------------
-; entry2: new searchable\0
-; entry2\value: "easyhtml"
-
-; entry3: new searchable\0
-; entry3\value: "artsembly"
-
-; 'searchable ++ entry2
-; 'searchable ++ entry3
-
 searchable: write.compact.json ø searchable
 
 loop entries 'entry [
