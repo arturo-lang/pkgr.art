@@ -397,7 +397,9 @@ a.version-link {
                     code {
                         color: inherit !important;
                         font-family: "Fira Code", monospace !important;
-                        font-feature-settings: 'ss07','ss09','cv20','cv22','cv23';
+                        font-feature-settings: 'ss07' on,'ss09' on,'cv20' on,'cv22' on,'cv23' on;
+                        -moz-font-feature-settings: 'ss07' on,'ss09' on,'cv20' on,'cv22' on,'cv23' on;
+                        -webkit-font-feature-settings: 'ss07' on,'ss09' on,'cv20' on,'cv22' on,'cv23' on;
                     }
 
                     a {
