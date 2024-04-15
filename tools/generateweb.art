@@ -167,6 +167,7 @@ loop entries 'entry [
     currentVersion: first entry\version
     currentVersionIsLatest: true
     write ~{|tgtName|/index.html} processPackagePage entry
+    compressHTML ~{|tgtName|/index.html}
 
     createSpecFile entry currentVersion tgtName
 
@@ -182,6 +183,7 @@ loop entries 'entry [
             currentVersionIsLatest: true
 
         write ~{|versionTgt|/index.html} processPackagePage entry
+        compressHTML ~{|versionTgt|/index.html}
 
         createSpecFile entry vv versionTgt
     ]
