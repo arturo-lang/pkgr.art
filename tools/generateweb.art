@@ -156,7 +156,7 @@ processPackagePage: function [entry][
 ; 'searchable ++ entry2
 ; 'searchable ++ entry3
 
-searchable: write.json ø searchable
+searchable: write.compact.json ø searchable
 
 loop entries 'entry [
     tgtName: ~{public/|entry\name|}
