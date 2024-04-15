@@ -21,6 +21,9 @@ Prism.languages.arturo = {
         greedy: true,
         alias: 'function'
     },
+	"attribute": {
+		pattern: /\.([\w]+\b\??:?)/i
+	},
     'builtin': {
         pattern: /[\w]+\b\??:/i
     },
@@ -40,13 +43,20 @@ Prism.languages.arturo = {
         pattern: /\b(?:abs|accept|acos|acosh|acsec|acsech|actan|actanh|add|after|alert|alias|alphabet|alphaParticleMass|and|angle|angstromStar|append|arg|args|arithmeticError|arity|arrange|array|as|asec|asech|asin|asinh|assertionError|atan|atan2|atanh|atomicMass|attr|attrs|average|avogadroConstant|before|benchmark|blend|bohrRadius|boltzmannConstant|break|browse|builtins1|builtins2|call|capitalize|case|ceil|chop|chunk|clamp|classicalElectronRadius|clear|clip|close|cluster|coalesce|collect|color|combine|compare|conductanceQuantum|config|conj|connect|constructor|continue|conversionError|convert|copy|cos|cosh|couple|crc|csec|csech|ctan|ctanh|cursor|darken|dec|decode|decouple|define|delete|denominator|desaturate|deuteronMass|deviation|dialog|dictionary|difference|digest|digits|div|divmod|do|download|drop|dup|electronCharge|electronMass|electronMassEnergy|else|empty|encode|ensure|enumerate|env|epsilon|escape|execute|exit|exp|extend|extract|factorial|factors|false|fdiv|filter|first|flatten|floor|fold|from|function|gamma|gather|gcd|get|goto|gravitationalConstant|grayscale|hartreeEnergy|hash|helionMass|hypot|if|impedanceOfVacuum|import|in|inc|indent|index|indexError|infinite|info|input|insert|inspect|intersection|inverseConductanceQuantum|invert|is|jaro|join|josephsonConstant|keys|kurtosis|last|lcm|let|levenshtein|libraryError|lighten|list|listen|ln|log|loop|lower|magneticFluxQuantum|mail|map|match|max|maximum|maybe|median|method|methods|min|minimum|mod|molarGasConstant|move|mul|muonMass|nameError|nand|neg|neutronMass|new|nor|normalize|not|now|null|numerator|open|or|outdent|packageError|pad|palette|panic|path|pause|permissions|permutate|pi|planckConstant|planckLength|planckMass|planckTemperature|planckTime|pop|popup|pow|powerset|powmod|prepend|print|prints|process|product|property|protonMass|protonMassEnergy|query|random|range|read|receive|reciprocal|reducedPlanckConstant|relative|remove|rename|render|repeat|replace|request|return|reverse|rotate|round|runtimeError|rydbergConstant|sample|saturate|scalar|script|sec|sech|select|send|serve|set|shl|shr|shuffle|sin|sinh|size|skewness|slice|sort|sortable|specify|speedOfLight|spin|split|sqrt|squeeze|stack|standardGasVolume|standardPressure|standardTemperature|store|strip|sub|sum|switch|symbols|symlink|syntaxError|sys|systemError|take|tally|tan|tanh|tau|tauMass|terminal|terminate|thomsonCrossSection|throw|timestamp|to|translate|tritonMass|true|truncate|try|type|typeError|uiError|unclip|union|unique|units|unless|unplug|unstack|until|unzip|upper|vacuumPermeability|vacuumPermittivity|valueError|values|var|variance|vmError|volume|vonKlitzingConstant|webview|while|with|wordwrap|write|xnor|xor|zip)\b/,
         alias: 'keyword'
     },
-    'sugar': {
-        pattern: /\->|=>|\||\:\:/,
+	"user": {
+		pattern: /([\w]+\b\??:?)/i
+	},
+	'sugar': {
+        pattern: /\-\>|\=\>|\:\:/,
         alias: 'important'
     },
     'symbol': {
-        pattern: /<\:|\-\:|ø|@|#|\+|\||\*|\$|\-|\%|\/|\.\.|\^|~|=|<|>|\\|\-\-\-/
-    }
+        pattern: /\<\=|\<\=\>|\<\<\=|\=\>\>|\<\<\=\>\>|\<\-|\<\-\>|\<\<\-|\-\>\>|\<\<\-\>\>|\-\<|\>\-|\>\-\<|\-\<\<|\>\>\-|\>\>\-\<\<|\<\<|\>\>|\<\<\<|\>\>\>|\<\-\-|\-\-\>|\<\-\-\>|\<\=\=|\=\=\>|\<\=\=\>|\<~|~\>|\<~\>|\|\>|\<\||\<\|\>|\=\<|\>\=|\<\>|\<\:|\-\:|\>\:|~|\!|\!\!|\?|\?\?|@|\#|\#\#|\#\#\#|\#\#\#\#|\#\#\#\#\#|\#\#\#\#\#\#|\$|%|\^|&|\*|\*\*|\-|\-\-|\=|\=\=|\=~|\+|\+\+|\<|\>|\/|\/%|\/\/|\\\\|\\\\\\\\|\||\|\-|\|\=|\.\.|\.\.\.|\.\/|\:|\:\:|\:\=|\|\||ø|∅|∞|∑|∏|∩|∪|⊂|⊃|⊆|⊇|∈|∉|∧|∨|⊻|⊼|¬|\-\-\-/
+    },
+	"more-sugar": {
+		pattern: /\|/,
+		alias: 'important'
+	}
 };
 
 Prism.languages.art = Prism.languages['arturo'];

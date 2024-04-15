@@ -400,13 +400,18 @@ a.version-link {
                             }
                         }
                     }
+                    
 
                     pre, code {
-                        color: inherit !important;
                         -webkit-font-feature-settings: "ss03", "ss04", "ss05", "ss07", "ss09", "cv01", "cv02", "cv20", "cv22", "cv23", "calt";;
                         -moz-font-feature-settings: "ss03", "ss04", "ss05", "ss07", "ss09", "cv01", "cv02", "cv20", "cv22", "cv23", "calt";
                         font-feature-settings: "ss03", "ss04", "ss05", "ss07", "ss09", "cv01", "cv02", "cv20", "cv22", "cv23", "calt";
                         text-rendering: optimizelegibility;
+                    }
+
+                    code:not([class*=language-]),
+                    pre:not([class*=language-]) {
+                        color: inherit !important;
                     }
 
                     a {
