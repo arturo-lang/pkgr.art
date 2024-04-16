@@ -23,6 +23,19 @@ grafito: #[
                          "sqlite3"
                 ]
         ]
+html: #[
+        description: "HTML generator for Arturo"
+        tags: [
+                        "arturo"
+                         "arturo-module"
+                         "css"
+                         "css3"
+                         "html"
+                         "html-generator"
+                         "html5"
+                         "javascript"
+                ]
+        ]
 states: #[
         description: ":states is a lean Finite State Machine package for the Arturo Programming Language"
         tags: [
