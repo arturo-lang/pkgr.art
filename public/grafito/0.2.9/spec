@@ -1,0 +1,13 @@
+name: "grafito"
+description: "Portable, Serverless & Lightweight SQLite-based Graph Database in Arturo"
+license: "MIT"
+author: "arturo-lang"
+version: 0.2.9
+url: "https://api.github.com/repos/arturo-lang/grafito/zipball/v0.2.9"
+entry: "grafito.art"
+executable: false
+depends: []
+requires: [
+                >
+                 0.9.83
+        ]

@@ -5,6 +5,7 @@ author: "drkameleon"
 version: 0.0.2
 url: "https://api.github.com/repos/drkameleon/unidecode.art/zipball/v0.0.2"
 entry: "unidecode.art"
+executable: false
 depends: []
 requires: [
                 >

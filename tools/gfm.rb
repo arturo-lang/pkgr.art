@@ -5,7 +5,10 @@ puts Commonmarker.to_html(File.read(ARGV[0]), options: {
         github_pre_lang: true,
         unsafe: true 
     },
-    extension: { footnotes: true }
+    extension: { 
+        header_ids: "",
+        footnotes: true 
+    }
 }, plugins: { 
     syntax_highlighter: nil 
 })
