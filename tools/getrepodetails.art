@@ -122,6 +122,41 @@ getReleaseInfo: function [owner, repo, version, url][
     return ret
 ]
 
+getFolderSize: function [folder][
+    subfiles: list folder
+    if 0 = size subfiles -> return 0`B
+    return fold.seed: 0`B subfiles [bef,filepath][
+        (directory? filepath) ? -> bef + getFolderSize filepath
+                                -> bef + volume filepath
+    ]
+]
+
+getNoOfFiles: function [folder][
+    subfiles: list folder
+    if 0 = size subfiles -> return 0
+    return fold.seed: 0 list folder [bef,filepath][
+        (directory? filepath) ? -> bef + getNoOfFiles filepath
+                                -> bef + 1
+    ]
+]
+
+getRepoDetails: function [owner, repo, downloadUrl][
+    tmpName: ~{|owner|-|repo|}
+    tmpZip: ~"|tmpName|.zip"
+    tmpFolder: ~"|tmpName|"
+    
+    download.as: tmpZip downloadUrl
+    unzip tmpFolder tmpZip
+
+    repoSize: getFolderSize tmpFolder
+    repoFiles: getNoOfFiles tmpFolder
+
+    delete.directory tmpFolder
+    delete tmpZip
+
+    return #[size: repoSize, files: repoFiles]
+]
+
 getVersions: function [owner, repo][
     greaterThan: (attr 'greaterThan) ?? 0.0.0
     available: new []
@@ -131,10 +166,12 @@ getVersions: function [owner, repo][
             if ver: <= extractCorrectVersion release\tag_name [
                 if ver > greaterThan [
                     if releaseInfo: <= getReleaseInfo owner repo ver release\zipball_url [
+                        repoDetails: getRepoDetails owner repo downloadUrl
                         'available ++ #[
                             version: ver
                             date: to :date release\published_at
                             link: release\html_url 
+                            details: repoDetails
                             url: release\zipball_url
                             info: releaseInfo
                         ]
