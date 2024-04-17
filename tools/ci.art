@@ -22,9 +22,7 @@ do ::
  
         [owner,repo]: split.by:"/" location
         (repoD: <= getRepoInfo owner repo)?[
-            verses: getVersions owner repo
-            inspect verses
-            (empty? verses)?[
+            (empty? getVersions owner repo)?[
                 print color #orange "[ ❓ HMMM  ]" 
                 'problemWithReleases ++ ~"|owner|/|repo|"
                 hasError?: true
