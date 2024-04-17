@@ -7,6 +7,7 @@ puts Commonmarker.to_html(File.read(ARGV[0]), options: {
     },
     extension: { 
         header_ids: "",
+        table: true,
         footnotes: true 
     }
 }, plugins: { 
