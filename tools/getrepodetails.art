@@ -22,6 +22,7 @@ getGH: function [req][
             "Authorization": ~"Bearer |AccessToken|"
             "X-GitHub-Api-Version": apiVersion
         ] ~{https://api.github.com/|req|} ø
+        inspect got
         return read.json got\body
     ]
 ]
@@ -134,7 +135,7 @@ getFolderSize: function [folder][
 getNoOfFiles: function [folder][
     subfiles: list folder
     if 0 = size subfiles -> return 0
-    return fold.seed: 0 list folder [bef,filepath][
+    return fold.seed: 0 subfiles [bef,filepath][
         (directory? filepath) ? -> bef + getNoOfFiles filepath
                                 -> bef + 1
     ]
@@ -148,7 +149,7 @@ getRepoDetails: function [owner, repo, downloadUrl][
     download.as: tmpZip downloadUrl
     unzip tmpFolder tmpZip
 
-    repoSize: getFolderSize tmpFolder
+    repoSize: to :integer scalar getFolderSize tmpFolder
     repoFiles: getNoOfFiles tmpFolder
 
     delete.directory tmpFolder
@@ -166,12 +167,11 @@ getVersions: function [owner, repo][
             if ver: <= extractCorrectVersion release\tag_name [
                 if ver > greaterThan [
                     if releaseInfo: <= getReleaseInfo owner repo ver release\zipball_url [
-                        repoDetails: getRepoDetails owner repo downloadUrl
                         'available ++ #[
                             version: ver
                             date: to :date release\published_at
                             link: release\html_url 
-                            details: repoDetails
+                            details: getRepoDetails owner repo release\zipball_url
                             url: release\zipball_url
                             info: releaseInfo
                         ]
