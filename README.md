@@ -92,7 +92,7 @@ A few examples, taken from `import`'s own documentation that show a few more bel
 ```red
 import "dummy"!                     ; import the package 'dummy'
 
-print dummyFunc 10              ; and use it :)
+print dummyFunc 10                  ; and use it :)
 ```
 
 ```red
@@ -126,9 +126,7 @@ import "somepackage"!               ; the same works if we have a folder that
 d: import.lean "dummy"!             ; importing a package as a dictionary
                                     ; for better namespace isolation
 
-do [
-    print d\dummyFunc 10            ; works fine :)
-]
+print d\dummyFunc 10                ; works fine :)
 ```
 
 > ⚠️ You may have noticed the use of `do` (with a block) *after* the import statements. Unfortunately, given how Arturo's parser and AST works right now, there is no way to make functions inside an imported file/package be visible at the same level of parsing/execution, hence we have to include them in a sublevel! (needless to say, this is one of the things that could be resolved in the future, I just wouldn't bet too hard on it for now)
