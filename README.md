@@ -49,7 +49,7 @@ The way to fine-tune a package is by including an extra `info.art` in your packa
 Let's take a look at an example `info.art` configuration:
 
 ```red
-entry: "mayownmain"
+entry: "myownmain"
 depends: [
   [someOtherPackage >= 0.0.2]
 ]
@@ -82,7 +82,7 @@ In any case, we're here to guide you through the whole process! Not to worry!
 The main way of using a package is by `import`ing in your Arturo code. And it's as simple as:
 
 ```red
-import "dummy"
+import "dummy"!
 ```
 
 If the package has not already been downloaded, it will be and you will be able to use it just fine without noticing anything. If it's already there, then it will be used automatically.
@@ -90,40 +90,40 @@ If the package has not already been downloaded, it will be and you will be able 
 A few examples, taken from `import`'s own documentation that show a few more bells and whistles:
 
 ```red
-import "dummy"                      ; import the package 'dummy'
-do ::
-    print dummyFunc 10              ; and use it :)
+import "dummy"!                     ; import the package 'dummy'
+
+print dummyFunc 10              ; and use it :)
 ```
 
 ```red
-import.version:0.0.3 "dummy"        ; import a specific version
+import.version:0.0.3 "dummy"!       ; import a specific version
 
-import.min.version:0.0.3 "dummy"    ; import at least the give version;
+import.min.version:0.0.3 "dummy"!   ; import at least the give version;
                                     ; if there is a newer one, it will pull this one
 ```
 
 ```red
-import.latest "dummy"               ; whether we already have the package or not
+import.latest "dummy"!              ; whether we already have the package or not
                                     ; always try to pull the latest version
 ```
 
 ```red
-import "https://github.com/arturo-lang/dummy-package"
+import "https://github.com/arturo-lang/dummy-package"!
 ; we may also import user repositories directly
 
-import.branch:"main" "https://github.com/arturo-lang/dummy-package"
+import.branch:"main" "https://github.com/arturo-lang/dummy-package"!
 ; even specifying the branch to pull
 ```
 
 ```red
-import "somefile.art"               ; importing a local file is possible
+import "somefile.art"!              ; importing a local file is possible
 
-import "somepackage"                ; the same works if we have a folder that
+import "somepackage"!               ; the same works if we have a folder that
                                     ; is actually structured like a package
 ```
 
 ```red
-d: import.lean "dummy"              ; importing a package as a dictionary
+d: import.lean "dummy"!             ; importing a package as a dictionary
                                     ; for better namespace isolation
 
 do [
