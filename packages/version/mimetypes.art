@@ -1,5 +1,22 @@
 [
         #[
+                version: 0.0.2
+                date: to :date "2024-04-17T12:21:51+00:00"
+                link: "https://github.com/drkameleon/mimetypes.art/releases/tag/v0.0.2"
+                url: "https://api.github.com/repos/drkameleon/mimetypes.art/zipball/v0.0.2"
+                info: #[
+                        entry: "src/mimetypes.art"
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                        executable: false
+                        depends: [
+
+                        ]
+                ]
+        ]
+         #[
                 version: 0.0.1
                 date: to :date "2024-04-17T11:19:25+00:00"
                 link: "https://github.com/drkameleon/mimetypes.art/releases/tag/v0.0.1"
