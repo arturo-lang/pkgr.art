@@ -128,7 +128,6 @@ getVersions: function [owner, repo][
     try [
         releases: getGH ~"repos/|owner|/|repo|/releases"
         loop releases 'release [
-            inspect release
             if ver: <= extractCorrectVersion release\tag_name [
                 if ver > greaterThan [
                     if releaseInfo: <= getReleaseInfo owner repo ver release\zipball_url [
