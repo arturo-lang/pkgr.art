@@ -36,6 +36,18 @@ html: #[
                          "javascript"
                 ]
         ]
+mimetypes: #[
+        description: "MIME content type registry & recognition"
+        tags: [
+                        "arturo"
+                         "arturo-language"
+                         "arturo-package"
+                         "file"
+                         "http"
+                         "mimetype"
+                         "web-server"
+                ]
+        ]
 states: #[
         description: ":states is a lean Finite State Machine package for the Arturo Programming Language"
         tags: [
