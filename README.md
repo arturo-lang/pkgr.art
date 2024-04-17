@@ -1,6 +1,6 @@
 <p align="center"><img align="center" width="350" src="https://raw.githubusercontent.com/arturo-lang/pkgr.art/main/logo.png"/></p>
 <p align="center">
-  <b>The main registry for Arturo's package manager</b>
+  <b>The official package registry<br>for the Arturo programming language</b>
   <br><br>
   <img src="https://img.shields.io/github/license/arturo-lang/pkgr.art?style=for-the-badge">
   <img src="https://img.shields.io/badge/language-Arturo-orange.svg?style=for-the-badge">
