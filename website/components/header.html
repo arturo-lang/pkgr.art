@@ -7,7 +7,26 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no">
         <title><||= packageTitle ||>Arturo Packager</title>
-        <meta name="description" content="<||= (packageTitle = "") ? -> "Package manager for the Arturo programming language" -> ~"Download |capitalize packageTitle|Package for the Arturo programming language" ||>">
+        <meta name="description" content="<||= (packageTitle = "") ? -> "Package manager for the Arturo programming language" -> ~"Get |capitalize packageTitle|Package for the Arturo programming language" ||>">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="<||= capitalize packageTitle ||>Arturo Packager">
+        <meta property="og:description" content="<||= (packageTitle = "") ? -> "Package manager for the Arturo programming language" -> ~"Get |capitalize packageTitle|Package for the Arturo programming language" ||>">
+        
+        <|| if packageTitle <> "" [||>
+        <meta property="og:image" content="<||= siteroot ||>/thumbs/<||= packageTitle ||>.png">
+        <|| ] ||>
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@ArturoLanguage" />
+        <meta name="twitter:creator" content="@ArturoLanguage" />
+        <meta name="twitter:title" content="<||= capitalize packageTitle ||>Arturo Packager">
+        <meta name="twitter:description" content="<||= (packageTitle = "") ? -> "Package manager for the Arturo programming language" -> ~"Get |capitalize packageTitle|Package for the Arturo programming language" ||>">
+        <|| if packageTitle <> "" [||>
+        <meta name="twitter:image" content="<||= siteroot ||>/thumbs/<||= packageTitle ||>.png">
+        <|| ] ||>
 
         <!-- FavIcon -->
         <link rel="apple-touch-icon" sizes="57x57" href="<||= siteroot ||>/favico/apple-icon-57x57.png">
