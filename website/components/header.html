@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no">
-        <title><||= packageTitle ||>Arturo Packager</title>
+        <title><||= capitalize packageTitle ||>Arturo Packager</title>
         <meta name="description" content="<||= (packageTitle = "") ? -> "Package manager for the Arturo programming language" -> ~"Get |capitalize packageTitle|Package for the Arturo programming language" ||>">
 
         <!-- Open Graph / Facebook -->
@@ -15,7 +15,7 @@
         <meta property="og:description" content="<||= (packageTitle = "") ? -> "Package manager for the Arturo programming language" -> ~"Get |capitalize packageTitle|Package for the Arturo programming language" ||>">
         
         <|| if packageTitle <> "" [||>
-        <meta property="og:image" content="<||= siteroot ||>/thumbs/<||= packageTitle ||>.png">
+        <meta property="og:image" content="<||= siteroot ||>/thumbs/<||= replace packageTitle " &bull; " "" ||>.png">
         <|| ] ||>
 
         <!-- Twitter -->
@@ -25,7 +25,7 @@
         <meta name="twitter:title" content="<||= capitalize packageTitle ||>Arturo Packager">
         <meta name="twitter:description" content="<||= (packageTitle = "") ? -> "Package manager for the Arturo programming language" -> ~"Get |capitalize packageTitle|Package for the Arturo programming language" ||>">
         <|| if packageTitle <> "" [||>
-        <meta name="twitter:image" content="<||= siteroot ||>/thumbs/<||= packageTitle ||>.png">
+        <meta name="twitter:image" content="<||= siteroot ||>/thumbs/<||= replace packageTitle " &bull; " "" ||>.png">
         <|| ] ||>
 
         <!-- FavIcon -->
