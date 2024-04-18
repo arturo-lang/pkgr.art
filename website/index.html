@@ -5,13 +5,13 @@
     <div class="container package-listing">
         <div class="columns">
             <div class="column is-12 has-text-centered">
-                <h2 class="title package-listing-header">Latest additions</h2>
+                <h2 class="title package-listing-header">Recently updated</h2>
             </div>
         </div>
         <div class="columns" style="margin-top:0.5rem">
             <div class="column is-8-tablet is-offset-2-tablet is-10-mobile is-offset-1-mobile">
                 <!-- <p class="subtitle has-text-black">Latest packages</p> -->
-                <|| loop entries [entryLeft, entryRight][||>
+                <|| loop first.n: 6 entries [entryLeft, entryRight][||>
                     <div class="columns is-tablet">
                         <div class="column is-6">
                             <||= getPackageBox entryLeft ||>
