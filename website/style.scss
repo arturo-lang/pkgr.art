@@ -779,12 +779,21 @@ a {
 
     .autocomplete-suggestion {
         padding: 0.7rem; 
-        white-space: nowrap; 
+        //white-space: nowrap; 
         overflow: hidden;
         cursor: pointer;
 
         &.autocomplete-selected {
             background: #F0F0F0;
+        }
+
+        .suggestion-wrapper {
+            border-bottom: 1px solid #DDD;
+            align-items: center;
+
+            p {
+                text-overflow: ellipsis;
+            }
         }
     }
 }
