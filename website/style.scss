@@ -852,3 +852,15 @@ a {
         }
     }
 }
+
+.show-all-button {
+    margin-bottom: 3rem;
+    color: $arturoColor;
+    border-color: $arturoColor;
+
+    &:hover {
+        background-color: $arturoColor;
+        border-color: $arturoColor;
+        color: $backgroundColor;
+    }
+}
