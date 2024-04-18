@@ -163,7 +163,7 @@ write.directory "public/thumbs" ø
 loop packages [k,v][
     print ~"- Processing main package: |k|"
     inf: # ~"packages/info/|k|.art"
-    generateThumbnail inf\name inf\author\name inf\description
+    generateThumbnail k inf\author\name inf\description
     vers: do "@" ++ read ~"packages/version/|k|.art" 
     ;--------------------------------
     ; DEBUGGING!
