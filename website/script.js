@@ -370,7 +370,7 @@ $(document).ready(function(){
 
 	$(".repo-size-field").each(function(idx) {
 		console.log();
-		$(this).text("("+humanFileSize(parseInt($(this).text().replace("(","").replace(")","")))+")");
+		$(this).text(humanFileSize(parseInt($(this).text())));
 	});
 });
 
