@@ -58,9 +58,9 @@ jobs:
       - name: Update package info
         run: |
           echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
-          arturo tools/deploy.art
           rm -rf public
           mkdir public
+          arturo tools/deploy.art
           arturo tools/generateweb.art
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
