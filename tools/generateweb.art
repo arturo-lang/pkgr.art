@@ -287,7 +287,4 @@ copy "website/script.js" ~"|assetsFolder|/script.js"
 copy "website/download.php" "public/download.php"
 copy "website/getdownloads.php" "public/getdownloads.php"
 
-; copy searchable items
-copy "website/searchable.json" "public/searchable.json"
-
 print color #green "Done!"
