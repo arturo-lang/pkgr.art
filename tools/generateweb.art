@@ -88,7 +88,7 @@ getLink: function [loc, subv][
         unless null? subv ->
             rett: rett ++ "/" ++ to :string subv
     ][
-        rett: siteroot ++ "/" ++ loc
+        rett: siteroot ++ "/_packages/" ++ loc
         unless null? subv ->
             rett: rett ++ "/" ++ to :string subv
         rett: rett ++ "/index.html"
@@ -158,7 +158,12 @@ createSpecFile: function [package, versionToProcess, targetFolder][
 
 searchable: new []
 
-write.directory "public/thumbs" ø
+; create thumbs folder if necessary
+
+thumbsFolder: "public/thumbs"
+unless directory? thumbsFolder [
+    write.directory "public/thumbs" ø
+]
 
 loop packages [k,v][
     print ~"- Processing main package: |k|"
@@ -192,9 +197,14 @@ processPackagePage: function [entry][
 
 searchable: write.compact.json ø searchable
 
+pkgFolder: "public/_packages"
+unless directory? pkgFolder [
+    write.directory pkgFolder ø
+]
+
 loop entries 'entry [
     print ~"- Creating subpages: |entry\name|"
-    tgtName: ~{public/|entry\name|}
+    tgtName: ~{|pkgFolder|/|entry\name|}
     unless directory? tgtName [
         write.directory tgtName ø
     ]
@@ -207,7 +217,7 @@ loop entries 'entry [
     createSpecFile entry currentVersion tgtName
 
     loop entry\version 'vv [
-        versionTgt: ~{public/|entry\name|/|vv\version|}
+        versionTgt: ~{|tgtName|/|vv\version|}
         unless directory? versionTgt [
             write.directory versionTgt ø
         ]
@@ -233,6 +243,7 @@ if odd? size entries ->
 
 ; render homepage
 isHome: true
+isSearch: false
 packageTitle: ""
 write "public/index.html"
       render.template read "website/index.html"
@@ -240,25 +251,40 @@ write "public/index.html"
 ; and compress it
 compressHTML "public/index.html"
 
-; compile scss
-execute "sass website/style.scss public/style.css"
+; render search page
+isHome: false
+isSearch: true
+write.directory "public/search" ø
+write "public/search/index.html"
+      render.template read "website/search.html"
 
 ; and compress it too
-compressCSS "public/style.css"
+compressHTML "public/search/index.html"
+
+; create assets folder if necessary
+assetsFolder: "public/assets"
+unless directory? assetsFolder [
+    write.directory assetsFolder ø
+]
+
+; compile scss
+execute ~"sass website/style.scss |assetsFolder|/style.css"
+
+; and compress it too
+compressCSS ~"|assetsFolder|/style.css"
 
 ; copy resources
 loop list "website/images" 'file [
-    copy file replace file "website/" "public/"
+    if contains? [".jpg", ".png"] extract.extension file [
+        copy file assetsFolder ++ "/" ++ extract.basename file
+    ]
 ]
 
 ; copy main javascript
-copy "website/script.js" "public/script.js"
+copy "website/script.js" ~"|assetsFolder|/script.js"
 
 ; copy server scripts
 copy "website/download.php" "public/download.php"
 copy "website/getdownloads.php" "public/getdownloads.php"
-
-; copy searchable items
-copy "website/searchable.json" "public/searchable.json"
 
 print color #green "Done!"

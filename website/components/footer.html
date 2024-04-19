@@ -20,7 +20,7 @@
         <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
         <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/javascript-time-ago@2.5.9/bundle/javascript-time-ago.js"></script> -->
-        <script src="<||= siteroot ||>/script.js"></script>
+        <script src="<||= siteroot ||>/assets/script.js"></script>
         <script>
             $(document).ready(function(){
                 $(".star-count").each(function (idx){
@@ -51,11 +51,12 @@
                     $('#search-bar').autocomplete({
                         formatResult: function (suggestion, currentValue){
                             return `
-                                <div class="columns" style="border-bottom:1px solid #DDD;">
-                                    <div class="column is-8">
+                                <div class="columns is-mobile suggestion-wrapper">
+                                    <div class="column is-9-tablet is-12-mobile">
                                         <b>${suggestion.value}</b>
+                                        <p><small>${suggestion.description}</small></p>
                                     </div>
-                                    <div class="column is-4">
+                                    <div class="column is-3-tablet is-hidden-mobile">
                                         <div class="is-pulled-right has-text-grey">
                                             ${suggestion.version}
                                         </div>

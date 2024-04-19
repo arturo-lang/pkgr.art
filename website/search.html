@@ -5,23 +5,17 @@
     <div class="container package-listing">
         <div class="columns">
             <div class="column is-12 has-text-centered">
-                <h2 class="title package-listing-header">Recently updated</h2>
+                <h2 class="title package-listing-header"><||= enumerate entries => [not? null? &]||> packages found</h2>
             </div>
         </div>
         <div class="columns" style="margin-top:0.5rem">
             <div class="column is-8-tablet is-offset-2-tablet is-10-mobile is-offset-1-mobile">
                 <!-- <p class="subtitle has-text-black">Latest packages</p> -->
-                <|| loop first.n: 6 entries [entryLeft, entryRight][||>
-                    <div class="columns is-tablet">
-                        <div class="column is-6">
-                            <||= getPackageBox entryLeft ||>
-                        </div>
-                        <div class="column is-6">
-                            <|| unless null? entryRight [||>
-                                <||= getPackageBox entryRight ||>
-                            <|| ] ||>
-                        </div>
-                    </div>
+                <|| loop entries [entryLeft, entryRight][||>
+                    <||= getPackageBox entryLeft ||>
+                    <|| unless null? entryRight [||>
+                        <||= getPackageBox entryRight ||>
+                    <|| ] ||>
                 <|| ] ||>
             </div>
         </div>
@@ -29,7 +23,6 @@
     <div class="container has-text-centered">
         <div class="columns">
             <div class="column is-12" style="padding:4rem; font-size: 1.2rem">
-                <a href="<||= siteroot ||>/search" class="button is-medium show-all-button">Show all packages</a>
                 <p class="has-text-grey">
                     <a class="simple-link" href="https://github.com/arturo-lang/pkgr.art?tab=readme-ov-file#using-packages" target="_blank">How do I use a package?</a>&nbsp;·&nbsp;
                     <a class="simple-link" href="https://github.com/arturo-lang/pkgr.art?tab=readme-ov-file#creating-packages" target="_blank">How do I create a new package?</a>
