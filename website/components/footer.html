@@ -20,7 +20,7 @@
         <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
         <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/javascript-time-ago@2.5.9/bundle/javascript-time-ago.js"></script> -->
-        <script src="<||= siteroot ||>/script.js"></script>
+        <script src="<||= siteroot ||>/assets/script.js"></script>
         <script>
             $(document).ready(function(){
                 $(".star-count").each(function (idx){
@@ -28,6 +28,8 @@
                     var currentElement = $(this);
                     jQuery.getJSON(repo, function (got){
                         currentElement.html(got.items[0].stargazers_count);
+                    }).fail(function() {
+                        console.log('failed'); // or whatever
                     });
                 });
                 var searchables = <||= searchable ||>;
