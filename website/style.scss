@@ -156,7 +156,7 @@ a.version-link {
 
     .package-body {
         padding: 1.25rem;
-        height: 120px !important;
+        height: 100px !important;
 
         p {
             display: -webkit-box; 
@@ -170,27 +170,25 @@ a.version-link {
     .package-footer {
         border-top: 1px solid #eee;
 
-        .columns {
-            padding: 1.25rem;
-            padding-left: 0.75rem;
+        padding: 1.25rem;
+        padding-left: 0.75rem;
 
-            .repo-user {
-                padding-top:0; 
-                padding-bottom: 0.25rem;
-                font-weight: 500;
-    
-                .repo-user-icon {}
-                .repo-user-name {}
-            }
-    
-            .repo-license {
-                padding-top:0; 
-                padding-bottom: 0.25rem;
-                font-weight: 500;
-    
-                .repo-license-icon {}
-                .repo-license-name {}
-            }
+        .repo-user {
+            padding-top:0; 
+            padding-bottom: 0.25rem;
+            font-weight: 500;
+
+            .repo-user-icon {}
+            .repo-user-name {}
+        }
+
+        .repo-license {
+            padding-top:0; 
+            padding-bottom: 0.25rem;
+            font-weight: 500;
+
+            .repo-license-icon {}
+            .repo-license-name {}
         }
     }
 }
