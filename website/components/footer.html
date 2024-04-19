@@ -28,8 +28,6 @@
                     var currentElement = $(this);
                     jQuery.getJSON(repo, function (got){
                         currentElement.html(got.items[0].stargazers_count);
-                    }).fail(function() {
-                        console.log('failed'); // or whatever
                     });
                 });
                 var searchables = <||= searchable ||>;
