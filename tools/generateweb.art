@@ -240,6 +240,14 @@ write "public/index.html"
 ; and compress it
 compressHTML "public/index.html"
 
+; render search page
+write.directory "public/search" ø
+write "public/search/index.html"
+      render.template read "website/search.html"
+
+; and compress it too
+compressHTML "public/search/index.html"
+
 ; compile scss
 execute "sass website/style.scss public/style.css"
 
