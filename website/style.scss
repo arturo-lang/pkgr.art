@@ -140,20 +140,23 @@ a.version-link {
     margin-bottom: 0 !important;
 
     padding: 0 !important;
+    display: flex;
+    flex-direction: column;
 
     box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.07), 0 0 0 1px rgba(10,10,10,.02);
 
-    & > * {
-        padding: 1.25rem;
-    }
+    // & > * {
+    //     padding: 1.25rem;
+    // }
 
     .package-header {
+        padding: 1.25rem;
         border-bottom: 1px solid lightgray; 
     }
 
     .package-body {
-        //padding: 1.25rem;
-        height: 70px !important;
+        padding: 1.25rem;
+        height: 120px !important;
 
         p {
             display: -webkit-box; 
@@ -165,22 +168,29 @@ a.version-link {
     }
 
     .package-footer {
-        .repo-user {
-            padding-top:0; 
-            padding-bottom: 0.25rem;
-            font-weight: 500;
+        border-top: 1px solid #eee;
 
-            .repo-user-icon {}
-            .repo-user-name {}
-        }
+        .columns {
+            padding: 1.25rem;
+            padding-left: 0.75rem;
 
-        .repo-license {
-            padding-top:0; 
-            padding-bottom: 0.25rem;
-            font-weight: 500;
-
-            .repo-license-icon {}
-            .repo-license-name {}
+            .repo-user {
+                padding-top:0; 
+                padding-bottom: 0.25rem;
+                font-weight: 500;
+    
+                .repo-user-icon {}
+                .repo-user-name {}
+            }
+    
+            .repo-license {
+                padding-top:0; 
+                padding-bottom: 0.25rem;
+                font-weight: 500;
+    
+                .repo-license-icon {}
+                .repo-license-name {}
+            }
         }
     }
 }
