@@ -56,14 +56,15 @@ depends: [
 requires: [> 0.9.83]
 ```
 
-As you can see, all this file *may* contain - note: all fields are optional - is basically a few more details:
-
-- **entry**: an alternative entry file, if you don't want to use `main.art`
-- **executable**: an "executable" file, if you set this pointing to a file within the package, then - when installing it - an (Bash-based, for now) executable will be installed in `$HOME/.arturo/packages/bin` (just make sure this path is in your $PATH variable and you'll be able to execute the given package from anywhere ;-))
-- **depends**: a list of dependencies (= other packages your own package needs)
-- **requires**: the minimum Arturo version your package is meant to work with
-
-As you can see, that's no rocket science.
+> [!NOTE]
+> All this file *may* contain - **worry not:** all fields are optional - is basically a few more details:
+> 
+> - **entry**: an alternative entry file, if you don't want to use `main.art`
+> - **executable**: an "executable" file, if you set this pointing to a file within the package, then - when installing it - an (Bash-based, for now) executable will be installed in `$HOME/.arturo/packages/bin` (just make sure this path is in your $PATH variable and you'll be able to execute the given package from anywhere ;-))
+> - **depends**: a list of dependencies (= other packages your own package needs)
+> - **requires**: the minimum Arturo version your package is meant to work with
+>
+> As you can see, it's no rocket science - really! 😉
 
 ### How do I "publish" a new package?
 
@@ -71,7 +72,8 @@ In order to publish a new package so that it's universally available via the mai
 
 Also: you don't have to add any description/documentation or anything like that. What will be extracted is exactly what you have in the repo - so, make sure everything is neat and tidy in there! 😉
 
-And another detail: since Arturo's package manager is version-aware, in order for us to be able to actually use versions for the submitted packages, make sure each of your versions is actually a published "Release" with a proper tag (by proper, I'd say anything that is SemVer compatible, like: `0.0.2` or `v0.0.3` if you prefer that).
+> [!TIP]
+> Since Arturo's package manager is version-aware, in order for us to be able to actually use versions for the submitted packages, make sure each of your versions is actually a published "Release" with a proper tag (by proper, I'd say anything that is SemVer compatible, like: `0.0.2` or `v0.0.3` if you prefer that).
 
 In any case, we're here to guide you through the whole process! Not to worry!
 
@@ -129,7 +131,8 @@ d: import.lean "dummy"!             ; importing a package as a dictionary
 print d\dummyFunc 10                ; works fine :)
 ```
 
-> ⚠️ You may have noticed the use of `do` (with a block) *after* the import statements. Unfortunately, given how Arturo's parser and AST works right now, there is no way to make functions inside an imported file/package be visible at the same level of parsing/execution, hence we have to include them in a sublevel! (needless to say, this is one of the things that could be resolved in the future, I just wouldn't bet too hard on it for now)
+> [!IMPORTANT]
+> You may have noticed the use of `!` *after* the import statements. Given how Arturo's parser and AST works, this is the way to make functions inside an imported file/package visible at the same level of parsing/execution! (another way, would be to wrap the calls to the aforementioned included functions in a `do [...]` block, but `!` is definitely more practical and faster! ;-))
 
 
 License
@@ -137,7 +140,7 @@ License
 
 MIT License
 
-Copyright (c) 2023 Arturo Programming Language
+Copyright (c) 2024 Arturo Programming Language
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
