@@ -233,6 +233,7 @@ if odd? size entries ->
 
 ; render homepage
 isHome: true
+isSearch: false
 packageTitle: ""
 write "public/index.html"
       render.template read "website/index.html"
@@ -242,6 +243,7 @@ compressHTML "public/index.html"
 
 ; render search page
 isHome: false
+isSearch: true
 write.directory "public/search" ø
 write "public/search/index.html"
       render.template read "website/search.html"
