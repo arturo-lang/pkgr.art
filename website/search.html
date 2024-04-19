@@ -11,17 +11,8 @@
         <div class="columns" style="margin-top:0.5rem">
             <div class="column is-8-tablet is-offset-2-tablet is-10-mobile is-offset-1-mobile">
                 <!-- <p class="subtitle has-text-black">Latest packages</p> -->
-                <|| loop first.n: 6 entries [entryLeft, entryRight][||>
-                    <div class="columns is-tablet">
-                        <div class="column is-6">
-                            <||= getPackageBox entryLeft ||>
-                        </div>
-                        <div class="column is-6">
-                            <|| unless null? entryRight [||>
-                                <||= getPackageBox entryRight ||>
-                            <|| ] ||>
-                        </div>
-                    </div>
+                <|| loop entries 'ent [||>
+                    <||= getPackageBox ent ||>
                 <|| ] ||>
             </div>
         </div>
