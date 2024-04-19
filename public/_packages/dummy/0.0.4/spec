@@ -1,0 +1,10 @@
+name: "dummy"
+description: "This package will serve merely as test for Arturo\'s package manager"
+license: "MIT"
+author: "arturo-lang"
+version: 0.0.4
+url: "https://api.github.com/repos/arturo-lang/dummy-package/zipball/v0.0.4"
+entry: "main.art"
+executable: false
+depends: []
+requires: []

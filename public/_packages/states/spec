@@ -1,0 +1,13 @@
+name: "states"
+description: ":states is a lean Finite State Machine package for the Arturo Programming Language"
+license: "MIT"
+author: "RickBarretto"
+version: 0.1.0
+url: "https://api.github.com/repos/RickBarretto/states.art/zipball/v0.1.0"
+entry: "states.art"
+executable: false
+depends: []
+requires: [
+                >
+                 0.9.83
+        ]
