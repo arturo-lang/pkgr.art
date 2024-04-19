@@ -191,6 +191,28 @@ a.version-link {
             .repo-license-name {}
         }
     }
+
+    &.is-plain {
+        box-shadow: 0;
+
+        .package-body {
+            display: none;
+        }
+        .package-footer {
+            display: none
+        }
+
+        &:hover {
+            box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.07), 0 0 0 1px rgba(10,10,10,.02);
+            
+            .package-body {
+                display: block;
+            }
+            .package-footer {
+                display: block;
+            }
+        }
+    }
 }
 
 .main-section {
