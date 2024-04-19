@@ -28,7 +28,7 @@ The main registry for Arturo's package manager
 
 ## What is a package?
 
-Trying to be as brief as possible, an Arturo package could be defined as a folder with an entry file in it (by default: `main.art`).
+Trying to be as brief as possible: an Arturo package could be defined as a folder with an entry file in it (by default, `main.art`).
 
 So let's say you create a new folder `myPackage` and create a `main.art` in there with some code in it, technically speaking, *that* is a package.
 
@@ -70,7 +70,7 @@ requires: [> 0.9.83]
 
 In order to publish a new package so that it's universally available via the main package registry (pkgr.art), all you have to do is add a tiny PR to this repo, and add a one-line entry to the [`packages/list.art`](https://github.com/arturo-lang/pkgr.art/blob/main/packages/list.art) file. Yes, it's as easy as that: a name you want for your package and the repo (owner/repo) of your project. Once the PR has been merged, your package will be instantly available!
 
-Also: you don't have to add any description/documentation or anything like that. What will be extracted is exactly what you have in the repo - so, make sure everything is neat and tidy in there! 😉
+Also: you don't have to add any description/documentation or anything like that. What will be extracted is exactly what you have in the repo - so, make sure everything is neat and tidy in there! 🚀
 
 > [!TIP]
 > Since Arturo's package manager is version-aware, in order for us to be able to actually use versions for the submitted packages, make sure each of your versions is actually a published "Release" with a proper tag (by proper, I'd say anything that is SemVer compatible, like: `0.0.2` or `v0.0.3` if you prefer that).
@@ -132,7 +132,7 @@ print d\dummyFunc 10                ; works fine :)
 ```
 
 > [!IMPORTANT]
-> You may have noticed the use of `!` *after* the import statements. Given how Arturo's parser and AST works, this is the way to make functions inside an imported file/package visible at the same level of parsing/execution! (another way, would be to wrap the calls to the aforementioned included functions in a `do [...]` block, but `!` is definitely more practical and faster! ;-))
+> You may have noticed the use of `!` *after* the import statements. Given how Arturo's parser and AST works, this is the way to make functions inside an imported file/package visible at the same level of parsing/execution! (another way, would be to wrap the calls to the aforementioned included functions in a `do [...]` block, but `!` is definitely more practical and faster! 😉)
 
 
 License
