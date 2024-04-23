@@ -48,6 +48,20 @@ mimetypes: #[
                          "web-server"
                 ]
         ]
+recase: #[
+        description: "Unicode-friendly string case converter for Arturo"
+        tags: [
+                        "arturo"
+                         "arturo-language"
+                         "arturo-package"
+                         "camelcase"
+                         "casing"
+                         "kebabcase"
+                         "snakecase"
+                         "string-manipulation"
+                         "titlecase"
+                ]
+        ]
 states: #[
         description: ":states is a lean Finite State Machine package for the Arturo Programming Language"
         tags: [
