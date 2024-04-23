@@ -49,7 +49,7 @@ mimetypes: #[
                 ]
         ]
 recase: #[
-        description: "Unicode-friendly string case converter for Arturo"
+        description: "Unicode-friendly string case converter"
         tags: [
                         "arturo"
                          "arturo-language"

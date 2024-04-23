@@ -1,5 +1,5 @@
 name: "recase"
-description: "Unicode-friendly string case converter for Arturo"
+description: "Unicode-friendly string case converter"
 license: "MIT"
 author: "drkameleon"
 version: 0.0.1
