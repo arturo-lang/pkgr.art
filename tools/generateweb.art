@@ -280,6 +280,13 @@ loop list "website/images" 'file [
     ]
 ]
 
+; copy favicon-related resources
+loop list "website" 'file [
+    if contains? [".png", ".ico", ".svg", ".webmanifest", ".xml"] extract.extension file [
+        copy file "public/" ++ extract.basename file
+    ]
+]
+
 ; copy main javascript
 copy "website/script.js" ~"|assetsFolder|/script.js"
 
