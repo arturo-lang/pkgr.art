@@ -11,7 +11,7 @@
         <div class="columns" style="margin-top:0.5rem">
             <div class="column is-8-tablet is-offset-2-tablet is-10-mobile is-offset-1-mobile">
                 <!-- <p class="subtitle has-text-black">Latest packages</p> -->
-                <|| loop entries [entryLeft, entryRight][||>
+                <|| loop sort.by:'name entries [entryLeft, entryRight][||>
                     <||= getPackageBox entryLeft ||>
                     <|| unless null? entryRight [||>
                         <||= getPackageBox entryRight ||>
