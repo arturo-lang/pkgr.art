@@ -218,6 +218,7 @@ loop entries 'entry [
 
     loop entry\version 'vv [
         versionTgt: ~{|tgtName|/|vv\version|}
+        print ~"\t|vv\version|"
         unless directory? versionTgt [
             write.directory versionTgt ø
         ]
@@ -255,6 +256,8 @@ compressHTML "public/index.html"
 isHome: false
 isSearch: true
 write.directory "public/search" ø
+if null? last entries ->
+    pop 'entries
 write "public/search/index.html"
       render.template read "website/search.html"
 
