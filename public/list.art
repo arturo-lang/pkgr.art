@@ -48,6 +48,16 @@ mimetypes: #[
                          "web-server"
                 ]
         ]
+progressive: #[
+        description: "A customizeable, text-based progress bar generator & library"
+        tags: [
+                        "arturo"
+                         "arturo-package"
+                         "cli"
+                         "progress-bar"
+                         "terminal"
+                ]
+        ]
 recase: #[
         description: "Unicode-friendly string case converter"
         tags: [
