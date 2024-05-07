@@ -686,8 +686,8 @@ readme: {
                 
         }
 stats: #[
-        stars: 125
-        watch: 125
+        stars: 127
+        watch: 127
         ]
 author: #[
         name: "arturo-lang"

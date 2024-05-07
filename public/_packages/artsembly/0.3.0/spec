@@ -1,0 +1,13 @@
+name: "artsembly"
+description: "Arturo VM Bytecode assembler"
+license: "MIT"
+author: "arturo-lang"
+version: 0.3.0
+url: "https://api.github.com/repos/arturo-lang/artsembly/zipball/v0.3.0"
+entry: "src/artsembly.art"
+executable: false
+depends: []
+requires: [
+                >
+                 0.9.83
+        ]

@@ -1,4 +1,15 @@
 
+artsembly: #[
+        description: "Arturo VM Bytecode assembler"
+        tags: [
+                        "arturo"
+                         "arturo-package"
+                         "assembler"
+                         "bytecode"
+                         "bytecode-compiler"
+                         "vm"
+                ]
+        ]
 dummy: #[
         description: "This package will serve merely as test for Arturo\'s package manager"
         tags: [
