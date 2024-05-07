@@ -1,3 +1,4 @@
+artsembly: "arturo-lang/artsembly"
 dummy: "arturo-lang/dummy-package"
 grafito: "arturo-lang/grafito"
 html: "arturo-lang/art-html-module"
