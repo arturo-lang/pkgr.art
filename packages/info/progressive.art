@@ -122,6 +122,7 @@ readme: {
                 | Option | Type | Description | Default |
                 |----|----|----|----|
                 | .label | :string | set the main label | `"Progress:"` | 
+                | .message | :string | set a final message to appear as information | `""` |
                 | .labelColor | :color | set the main label color | `#white` |
                 | .detailColor | :color | set the color for the details | `#gray` |
                 | .onMark | :string | set character for "active" progress bar portions | `"▓"` |
@@ -172,8 +173,8 @@ readme: {
                 
         }
 stats: #[
-        stars: 1
-        watch: 1
+        stars: 2
+        watch: 2
         ]
 author: #[
         name: "drkameleon"

@@ -1,5 +1,26 @@
 [
         #[
+                version: 0.0.2
+                date: to :date "2024-05-10T11:01:47+00:00"
+                link: "https://github.com/drkameleon/progressive.art/releases/tag/v0.0.2"
+                details: #[
+                        size: 4991964
+                        files: 10
+                ]
+                url: "https://api.github.com/repos/drkameleon/progressive.art/zipball/v0.0.2"
+                info: #[
+                        entry: "src/progressive.art"
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                        executable: false
+                        depends: [
+
+                        ]
+                ]
+        ]
+         #[
                 version: 0.0.1
                 date: to :date "2024-05-04T12:33:03+00:00"
                 link: "https://github.com/drkameleon/progressive.art/releases/tag/v0.0.1"
