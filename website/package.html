@@ -101,11 +101,22 @@
                                         </span><br>
                                         No dependencies.
                                     <|| ][ ||>
-                                        <ul>
-                                        <|| loop currentVersion\info\depends 'dep [ ||>
-                                            <li><a href="<||= getLink entry\name ø ||>"><||= dep ||></a></li>
-                                        <|| ] ||>
-                                        </ul>
+                                        <table class="table is-striped is-hoverable">
+                                            <tbody>
+                                                <|| loop currentVersion\info\depends 'dep [ ||>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="version-link" href="<||= getLink dep\0 ø ||>"><||= dep\0 ||></a></li>
+                                                        </td>
+                                                        <|| if 1 < size dep [||>
+                                                            <td>
+                                                                <span class="has-text-grey"><||= last dep ||></span>
+                                                            </td>
+                                                        <|| ] ||>
+                                                    </tr>
+                                                <|| ] ||>
+                                            </tbody>
+                                        </table>
                                     <|| ] ||>
                                 </div>
                             </div>
