@@ -59,6 +59,18 @@ mimetypes: #[
                          "web-server"
                 ]
         ]
+peregrino: #[
+        description: "Lightning-fast command-line benchmarking tool & library"
+        tags: [
+                        "arturo"
+                         "arturo-package"
+                         "benchmark"
+                         "benchmarking-utility"
+                         "cli"
+                         "terminal"
+                         "tool"
+                ]
+        ]
 progressive: #[
         description: "A customizeable, text-based progress bar generator & library"
         tags: [
