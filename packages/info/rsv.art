@@ -1,0 +1,46 @@
+
+name: "art-rsv"
+fullName: "cattokomo/art-rsv"
+url: "https://github.com/cattokomo/art-rsv"
+description: "RSV parser and serializer for Arturo"
+tags: [
+
+        ]
+license: #[
+        name: "MIT"
+        url: "http://choosealicense.com/licenses/mit/"
+        ]
+readme: {
+                # art-rsv
+                RSV parser and serializer for Arturo
+                
+                ## Usage
+                
+                Add this to your Arturo code:
+                ```red
+                rsv: import.lean "rsv"!
+                ```
+                
+                ### `_VERSION :version`
+                
+                Current version of the library.
+                
+                ### `encode rows :block`
+                
+                Encode block containing block of strings or `null` into RSV.
+                
+                ### `decode data :string`
+                
+                Decode a string into block containing block of strings or `null`.
+                
+        }
+stats: #[
+        stars: 3
+        watch: 3
+        ]
+author: #[
+        name: "cattokomo"
+        url: "https://github.com/cattokomo"
+        avatar: "https://avatars.githubusercontent.com/u/71205197?v=4"
+        ]
+

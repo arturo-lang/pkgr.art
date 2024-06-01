@@ -3,6 +3,10 @@
                 version: 1.1.2
                 date: to :date "2024-03-27T01:09:56+00:00"
                 link: "https://github.com/RickBarretto/unitt/releases/tag/v1.1.2"
+                details: #[
+                        size: 2924568
+                        files: 40
+                ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v1.1.2"
                 info: #[
                         entry: "unitt.art"
@@ -20,6 +24,10 @@
                 version: 1.0.0
                 date: to :date "2024-02-17T20:48:40+00:00"
                 link: "https://github.com/RickBarretto/unitt/releases/tag/v1.0.0"
+                details: #[
+                        size: 2924560
+                        files: 40
+                ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v1.0.0"
                 info: #[
                         entry: "unitt.art"
@@ -37,6 +45,10 @@
                 version: 0.2.0
                 date: to :date "2024-02-17T03:19:20+00:00"
                 link: "https://github.com/RickBarretto/unitt/releases/tag/v0.2.0"
+                details: #[
+                        size: 2819071
+                        files: 40
+                ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.2.0"
                 info: #[
                         entry: "unitt.art"
@@ -54,6 +66,10 @@
                 version: 0.1.4
                 date: to :date "2024-02-03T00:41:47+00:00"
                 link: "https://github.com/RickBarretto/unitt/releases/tag/v0.1.4"
+                details: #[
+                        size: 2810315
+                        files: 35
+                ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.4"
                 info: #[
                         entry: "unitt.art"
@@ -71,6 +87,10 @@
                 version: 0.1.3-pre
                 date: to :date "2024-01-31T02:06:00+00:00"
                 link: "https://github.com/RickBarretto/unitt/releases/tag/v0.1.3-pre"
+                details: #[
+                        size: 2801390
+                        files: 16
+                ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.3-pre"
                 info: #[
                         entry: "unitt.art"
@@ -88,6 +108,10 @@
                 version: 0.1.2-pre
                 date: to :date "2024-01-29T11:17:23+00:00"
                 link: "https://github.com/RickBarretto/unitt/releases/tag/v0.1.2-pre"
+                details: #[
+                        size: 2798820
+                        files: 16
+                ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.2-pre"
                 info: #[
                         entry: "unitt.art"

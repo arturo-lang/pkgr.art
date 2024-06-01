@@ -140,20 +140,19 @@ a.version-link {
     margin-bottom: 0 !important;
 
     padding: 0 !important;
+    display: flex;
+    flex-direction: column;
 
     box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.07), 0 0 0 1px rgba(10,10,10,.02);
 
-    & > * {
-        padding: 1.25rem;
-    }
-
     .package-header {
+        padding: 1.25rem;
         border-bottom: 1px solid lightgray; 
     }
 
     .package-body {
-        //padding: 1.25rem;
-        height: 70px !important;
+        padding: 1.25rem;
+        height: 100px !important;
 
         p {
             display: -webkit-box; 
@@ -165,6 +164,11 @@ a.version-link {
     }
 
     .package-footer {
+        border-top: 1px solid #eee;
+
+        padding: 1.25rem;
+        padding-left: 0.75rem;
+
         .repo-user {
             padding-top:0; 
             padding-bottom: 0.25rem;
@@ -181,6 +185,63 @@ a.version-link {
 
             .repo-license-icon {}
             .repo-license-name {}
+        }
+    }
+
+    &.is-plain {
+        box-shadow: none;
+        border-radius: 0;
+        border-bottom: 1px solid #eee;
+
+        &:first-child {
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        &:nth-last-child(2) {
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+
+        .package-header {
+            border-bottom: 0;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+
+            .repo-icon {
+                display: none;
+            }
+        }
+
+        .package-body {
+            display: none;
+        }
+        .package-footer {
+            display: none
+        }
+
+        &:hover {
+            box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.07), 0 0 0 1px rgba(10,10,10,.02);
+            border-bottom: 0;
+            transform: scale(1.05);
+            border-radius: 6px;
+
+            .package-header {
+                border-bottom: 1px solid lightgray; 
+                padding-top: 1.25rem;
+                padding-bottom: 1.25rem;
+
+                .repo-icon {
+                    display: block;
+                }
+            }
+
+            .package-body {
+                display: block;
+            }
+            .package-footer {
+                display: block;
+            }
         }
     }
 }
@@ -779,12 +840,21 @@ a {
 
     .autocomplete-suggestion {
         padding: 0.7rem; 
-        white-space: nowrap; 
+        //white-space: nowrap; 
         overflow: hidden;
         cursor: pointer;
 
         &.autocomplete-selected {
             background: #F0F0F0;
+        }
+
+        .suggestion-wrapper {
+            border-bottom: 1px solid #DDD;
+            align-items: center;
+
+            p {
+                text-overflow: ellipsis;
+            }
         }
     }
 }
@@ -841,5 +911,18 @@ a {
         &:hover {
             color: #555;
         }
+    }
+}
+
+.show-all-button {
+    margin-bottom: 3rem;
+    color: $arturoColor;
+    border-color: $arturoColor;
+    background-color: $backgroundColor;
+
+    &:hover {
+        background-color: $arturoColor;
+        border-color: $arturoColor;
+        color: $backgroundColor;
     }
 }

@@ -3,6 +3,10 @@
                 version: 0.1.0
                 date: to :date "2024-02-11T12:46:54+00:00"
                 link: "https://github.com/RickBarretto/states.art/releases/tag/v0.1.0"
+                details: #[
+                        size: 3199822
+                        files: 6
+                ]
                 url: "https://api.github.com/repos/RickBarretto/states.art/zipball/v0.1.0"
                 info: #[
                         entry: "states.art"

@@ -1,0 +1,34 @@
+
+name: "art-html-module"
+fullName: "arturo-lang/art-html-module"
+url: "https://github.com/arturo-lang/art-html-module"
+description: "HTML generator for Arturo"
+tags: [
+                "arturo"
+                 "arturo-module"
+                 "css"
+                 "css3"
+                 "html"
+                 "html-generator"
+                 "html5"
+                 "javascript"
+        ]
+license: #[
+        name: "MIT"
+        url: "http://choosealicense.com/licenses/mit/"
+        ]
+readme: {
+                # art-html-module
+                HTML generator for Arturo
+                
+        }
+stats: #[
+        stars: 4
+        watch: 4
+        ]
+author: #[
+        name: "arturo-lang"
+        url: "https://github.com/arturo-lang"
+        avatar: "https://avatars.githubusercontent.com/u/55656888?v=4"
+        ]
+

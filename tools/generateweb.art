@@ -10,6 +10,48 @@ deploying?: key? env 'GITHUB_ACTION
 
 isHome: false
 
+generateThumbnail: function [title, author, description][
+    xx: function [cc][execute.directly cc]
+
+    xx {convert -size 1200x600 canvas:#f5f5f7 thumb_bg.png}
+    xx {convert -size 1100x10 canvas:'#82138d' thumb_sep.png}
+
+    xx ~{convert -background transparent -fill '#82138d' -font 'website/resources/Inter-Bold.ttf' -pointsize 100 label:'|title|' thumb_title.png}
+    xx {convert thumb_bg.png thumb_title.png -gravity northwest -geometry +90+90 -composite thumb_pre.png}
+
+    xx ~{convert -size 600x200 -background transparent -fill '#575759' -font 'website/resources/Inter-Regular.ttf' -pointsize 38 caption:"|description|" thumb_desc.png}
+
+    xx {convert -size 100x10 canvas:#e0e0e0 thumb_line_1.png}
+    xx {convert -size 100x10 canvas:#D7CDD8 thumb_line_2.png}
+    xx {convert -size 100x10 canvas:#CFBBD1 thumb_line_3.png}
+    xx {convert -size 100x10 canvas:#C6A8C9 thumb_line_4.png}
+    xx {convert -size 100x10 canvas:#BE95C2 thumb_line_5.png}
+    xx {convert -size 100x10 canvas:#B583BA thumb_line_6.png}
+    xx {convert -size 100x10 canvas:#AD70B3 thumb_line_7.png}
+    xx {convert -size 100x10 canvas:#A45EAB thumb_line_8.png}
+    xx {convert -size 100x10 canvas:#9C4BA4 thumb_line_9.png}
+    xx {convert -size 100x10 canvas:#93389C thumb_line_10.png}
+    xx {convert -size 100x10 canvas:#8B2695 thumb_line_11.png}
+    xx {convert -size 100x10 canvas:#82138d thumb_line_12.png}
+
+    xx {convert thumb_line_1.png thumb_line_2.png thumb_line_3.png thumb_line_4.png thumb_line_5.png thumb_line_6.png thumb_line_7.png thumb_line_8.png thumb_line_9.png thumb_line_10.png thumb_line_11.png thumb_line_12.png +append thumb_sep.png}
+
+    xx {convert -size 1200x90 canvas:#f0f0f3 thumb_line.png}
+    xx ~{convert -background transparent -fill '#979799' -font 'website/resources/Inter-Bold.ttf' -pointsize 30 label:"|title|.pkgr.art" thumb_line_text.png}
+    xx ~{convert -background transparent -fill '#979799' -font 'website/resources/Inter-Bold.ttf' -pointsize 30 label:"|author|" thumb_line_author.png}
+    xx {convert thumb_line.png thumb_line_text.png -gravity east -geometry +90+0 -composite thumb_l.png}
+    xx {convert thumb_l.png thumb_line_author.png -gravity west -geometry +140+0 -composite thumb_l2.png}
+    xx {convert thumb_l2.png website/resources/user_icon.png -gravity west -geometry +90+0 -composite thumb_l3.png}
+
+    xx {convert thumb_pre.png website/resources/trans_logo.png -gravity east -geometry +90-40 -composite thumb_final.png}
+    xx {convert thumb_final.png thumb_l3.png -gravity south -composite thumb_final2.png}
+    xx {convert thumb_final2.png thumb_desc.png -gravity west -geometry +90+50 -composite thumb_final3.png}
+    xx {convert thumb_final3.png thumb_sep.png -gravity south -geometry +0+91 -composite thumb_final4.png}
+
+    move "thumb_final4.png" ~"public/thumbs/|title|.png"
+    xx {rm thumb_*}
+]
+
 compressHTML: function [file][
     execute ~{!sh 
         html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --use-short-doctype --minify-css true |file| -o |file|
@@ -46,7 +88,7 @@ getLink: function [loc, subv][
         unless null? subv ->
             rett: rett ++ "/" ++ to :string subv
     ][
-        rett: siteroot ++ "/" ++ loc
+        rett: siteroot ++ "/_packages/" ++ loc
         unless null? subv ->
             rett: rett ++ "/" ++ to :string subv
         rett: rett ++ "/index.html"
@@ -116,8 +158,17 @@ createSpecFile: function [package, versionToProcess, targetFolder][
 
 searchable: new []
 
+; create thumbs folder if necessary
+
+thumbsFolder: "public/thumbs"
+unless directory? thumbsFolder [
+    write.directory "public/thumbs" ø
+]
+
 loop packages [k,v][
+    print ~"- Processing main package: |k|"
     inf: # ~"packages/info/|k|.art"
+    generateThumbnail k inf\author\name inf\description
     vers: do "@" ++ read ~"packages/version/|k|.art" 
     ;--------------------------------
     ; DEBUGGING!
@@ -146,8 +197,14 @@ processPackagePage: function [entry][
 
 searchable: write.compact.json ø searchable
 
+pkgFolder: "public/_packages"
+unless directory? pkgFolder [
+    write.directory pkgFolder ø
+]
+
 loop entries 'entry [
-    tgtName: ~{public/|entry\name|}
+    print ~"- Creating subpages: |entry\name|"
+    tgtName: ~{|pkgFolder|/|entry\name|}
     unless directory? tgtName [
         write.directory tgtName ø
     ]
@@ -160,7 +217,8 @@ loop entries 'entry [
     createSpecFile entry currentVersion tgtName
 
     loop entry\version 'vv [
-        versionTgt: ~{public/|entry\name|/|vv\version|}
+        versionTgt: ~{|tgtName|/|vv\version|}
+        print ~"\t|vv\version|"
         unless directory? versionTgt [
             write.directory versionTgt ø
         ]
@@ -186,6 +244,7 @@ if odd? size entries ->
 
 ; render homepage
 isHome: true
+isSearch: false
 packageTitle: ""
 write "public/index.html"
       render.template read "website/index.html"
@@ -193,25 +252,49 @@ write "public/index.html"
 ; and compress it
 compressHTML "public/index.html"
 
-; compile scss
-execute "sass website/style.scss public/style.css"
+; render search page
+isHome: false
+isSearch: true
+write.directory "public/search" ø
+if null? last entries ->
+    pop 'entries
+write "public/search/index.html"
+      render.template read "website/search.html"
 
 ; and compress it too
-compressCSS "public/style.css"
+compressHTML "public/search/index.html"
+
+; create assets folder if necessary
+assetsFolder: "public/assets"
+unless directory? assetsFolder [
+    write.directory assetsFolder ø
+]
+
+; compile scss
+execute ~"sass website/style.scss |assetsFolder|/style.css"
+
+; and compress it too
+compressCSS ~"|assetsFolder|/style.css"
 
 ; copy resources
 loop list "website/images" 'file [
-    copy file replace file "website/" "public/"
+    if contains? [".jpg", ".png"] extract.extension file [
+        copy file assetsFolder ++ "/" ++ extract.basename file
+    ]
+]
+
+; copy favicon-related resources
+loop list "website" 'file [
+    if contains? [".png", ".ico", ".svg", ".webmanifest", ".xml"] extract.extension file [
+        copy file "public/" ++ extract.basename file
+    ]
 ]
 
 ; copy main javascript
-copy "website/script.js" "public/script.js"
+copy "website/script.js" ~"|assetsFolder|/script.js"
 
 ; copy server scripts
 copy "website/download.php" "public/download.php"
 copy "website/getdownloads.php" "public/getdownloads.php"
-
-; copy searchable items
-copy "website/searchable.json" "public/searchable.json"
 
 print color #green "Done!"

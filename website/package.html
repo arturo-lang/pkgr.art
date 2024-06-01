@@ -1,6 +1,6 @@
 <||= read "website/components/header.html" ||>
 
-<||= read "website/components/search.html" ||>
+<||= read "website/components/hero.html" ||>
 <section class="main-section">
     <div class="container">
         <div class="columns is-mobile">
@@ -73,6 +73,9 @@
                                                         <td>
                                                             <span class="has-text-grey"><||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span>
                                                         </td>
+                                                        <td>
+                                                            <span class="has-text-grey repo-size-field"><||= ver\details\size ||></span><small>&nbsp;/&nbsp;<span class="has-text-grey"><||= ver\details\files ||> files</span></small>
+                                                        </td>
                                                     </tr>
                                                 <|| ][ ||>
                                                     <tr>
@@ -81,6 +84,9 @@
                                                         </td>
                                                         <td>
                                                             <span class="has-text-grey"><||= ver\date\day ||>&nbsp;<||= ver\date\Month ||>&nbsp;<||= ver\date\year ||></span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey repo-size-field"><||= ver\details\size ||></span><small>&nbsp;/&nbsp;<span class="has-text-grey"><||= ver\details\files ||> files</span></small>
                                                         </td>
                                                     </tr>
                                                 <|| ] ||>
@@ -95,11 +101,22 @@
                                         </span><br>
                                         No dependencies.
                                     <|| ][ ||>
-                                        <ul>
-                                        <|| loop currentVersion\info\depends 'dep [ ||>
-                                            <li><a href="<||= getLink entry\name ø ||>"><||= dep ||></a></li>
-                                        <|| ] ||>
-                                        </ul>
+                                        <table class="table is-striped is-hoverable">
+                                            <tbody>
+                                                <|| loop currentVersion\info\depends 'dep [ ||>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="version-link" href="<||= getLink to :string dep\0 ø ||>"><||= to :string dep\0 ||></a>
+                                                        </td>
+                                                        <|| if 1 < size dep [||>
+                                                            <td>
+                                                                <span class="has-text-grey"><||= last dep ||></span>
+                                                            </td>
+                                                        <|| ] ||>
+                                                    </tr>
+                                                <|| ] ||>
+                                            </tbody>
+                                        </table>
                                     <|| ] ||>
                                 </div>
                             </div>
@@ -118,7 +135,7 @@
                                     <span class="icon star-icon">
                                         <i class="fa fa-star"></i>
                                     </span>&nbsp;
-                                    <span class="star-count" data-package="<||= replace entry\info\url "https://github.com/" "" ||>"></span>
+                                    <span class="star-count" data-package="<||= replace entry\info\url "https://github.com/" "" ||>"><||= entry\info\stats\stars ||></span>
                                 </div>
                             </div>
                             <div class="package-instructions">

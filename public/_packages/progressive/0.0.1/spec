@@ -1,0 +1,13 @@
+name: "progressive"
+description: "A customizeable, text-based progress bar generator & library"
+license: "MIT"
+author: "drkameleon"
+version: 0.0.1
+url: "https://api.github.com/repos/drkameleon/progressive.art/zipball/v0.0.1"
+entry: "src/progressive.art"
+executable: false
+depends: []
+requires: [
+                >
+                 0.9.83
+        ]

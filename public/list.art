@@ -1,4 +1,15 @@
 
+artsembly: #[
+        description: "Arturo VM Bytecode assembler"
+        tags: [
+                        "arturo"
+                         "arturo-package"
+                         "assembler"
+                         "bytecode"
+                         "bytecode-compiler"
+                         "vm"
+                ]
+        ]
 dummy: #[
         description: "This package will serve merely as test for Arturo\'s package manager"
         tags: [
@@ -21,6 +32,67 @@ grafito: #[
                          "serverless"
                          "sqlite"
                          "sqlite3"
+                ]
+        ]
+html: #[
+        description: "HTML generator for Arturo"
+        tags: [
+                        "arturo"
+                         "arturo-module"
+                         "css"
+                         "css3"
+                         "html"
+                         "html-generator"
+                         "html5"
+                         "javascript"
+                ]
+        ]
+mimetypes: #[
+        description: "MIME content type registry & recognition"
+        tags: [
+                        "arturo"
+                         "arturo-language"
+                         "arturo-package"
+                         "file"
+                         "http"
+                         "mimetype"
+                         "web-server"
+                ]
+        ]
+peregrino: #[
+        description: "Lightning-fast command-line benchmarking tool & library"
+        tags: [
+                        "arturo"
+                         "arturo-package"
+                         "benchmark"
+                         "benchmarking-utility"
+                         "cli"
+                         "terminal"
+                         "tool"
+                ]
+        ]
+progressive: #[
+        description: "A customizeable, text-based progress bar generator & library"
+        tags: [
+                        "arturo"
+                         "arturo-package"
+                         "cli"
+                         "progress-bar"
+                         "terminal"
+                ]
+        ]
+recase: #[
+        description: "Unicode-friendly string case converter"
+        tags: [
+                        "arturo"
+                         "arturo-language"
+                         "arturo-package"
+                         "camelcase"
+                         "casing"
+                         "kebabcase"
+                         "snakecase"
+                         "string-manipulation"
+                         "titlecase"
                 ]
         ]
 states: #[
@@ -53,6 +125,12 @@ unitt: #[
                          "arturo-lang"
                          "package"
                          "unit-tests"
+                ]
+        ]
+rsv: #[
+        description: "RSV parser and serializer for Arturo"
+        tags: [
+
                 ]
         ]
 

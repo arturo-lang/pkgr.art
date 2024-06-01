@@ -1,0 +1,23 @@
+[
+        #[
+                version: 0.3.0
+                date: to :date "2024-05-07T14:36:37+00:00"
+                link: "https://github.com/arturo-lang/artsembly/releases/tag/v0.3.0"
+                details: #[
+                        size: 28664
+                        files: 5
+                ]
+                url: "https://api.github.com/repos/arturo-lang/artsembly/zipball/v0.3.0"
+                info: #[
+                        entry: "src/artsembly.art"
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                        executable: false
+                        depends: [
+
+                        ]
+                ]
+        ]
+]

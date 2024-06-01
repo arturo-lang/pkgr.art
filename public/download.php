@@ -7,8 +7,8 @@ $mgk = $_GET["mgk"];
 header("Access-Control-Allow-Origin: *");
 
 if (($pkg != "") && ($ver != "") && ($mgk == "18966")) {
-    if ((is_dir("/var/www/pkgr.art/public/" . $pkg)) && 
-        (is_dir("/var/www/pkgr.art/public/" . $pkg . "/" . $ver))) {
+    if ((is_dir("/var/www/pkgr.art/public/_packages/" . $pkg)) && 
+        (is_dir("/var/www/pkgr.art/public/_packages/" . $pkg . "/" . $ver))) {
         $filename = "/var/www/pkg_stats/" . $pkg . "-" . $ver . ".cnt";
         $cnt = 0;
         if (file_exists($filename)){

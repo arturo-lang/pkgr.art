@@ -1,0 +1,32 @@
+<||= read "website/components/header.html" ||>
+
+<||= read "website/components/hero.html" ||>
+<section class="main-section">
+    <div class="container package-listing">
+        <div class="columns">
+            <div class="column is-12 has-text-centered">
+                <h2 class="title package-listing-header"><||= enumerate entries => [not? null? &]||> packages found</h2>
+            </div>
+        </div>
+        <div class="columns" style="margin-top:0.5rem">
+            <div class="column is-8-tablet is-offset-2-tablet is-10-mobile is-offset-1-mobile">
+                <!-- <p class="subtitle has-text-black">Latest packages</p> -->
+                <|| loop sort.by:'name entries [entryLeft][||>
+                    <||= getPackageBox entryLeft ||>
+                <|| ] ||>
+            </div>
+        </div>
+    </div>
+    <div class="container has-text-centered">
+        <div class="columns">
+            <div class="column is-12" style="padding:4rem; font-size: 1.2rem">
+                <p class="has-text-grey">
+                    <a class="simple-link" href="https://github.com/arturo-lang/pkgr.art?tab=readme-ov-file#using-packages" target="_blank">How do I use a package?</a>&nbsp;·&nbsp;
+                    <a class="simple-link" href="https://github.com/arturo-lang/pkgr.art?tab=readme-ov-file#creating-packages" target="_blank">How do I create a new package?</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<||= read "website/components/footer.html" ||>

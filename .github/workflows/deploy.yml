@@ -32,6 +32,11 @@ jobs:
           npm install -g clean-css
           npm install -g clean-css-cli
 
+      - name: "Install Imagemagick"
+        run: |
+          sudo apt-get update
+          sudo apt-get install imagemagick
+
       - name: "Install Ruby"
         uses: ruby/setup-ruby@v1
         with:
@@ -53,6 +58,8 @@ jobs:
       - name: Update package info
         run: |
           echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+          rm -rf public
+          mkdir public
           arturo tools/deploy.art
           arturo tools/generateweb.art
         env:
