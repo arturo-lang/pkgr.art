@@ -106,6 +106,12 @@ states: #[
                          "pkgr-art"
                 ]
         ]
+tasks: #[
+        description: "A rake-inspired task system for Arturo"
+        tags: [
+
+                ]
+        ]
 unidecode: #[
         description: "Unicode -> ASCII converter"
         tags: [
