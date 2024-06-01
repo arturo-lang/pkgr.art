@@ -29,6 +29,12 @@ getProperMarkdown: function [md][
     ; ret: read.markdown md
     delete "tmp.md"
     ret: replace ret {/class="language-[^"]+"/} ""
+    ret: replace ret {<pre lang="red"><code>} {<pre class="language-arturo"><code class="language-arturo">}
+    ret: replace ret {<pre lang="arturo"><code>} {<pre class="language-arturo"><code class="language-arturo">}
+    ret: replace ret {<pre lang="art"><code>} {<pre class="language-arturo"><code class="language-arturo">}
+    ret: replace ret "/>" ">"
+    ret: replace ret { align="center"} { style="text-align:center"}
+    ret: replace ret {/<img width="[^"]+"/} {<img}
     ret: replace ret {<a href="http} {<a rel="nofollow" target="_blank" href="http}
     return ret
 ]
@@ -100,6 +106,7 @@ createSpecFile: function [package, versionToProcess, targetFolder][
         version: versionToProcess\version
         url: versionToProcess\url
         entry: versionToProcess\info\entry
+        executable: versionToProcess\info\executable
         depends: versionToProcess\info\depends
         requires: versionToProcess\info\requires
     ]
@@ -137,39 +144,34 @@ processPackagePage: function [entry][
     postprocessHTML render.template read "website/package.html" entry\info\fullName
 ]
 
-;--------------------------------
-; DEBUGGING!
-;--------------------------------
-; entry2: new searchable\0
-; entry2\value: "easyhtml"
-
-; entry3: new searchable\0
-; entry3\value: "artsembly"
-
-; 'searchable ++ entry2
-; 'searchable ++ entry3
-
-searchable: write.json ø searchable
+searchable: write.compact.json ø searchable
 
 loop entries 'entry [
     tgtName: ~{public/|entry\name|}
-    unless exists?.directory tgtName ->
+    unless directory? tgtName [
         write.directory tgtName ø
+    ]
 
     currentVersion: first entry\version
     currentVersionIsLatest: true
     write ~{|tgtName|/index.html} processPackagePage entry
+    compressHTML ~{|tgtName|/index.html}
 
     createSpecFile entry currentVersion tgtName
 
     loop entry\version 'vv [
         versionTgt: ~{public/|entry\name|/|vv\version|}
-        unless exists?.directory versionTgt ->
+        unless directory? versionTgt [
             write.directory versionTgt ø
+        ]
 
         currentVersion: vv
         currentVersionIsLatest: false
+        if currentVersion = first entry\version ->
+            currentVersionIsLatest: true
+
         write ~{|versionTgt|/index.html} processPackagePage entry
+        compressHTML ~{|versionTgt|/index.html}
 
         createSpecFile entry vv versionTgt
     ]

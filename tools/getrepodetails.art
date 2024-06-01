@@ -77,8 +77,9 @@ getRepoInfo: function [owner, repo][
 ]
 
 getReleaseInfo: function [owner, repo, version, url][
-    if IsCI? ->
+    if IsCI? [
         write.directory "tmp" ø
+    ]
 
     tgt: ~{tmp/|owner|-|repo|-|version|.zip}
     download.as: tgt url
@@ -98,6 +99,14 @@ getReleaseInfo: function [owner, repo, version, url][
 
     unless ".art" = extract.extension ret\entry ->
         ret\entry: ret\entry ++ ".art"
+
+    unless key? ret 'executable ->
+        ret\executable: false
+    
+    if ret\executable [
+        unless ".art" = extract.extension ret\executable ->
+            ret\executable: ret\executable ++ ".art"
+    ]
 
     unless key? ret 'depends ->
         ret\depends: []
@@ -119,12 +128,14 @@ getVersions: function [owner, repo][
     try [
         releases: getGH ~"repos/|owner|/|repo|/releases"
         loop releases 'release [
+            inspect release
             if ver: <= extractCorrectVersion release\tag_name [
                 if ver > greaterThan [
                     if releaseInfo: <= getReleaseInfo owner repo ver release\zipball_url [
                         'available ++ #[
                             version: ver
                             date: to :date release\published_at
+                            link: release\html_url 
                             url: release\zipball_url
                             info: releaseInfo
                         ]

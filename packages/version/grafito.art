@@ -1,0 +1,53 @@
+[
+        #[
+                version: 0.2.11
+                date: to :date "2024-04-10T16:24:55+00:00"
+                link: "https://github.com/arturo-lang/grafito/releases/tag/v0.2.11"
+                url: "https://api.github.com/repos/arturo-lang/grafito/zipball/v0.2.11"
+                info: #[
+                        entry: "grafito.art"
+                        executable: "grafito.art"
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                ]
+        ]
+         #[
+                version: 0.2.10
+                date: to :date "2024-04-10T15:56:06+00:00"
+                link: "https://github.com/arturo-lang/grafito/releases/tag/v0.2.10"
+                url: "https://api.github.com/repos/arturo-lang/grafito/zipball/v0.2.10"
+                info: #[
+                        entry: "grafito.art"
+                        executable: "grafito.art"
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                ]
+        ]
+         #[
+                version: 0.2.9
+                date: to :date "2024-04-09T11:01:21+00:00"
+                link: "https://github.com/arturo-lang/grafito/releases/tag/v0.2.9"
+                url: "https://api.github.com/repos/arturo-lang/grafito/zipball/v0.2.9"
+                info: #[
+                        entry: "grafito.art"
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                        executable: false
+                ]
+        ]
+]
