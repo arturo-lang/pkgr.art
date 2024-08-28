@@ -1,18 +1,13 @@
 
-name: "recase.art"
-fullName: "drkameleon/recase.art"
-url: "https://github.com/drkameleon/recase.art"
-description: "Unicode-friendly string case converter"
+name: "validator.art"
+fullName: "drkameleon/validator.art"
+url: "https://github.com/drkameleon/validator.art"
+description: "A batteries-included, supercharged & customizable, string validation library for Arturo"
 tags: [
                 "arturo"
-                 "arturo-language"
                  "arturo-package"
-                 "camelcase"
-                 "casing"
-                 "kebabcase"
-                 "snakecase"
-                 "string-manipulation"
-                 "titlecase"
+                 "validation-library"
+                 "validator"
         ]
 license: #[
         name: "MIT"
@@ -20,15 +15,16 @@ license: #[
         ]
 readme: {
                 <h1 align="center">
-                    Recase
+                    Validator
                 </h1>
                 
                 <p align="center">
-                     <i>Unicode-friendly string case converter for Arturo</i> 
+                     <i>A 🔋-included, supercharged & customizable,<br>string validation library for Arturo</i> 
                      <br><br>
                      <img src="https://img.shields.io/github/license/arturo-lang/grafito?style=for-the-badge">
                     <img src="https://img.shields.io/badge/language-Arturo-orange.svg?style=for-the-badge">
                 </p>
+                
                 
                 --- 
                  
@@ -45,56 +41,57 @@ readme: {
                 
                 ### What does this package do?
                 
-                This package provides an function (`recase`) that allows to convert to and from different case styles, with full support of Unicode characters:
-                
-                - TitleCase
-                - camelCase
-                - snake_case
-                - kebab-case
-                
-                > [!IMPORTANT]
-                > All whitespace within the string will be stripped, to allow for a more efficient "word" separation.
+                This package provides a function (`valid?`) that allows to check and validate strings, based on different built-in schemes/patterns, e.g e-mails, urls, etc.
                 
                 ### How do I use it?
                 
-                Simply `import` it and use the included `recase` function:
+                Simply `import` it and use the included `valid?` function:
                 
-                ```arturo
-                import "recase"!
+                ```red
+                import "validator"!
                 
-                recase.snake "This is an example"
-                ; => "this_is_an_example"
+                valid?.url "https://arturo-lang.io"
+                ; => true
                 
-                recase.camel "Print SQL"
-                ; => "printSQL"
+                valid?.email "loremIpsum@
+                ; => false
                 ```
+                
+                And we may also check more than one strings:
+                
+                ```red
+                valid?.email ["my@email.com", "info@google.com"]
+                ; => true
+                ```
+                
+                > [!TIP]
+                > Different type of checks may accept different extra params, so you'd better have a look into the reference first! 😉
+                
                 
                 ### Function reference
                 
-                #### `recase`
+                #### `valid?`
                 
                 ##### Description
                 
-                convert case of given string
+                check if given string is valid
                 
                 ##### Usage
                 
                 <pre>
-                <b>recase</b> <ins>str</ins> <i>:string</i>
+                <b>valid?</b> <ins>str</ins> <i>:string :block</i>
                 </pre>
                 
                 ##### Attributes
                 
-                | Option | Type(s) | Description |
-                |----|----|----|
-                | title |  | convert to TitleCase | 
-                | camel |  | convert to camelCase | 
-                | snake |  | convert to snake_case | 
-                | kebab |  | convert to kebab-case | 
+                | Option | Description |
+                |----|----|
+                | email | verify e-mail address | 
+                | url | verify URL |
                 
                 ##### Returns
                 
-                - *:string*
+                - *:logical*
                 
                 <hr/>
                 

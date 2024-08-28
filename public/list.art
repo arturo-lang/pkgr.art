@@ -95,6 +95,12 @@ recase: #[
                          "titlecase"
                 ]
         ]
+rsv: #[
+        description: "RSV parser and serializer for Arturo"
+        tags: [
+
+                ]
+        ]
 states: #[
         description: ":states is a lean Finite State Machine package for the Arturo Programming Language"
         tags: [
@@ -133,10 +139,13 @@ unitt: #[
                          "unit-tests"
                 ]
         ]
-rsv: #[
-        description: "RSV parser and serializer for Arturo"
+validator: #[
+        description: "A batteries-included, supercharged & customizable, string validation library for Arturo"
         tags: [
-
+                        "arturo"
+                         "arturo-package"
+                         "validation-library"
+                         "validator"
                 ]
         ]
 
