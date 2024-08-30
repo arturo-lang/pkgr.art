@@ -1,0 +1,13 @@
+name: "tasks"
+description: "A rake-inspired task system for Arturo"
+license: "--"
+author: "RickBarretto"
+version: 1.0.0
+url: "https://api.github.com/repos/RickBarretto/tasks/zipball/v1.0.0"
+entry: "tasks.art"
+executable: false
+depends: []
+requires: [
+                >
+                 0.9.83
+        ]
