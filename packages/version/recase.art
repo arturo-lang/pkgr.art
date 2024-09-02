@@ -1,5 +1,26 @@
 [
         #[
+                version: 0.0.3
+                date: to :date "2024-09-02T15:37:17+00:00"
+                link: "https://github.com/drkameleon/recase.art/releases/tag/v0.0.3"
+                details: #[
+                        size: 6739
+                        files: 5
+                ]
+                url: "https://api.github.com/repos/drkameleon/recase.art/zipball/v0.0.3"
+                info: #[
+                        entry: "recase.art"
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                        executable: false
+                        depends: [
+
+                        ]
+                ]
+        ]
+         #[
                 version: 0.0.2
                 date: to :date "2024-04-30T07:57:29+00:00"
                 link: "https://github.com/drkameleon/recase.art/releases/tag/v0.0.2"
