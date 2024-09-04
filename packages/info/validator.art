@@ -86,6 +86,7 @@ readme: {
                 
                 | Option | Related parameters | Description |
                 |----|----|----|
+                | base58 | | check base-58 encoding |
                 | email | | verify e-mail address | 
                 | floating | | test if string contains a parsable floating-point value |
                 | integer | | test if string contains a parsable integer value |
@@ -126,8 +127,8 @@ readme: {
                 
         }
 stats: #[
-        stars: 3
-        watch: 3
+        stars: 4
+        watch: 4
         ]
 author: #[
         name: "drkameleon"
