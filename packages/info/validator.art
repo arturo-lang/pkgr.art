@@ -93,6 +93,9 @@ readme: {
                 | ip | | verify IP addresses |
                 | | .v4 | look for IPv4 addresses only |
                 | | .v6 | look for IPv6 addresses only |
+                | isbn | | verify ISBN code |
+                | | .10 | check for ISBN-10 codes only |
+                | | .13 | check for ISBN-13 codes only |
                 | url | | verify URL |
                 
                 ##### Returns
