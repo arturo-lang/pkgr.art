@@ -1,5 +1,26 @@
 [
         #[
+                version: 0.1.0
+                date: to :date "2024-09-11T11:38:50+00:00"
+                link: "https://github.com/drkameleon/validator.art/releases/tag/v0.1.0"
+                details: #[
+                        size: 32155
+                        files: 15
+                ]
+                url: "https://api.github.com/repos/drkameleon/validator.art/zipball/v0.1.0"
+                info: #[
+                        entry: "src/validator.art"
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                        executable: false
+                        depends: [
+
+                        ]
+                ]
+        ]
+         #[
                 version: 0.0.5
                 date: to :date "2024-09-09T16:31:53+00:00"
                 link: "https://github.com/drkameleon/validator.art/releases/tag/v0.0.5"
