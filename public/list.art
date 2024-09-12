@@ -144,6 +144,9 @@ validator: #[
         tags: [
                         "arturo"
                          "arturo-package"
+                         "credit-card-validator"
+                         "iban-checker"
+                         "isbn-validation"
                          "validation-library"
                          "validator"
                 ]

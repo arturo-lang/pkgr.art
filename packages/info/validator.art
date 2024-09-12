@@ -6,6 +6,9 @@ description: "A batteries-included, supercharged & customizable, string validati
 tags: [
                 "arturo"
                  "arturo-package"
+                 "credit-card-validator"
+                 "iban-checker"
+                 "isbn-validation"
                  "validation-library"
                  "validator"
         ]
@@ -33,6 +36,7 @@ readme: {
                 * [What does this package do?](#what-does-this-package-do)
                 * [How do I use it?](#how-do-i-use-it)
                 * [Function Reference](#function-reference)
+                * [Contributing](#contributing)
                 * [License](#license)   
                 
                 <!--te-->
@@ -54,6 +58,15 @@ readme: {
                 ; => true
                 
                 valid?.email "loremIpsum@"
+                ; => false
+                
+                valid?.iban "GB82 WEST 1234 5698 7654 32"
+                ; => true
+                
+                valid?.ip "127.0.0.1"
+                ; => true
+                
+                valid?.ip.v6 "127.0.0.1"
                 ; => false
                 ```
                 
@@ -87,6 +100,7 @@ readme: {
                 | Option | Related parameters | Description |
                 |----|----|----|
                 | base58 | | check base-58 encoding |
+                | card | | check credit card number |
                 | email | | verify e-mail address | 
                 | floating | | test if string contains a parsable floating-point value |
                 | integer | | test if string contains a parsable integer value |
@@ -102,6 +116,16 @@ readme: {
                 ##### Returns
                 
                 - *:logical*
+                
+                ### Contributing
+                
+                Validator.art has been designed with flexibility and extensibility in mind.
+                
+                - Have you noticed an error and want to fix sth?
+                - Do you want to add more tests to a given validator to make it more robust?
+                - Do you want to add a new one (Have a look into the [sample validator](docs/sample.art)!)
+                
+                You are 100% welcome! Just make a PR and I'll be more than glad to merge it! 🚀
                 
                 <hr/>
                 
@@ -128,7 +152,7 @@ readme: {
                 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
                 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
                 SOFTWARE.
-                
+                 
         }
 stats: #[
         stars: 4
