@@ -13,15 +13,6 @@ tags: [
                  "html5"
                  "javascript"
         ]
-license: #[
-        name: "MIT"
-        url: "http://choosealicense.com/licenses/mit/"
-        ]
-readme: {
-                # art-html-module
-                HTML generator for Arturo
-                
-        }
 stats: #[
         stars: 4
         watch: 4

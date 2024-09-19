@@ -1,5 +1,7 @@
 #!/usr/bin/env arturo
 
+do ./"versioncontrol.art"
+
 packages: # "packages/list.art"
 entries: new []
 
@@ -101,6 +103,7 @@ getPackageBox: function [entry][
 ]
 
 getCleanTags: function [taglist][
+    if null? taglist -> return []
     taglist | filter 'tag [contains? ["arturo", "arturo-lang", "arturo-language", "arturo-package", "pkgr-art", "package"] tag]
             | map 'tag [replace tag "-" " "]
 ]
@@ -143,7 +146,7 @@ createSpecFile: function [package, versionToProcess, targetFolder][
     ret: #[
         name: package\name,
         description: package\info\description
-        license: package\info\license\name
+        license: versionToProcess\details\license\name;package\info\license\name
         author: package\info\author\name
         version: versionToProcess\version
         url: versionToProcess\url

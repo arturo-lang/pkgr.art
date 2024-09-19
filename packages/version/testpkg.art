@@ -1,0 +1,32 @@
+[
+        #[
+                version: 0.0.1
+                date: to :date "2024-09-18T17:38:48+02:00"
+                link: "https://codeberg.org/drkameleon/testpkg/releases/tag/v0.0.1"
+                details: #[
+                        size: 1182
+                        files: 4
+                        readme: {
+                                # testpkg
+                                
+                                This is a test package
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "--"
+                        ]
+                ]
+                url: "https://codeberg.org/drkameleon/testpkg/archive/v0.0.1.zip"
+                info: #[
+                        entry: "someentry.art"
+                        executable: false
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.0.0
+                        ]
+                ]
+        ]
+]
