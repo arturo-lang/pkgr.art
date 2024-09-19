@@ -19,7 +19,7 @@
                             <div class="is-pulled-right has-text-grey is-hidden-mobile">
                                 <a target="_blank" href="<||= entry\info\url ||>">
                                     <span class="icon repo-icon inside-package">
-                                        <i class="fa fa-github"></i>
+                                        <i class="fa fa-code"></i>
                                     </span>
                                 </a>
                             </div>
@@ -56,7 +56,7 @@
                             </div>
                             <div class="box content left-container">
                                 <div class="overview">
-                                    <||= getProperMarkdown entry\info\readme ||>
+                                    <||= getProperMarkdown currentVersion\details\readme ||>
                                 </div>
                                 <div class="version-history is-hidden">
                                     <div class="version-summary">
@@ -174,7 +174,7 @@
                                 <div class="subgroup-detail">
                                     <b>License</b>
                                     <br>
-                                    <a target="_blank" href="<||= entry\info\license\url ||>" class="repo-license-name"><||= entry\info\license\name ||></a>
+                                    <a target="_blank" href="<||= currentVersion\details\license\url ||>" class="repo-license-name"><||= currentVersion\details\license\name ||></a>
                                 </div>
                                 <span class="icon subgroup-icon">
                                     <i class="fas fa-balance-scale"></i>
