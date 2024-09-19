@@ -7,6 +7,12 @@ IsCI?: key? env 'GITHUB_ACTION      ; if it's set, we're inside a GitHub workflo
 ; Helper methods
 ;--------------------------------------------------
 
+getLicenseUrl: function [lc][
+    if lc = "MIT" -> return "https://choosealicense.com/licenses/mit/"
+    if lc = "Beerware" -> return "https://fedoraproject.org/wiki/Licensing/Beerware"
+    return "--"
+]
+
 getGH: function [reqtype, req][
     if reqtype = :githubLink [
         accepting: "application/vnd.github+json"
@@ -69,15 +75,15 @@ getRepoInfo: function [pkg][
     [owner, repo]: split.by:"/" pkg\location
     if throws? [
         got: getGH type pkg ~"repos/|owner|/|repo|"
-        licenseName: "--"
-        licenseUrl: "--"
-        if is? :githubLink pkg [
-            if got\license [
-                licenseInfo: read.json got\license\url
-                licenseName: got\license\spdx_id
-                licenseUrl: licenseInfo\html_url
-            ]
-        ]
+        ; licenseName: "--"
+        ; licenseUrl: "--"
+        ; if is? :githubLink pkg [
+        ;     if got\license [
+        ;         licenseInfo: read.json got\license\url
+        ;         licenseName: got\license\spdx_id
+        ;         licenseUrl: licenseInfo\html_url
+        ;     ]
+        ; ]
         #[
             name: got\name
             fullName: got\full_name
@@ -185,15 +191,18 @@ getRepoDetails: function [pkg, downloadUrl][
     repoReadme: getReadmeFile tmpFolder
 
     licenseName: "--"
-    licenseUrl: "--"
-    unless is? :githubLink pkg [
-        licensing: first read.json execute (~./{license-detector-|sys\os|}) ++ ~" --format json |first list tmpFolder|"
-        unless key? licensing 'error [
-            firstMatch: first licensing\matches
-            licenseName: firstMatch\license
-        ]
+    ; (is? :githubLink pkg) ? [
 
+    ; ][
+    licensing: first read.json execute (~./{license-detector-|sys\os|}) ++ ~" --format json |first list tmpFolder|"
+    unless key? licensing 'error [
+        firstMatch: first licensing\matches
+        licenseName: firstMatch\license
     ]
+
+    licenseUrl: getLicenseUrl licenseName
+
+    ; ]
     repoLicense: #[
         name: licenseName
         url: licenseUrl
