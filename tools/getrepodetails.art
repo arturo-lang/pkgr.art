@@ -71,10 +71,12 @@ getRepoInfo: function [pkg][
         got: getGH type pkg ~"repos/|owner|/|repo|"
         licenseName: "--"
         licenseUrl: "--"
-        if and? [is? :githubLink pkg][got\license][
-            licenseInfo: read.json got\license\url
-            licenseName: got\license\spdx_id
-            licenseUrl: licenseInfo\html_url
+        if is? :githubLink pkg [
+            if got\license [
+                licenseInfo: read.json got\license\url
+                licenseName: got\license\spdx_id
+                licenseUrl: licenseInfo\html_url
+            ]
         ]
         #[
             name: got\name
@@ -107,7 +109,7 @@ getReleaseInfo: function [owner, repo, version, url][
     unzip "tmp" tgt
     delete tgt
 
-    tgtFolder: first list "tmp"
+    tgtFolder: first filter list "tmp" => [contains? & ".DS_Store"]
     infoFile: ~"|tgtFolder|/info.art"
 
     ret: #[]
@@ -207,7 +209,7 @@ getRepoDetails: function [pkg, downloadUrl][
 
 getVersions: function [pkg][
     [owner, repo]: split.by:"/" pkg\location
-
+    
     greaterThan: (attr 'greaterThan) ?? 0.0.0
     available: new []
     try [
