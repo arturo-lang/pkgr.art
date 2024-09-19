@@ -1,0 +1,10 @@
+define :githubLink [location :string]
+define :codebergLink [location :string]
+
+gh: function [loc][
+    to :githubLink @[loc]
+]
+
+cb: function [loc][
+    to :codebergLink @[loc]
+]

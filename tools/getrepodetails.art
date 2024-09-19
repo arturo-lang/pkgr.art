@@ -7,22 +7,33 @@ IsCI?: key? env 'GITHUB_ACTION      ; if it's set, we're inside a GitHub workflo
 ; Helper methods
 ;--------------------------------------------------
 
-getGH: function [req][
-    accepting: "application/vnd.github+json"
-    apiVersion: "2022-11-28"
+getGH: function [reqtype, req][
+    if reqtype = :githubLink [
+        accepting: "application/vnd.github+json"
+        apiVersion: "2022-11-28"
 
-    (IsCI?)?[
-        got: execute ~{!sh
-            gh api -H "Accept: |accepting|" -H "X-GitHub-Api-Version: |apiVersion|" /|req|
-        }
-        return read.json got
-    ][
+        (IsCI?)?[
+            got: execute ~{!sh
+                gh api -H "Accept: |accepting|" -H "X-GitHub-Api-Version: |apiVersion|" /|req|
+            }
+            return read.json got
+        ][
+            got: request.get.headers: #[
+                "Accept": accepting
+                "Authorization": ~"Bearer |AccessToken|"
+                "X-GitHub-Api-Version": apiVersion
+            ] ~{https://api.github.com/|req|} ø
+            ;inspect got
+            return read.json got\body
+        ]
+    ]
+
+    if reqtype = :codebergLink [
+        accepting: "application/json"
+
         got: request.get.headers: #[
             "Accept": accepting
-            "Authorization": ~"Bearer |AccessToken|"
-            "X-GitHub-Api-Version": apiVersion
-        ] ~{https://api.github.com/|req|} ø
-        inspect got
+        ] ~{https://codeberg.org/api/v1/|req|} ø
         return read.json got\body
     ]
 ]
@@ -34,23 +45,35 @@ extractCorrectVersion: function [versionString][
     ]
 ]
 
+howAreStarsCalled: function [reqtype][
+    if reqtype = :githubLink -> return "stargazers_count"
+    if reqtype = :codebergLink -> return "stars_count"
+]
+
 ;--------------------------------------------------
 ; Main routines
 ;--------------------------------------------------
 
-getReadme: function [owner, repo][
-    got: getGH ~"repos/|owner|/|repo|/readme"
-    if key? got 'download_url ->
-        return read got\download_url
-    return ø
-]
+; getReadme: function [pkg][
+;     return ""
+;     [owner, repo]: split.by:"/" pkg\location
+;     unless is? :githubLink pkg -> return ""
+;     got: getGH ~"repos/|owner|/|repo|/readme"
+;     if key? got 'download_url [
+;         return read got\download_url
+;     ]
+;     return ø
+; ]
 
-getRepoInfo: function [owner, repo][
+getRepoInfo: function [pkg][
+    [owner, repo]: split.by:"/" pkg\location
     if throws? [
-        got: getGH ~"repos/|owner|/|repo|"
+        got: getGH type pkg ~"repos/|owner|/|repo|"
+        licenseName: "--"
         licenseUrl: "--"
-        if got\license [
+        if and? [is? :githubLink pkg][got\license][
             licenseInfo: read.json got\license\url
+            licenseName: got\license\spdx_id
             licenseUrl: licenseInfo\html_url
         ]
         #[
@@ -59,13 +82,10 @@ getRepoInfo: function [owner, repo][
             url: got\html_url
             description: got\description
             tags: got\topics
-            license: #[
-                name: (got\license)? -> got\license\spdx_id -> "--"
-                url: licenseUrl
-            ]
-            readme: getReadme owner repo
+
+            ;readme: getReadme pkg
             stats: #[
-                stars: got\stargazers_count
+                stars: got\[howAreStarsCalled type pkg]
                 watch: got\watchers_count
             ]
             author: #[
@@ -141,7 +161,16 @@ getNoOfFiles: function [folder][
     ]
 ]
 
-getRepoDetails: function [owner, repo, downloadUrl][
+getReadmeFile: function [folder][
+    tgtF: first list folder
+    if exists? r1: <= join.path @[tgtF "README"] [return read r1]
+    if exists? r2: <= join.path @[tgtF "README.md"] [return read r2]
+    return "--"
+]
+
+getRepoDetails: function [pkg, downloadUrl][
+    [owner, repo]: split.by:"/" pkg\location
+
     tmpName: ~{|owner|-|repo|}
     tmpZip: ~"|tmpName|.zip"
     tmpFolder: ~"|tmpName|"
@@ -151,18 +180,38 @@ getRepoDetails: function [owner, repo, downloadUrl][
 
     repoSize: to :integer scalar getFolderSize tmpFolder
     repoFiles: getNoOfFiles tmpFolder
+    repoReadme: getReadmeFile tmpFolder
+
+    licenseName: "--"
+    licenseUrl: "--"
+    unless is? :githubLink pkg [
+        licensing: first read.json execute (~./{license-detector-|sys\os|}) ++ ~" --format json |first list tmpFolder|"
+        unless key? licensing 'error [
+            firstMatch: first licensing\matches
+            licenseName: firstMatch\license
+        ]
+
+    ]
+    repoLicense: #[
+        name: licenseName
+        url: licenseUrl
+    ]
 
     delete.directory tmpFolder
     delete tmpZip
 
-    return #[size: repoSize, files: repoFiles]
+    ret: #[size: repoSize, files: repoFiles, readme: repoReadme, license: repoLicense]
+
+    return ret
 ]
 
-getVersions: function [owner, repo][
+getVersions: function [pkg][
+    [owner, repo]: split.by:"/" pkg\location
+
     greaterThan: (attr 'greaterThan) ?? 0.0.0
     available: new []
     try [
-        releases: getGH ~"repos/|owner|/|repo|/releases"
+        releases: getGH type pkg ~"repos/|owner|/|repo|/releases"
         loop releases 'release [
             if ver: <= extractCorrectVersion release\tag_name [
                 if ver > greaterThan [
@@ -171,7 +220,7 @@ getVersions: function [owner, repo][
                             version: ver
                             date: to :date release\published_at
                             link: release\html_url 
-                            details: getRepoDetails owner repo release\zipball_url
+                            details: getRepoDetails pkg release\zipball_url
                             url: release\zipball_url
                             info: releaseInfo
                         ]

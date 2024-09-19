@@ -1,3 +1,5 @@
+do ./"versioncontrol.art"
+
 packages: # "packages/list.art"
 do relative "getrepodetails.art"
 
@@ -15,21 +17,25 @@ do ::
     print " Verifying packages"
     print separator
 
-    loop packages [name,location][
+    loop packages [name, pkg][
         prints [pad to :string cnt 4 "/" pad.right to :string total 4 "|"]
         prints color #cyan "Processing: "
-        prints pad.right name 40 
+
+        pkgType: "gh"
+        if is? :codebergLink pkg -> pkgType: "cb"
+        prints color #magenta pad.right pkgType 3
+        
+        prints pad.right name 38
  
-        [owner,repo]: split.by:"/" location
-        (repoD: <= getRepoInfo owner repo)?[
-            (empty? getVersions owner repo)?[
+        (repoD: <= getRepoInfo pkg)?[
+            (empty? getVersions pkg)?[
                 print color #orange "[ ❓ HMMM  ]" 
-                'problemWithReleases ++ ~"|owner|/|repo|"
+                'problemWithReleases ++ pkg\location
                 hasError?: true
             ] -> print color #green "[ ✅  OK   ]"                  
         ][
             print color #red "[ ⛔️ ERROR ]"
-            'problemWithRepo ++ ~"|owner|/|repo|"
+            'problemWithRepo ++ pkg\location
             hasError?: true
         ]
         cnt: cnt + 1

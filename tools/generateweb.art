@@ -1,5 +1,7 @@
 #!/usr/bin/env arturo
 
+do ./"versioncontrol.art"
+
 packages: # "packages/list.art"
 entries: new []
 

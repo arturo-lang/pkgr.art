@@ -1,0 +1,19 @@
+
+name: "testpkg"
+fullName: "drkameleon/testpkg"
+url: "https://codeberg.org/drkameleon/testpkg"
+description: "This is a test package"
+tags: [
+                "arturo"
+                 "test"
+        ]
+stats: #[
+        stars: 1
+        watch: 1
+        ]
+author: #[
+        name: "drkameleon"
+        url: "https://codeberg.org/drkameleon"
+        avatar: "https://codeberg.org/avatars/ee3ab814dfdadfb0ebec79bb0882bfda3ff95545f6c5cbca63f534387a065602"
+        ]
+
