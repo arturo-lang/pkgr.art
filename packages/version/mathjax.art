@@ -1,7 +1,7 @@
 [
         #[
                 version: 0.0.1
-                date: to :date "2024-09-19T13:50:34+02:00"
+                date: to :date "2024-09-19T11:50:34+00:00"
                 link: "https://codeberg.org/Eloitor/mathjax.art/releases/tag/v0.0.1"
                 details: #[
                         size: 60237
@@ -75,7 +75,7 @@
                         }
                         license: #[
                                 name: "Beerware"
-                                url: "--"
+                                url: "https://fedoraproject.org/wiki/Licensing/Beerware"
                         ]
                 ]
                 url: "https://codeberg.org/Eloitor/mathjax.art/archive/v0.0.1.zip"

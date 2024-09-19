@@ -6,6 +6,11 @@
                 details: #[
                         size: 2924568
                         files: 40
+                        readme: "--"
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
                 ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v1.1.2"
                 info: #[
@@ -27,6 +32,11 @@
                 details: #[
                         size: 2924560
                         files: 40
+                        readme: "--"
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
                 ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v1.0.0"
                 info: #[
@@ -48,6 +58,11 @@
                 details: #[
                         size: 2819071
                         files: 40
+                        readme: "--"
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
                 ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.2.0"
                 info: #[
@@ -69,6 +84,11 @@
                 details: #[
                         size: 2810315
                         files: 35
+                        readme: "--"
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
                 ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.4"
                 info: #[
@@ -90,6 +110,11 @@
                 details: #[
                         size: 2801390
                         files: 16
+                        readme: "--"
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
                 ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.3-pre"
                 info: #[
@@ -111,6 +136,11 @@
                 details: #[
                         size: 2798820
                         files: 16
+                        readme: "--"
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
                 ]
                 url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v0.1.2-pre"
                 info: #[

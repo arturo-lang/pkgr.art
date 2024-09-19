@@ -6,6 +6,34 @@
                 details: #[
                         size: 3402
                         files: 4
+                        readme: {
+                                # art-rsv
+                                RSV parser and serializer for Arturo
+                                
+                                ## Usage
+                                
+                                Add this to your Arturo code:
+                                ```red
+                                rsv: import.lean "rsv"!
+                                ```
+                                
+                                ### `_VERSION :version`
+                                
+                                Current version of the library.
+                                
+                                ### `encode rows :block`
+                                
+                                Encode block containing block of strings or `null` into RSV.
+                                
+                                ### `decode data :string`
+                                
+                                Decode a string into block containing block of strings or `null`.
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
                 ]
                 url: "https://api.github.com/repos/cattokomo/art-rsv/zipball/v0.1.1"
                 info: #[
@@ -27,6 +55,34 @@
                 details: #[
                         size: 3416
                         files: 4
+                        readme: {
+                                # art-rsv
+                                RSV parser and serializer for Arturo
+                                
+                                ## Usage
+                                
+                                Add this to your Arturo code:
+                                ```red
+                                rsv: import.lean "rsv"!
+                                ```
+                                
+                                ### `_VERSION :version`
+                                
+                                Current version of the library.
+                                
+                                ### `encode rows :block`
+                                
+                                Encode block containing block of strings or `null` into RSV.
+                                
+                                ### `decode data :string`
+                                
+                                Decode a string into block containing block of strings or `null`.
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
                 ]
                 url: "https://api.github.com/repos/cattokomo/art-rsv/zipball/0.1.0"
                 info: #[

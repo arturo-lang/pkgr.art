@@ -1,0 +1,13 @@
+name: "mathjax"
+description: "A wrapper for using mathjax in Arturo\'s webview"
+license: "Beerware"
+author: "Eloitor"
+version: 0.0.1
+url: "https://codeberg.org/Eloitor/mathjax.art/archive/v0.0.1.zip"
+entry: "src/mathjax.art"
+executable: false
+depends: []
+requires: [
+                >
+                 0.0.0
+        ]

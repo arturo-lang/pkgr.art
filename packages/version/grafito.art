@@ -1,7 +1,7 @@
 [
         #[
                 version: 0.2.11
-                date: to :date "2024-04-10T18:24:55+02:00"
+                date: to :date "2024-04-10T16:24:55+00:00"
                 link: "https://github.com/arturo-lang/grafito/releases/tag/v0.2.11"
                 details: #[
                         size: 2146021
@@ -670,26 +670,26 @@
                                 
                         }
                         license: #[
-                                name: "--"
-                                url: "--"
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
                         ]
                 ]
                 url: "https://api.github.com/repos/arturo-lang/grafito/zipball/v0.2.11"
                 info: #[
-                        entry: "unidecode.art"
+                        entry: "grafito.art"
+                        executable: "grafito.art"
+                        depends: [
+
+                        ]
                         requires: [
                                 >
                                  0.9.83
-                        ]
-                        executable: false
-                        depends: [
-
                         ]
                 ]
         ]
          #[
                 version: 0.2.10
-                date: to :date "2024-04-10T17:56:06+02:00"
+                date: to :date "2024-04-10T15:56:06+00:00"
                 link: "https://github.com/arturo-lang/grafito/releases/tag/v0.2.10"
                 details: #[
                         size: 2146019
@@ -1358,26 +1358,26 @@
                                 
                         }
                         license: #[
-                                name: "--"
-                                url: "--"
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
                         ]
                 ]
                 url: "https://api.github.com/repos/arturo-lang/grafito/zipball/v0.2.10"
                 info: #[
-                        entry: "src/validator.art"
+                        entry: "grafito.art"
+                        executable: "grafito.art"
+                        depends: [
+
+                        ]
                         requires: [
                                 >
                                  0.9.83
-                        ]
-                        executable: false
-                        depends: [
-
                         ]
                 ]
         ]
          #[
                 version: 0.2.9
-                date: to :date "2024-04-09T13:01:21+02:00"
+                date: to :date "2024-04-09T11:01:21+00:00"
                 link: "https://github.com/arturo-lang/grafito/releases/tag/v0.2.9"
                 details: #[
                         size: 2145996
@@ -2046,21 +2046,21 @@
                                 
                         }
                         license: #[
-                                name: "--"
-                                url: "--"
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
                         ]
                 ]
                 url: "https://api.github.com/repos/arturo-lang/grafito/zipball/v0.2.9"
                 info: #[
-                        entry: "src/progressive.art"
+                        entry: "grafito.art"
+                        depends: [
+
+                        ]
                         requires: [
                                 >
                                  0.9.83
                         ]
                         executable: false
-                        depends: [
-
-                        ]
                 ]
         ]
 ]

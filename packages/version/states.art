@@ -6,6 +6,11 @@
                 details: #[
                         size: 3199822
                         files: 6
+                        readme: "--"
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
                 ]
                 url: "https://api.github.com/repos/RickBarretto/states.art/zipball/v0.1.0"
                 info: #[

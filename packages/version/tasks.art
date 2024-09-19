@@ -6,6 +6,11 @@
                 details: #[
                         size: 4834554
                         files: 8
+                        readme: "--"
+                        license: #[
+                                name: "--"
+                                url: "--"
+                        ]
                 ]
                 url: "https://api.github.com/repos/RickBarretto/tasks/zipball/v1.0.0"
                 info: #[
