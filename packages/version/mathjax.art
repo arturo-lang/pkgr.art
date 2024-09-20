@@ -1,5 +1,97 @@
 [
         #[
+                version: 0.0.2
+                date: to :date "2024-09-20T06:16:49+00:00"
+                link: "https://codeberg.org/Eloitor/mathjax.art/releases/tag/v0.0.2"
+                details: #[
+                        size: 60292
+                        files: 6
+                        readme: {
+                                <h1 align="center">
+                                    Mathjax.art
+                                </h1>
+                                
+                                <p align="center">
+                                     <i>A wrapper for using mathjax in arturo's webview</i> 
+                                     <br><br>
+                                     <img src="https://img.shields.io/badge/license-beerware-green?style=for-the-badge">
+                                     <a href="https://arturo-lang.io/" target="_blank">
+                                          <img src="https://img.shields.io/badge/language-Arturo-orange.svg?style=for-the-badge" alt="Arturo Language Badge">
+                                     </a>
+                                </p>
+                                
+                                --- 
+                                 
+                                <!--ts-->
+                                
+                                * [What does this package do?](#what-does-this-package-do)
+                                * [How do I use it?](#how-do-i-use-it)
+                                * [Contributing](#contributing)
+                                
+                                <!--te-->
+                                 
+                                ---
+                                
+                                ### What does this package do?
+                                
+                                This package provides a wrapper arround [mathjax](https://www.mathjax.org/), to display math equations in an arturo's webview
+                                
+                                ### How do I use it?
+                                
+                                
+                                ```red
+                                import "mathjax"!
+                                
+                                webview.inject: mathjaxJs
+                                .title: "Pythagorean triples"
+                                ---------------
+                                The general form for generating all primitive Pythagorean triples 
+                                (where $a$, $b$, and $c$ are coprime) is given by the following parametrization.
+                                For two positive integers $m$ and $n$ with $m > n$, $m - n$ odd, and $\gcd(m, n) = 1$,
+                                the triple $(a, b, c)$ is given by:
+                                $$a = m^2 - n^2, \quad b = 2mn, \quad c = m^2 + n^2.$$
+                                
+                                This produces a Pythagorean triple because:
+                                $$
+                                (m^2 - n^2)^2 + (2mn)^2 = m^4 - 2m^2n^2 + n^4 + 4m^2n^2 = m^4 + 2m^2n^2 + n^4 = (m^2 + n^2)^2.
+                                $$
+                                Thus, $a^2 + b^2 = c^2$, satisfying the Pythagorean theorem.
+                                ```
+                                ![Running docs/example.art screenshot](https://codeberg.org/Eloitor/mathjax.art/raw/branch/main/docs/example.png)
+                                
+                                ### Contributing
+                                
+                                Mathjax.art has been designed with flexibility and extensibility in mind.
+                                
+                                - Can you make it work offline?
+                                - Have you noticed an error and want to fix sth?
+                                - Do you want to add more options?
+                                - Do you want to add more tests to an inject to make it more robust?
+                                
+                                You are 100% welcome! Just make a PR and I'll be more than glad to merge it! 🚀
+                                
+                                <hr/>
+                                
+                        }
+                        license: #[
+                                name: "Beerware"
+                                url: "https://fedoraproject.org/wiki/Licensing/Beerware"
+                        ]
+                ]
+                url: "https://codeberg.org/Eloitor/mathjax.art/archive/v0.0.2.zip"
+                info: #[
+                        entry: "src/mathjax.art"
+                        executable: false
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.0.0
+                        ]
+                ]
+        ]
+         #[
                 version: 0.0.1
                 date: to :date "2024-09-19T11:50:34+00:00"
                 link: "https://codeberg.org/Eloitor/mathjax.art/releases/tag/v0.0.1"

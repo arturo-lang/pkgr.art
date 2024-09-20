@@ -3,7 +3,14 @@ name: "mathjax.art"
 fullName: "Eloitor/mathjax.art"
 url: "https://codeberg.org/Eloitor/mathjax.art"
 description: "A wrapper for using mathjax in Arturo\'s webview"
-tags: null
+tags: [
+                "arturo"
+                 "arturo-package"
+                 "gui"
+                 "javascript"
+                 "latex"
+                 "webview"
+        ]
 stats: #[
         stars: 1
         watch: 2

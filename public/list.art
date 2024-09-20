@@ -49,7 +49,14 @@ html: #[
         ]
 mathjax: #[
         description: "A wrapper for using mathjax in Arturo\'s webview"
-        tags: null
+        tags: [
+                        "arturo"
+                         "arturo-package"
+                         "gui"
+                         "javascript"
+                         "latex"
+                         "webview"
+                ]
         ]
 mimetypes: #[
         description: "MIME content type registry & recognition"
