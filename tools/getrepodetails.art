@@ -173,6 +173,7 @@ getReadmeFile: function [folder][
     tgtF: first list folder
     if exists? r1: <= join.path @[tgtF "README"] [return read r1]
     if exists? r2: <= join.path @[tgtF "README.md"] [return read r2]
+    if exists? r3: <= join.path @[tgtF "readme.md"] [return read r3]
     return "--"
 ]
 
