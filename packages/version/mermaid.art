@@ -1,0 +1,92 @@
+[
+        #[
+                version: 0.0.1
+                date: to :date "2024-09-27T12:58:30+00:00"
+                link: "https://codeberg.org/Eloitor/mermaid.art/releases/tag/v0.0.1"
+                details: #[
+                        size: 26955
+                        files: 6
+                        readme: {
+                                <h1 align="center">
+                                    Mermaid.art
+                                </h1>
+                                
+                                <p align="center">
+                                     <i>A wrapper for using mermaid in arturo's webview</i> 
+                                     <br><br>
+                                     <img src="https://img.shields.io/badge/license-beerware-green?style=for-the-badge">
+                                     <a href="https://arturo-lang.io/" target="_blank">
+                                          <img src="https://img.shields.io/badge/language-Arturo-orange.svg?style=for-the-badge" alt="Arturo Language Badge">
+                                     </a>
+                                </p>
+                                
+                                --- 
+                                 
+                                <!--ts-->
+                                
+                                * [What does this package do?](#what-does-this-package-do)
+                                * [How do I use it?](#how-do-i-use-it)
+                                * [Contributing](#contributing)
+                                
+                                <!--te-->
+                                 
+                                ---
+                                
+                                ### What does this package do?
+                                
+                                This package provides a wrapper for using [mermaid](https://mermaid.js.org/), to display diagrams in an arturo's webview
+                                
+                                ### How do I use it?
+                                
+                                
+                                ```red
+                                import ./"mermaid"!
+                                
+                                webview.inject: mermaidJs
+                                .title: "A mermaid example"
+                                ---------------
+                                This is a simple mermaid example
+                                <pre class="mermaid">
+                                graph LR
+                                  A --- B
+                                  B-->C[fa:fa-ban forbidden]
+                                  B-->D(fa:fa-spinner);
+                                </pre>
+                                
+                                Later there could be ways to construct diagrams directly from arturo data.
+                                ```
+                                ![Running docs/example.art screenshot](https://codeberg.org/Eloitor/mermaid.art/raw/branch/main/docs/example.png)
+                                
+                                ### Contributing
+                                
+                                Mermaid.art has been designed with flexibility and extensibility in mind.
+                                
+                                - Can you make it work offline?
+                                - Have you noticed an error and want to fix sth?
+                                - Do you want to add more options?
+                                - Do you want to add more tests to an inject to make it more robust?
+                                
+                                You are 100% welcome! Just make a PR and I'll be more than glad to merge it! 🚀
+                                
+                                <hr/>
+                                
+                        }
+                        license: #[
+                                name: "Beerware"
+                                url: "https://fedoraproject.org/wiki/Licensing/Beerware"
+                        ]
+                ]
+                url: "https://codeberg.org/Eloitor/mermaid.art/archive/v0.0.1.zip"
+                info: #[
+                        entry: "src/mermaid.art"
+                        executable: false
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.0.0
+                        ]
+                ]
+        ]
+]

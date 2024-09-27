@@ -1,0 +1,25 @@
+
+name: "mermaid.art"
+fullName: "Eloitor/mermaid.art"
+url: "https://codeberg.org/Eloitor/mermaid.art"
+description: "A wrapper for using mermaid in Arturo\'s webview"
+tags: [
+                "arturo"
+                 "arturo-package"
+                 "diagrams"
+                 "gui"
+                 "javascript"
+                 "mermaid"
+                 "mermaid-charting-language"
+                 "webview"
+        ]
+stats: #[
+        stars: 1
+        watch: 1
+        ]
+author: #[
+        name: "Eloitor"
+        url: "https://codeberg.org/Eloitor"
+        avatar: "https://codeberg.org/avatars/ead21ab8a2d0ee2f4396823f5ed63becc64e425fd74e41ddbda8b68d4c07cf5f"
+        ]
+

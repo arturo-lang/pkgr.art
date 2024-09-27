@@ -58,6 +58,19 @@ mathjax: #[
                          "webview"
                 ]
         ]
+mermaid: #[
+        description: "A wrapper for using mermaid in Arturo\'s webview"
+        tags: [
+                        "arturo"
+                         "arturo-package"
+                         "diagrams"
+                         "gui"
+                         "javascript"
+                         "mermaid"
+                         "mermaid-charting-language"
+                         "webview"
+                ]
+        ]
 mimetypes: #[
         description: "MIME content type registry & recognition"
         tags: [
