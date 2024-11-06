@@ -1,9 +1,9 @@
 name: "rsv"
 description: "RSV parser and serializer for Arturo"
 license: "MIT"
-author: "cattokomo"
+author: "mbekkomo"
 version: 0.1.0
-url: "https://api.github.com/repos/cattokomo/art-rsv/zipball/0.1.0"
+url: "https://api.github.com/repos/mbekkomo/art-rsv/zipball/0.1.0"
 entry: "rsv.art"
 executable: false
 depends: []

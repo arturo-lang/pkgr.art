@@ -1,7 +1,7 @@
 
 name: "art-rsv"
-fullName: "cattokomo/art-rsv"
-url: "https://github.com/cattokomo/art-rsv"
+fullName: "mbekkomo/art-rsv"
+url: "https://github.com/mbekkomo/art-rsv"
 description: "RSV parser and serializer for Arturo"
 tags: [
 
@@ -11,8 +11,8 @@ stats: #[
         watch: 3
         ]
 author: #[
-        name: "cattokomo"
-        url: "https://github.com/cattokomo"
+        name: "mbekkomo"
+        url: "https://github.com/mbekkomo"
         avatar: "https://avatars.githubusercontent.com/u/71205197?v=4"
         ]
 
