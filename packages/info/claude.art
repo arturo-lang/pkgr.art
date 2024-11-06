@@ -1,0 +1,25 @@
+
+name: "claude.ai.art"
+fullName: "drkameleon/claude.ai.art"
+url: "https://github.com/drkameleon/claude.ai.art"
+description: "Claude.ai API client for Arturo"
+tags: [
+                "ai"
+                 "api"
+                 "api-client"
+                 "artificial-intelligence"
+                 "arturo"
+                 "arturo-package"
+                 "claude-ai"
+                 "claude-api"
+        ]
+stats: #[
+        stars: 1
+        watch: 1
+        ]
+author: #[
+        name: "drkameleon"
+        url: "https://github.com/drkameleon"
+        avatar: "https://avatars.githubusercontent.com/u/1265028?v=4"
+        ]
+

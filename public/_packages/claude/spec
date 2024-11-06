@@ -1,0 +1,13 @@
+name: "claude"
+description: "Claude.ai API client for Arturo"
+license: "MIT"
+author: "drkameleon"
+version: 0.0.1
+url: "https://api.github.com/repos/drkameleon/claude.ai.art/zipball/v0.0.1"
+entry: "src/api.art"
+executable: false
+depends: []
+requires: [
+                >
+                 0.9.83
+        ]
