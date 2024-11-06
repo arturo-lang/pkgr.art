@@ -1,4 +1,5 @@
 artsembly:      gh "arturo-lang/artsembly"
+claude:         gh "drkameleon/claude.ai.art"
 dummy:          gh "arturo-lang/dummy-package"
 grafito:        gh "arturo-lang/grafito"
 html:           gh "arturo-lang/art-html-module"
