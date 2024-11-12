@@ -29,6 +29,17 @@ dummy: #[
                         "test"
                 ]
         ]
+grace: #[
+        description: "A minimalistic code editor, inspired by Monaco/VSCode, based on Ace & written in Arturo"
+        tags: [
+                        "arturo"
+                         "arturo-package"
+                         "code"
+                         "code-editor"
+                         "editor"
+                         "syntax-highlighting"
+                ]
+        ]
 grafito: #[
         description: "Portable, Serverless & Lightweight SQLite-based Graph Database in Arturo"
         tags: [

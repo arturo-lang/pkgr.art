@@ -1,0 +1,23 @@
+
+name: "grace.art"
+fullName: "drkameleon/grace.art"
+url: "https://github.com/drkameleon/grace.art"
+description: "A minimalistic code editor, inspired by Monaco/VSCode, based on Ace & written in Arturo"
+tags: [
+                "arturo"
+                 "arturo-package"
+                 "code"
+                 "code-editor"
+                 "editor"
+                 "syntax-highlighting"
+        ]
+stats: #[
+        stars: 7
+        watch: 7
+        ]
+author: #[
+        name: "drkameleon"
+        url: "https://github.com/drkameleon"
+        avatar: "https://avatars.githubusercontent.com/u/1265028?v=4"
+        ]
+
