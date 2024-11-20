@@ -1,0 +1,25 @@
+
+name: "tabular.art"
+fullName: "drkameleon/tabular.art"
+url: "https://github.com/drkameleon/tabular.art"
+description: "Feature-rich ASCII table generator for the terminal"
+tags: [
+                "arturo"
+                 "arturo-package"
+                 "ascii"
+                 "cli"
+                 "csv"
+                 "table"
+                 "table-generator"
+                 "terminal"
+        ]
+stats: #[
+        stars: 1
+        watch: 1
+        ]
+author: #[
+        name: "drkameleon"
+        url: "https://github.com/drkameleon"
+        avatar: "https://avatars.githubusercontent.com/u/1265028?v=4"
+        ]
+

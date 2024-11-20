@@ -160,6 +160,19 @@ states: #[
                          "pkgr-art"
                 ]
         ]
+tabular: #[
+        description: "Feature-rich ASCII table generator for the terminal"
+        tags: [
+                        "arturo"
+                         "arturo-package"
+                         "ascii"
+                         "cli"
+                         "csv"
+                         "table"
+                         "table-generator"
+                         "terminal"
+                ]
+        ]
 tasks: #[
         description: "A rake-inspired task system for Arturo"
         tags: [
