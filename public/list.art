@@ -29,6 +29,20 @@ dummy: #[
                         "test"
                 ]
         ]
+fianchetto: #[
+        description: "Chess-aware custom types, FEN/PGN parsing & more"
+        tags: [
+                        "arturo"
+                         "arturo-language"
+                         "arturo-package"
+                         "chess"
+                         "chess-programming"
+                         "fen"
+                         "fen-parsing"
+                         "pgn"
+                         "pgn-parser"
+                ]
+        ]
 grace: #[
         description: "A minimalistic code editor, inspired by Monaco/VSCode, based on Ace & written in Arturo"
         tags: [

@@ -1,0 +1,26 @@
+
+name: "fianchetto.art"
+fullName: "drkameleon/fianchetto.art"
+url: "https://github.com/drkameleon/fianchetto.art"
+description: "Chess-aware custom types, FEN/PGN parsing & more"
+tags: [
+                "arturo"
+                 "arturo-language"
+                 "arturo-package"
+                 "chess"
+                 "chess-programming"
+                 "fen"
+                 "fen-parsing"
+                 "pgn"
+                 "pgn-parser"
+        ]
+stats: #[
+        stars: 1
+        watch: 1
+        ]
+author: #[
+        name: "drkameleon"
+        url: "https://github.com/drkameleon"
+        avatar: "https://avatars.githubusercontent.com/u/1265028?v=4"
+        ]
+
