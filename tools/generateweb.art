@@ -67,7 +67,7 @@ compressCSS: function [file][
 ]
 
 getProperMarkdown: function [md][
-    write "tmp.md" md
+    md >> "tmp.md" 
     ret: execute ~{ruby |relative "gfm.rb"| tmp.md}
     ; print ["Got:\n" ret]
     ; ret: read.markdown md
@@ -156,7 +156,7 @@ createSpecFile: function [package, versionToProcess, targetFolder][
         requires: versionToProcess\info\requires
     ]
 
-    write ~"|targetFolder|/spec" replace strip as.pretty.unwrapped.code ret {/\[\n\n\s+\]/} "[]"
+    write replace strip as.pretty.unwrapped.code ret {/\[\n\n\s+\]/} "[]" ~"|targetFolder|/spec" 
 ]
 
 searchable: new []
@@ -165,7 +165,7 @@ searchable: new []
 
 thumbsFolder: "public/thumbs"
 unless directory? thumbsFolder [
-    write.directory "public/thumbs" ø
+    write.directory  ø "public/thumbs"
 ]
 
 loop packages [k,v][
@@ -198,23 +198,23 @@ processPackagePage: function [entry][
     postprocessHTML render.template read "website/package.html" entry\info\fullName
 ]
 
-searchable: write.compact.json ø searchable
+searchable: write.compact.json searchable ø 
 
 pkgFolder: "public/_packages"
 unless directory? pkgFolder [
-    write.directory pkgFolder ø
+    write.directory ø pkgFolder 
 ]
 
 loop entries 'entry [
     print ~"- Creating subpages: |entry\name|"
     tgtName: ~{|pkgFolder|/|entry\name|}
     unless directory? tgtName [
-        write.directory tgtName ø
+        write.directory ø tgtName 
     ]
 
     currentVersion: first entry\version
     currentVersionIsLatest: true
-    write ~{|tgtName|/index.html} processPackagePage entry
+    write processPackagePage entry ~{|tgtName|/index.html} 
     compressHTML ~{|tgtName|/index.html}
 
     createSpecFile entry currentVersion tgtName
@@ -223,7 +223,7 @@ loop entries 'entry [
         versionTgt: ~{|tgtName|/|vv\version|}
         print ~"\t|vv\version|"
         unless directory? versionTgt [
-            write.directory versionTgt ø
+            write.directory ø versionTgt 
         ]
 
         currentVersion: vv
@@ -231,7 +231,7 @@ loop entries 'entry [
         if currentVersion = first entry\version ->
             currentVersionIsLatest: true
 
-        write ~{|versionTgt|/index.html} processPackagePage entry
+        write processPackagePage entry ~{|versionTgt|/index.html} 
         compressHTML ~{|versionTgt|/index.html}
 
         createSpecFile entry vv versionTgt
@@ -249,8 +249,8 @@ if odd? size entries ->
 isHome: true
 isSearch: false
 packageTitle: ""
-write "public/index.html"
-      render.template read "website/index.html"
+write render.template read "website/index.html" "public/index.html"
+      
 
 ; and compress it
 compressHTML "public/index.html"
@@ -258,11 +258,12 @@ compressHTML "public/index.html"
 ; render search page
 isHome: false
 isSearch: true
-write.directory "public/search" ø
+write.directory  ø "public/search"
 if null? last entries ->
     pop 'entries
-write "public/search/index.html"
-      render.template read "website/search.html"
+write render.template read "website/search.html"
+      "public/search/index.html"
+      
 
 ; and compress it too
 compressHTML "public/search/index.html"
@@ -270,7 +271,7 @@ compressHTML "public/search/index.html"
 ; create assets folder if necessary
 assetsFolder: "public/assets"
 unless directory? assetsFolder [
-    write.directory assetsFolder ø
+    write.directory ø assetsFolder 
 ]
 
 ; compile scss
