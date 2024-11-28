@@ -107,7 +107,7 @@ getRepoInfo: function [pkg][
 
 getReleaseInfo: function [owner, repo, version, url][
     if IsCI? [
-        write.directory "tmp" ø
+        write.directory ø "tmp" 
     ]
 
     tgt: ~{tmp/|owner|-|repo|-|version|.zip}
