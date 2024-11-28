@@ -1,6 +1,7 @@
 artsembly:      gh "arturo-lang/artsembly"
 claude:         gh "drkameleon/claude.ai.art"
 dummy:          gh "arturo-lang/dummy-package"
+fianchetto:     gh "drkameleon/fianchetto.art"
 grace:          gh "drkameleon/grace.art"
 grafito:        gh "arturo-lang/grafito"
 html:           gh "arturo-lang/art-html-module"
