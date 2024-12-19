@@ -120,11 +120,11 @@ postprocessAlerts: function [src][
         {/<blockquote>\n<p>\[!WARNING\]/}
         {/<blockquote>\n<p>\[!CAUTION\]/}
      ]@[
-        ~"<blockquote class='alert alert-tip'>\n<p><b class='alert-message'>|octicon 'lightbulb|Tip</b><br>\n"
-        ~"<blockquote class='alert alert-note'>\n<p><b class='alert-message'>|octicon 'info|Note</b><br>\n"
-        ~"<blockquote class='alert alert-important'>\n<p><b class='alert-message'>|octicon 'report|Important</b><br>\n"
-        ~"<blockquote class='alert alert-warning'>\n<p><b class='alert-message'>|octicon 'alert|Warning</b><br>\n"
-        ~"<blockquote class='alert alert-caution'>\n<p><b class='alert-message'>|octicon 'stop|Caution</b><br>\n"
+        ~"<blockquote class='alert alert-tip'>\n<p><b class='alert-message'>|octicon 'lightbulb|Tip</b>\n"
+        ~"<blockquote class='alert alert-note'>\n<p><b class='alert-message'>|octicon 'info|Note</b>\n"
+        ~"<blockquote class='alert alert-important'>\n<p><b class='alert-message'>|octicon 'report|Important</b>\n"
+        ~"<blockquote class='alert alert-warning'>\n<p><b class='alert-message'>|octicon 'alert|Warning</b>\n"
+        ~"<blockquote class='alert alert-caution'>\n<p><b class='alert-message'>|octicon 'stop|Caution</b>\n"
      ]
 ]
 
