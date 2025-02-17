@@ -1,10 +1,10 @@
 [
         #[
-                version: 2.0.0
-                date: to :date "2025-02-17T13:28:12+00:00"
-                link: "https://github.com/RickBarretto/unitt/releases/tag/v2.0.0"
+                version: 2.0.1
+                date: to :date "2025-02-17T14:58:29+00:00"
+                link: "https://github.com/RickBarretto/unitt/releases/tag/v2.0.1"
                 details: #[
-                        size: 2089284
+                        size: 2089281
                         files: 18
                         readme: {
                                 <h1 align="center">
@@ -49,7 +49,7 @@
                                 
                                 **Setup & Execution**
                                 
-                                Create the file `unitt` on the root of your project:
+                                Create the file `test` on the root of your project:
                                 
                                 ```art
                                 #! arturo
@@ -72,12 +72,12 @@
                                 
                                 ```sh
                                 # Runs test/test*.art by default
-                                ./unitt 
+                                ./test
                                 ```
                                 
                                 ```sh
                                 # Glob Pattern from Shell
-                                ./unitt test/*test.art
+                                ./test test/*test.art
                                 ```
                                 
                                 ### Testing code
@@ -225,13 +225,14 @@
                                 by [Artem Sapegin](https://unsplash.com/@sapegin?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) 
                                 on [Unsplash](https://unsplash.com/photos/brown-wooden-boat-floating-on-body-of-water-XGDBdSQ70O0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
                                       
+                                
                         }
                         license: #[
                                 name: "MIT"
                                 url: "https://choosealicense.com/licenses/mit/"
                         ]
                 ]
-                url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v2.0.0"
+                url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v2.0.1"
                 info: #[
                         entry: "src/unitt.art"
                         depends: [
