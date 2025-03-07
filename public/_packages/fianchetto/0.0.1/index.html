@@ -1,318 +1,44 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Fianchetto &bull; Arturo Packager</title><meta name="description" content="Get Fianchetto &bull; Package for the Arturo programming language"><meta property="og:type" content="website"><meta property="og:url" content="https://pkgr.art"><meta property="og:title" content="Fianchetto &bull; Arturo Packager"><meta property="og:description" content="Get Fianchetto &bull; Package for the Arturo programming language"><meta property="og:image" content="https://pkgr.art/thumbs/fianchetto.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@ArturoLanguage"><meta name="twitter:creator" content="@ArturoLanguage"><meta name="twitter:title" content="Fianchetto &bull; Arturo Packager"><meta name="twitter:description" content="Get Fianchetto &bull; Package for the Arturo programming language"><meta name="twitter:image" content="https://pkgr.art/thumbs/fianchetto.png"><link rel="apple-touch-icon" sizes="180x180" href="https://pkgr.art/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://pkgr.art/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://pkgr.art/favicon-16x16.png"><link rel="manifest" href="https://pkgr.art/site.webmanifest"><link rel="mask-icon" href="https://pkgr.art/safari-pinned-tab.svg" color="#501056"><meta name="msapplication-TileColor" content="#da532c"><meta name="theme-color" content="#f5f5f7"><link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bulma@0.9.4/css/bulma.min.css,npm/prismjs@1.29.0/themes/prism-okaidia.min.css,npm/protip@1.4.21/protip.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"><script src="https://kit.fontawesome.com/8bfb2fe6f4.js" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script><link rel="stylesheet" type="text/css" href="https://pkgr.art/assets/style.css"><section class="hero main-hero is-hidden"><div class="hero-body"><div class="container has-text-centered"><div class="column is-4 is-offset-4 main-header"><h1 class="title has-text-black main-title"><a href="https://pkgr.art/"><span class="animate-character">Packager</span><br></a></h1><div class="control has-icons-left"><input id="search-bar" class="input is-large main-search" type="search" placeholder="I'm looking for..."> <span class="icon is-medium is-left"><i class="fa fa-search"></i></span></div></div></div></div></section><div class="hero search-line" onclick="showSearch()">&nbsp;<i class="showsearch-icon fas fa-caret-square-down" onclick="showSearch()"></i>&nbsp;</div><section class="main-section"><div class="container"><div class="columns is-mobile"><div class="column is-8-tablet is-offset-2-tablet is-12-mobile is-offset-0-mobile package-page"><div class="column is-12 is-10-mobile is-offset-1-mobile" style="margin-bottom:1rem"><div class="columns package-title-wrapper"><div class="column is-8 package-title title-wrapper"><h2 class="is-size-2"><b>fianchetto</b></h2></div><div class="column is-4 package-link"><div class="is-pulled-right has-text-grey is-hidden-mobile"><a target="_blank" href="https://github.com/drkameleon/fianchetto.art"><span class="icon repo-icon inside-package"><i class="fa fa-code"></i></span></a></div></div></div><div class="block package-description"><h3 class="is-size-5">Chess-aware custom types, FEN/PGN parsing & more</h3></div><div class="block package-tags"><span class="tag is-info is-light is-medium package-tag">chess</span> <span class="tag is-info is-light is-medium package-tag">chess programming</span> <span class="tag is-info is-light is-medium package-tag">fen</span> <span class="tag is-info is-light is-medium package-tag">fen parsing</span> <span class="tag is-info is-light is-medium package-tag">pgn</span> <span class="tag is-info is-light is-medium package-tag">pgn parser</span></div></div><div class="columns"><div class="column is-9 left-column"><div class="left-wrapper"><div class="tabs left-tabs"><ul><li id="overview-tab" class="is-active"><a onclick="showOverview()">Overview</a><li id="version-tab"><a onclick="showVersionHistory()"><span>Versions</span><span class="no-of-versions">1</span></a><li id="dependencies-tab"><a onclick="showDependencies()">Dependencies</a><li class="maximize-button is-hidden-mobile"><a onclick="toggleDocSize()"><div class="icon"><i class="fas fa-angle-double-right"></i></div></a></ul></div><div class="box content left-container"><div class="overview"><p style="text-align:center"><img style="text-align:center" width="500" src="https://raw.githubusercontent.com/drkameleon/fianchetto.art/main/icon.png"><p style="text-align:center"><b>Chess-aware components / custom types,<br>and more...</b><br><br><img src="https://img.shields.io/github/license/arturo-lang/grafito?style=for-the-badge"> <img src="https://img.shields.io/badge/language-Arturo-orange.svg?style=for-the-badge"><hr><ul><li><a href="#what-does-this-package-do">What does this package do?</a><li><a href="#how-do-i-use-it">How do I use it?</a><li><a href="#type-reference">Type Reference</a><ul><li><a href="#chesscoords">chessCoords</a><li><a href="#chesspiece">chessPiece</a><li><a href="#chessmove">chessMove</a><li><a href="#chessboard">chessBoard</a><li><a href="#chessposition">chessPosition</a><li><a href="#chessgame">chessGame</a></ul><li><a href="#license">License</a></ul><hr><h3><a href="#what-does-this-package-do" aria-hidden="true" class="anchor" id="what-does-this-package-do"></a>What does this package do?</h3><p>This package includes different useful types for chess programming &amp; analysis: pieces, boards, moves, positions, games. It also comes with FEN &amp; PGN parsing/output capabilities and can - potentially - serve as the foundation of other chess-related apps &amp; packages.<h3><a href="#how-do-i-use-it" aria-hidden="true" class="anchor" id="how-do-i-use-it"></a>How do I use it?</h3><p>Simply <code>import</code> it and use any of the provided helper functions or types:<pre class="language-arturo"><code class="language-arturo">import .withHelpers &quot;fianchetto&quot;!
 
-<!DOCTYPE html>
-<html lang="en">  
-    <head>
-        <!-- Meta -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-        <title>Fianchetto &bull; Arturo Packager</title>
-        <meta name="description" content="Get Fianchetto &bull; Package for the Arturo programming language">
+; Let's create a new chess game!
+game: newGame ø!
 
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website">
-        
-            <meta property="og:url" content="https://pkgr.art" />
-        
-        <meta property="og:title" content="Fianchetto &bull; Arturo Packager">
-        <meta property="og:description" content="Get Fianchetto &bull; Package for the Arturo programming language">
-        
-        
-        <meta property="og:image" content="https://pkgr.art/thumbs/fianchetto.png">
-        
+; What about showing the FEN string?
+print [&quot;Initial FEN:&quot; game\position]
 
-        <!-- Twitter -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@ArturoLanguage" />
-        <meta name="twitter:creator" content="@ArturoLanguage" />
-        <meta name="twitter:title" content="Fianchetto &bull; Arturo Packager">
-        <meta name="twitter:description" content="Get Fianchetto &bull; Package for the Arturo programming language">
-        
-        <meta name="twitter:image" content="https://pkgr.art/thumbs/fianchetto.png">
-        
+; Make moves using coordinates
+game\makeMove &quot;e2e4&quot;
+game\makeMove &quot;e7e5&quot;
+game\makeMove &quot;g1f3&quot;
 
-        <!-- FavIcon -->
-        <link rel="apple-touch-icon" sizes="180x180" href="https://pkgr.art/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="https://pkgr.art/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="https://pkgr.art/favicon-16x16.png">
-        <link rel="manifest" href="https://pkgr.art/site.webmanifest">
-        <link rel="mask-icon" href="https://pkgr.art/safari-pinned-tab.svg" color="#501056">
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="theme-color" content="#f5f5f7">
-
-        <!-- Fonts & Styles -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bulma@0.9.4/css/bulma.min.css,npm/prismjs@1.29.0/themes/prism-okaidia.min.css,npm/protip@1.4.21/protip.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
-        <!-- Icons -->
-        <script src="https://kit.fontawesome.com/8bfb2fe6f4.js" crossorigin="anonymous"></script>
-
-        <!-- Jquery -->
-        <script
-            src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-            crossorigin="anonymous"></script>
-            
-        <!-- Our main style -->
-        <link rel="stylesheet" type="text/css" href="https://pkgr.art/assets/style.css">
-    </head>
-    <body>
-
-<section class="hero main-hero is-hidden">
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            <div class="column is-4 is-offset-4 main-header">
-                
-                <h1 class="title has-text-black main-title">
-                    <a href="https://pkgr.art/">
-                        <!--<b>Arturo</b><br>--><span class="animate-character">Packager</span><br>
-                    </a>
-                </h1>
-                <div class="control has-icons-left">
-                    <input id="search-bar" class="input is-large main-search" type="search" placeholder="I'm looking for...">
-                    <span class="icon is-medium is-left">
-                        <i class="fa fa-search"></i>
-                    </span>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-
-    <div class="hero search-line" onclick="showSearch()">&nbsp;<i class="showsearch-icon fas fa-caret-square-down" onclick="showSearch()"></i>&nbsp;</div>
-
-<section class="main-section">
-    <div class="container">
-        <div class="columns is-mobile">
-            <div class="column is-8-tablet is-offset-2-tablet is-12-mobile is-offset-0-mobile package-page">
-                <div class="column is-12 is-10-mobile is-offset-1-mobile" style="margin-bottom: 1rem;">
-                    <div class="columns package-title-wrapper">
-                        <div class="column is-8 package-title title-wrapper">
-                            
-                            <h2 class="is-size-2"><b>fianchetto</b></h2>
-                            
-                            
-                        </div>
-                        <div class="column is-4 package-link">
-                            <div class="is-pulled-right has-text-grey is-hidden-mobile">
-                                <a target="_blank" href="https://github.com/drkameleon/fianchetto.art">
-                                    <span class="icon repo-icon inside-package">
-                                        <i class="fa fa-code"></i>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block package-description">
-                        <h3 class="is-size-5">Chess-aware custom types, FEN/PGN parsing & more</h3>
-                    </div>
-                    
-                    
-                        <div class="block package-tags">
-                            
-                                <span class="tag is-info is-light is-medium package-tag">chess</span>
-                            
-                                <span class="tag is-info is-light is-medium package-tag">chess programming</span>
-                            
-                                <span class="tag is-info is-light is-medium package-tag">fen</span>
-                            
-                                <span class="tag is-info is-light is-medium package-tag">fen parsing</span>
-                            
-                                <span class="tag is-info is-light is-medium package-tag">pgn</span>
-                            
-                                <span class="tag is-info is-light is-medium package-tag">pgn parser</span>
-                            
-                        </div>
-                    
-                </div>
-                <div class="columns">
-                    <div class="column is-9 left-column">
-                        <div class="left-wrapper">
-                            <div class="tabs left-tabs">
-                                <ul>
-                                    <li id="overview-tab" class="is-active"><a onclick="showOverview()">Overview</a></li>
-                                    <li id="version-tab"><a onclick="showVersionHistory()"><span>Versions</span><span class="no-of-versions">1</span></a></li>
-                                    <li id="dependencies-tab"><a onclick="showDependencies()">Dependencies</a></li>
-                                    <li class="maximize-button is-hidden-mobile">
-                                        <a onclick="toggleDocSize()">
-                                            <div class="icon">
-                                                <i class="fas fa-angle-double-right"></i>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="box content left-container">
-                                <div class="overview">
-                                    <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:136:in `require': cannot load such file -- commonmarker/commonmarker (LoadError)
-	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:136:in `require'
-	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker/extension.rb:13:in `rescue in <top (required)>'
-	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker/extension.rb:3:in `<top (required)>'
-	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker.rb:3:in `require_relative'
-	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker.rb:3:in `<top (required)>'
-	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:141:in `require'
-	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:141:in `rescue in require'
-	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:135:in `require'
-	from tools/gfm.rb:1:in `<main>'
-/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker/extension.rb:7:in `require_relative': cannot load such file -- /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker/3.3/commonmarker (LoadError)
-	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker/extension.rb:7:in `<top (required)>'
-	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker.rb:3:in `require_relative'
-	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker.rb:3:in `<top (required)>'
-	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:141:in `require'
-	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:141:in `rescue in require'
-	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:135:in `require'
-	from tools/gfm.rb:1:in `<main>'
-<internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:136:in `require': cannot load such file -- commonmarker (LoadError)
-	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:136:in `require'
-	from tools/gfm.rb:1:in `<main>'
-
-                                </div>
-                                <div class="version-history is-hidden">
-                                    <div class="version-summary">
-                                        <b>Last updated:</b><br><span id="last-version-ago"></span>
-                                    </div>
-                                    <table class="table is-striped is-hoverable">
-                                        <tbody>
-                                            
-                                                
-                                                    <tr>
-                                                        <td>
-                                                            <b>0.0.1</b>
-                                                        </td>
-                                                        <td>
-                                                            <span class="has-text-grey">28&nbsp;November&nbsp;2024</span>
-                                                        </td>
-                                                        <td>
-                                                            <span class="has-text-grey repo-size-field">47311</span><small>&nbsp;/&nbsp;<span class="has-text-grey">16 files</span></small>
-                                                        </td>
-                                                    </tr>
-                                                
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="dependencies is-hidden">
-                                    
-                                        <table class="table is-striped is-hoverable">
-                                            <tbody>
-                                                
-                                                    <tr>
-                                                        <td>
-                                                            <a class="version-link" href="https://tabular.pkgr.art">tabular</a>
-                                                        </td>
-                                                        
-                                                            <td>
-                                                                <span class="has-text-grey">0.0.1</span>
-                                                            </td>
-                                                        
-                                                    </tr>
-                                                
-                                            </tbody>
-                                        </table>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-3 is-10-mobile is-offset-1-mobile info-column">
-                        <div class="box info-wrapper">
-                            <div class="block stats-wrapper">
-                                <div class="download-info">
-                                    <span class="icon download-icon">
-                                        <i class="fas fa-download"></i>
-                                    </span>&nbsp;
-                                    <span id= "fianchetto-downloads" class="download-count">-</span>
-                                </div>&nbsp;&nbsp;
-                                <div class="star-info">
-                                    <span class="icon star-icon">
-                                        <i class="fa fa-star"></i>
-                                    </span>&nbsp;
-                                    <span class="star-count" data-package="drkameleon/fianchetto.art">1</span>
-                                </div>
-                            </div>
-                            <div class="package-instructions">
-                                <div class="installation-instructions block">
-                                    <input id="installation-code" class="input copy-code" value="import 'fianchetto" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
-                                </div>
-                                <div class="message is-success codecopied-message is-hidden">
-                                    <div class="message-body">
-                                        <b>Copied!</b> Paste into your script to import the package directly &mdash; and/or install the package from your terminal via with:<br><code>arturo -p install fianchetto </code>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block package-author package-subgroup">
-                                <div class="subgroup-detail">
-                                    <b>Author</b>
-                                    <br>
-                                    <a target="_blank" href="https://github.com/drkameleon" class="repo-user-name">drkameleon</a>
-                                </div>
-                                <span class="icon subgroup-icon">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                            </div>
-                            <div class="block package-version package-subgroup">
-                                <div class="subgroup-detail">
-                                    <b>Version</b>
-                                    <br>
-                                    <div class="package-version-wrapper">
-                                        <a target="_blank" href="https://github.com/drkameleon/fianchetto.art/releases/tag/v0.0.1">0.0.1</a><span class="tag is-success latest-version-tag">Latest</span>
-                                    </div>
-                                </div>
-                                <span class="icon subgroup-icon">
-                                    <i class="fas fa-code-branch"></i>
-                                </span>
-                            </div>
-                            <div class="block package-license package-subgroup">
-                                <div class="subgroup-detail">
-                                    <b>License</b>
-                                    <br>
-                                    <a target="_blank" href="https://choosealicense.com/licenses/mit/" class="repo-license-name">MIT</a>
-                                </div>
-                                <span class="icon subgroup-icon">
-                                    <i class="fas fa-balance-scale"></i>
-                                </span>
-                            </div>
-                            <hr>
-                            <div class="block package-executable package-subgroup">
-                                <div class="subgroup-detail">
-                                    <b>Executable?</b>
-                                    <br>
-                                    
-                                        <span class="icon">
-                                            <i class="fas fa-times"></i>
-                                        </span> No
-                                    
-                                </div>
-                                <span class="icon subgroup-icon">
-                                    <i class="fas fa-bolt"></i>
-                                </span>
-                            </div>
-                            <div class="block package-requires package-subgroup">
-                                <div class="subgroup-detail">
-                                    <b>Requires</b>
-                                    <br>
-                                    
-                                        Arturo >&nbsp;0.9.83
-                                    
-                                </div>
-                                <span class="icon subgroup-icon">
-                                    <i class="fas fa-exclamation-circle"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<script>
-    $(document).ready(function(){
+; and... let's print board!
+print &quot;Final position:&quot;
+print game\position\board
+</code></pre><p>Will produce:<pre><code>Initial FEN: rnbkqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBKQBNR w KQkq - 0 1 
+Final position:
++---+---+---+---+---+---+---+---+
+| r | n | b | q | k | b | n | r |
+| p | p | p | p | - | p | p | p |
+| - | - | - | - | - | - | - | - |
+| - | - | - | - | p | - | - | - |
+| - | - | - | - | P | - | - | - |
+| - | - | - | - | - | N | - | - |
+| P | P | P | P | - | P | P | P |
+| R | N | B | Q | K | B | - | R |
++---+---+---+---+---+---+---+---+
+</code></pre><h3><a href="#type-reference" aria-hidden="true" class="anchor" id="type-reference"></a>Type reference</h3><h4><a href="#chesscoords" aria-hidden="true" class="anchor" id="chesscoords"></a>chessCoords</h4><p>Mainly used to hold square coordinates, or a file-rank pair.<h5><a href="#constructor" aria-hidden="true" class="anchor" id="constructor"></a>constructor</h5><pre>
+<b>to :chessCoords</b> [<ins>coords</ins> <i>:string :block :integer</i>]
+</pre><h5><a href="#fields" aria-hidden="true" class="anchor" id="fields"></a>fields</h5><ul><li><code>\file</code><li><code>\rank</code></ul><h5><a href="#methods" aria-hidden="true" class="anchor" id="methods"></a>methods</h5><ul><li><code>\index</code></ul><h4><a href="#chesspiece" aria-hidden="true" class="anchor" id="chesspiece"></a>chessPiece</h4><p>The main chess piece representation<h5><a href="#constructor-1" aria-hidden="true" class="anchor" id="constructor-1"></a>constructor</h5><pre>
+<b>to :chessPiece</b> [<ins>ch</ins> <i>:char :literal :string</i>]
+</pre><h5><a href="#fields-1" aria-hidden="true" class="anchor" id="fields-1"></a>fields</h5><ul><li><code>\color</code><li><code>\kind</code></ul><h5><a href="#methods-1" aria-hidden="true" class="anchor" id="methods-1"></a>methods</h5><ul><li><code>\white?</code><li><code>\getMovePattern [fromSq :chessCoords, toSq :chessCoords]</code></ul><h4><a href="#chessmove" aria-hidden="true" class="anchor" id="chessmove"></a>chessMove</h4><p>A move type, encapsulating an origin and a target square.<h5><a href="#constructor-2" aria-hidden="true" class="anchor" id="constructor-2"></a>constructor</h5><pre>
+<b>to :chessMove</b> [<ins>coordset</ins> <i>:string :block</i>]
+</pre><h5><a href="#fields-2" aria-hidden="true" class="anchor" id="fields-2"></a>fields</h5><ul><li><code>\fromSq</code><li><code>\toSq</code></ul><h4><a href="#chessboard" aria-hidden="true" class="anchor" id="chessboard"></a>chessBoard</h4><p>The main chess board<h5><a href="#constructor-3" aria-hidden="true" class="anchor" id="constructor-3"></a>constructor</h5><pre>
+<b>to :chessBoard</b> []
+</pre><h5><a href="#fields-3" aria-hidden="true" class="anchor" id="fields-3"></a>fields</h5><ul><li><code>\squares</code></ul><h5><a href="#methods-2" aria-hidden="true" class="anchor" id="methods-2"></a>methods</h5><ul><li><code>\getPiece [coords :chessCoords]</code><li><code>\setPiece [coords :chessCoords piece :null :chessPiece]</code></ul><h4><a href="#chessposition" aria-hidden="true" class="anchor" id="chessposition"></a>chessPosition</h4><p>A given chess position<h5><a href="#constructor-4" aria-hidden="true" class="anchor" id="constructor-4"></a>constructor</h5><pre>
+<b>to :chessPosition</b> [<ins>source</ins> <i>:string :null</i>]
+</pre><h5><a href="#fields-4" aria-hidden="true" class="anchor" id="fields-4"></a>fields</h5><ul><li><code>\board</code><li><code>\activeColor</code><li><code>\castling</code><li><code>\enPassant</code><li><code>\halfmove</code><li><code>\fullmove</code></ul><h5><a href="#methods-3" aria-hidden="true" class="anchor" id="methods-3"></a>methods</h5><ul><li><code>\validateMove [newMove :chessMove]</code><li><code>\applyMove [newMove :chessMove]</code></ul><blockquote class="alert alert-tip"><p><b class="alert-message"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</b><br>You can initialize a <code>:chessPosition</code> by directly using a FEN string; or exporting a given position back to FEN, using <code>to :string</code>. 😉</blockquote><h4><a href="#chessgame" aria-hidden="true" class="anchor" id="chessgame"></a>chessGame</h4><p>The main chess game container<h5><a href="#constructor-5" aria-hidden="true" class="anchor" id="constructor-5"></a>constructor</h5><pre>
+<b>to :chessGame</b> [<ins>source</ins> <i>:string :null</i>]
+</pre><h5><a href="#fields-5" aria-hidden="true" class="anchor" id="fields-5"></a>fields</h5><ul><li><code>\position</code><li><code>\moves</code><li><code>\result</code><li><code>\metadata</code></ul><h5><a href="#methods-4" aria-hidden="true" class="anchor" id="methods-4"></a>methods</h5><ul><li><code>\makeMove: [coords :chessMove :string]</code></ul><blockquote class="alert alert-warning"><p><b class="alert-message"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</b><br>Although the future goal of the <code>:chessGame</code> constructor is to fully support any type of PGN file input, right now support should be considered extremely limited!</blockquote><hr><h3><a href="#license" aria-hidden="true" class="anchor" id="license"></a>License</h3><p>MIT License<p>Copyright (c) 2024 Yanis Zafirópulos<p>Permission is hereby granted, free of charge, to any person obtaining a copy<br>of this software and associated documentation files (the &quot;Software&quot;), to deal<br>in the Software without restriction, including without limitation the rights<br>to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<br>copies of the Software, and to permit persons to whom the Software is<br>furnished to do so, subject to the following conditions:<p>The above copyright notice and this permission notice shall be included in all<br>copies or substantial portions of the Software.<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br>IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br>FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br>AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<br>LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<br>OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<br>SOFTWARE.</div><div class="version-history is-hidden"><div class="version-summary"><b>Last updated:</b><br><span id="last-version-ago"></span></div><table class="table is-striped is-hoverable"><tr><td><b>0.0.1</b><td><span class="has-text-grey">28&nbsp;November&nbsp;2024</span><td><span class="has-text-grey repo-size-field">47311</span><small>&nbsp;/&nbsp;<span class="has-text-grey">16 files</span></small></table></div><div class="dependencies is-hidden"><table class="table is-striped is-hoverable"><tr><td><a class="version-link" href="https://tabular.pkgr.art">tabular</a><td><span class="has-text-grey">0.0.1</span></table></div></div></div></div><div class="column is-3 is-10-mobile is-offset-1-mobile info-column"><div class="box info-wrapper"><div class="block stats-wrapper"><div class="download-info"><span class="icon download-icon"><i class="fas fa-download"></i> </span>&nbsp; <span id="fianchetto-downloads" class="download-count">-</span></div>&nbsp;&nbsp;<div class="star-info"><span class="icon star-icon"><i class="fa fa-star"></i> </span>&nbsp; <span class="star-count" data-package="drkameleon/fianchetto.art">1</span></div></div><div class="package-instructions"><div class="installation-instructions block"><input id="installation-code" class="input copy-code" value="import 'fianchetto" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly="readonly"></div><div class="message is-success codecopied-message is-hidden"><div class="message-body"><b>Copied!</b> Paste into your script to import the package directly &mdash; and/or install the package from your terminal via with:<br><code>arturo -p install fianchetto</code></div></div></div><div class="block package-author package-subgroup"><div class="subgroup-detail"><b>Author</b><br><a target="_blank" href="https://github.com/drkameleon" class="repo-user-name">drkameleon</a></div><span class="icon subgroup-icon"><i class="fas fa-user"></i></span></div><div class="block package-version package-subgroup"><div class="subgroup-detail"><b>Version</b><br><div class="package-version-wrapper"><a target="_blank" href="https://github.com/drkameleon/fianchetto.art/releases/tag/v0.0.1">0.0.1</a><span class="tag is-success latest-version-tag">Latest</span></div></div><span class="icon subgroup-icon"><i class="fas fa-code-branch"></i></span></div><div class="block package-license package-subgroup"><div class="subgroup-detail"><b>License</b><br><a target="_blank" href="https://choosealicense.com/licenses/mit/" class="repo-license-name">MIT</a></div><span class="icon subgroup-icon"><i class="fas fa-balance-scale"></i></span></div><hr><div class="block package-executable package-subgroup"><div class="subgroup-detail"><b>Executable?</b><br><span class="icon"><i class="fas fa-times"></i> </span>No</div><span class="icon subgroup-icon"><i class="fas fa-bolt"></i></span></div><div class="block package-requires package-subgroup"><div class="subgroup-detail"><b>Requires</b><br>Arturo >&nbsp;0.9.83</div><span class="icon subgroup-icon"><i class="fas fa-exclamation-circle"></i></span></div></div></div></div></div></div></div></section><script>$(document).ready(function(){
         
             $.get("https://pkgr.art/getdownloads.php?pkg=fianchetto", function (data, status){
                 $("#fianchetto-downloads").html(data);
@@ -321,34 +47,7 @@
     });
     document.addEventListener("DOMContentLoaded",()=>{
         TimeAgo.addDefaultLocale({locale:"en",long:{year:{previous:"last year",past:{one:"{0} year ago",other:"{0} years ago"}},quarter:{previous:"last quarter",past:{one:"{0} quarter ago",other:"{0} quarters ago"}},month:{previous:"last month",past:{one:"{0} month ago",other:"{0} months ago"}},week:{previous:"last week",past:{one:"{0} week ago",other:"{0} weeks ago"}},day:{previous:"yesterday",past:{one:"{0} day ago",other:"{0} days ago"}},hour:{past:{one:"{0} hour ago",other:"{0} hours ago"}},minute:{past:{one:"{0} minute ago",other:"{0} minutes ago"}},second:{current:"now",past:{one:"{0} second ago",other:"{0} seconds ago"}}},now:{now:{current:"now",past:"just now"}}}),$("#last-version-ago").html(new TimeAgo("en").format(Date.parse("2024-11-28T15:25:05+00:00"),"long"))
-    });
-</script>
-
-        <footer class="footer">
-            <div class="content has-text-centered">
-                <p class="block">
-                    <a class="footer-icon home" aria-label="home" rel="noopener" href="https://arturo-lang.io" target="_blank"><i class="fas fa-home"></i></a>&nbsp;&nbsp;&nbsp;
-                    <a class="footer-icon github" aria-label="github" rel="noopener" href="https://github.com/arturo-lang" target="_blank"><i class="fab fa-github"></i></a>&nbsp;&nbsp;&nbsp;
-                    <a class="footer-icon twitter" aria-label="twitter" rel="noopener" href="https://twitter.com/ArturoLanguage" target="_blank"><i class="fab fa-twitter"></i></a>&nbsp;&nbsp;
-                    <a class="footer-icon discord" aria-label="discord" rel="noopener" href="https://discord.gg/YdVK2CB" target="_blank"><i class="fab fa-discord"></i></a>
-                </p>
-            </div>
-            <div class="content has-text-centered">
-                <p class="block">
-                    <strong>Arturo Programming Language</strong><br>Copyright &copy; 2019-2024 Yanis Zafirópulos<br><br>
-                    <small class="is-size-7-touch">Website built and generated using Arturo + Webize.<span class="is-hidden-touch"> Running on <a rel="noopener" href="https://m.do.co/c/d9efb97aa0f2" target="_blank">DigitalOcean</a>.</span></small><br>
-                    <small class="is-size-7-touch">Source code <span class="is-hidden-touch">licensed </span>under <a href="https://opensource.org/licenses/mit-license.php">MIT</a>. Website <span class="is-hidden-touch">content licensed </span><span class="is-hidden-desktop">under </span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.</small>
-                </p>
-            </div>
-        </footer>
-        <script src="https://cdn.jsdelivr.net/combine/npm/devbridge-autocomplete@1.4.11/dist/jquery.autocomplete.min.js,gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js,npm/fuse.js@7.0.0,npm/protip@1.4.21/protip.min.js,npm/javascript-time-ago@2.5.9/bundle/javascript-time-ago.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
-        <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/javascript-time-ago@2.5.9/bundle/javascript-time-ago.js"></script> -->
-        <script src="https://pkgr.art/assets/script.js"></script>
-        <script>
-            $(document).ready(function(){
+    });</script><footer class="footer"><div class="content has-text-centered"><p class="block"><a class="footer-icon home" aria-label="home" rel="noopener" href="https://arturo-lang.io" target="_blank"><i class="fas fa-home"></i></a>&nbsp;&nbsp;&nbsp; <a class="footer-icon github" aria-label="github" rel="noopener" href="https://github.com/arturo-lang" target="_blank"><i class="fab fa-github"></i></a>&nbsp;&nbsp;&nbsp; <a class="footer-icon twitter" aria-label="twitter" rel="noopener" href="https://twitter.com/ArturoLanguage" target="_blank"><i class="fab fa-twitter"></i></a>&nbsp;&nbsp; <a class="footer-icon discord" aria-label="discord" rel="noopener" href="https://discord.gg/YdVK2CB" target="_blank"><i class="fab fa-discord"></i></a></div><div class="content has-text-centered"><p class="block"><strong>Arturo Programming Language</strong><br>Copyright &copy; 2019-2024 Yanis Zafirópulos<br><br><small class="is-size-7-touch">Website built and generated using Arturo + Webize.<span class="is-hidden-touch"> Running on <a rel="noopener" href="https://m.do.co/c/d9efb97aa0f2" target="_blank">DigitalOcean</a>.</span></small><br><small class="is-size-7-touch">Source code <span class="is-hidden-touch">licensed </span>under <a href="https://opensource.org/licenses/mit-license.php">MIT</a>. Website <span class="is-hidden-touch">content licensed </span><span class="is-hidden-desktop">under </span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.</small></div></footer><script src="https://cdn.jsdelivr.net/combine/npm/devbridge-autocomplete@1.4.11/dist/jquery.autocomplete.min.js,gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js,npm/fuse.js@7.0.0,npm/protip@1.4.21/protip.min.js,npm/javascript-time-ago@2.5.9/bundle/javascript-time-ago.js"></script><script src="https://pkgr.art/assets/script.js"></script><script>$(document).ready(function(){
                 $(".star-count").each(function (idx){
                     var repo = `https://api.github.com/search/repositories?q=${$(this).data("package")}`;
                     var currentElement = $(this);
@@ -411,8 +110,4 @@
                         }
                     });
                 }
-            }
-        </script>
-    </body>
-
-</html>
+            }</script>
