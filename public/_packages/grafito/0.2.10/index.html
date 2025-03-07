@@ -1,277 +1,346 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Grafito &bull; Arturo Packager</title><meta name="description" content="Get Grafito &bull; Package for the Arturo programming language"><meta property="og:type" content="website"><meta property="og:url" content="https://pkgr.art"><meta property="og:title" content="Grafito &bull; Arturo Packager"><meta property="og:description" content="Get Grafito &bull; Package for the Arturo programming language"><meta property="og:image" content="https://pkgr.art/thumbs/grafito.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@ArturoLanguage"><meta name="twitter:creator" content="@ArturoLanguage"><meta name="twitter:title" content="Grafito &bull; Arturo Packager"><meta name="twitter:description" content="Get Grafito &bull; Package for the Arturo programming language"><meta name="twitter:image" content="https://pkgr.art/thumbs/grafito.png"><link rel="apple-touch-icon" sizes="180x180" href="https://pkgr.art/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://pkgr.art/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://pkgr.art/favicon-16x16.png"><link rel="manifest" href="https://pkgr.art/site.webmanifest"><link rel="mask-icon" href="https://pkgr.art/safari-pinned-tab.svg" color="#501056"><meta name="msapplication-TileColor" content="#da532c"><meta name="theme-color" content="#f5f5f7"><link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bulma@0.9.4/css/bulma.min.css,npm/prismjs@1.29.0/themes/prism-okaidia.min.css,npm/protip@1.4.21/protip.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"><script src="https://kit.fontawesome.com/8bfb2fe6f4.js" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script><link rel="stylesheet" type="text/css" href="https://pkgr.art/assets/style.css"><section class="hero main-hero is-hidden"><div class="hero-body"><div class="container has-text-centered"><div class="column is-4 is-offset-4 main-header"><h1 class="title has-text-black main-title"><a href="https://pkgr.art/"><span class="animate-character">Packager</span><br></a></h1><div class="control has-icons-left"><input id="search-bar" class="input is-large main-search" type="search" placeholder="I'm looking for..."> <span class="icon is-medium is-left"><i class="fa fa-search"></i></span></div></div></div></div></section><div class="hero search-line" onclick="showSearch()">&nbsp;<i class="showsearch-icon fas fa-caret-square-down" onclick="showSearch()"></i>&nbsp;</div><section class="main-section"><div class="container"><div class="columns is-mobile"><div class="column is-8-tablet is-offset-2-tablet is-12-mobile is-offset-0-mobile package-page"><div class="column is-12 is-10-mobile is-offset-1-mobile" style="margin-bottom:1rem"><div class="columns package-title-wrapper"><div class="column is-8 package-title title-wrapper"><h2 class="is-size-2"><b><a href="https://grafito.pkgr.art">grafito</a></b></h2></div><div class="column is-4 package-link"><div class="is-pulled-right has-text-grey is-hidden-mobile"><a target="_blank" href="https://github.com/arturo-lang/grafito"><span class="icon repo-icon inside-package"><i class="fa fa-code"></i></span></a></div></div></div><div class="block package-description"><h3 class="is-size-5">Portable, Serverless & Lightweight SQLite-based Graph Database in Arturo</h3></div><div class="block package-tags"><span class="tag is-info is-light is-medium package-tag">cross platform</span> <span class="tag is-info is-light is-medium package-tag">database</span> <span class="tag is-info is-light is-medium package-tag">database engine</span> <span class="tag is-info is-light is-medium package-tag">graph</span> <span class="tag is-info is-light is-medium package-tag">graph database</span> <span class="tag is-info is-light is-medium package-tag">graphdb</span> <span class="tag is-info is-light is-medium package-tag">portable</span> <span class="tag is-info is-light is-medium package-tag">portable database</span> <span class="tag is-info is-light is-medium package-tag">query language</span> <span class="tag is-info is-light is-medium package-tag">serverless</span> <span class="tag is-info is-light is-medium package-tag">sqlite</span> <span class="tag is-info is-light is-medium package-tag">sqlite3</span></div></div><div class="columns"><div class="column is-9 left-column"><div class="left-wrapper"><div class="tabs left-tabs"><ul><li id="overview-tab" class="is-active"><a onclick="showOverview()">Overview</a><li id="version-tab"><a onclick="showVersionHistory()"><span>Versions</span><span class="no-of-versions">3</span></a><li id="dependencies-tab"><a onclick="showDependencies()">Dependencies</a><li class="maximize-button is-hidden-mobile"><a onclick="toggleDocSize()"><div class="icon"><i class="fas fa-angle-double-right"></i></div></a></ul></div><div class="box content left-container"><div class="overview"><p style="text-align:center"><img style="text-align:center" width="350" src="https://raw.githubusercontent.com/arturo-lang/grafito/master/logo.png"><p style="text-align:center"><b>Portable, Serverless & Lightweight<br>SQLite-based Graph Database</b><br><br><img src="https://img.shields.io/github/license/arturo-lang/grafito?style=for-the-badge"> <img src="https://img.shields.io/badge/language-Arturo-orange.svg?style=for-the-badge"> <img src="https://img.shields.io/github/actions/workflow/status/arturo-lang/grafito/test.yml?branch=main&style=for-the-badge"><p style="text-align:center"><img style="text-align:center" src="https://raw.githubusercontent.com/arturo-lang/grafito/master/ui-screenshot.png"><hr><ul><li><a href="#at-a-glance">At A Glance</a><li><a href="#try-grafito">Try Grafito</a><ul><li><a href="#docker">Docker</a><li><a href="#installation">Installation</a><ul><li><a href="#as-a-library">As a Library</a><li><a href="#as-a-standalone-tool">As a Standalone tool</a></ul></ul><li><a href="#how-to">How To</a><ul><li><a href="#create-a-simple-node">Create a simple Node</a><li><a href="#create-relationships-between-nodes">Create Relationships between Nodes</a><li><a href="#search-nodes">Search Nodes</a><li><a href="#delete-an-existing-node">Delete an existing Node</a><li><a href="#delete-an-existing-relationship">Delete an existing Relationship</a><li><a href="#preview-a-set-of-nodes">Preview a Set of Nodes</a><li><a href="#more-complex-queries">More complex queries</a><ul><li><a href="#reverse-edge-queries">Reverse edge queries</a><li><a href="#using-filters">Using filters</a></ul><li><a href="#not-just-a-query-language">Not just a query language!</a></ul><li><a href="#command-reference">Command Reference</a><ul><li><a href="#put">put</a><li><a href="#unput">unput</a><li><a href="#link">link</a><li><a href="#unlink">unlink</a><li><a href="#what">what</a><li><a href="#fetch">fetch</a><li><a href="#preview">preview</a></ul><li><a href="#filter-reference">Filter Reference</a><ul><li><a href="#contains">contains</a><li><a href="#prefix">prefix</a><li><a href="#suffix">suffix</a><li><a href="#over">over</a><li><a href="#under">under</a><li><a href="#greaterOrEqual">overOrEqual</a><li><a href="#underOrEqual">underOrEqual</a><li><a href="#in">in</a><li><a href="#not">not</a></ul><li><a href="#community">Community</a><li><a href="#license">License</a></ul><hr><h2><a href="#at-a-glance" aria-hidden="true" class="anchor" id="at-a-glance"></a>At A Glance</h2><p>I know you really don't care about long explanations and want to have a look at working code right away, so... here you are (this is the code that creates the graph in the image above):<pre class="language-arturo"><code class="language-arturo">;---------------------------------------------
-; Import Grafito
-; and ... let's rock'n'roll! :)
-;---------------------------------------------
-do.import {grafito.art}
 
-do [
-    ;---------------------------------------------
-    ; Set up a new graph environment
-    ; with a local database named &quot;sample11&quot;
-    ;---------------------------------------------
-    graph .helpers: [person movie country book]
-          .create
-          .palette: 'default
-          &quot;sample11&quot; 
-    [
-        unless dbExists? [
-            ;---------------------------------------------
-            ; Populate the database
-            ;---------------------------------------------
+<!DOCTYPE html>
+<html lang="en">  
+    <head>
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <title>Grafito &bull; Arturo Packager</title>
+        <meta name="description" content="Get Grafito &bull; Package for the Arturo programming language">
 
-            uk: country.new [name: &quot;United Kingdom&quot;]
-            au: country.new [name: &quot;Australia&quot;]
-            us: country.new [name: &quot;United States&quot;] 
-            ca: country.new [name: &quot;Canada&quot;]
-            fr: country.new [name: &quot;France&quot;]
-            de: country.new [name: &quot;Germany&quot;]
-            se: country.new [name: &quot;Sweden&quot;]
-            es: country.new [name: &quot;Spain&quot;]
-            pl: country.new [name: &quot;Poland&quot;]
-
-            nolan:      person.new [name: &quot;Christopher Nolan&quot; birthday: 1970 sex: &quot;m&quot;]
-            pearce:     person.new [name: &quot;Guy Pearce&quot; birthday: 1967 sex: &quot;m&quot;]
-            hanson:     person.new [name: &quot;Curtis Hanson&quot; birthday: 1945 sex: &quot;m&quot;]
-            spacey:     person.new [name: &quot;Kevin Spacey&quot; birthday: 1959 sex: &quot;m&quot;]
-            dicaprio:   person.new [name: &quot;Leonardo DiCaprio&quot; birthday: 1974 sex: &quot;m&quot;]
-            hardy:      person.new [name: &quot;Tom Hardy&quot; birthday: 1977 sex: &quot;m&quot;]
-            cotillard:  person.new [name: &quot;Marion Cotillard&quot; birthday: 1975 sex: &quot;f&quot;]
-            moss:       person.new [name: &quot;Carrie-Ann Moss&quot; birthday: 1967 sex: &quot;f&quot;]
-            kidman:     person.new [name: &quot;Nicole Kidman&quot; birthday: 1967 sex: &quot;f&quot;]
-            cruise:     person.new [name: &quot;Tom Cruise&quot; birthday: 1962 sex: &quot;m&quot;]
-            kubrick:    person.new [name: &quot;Stanley Kubrick&quot; birthday: 1928 died: 1999 sex: &quot;m&quot; alive: false]
-            burton:     person.new [name: &quot;Tim Burton&quot; birthday: 1958 sex: &quot;m&quot;]
-            depp:       person.new [name: &quot;Johny Depp&quot; birthday: 1965 sex: &quot;m&quot;]
-            hallstrom:  person.new [name: &quot;Lasse Hallström&quot; birthday: 1946 sex: &quot;m&quot;]
-            scorsese:   person.new [name: &quot;Martin Scorsese&quot; birthday: 1942 sex: &quot;m&quot;]
-            sydow:      person.new [name: &quot;Max von Sydow&quot; birthday: 1929 died: 2020 sex: &quot;m&quot; alive: false]
-            binoche:    person.new [name: &quot;Juliette Binoche&quot; birthday: 1964 sex: &quot;f&quot;]
-            dench:      person.new [name: &quot;Judi Dench&quot; birthday: 1934 sex: &quot;f&quot;]
-            eastwood:   person.new [name: &quot;Clint Eastwood&quot; birthday: 1930 sex: &quot;m&quot;]
-            polanski:   person.new [name: &quot;Roman Polanski&quot; birthday: 1933 sex: &quot;m&quot;]
-            olin:       person.new [name: &quot;Lena Olin&quot; birthday: 1955 sex: &quot;f&quot;]
-            zimmer:     person.new [name: &quot;Hans Zimmer&quot; birthday: 1957 sex: &quot;m&quot;]
-            pook:       person.new [name: &quot;Jocelyn Pook&quot; birthday: 1960 sex: &quot;f&quot;]
-            lehane:     person.new [name: &quot;Dennis Lehane&quot; birthday: 1965 sex: &quot;m&quot;]
-            penn:       person.new [name: &quot;Sean Penn&quot; birthday: 1960 sex: &quot;m&quot;]
-            malick:     person.new [name: &quot;Terrence Malick&quot; birthday: 1943 sex: &quot;m&quot;]
-            brody:      person.new [name: &quot;Adrien Brody&quot; birthday: 1973 sex: &quot;m&quot;]
-            wach1:      person.new [name: &quot;Lana Wachowski&quot; birthday: 1965 sex: &quot;f&quot;]
-            wach2:      person.new [name: &quot;Lilly Wachowski&quot; birthday: 1967 sex: &quot;f&quot;]
-
-            memento:        movie.new [title: &quot;Memento&quot; year: 2000]
-            inception:      movie.new [title: &quot;Inception&quot; year: 2010]
-            laconfidential: movie.new [title: &quot;L.A. Confidential&quot; year: 1997]
-            matrix:         movie.new [title: &quot;The Matrix&quot; year: 1999]
-            eyes:           movie.new [title: &quot;Eyes Wide Shut&quot; year: 1999]
-            bigfish:        movie.new [title: &quot;Big Fish&quot; year: 2003]
-            sleepyhollow:   movie.new [title: &quot;Sleepy Hollow&quot; year: 1999]
-            chocolat:       movie.new [title: &quot;Chocolat&quot; year: 2000]
-            jedgar:         movie.new [title: &quot;J. Edgar&quot; year: 2011]
-            ninthgate:      movie.new [title: &quot;The Ninth Gate&quot; year: 1999]
-            shutter:        movie.new [title: &quot;Shutter Island&quot; year: 2010]
-            mystic:         movie.new [title: &quot;Mystic River&quot; year: 2003]
-            redline:        movie.new [title: &quot;Thin Red Line&quot; year: 1998]
-            pianist:        movie.new [title: &quot;The Pianist&quot; year: 2002]
-
-            mysticB:        book.new [title: &quot;Mystic River&quot; year: 2001 language: &quot;en&quot;]
-
-            ;---------------------------------------------
-            ; Define the relationships
-            ; between our nodes
-            ;---------------------------------------------
-
-            [nolan hardy dench pook] ~&gt; 'isFrom uk
-            [pearce kidman] ~&gt; 'isFrom au
-            [malick brody hanson spacey dicaprio wach1 wach2 cruise kubrick burton depp eastwood scorsese lehane penn] ~&gt; 'isFrom us
-            moss ~&gt; 'isFrom ca
-            [cotillard binoche] ~&gt; 'isFrom fr
-            polanski ~&gt; 'isFrom [fr pl]
-            [hallstrom olin sydow] ~&gt; 'isFrom se
-            zimmer ~&gt; 'isFrom de
-
-            nolan ~&gt; 'directed [memento inception]
-            hanson ~&gt; 'directed laconfidential
-            [wach1 wach2] ~&gt; 'directed matrix
-            kubrick ~&gt; 'directed eyes
-            burton ~&gt; 'directed [bigfish sleepyhollow]
-            hallstrom ~&gt; 'directed chocolat
-            eastwood ~&gt; 'directed [jedgar mystic]
-            polanski ~&gt; 'directed [pianist ninthgate]
-            scorsese ~&gt; 'directed shutter
-            malick ~&gt; 'directed [pianist redline]
-
-            pearce ~&gt; 'actedIn [memento laconfidential]
-            spacey ~&gt; 'actedIn laconfidential
-            [dicaprio hardy cotillard] ~&gt; 'actedIn inception
-            [dicaprio sydow] ~&gt; 'actedIn shutter
-            cotillard ~&gt; 'actedIn bigfish
-            moss ~&gt; 'actedIn [memento matrix chocolat]
-            [cruise kidman] ~&gt; 'actedIn eyes
-            depp ~&gt; 'actedIn [chocolat sleepyhollow]
-            [binoche dench olin] ~&gt; 'actedIn chocolat
-            [dicaprio dench] ~&gt; 'actedIn jedgar
-            [depp olin] ~&gt; 'actedIn ninthgate
-            penn ~&gt; 'actedIn [mystic redline]
-            brody ~&gt; 'actedIn [redline pianist]
-
-            zimmer ~&gt; 'composed inception
-            pook ~&gt; 'composed eyes
-
-            nolan ~&gt; 'written inception
-
-            lehane ~&gt; 'written mysticB
-            mystic ~&gt; 'basedOn mysticB
-
-            [redline bigfish memento laconfidential jedgar shutter mystic] ~&gt; 'origin us
-            matrix ~&gt; 'origin [us au]
-            [inception eyes chocolat] ~&gt; 'origin [uk us]
-            sleepyhollow ~&gt; 'origin [us de]
-            ninthgate ~&gt; 'origin [us fr es]
-            pianist ~&gt; 'origin [uk fr de pl]
-
-            wach1 ~&gt; 'sibling wach2
-            cruise ~&gt; 'married kidman
-        ]
-
-        ;---------------------------------------------
-        ; Fetch every &quot;person&quot; &amp;
-        ; open the Desktop app for visualization
-        ;---------------------------------------------
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
         
-        preview fetch 'person ø
-    ]
-]
-</code></pre><h2><a href="#try-grafito" aria-hidden="true" class="anchor" id="try-grafito"></a>Try Grafito!</h2><h3><a href="#docker" aria-hidden="true" class="anchor" id="docker"></a>Docker</h3><p>The easiest way to try Grafito is using Docker (although, without support for the Desktop app - yet)<pre><code>docker run -it arturolang/grafito
-</code></pre><p>or, if you want to run a specific script:<pre><code>docker run -it -v $(pwd):/home arturolang/grafito &lt;yourscript&gt;
-</code></pre><h3><a href="#installation" aria-hidden="true" class="anchor" id="installation"></a>Installation</h3><p>To install local, first you have to have installed the latest version of <a rel="nofollow" target="_blank" href="https://github.com/arturo-lang/arturo">Arturo</a>.<p>Then, just clone this repo and simply go to the folder via your terminal.<h4><a href="#as-a-library" aria-hidden="true" class="anchor" id="as-a-library"></a>As a Library</h4><p>After having installed the latest version of Arturo, you can use Grafito from any Arturo script as a library.<p>For example, here's how to run the above example:<pre><code>arturo examples/sample11.art
-</code></pre><h4><a href="#as-a-standalone-tool" aria-hidden="true" class="anchor" id="as-a-standalone-tool"></a>As a Standalone tool</h4><p>Of course, you can also run Grafito as a tool on it own:<pre><code>./grafito.art &lt;database&gt;
-</code></pre><p>(If you pass a name, it will use it as your database file. If not, the database will be in-memory)<p style="text-align:center"><img style="text-align:center" src="https://raw.githubusercontent.com/arturo-lang/grafito/master/console.png"><p>And you can see your lightweight graph engine in action!<h2><a href="#how-to" aria-hidden="true" class="anchor" id="how-to"></a>How To</h2><h3><a href="#create-a-simple-node" aria-hidden="true" class="anchor" id="create-a-simple-node"></a>Create a simple Node</h3><pre class="language-arturo"><code class="language-arturo">graph.create &quot;mygraph&quot; [
-	put'person [name: &quot;John&quot; sex: 'm]
-]
-</code></pre><p>The exact same thing using node helpers:<pre class="language-arturo"><code class="language-arturo">graph.create &quot;mygraph&quot;
-     .helpers: [person]
-[
-	person.new [name: &quot;John&quot;, sex: 'm]
-]
-</code></pre><h3><a href="#create-relationships-between-nodes" aria-hidden="true" class="anchor" id="create-relationships-between-nodes"></a>Create Relationships between Nodes</h3><pre class="language-arturo"><code class="language-arturo">graph.create &quot;mygraph&quot; [
-	john: put 'person [name: &quot;John&quot; sex: 'm]
-	joan: put 'person [name: &quot;Joan&quot; sex: 'f]
+            <meta property="og:url" content="https://pkgr.art" />
+        
+        <meta property="og:title" content="Grafito &bull; Arturo Packager">
+        <meta property="og:description" content="Get Grafito &bull; Package for the Arturo programming language">
+        
+        
+        <meta property="og:image" content="https://pkgr.art/thumbs/grafito.png">
+        
 
-	link john 'marriedTo joan
-]
-</code></pre><p>The exact same thing using node helpers and some syntactic sugar:<pre class="language-arturo"><code class="language-arturo">graph.create &quot;mygraph&quot;
-     .helpers: [person]
-[
-	john: person.new [name: &quot;John&quot;, sex: 'm]
-	joan: person.new [name: &quot;Joan&quot;, sex: 'f]
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@ArturoLanguage" />
+        <meta name="twitter:creator" content="@ArturoLanguage" />
+        <meta name="twitter:title" content="Grafito &bull; Arturo Packager">
+        <meta name="twitter:description" content="Get Grafito &bull; Package for the Arturo programming language">
+        
+        <meta name="twitter:image" content="https://pkgr.art/thumbs/grafito.png">
+        
 
-	john &lt;~&gt; 'marriedTo joan
-]
-</code></pre><h3><a href="#search-nodes" aria-hidden="true" class="anchor" id="search-nodes"></a>Search Nodes</h3><pre class="language-arturo"><code class="language-arturo">graph &quot;mygraph&quot; [
-	inspect fetch 'person [name: &quot;Joan&quot;]
-]
-</code></pre><p>The exact same thing using node helpers:<pre class="language-arturo"><code class="language-arturo">graph &quot;mygraph&quot;
-     .helpers: [person]
-[
-	inspect person [name: &quot;Joan&quot;]
-]
-</code></pre><h3><a href="#delete-an-existing-node" aria-hidden="true" class="anchor" id="delete-an-existing-node"></a>Delete an existing Node</h3><pre class="language-arturo"><code class="language-arturo">graph &quot;mygraph&quot; [
-	unput fetch 'person [name: &quot;John&quot;]
-]
-</code></pre><h3><a href="#delete-an-existing-relationship" aria-hidden="true" class="anchor" id="delete-an-existing-relationship"></a>Delete an existing Relationship</h3><pre class="language-arturo"><code class="language-arturo">graph &quot;mygraph&quot; [
-	unlink fetch 'person [name: &quot;John&quot;] 'marriedTo 
-           fetch 'person [name: &quot;Joan&quot;]
-]
-</code></pre><h3><a href="#preview-a-set-of-nodes" aria-hidden="true" class="anchor" id="preview-a-set-of-nodes"></a>Preview a Set of Nodes</h3><pre class="language-arturo"><code class="language-arturo">graph &quot;mygraph&quot; [
-	preview fetch 'person ø
-]
-</code></pre><p>(If you run the <code>sample4</code> in the <em>examples</em> folder, you'll be a minimal movie database. Running the command <code>preview</code> will open up the Desktop app with the image you see above ;-))<h3><a href="#more-complex-queries" aria-hidden="true" class="anchor" id="more-complex-queries"></a>More complex queries</h3><pre class="language-arturo"><code class="language-arturo">graph &quot;mygraph&quot; [
-	inspect fetch'person [
-		sex: &quot;m&quot;
-		marriedTo: fetch 'person [name: &quot;Joan&quot;]
-	]
-]
-</code></pre><p>The exact same thing using node helpers:<pre class="language-arturo"><code class="language-arturo">graph &quot;mygraph&quot;
-     .helpers: [person]
-[
-	inspect person [
-		sex: &quot;m&quot;
-		marriedTo: person [name: &quot;Joan&quot;]
-	]
-]
-</code></pre><h4><a href="#reverse-edge-queries" aria-hidden="true" class="anchor" id="reverse-edge-queries"></a>Reverse edge queries</h4><pre class="language-arturo"><code class="language-arturo">; using our sample11.art graph
+        <!-- FavIcon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="https://pkgr.art/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="https://pkgr.art/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="https://pkgr.art/favicon-16x16.png">
+        <link rel="manifest" href="https://pkgr.art/site.webmanifest">
+        <link rel="mask-icon" href="https://pkgr.art/safari-pinned-tab.svg" color="#501056">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#f5f5f7">
 
-movie [
-	directed: &lt;| person &quot;Clint Eastwood&quot;
-]
-</code></pre><h4><a href="#using-filters" aria-hidden="true" class="anchor" id="using-filters"></a>Using filters</h4><pre class="language-arturo"><code class="language-arturo">graph &quot;mygraph&quot; [
-	fetch 'person [
-		surname:&quot;Doe&quot;
-		age: -&gt; over: 30
-	]
-]
-</code></pre><h3><a href="#not-just-a-query-language" aria-hidden="true" class="anchor" id="not-just-a-query-language"></a>Not just a query language!</h3><p>Now, let's be reminded that although Grafito may present itself as an easy-to-use<br>Graph Query Language, actually it's a &quot;shell&quot; on top of Arturo. That is: you can use anything you would normally use in a full-blown programming language, <em>along with</em> the extra layer that is Grafito. Awesome, right?<p>The above is a - very simple - example, but gives you definitely a rough idea (and no, <a rel="nofollow" target="_blank" href="https://arturo-lang.io/documentation/library/sets/union/"><code>union</code></a> has nothing to do with Grafito... it's just a normal command from Arturo's standard library)<pre class="language-arturo"><code class="language-arturo">union 
-    person [
-        sex: &quot;m&quot;
-        birthday: -&gt; under: 1960
-    ]
-    person [
-        sex: &quot;f
-        isFrom: country &quot;France&quot;
-    ]
-</code></pre><p>(totally random example: Find all the men that were born before 1960 + all the women from... France!)<h2><a href="#command-reference" aria-hidden="true" class="anchor" id="command-reference"></a>Command Reference</h2><p>All of the following commands must run within a <code>graph</code> environment. In order to set it up, use:<pre class="language-arturo"><code class="language-arturo">graph &lt;database&gt; [
-	;; your code goes here
-]
-</code></pre><blockquote><p>⚠️ The <code>graph</code> command is not needed when you run Grafito as a tool, since the &quot;environment&quot; is already set up for you. ;-)</blockquote><p>If you pass <code>null</code> (or <code>ø</code>) then the database will be <em>in-memory</em>. If you want to save to a file on disk, then pass a string with the desired database name. If the database already exists, it will be re-opened. If not, it will be created from scratch.<blockquote><p>💡 You may force the database to be re-created from scratch, regardless of whether it exists, by setting the <code>.create</code> attribute. E.g.<pre><code>graph.create &quot;mygraph&quot; [
-	;; your code goes here
-]
-</code></pre></blockquote><h3><a href="#put" aria-hidden="true" class="anchor" id="put"></a>put</h3><h4><a href="#description" aria-hidden="true" class="anchor" id="description"></a>Description</h4><p>Insert new node(s) to graph with given name and attributes.<h4><a href="#usage" aria-hidden="true" class="anchor" id="usage"></a>Usage</h4><pre>
-<b>put</b> <ins>name</ins> <i>:literal</i>, <i>:string</i>
-    <ins>attributes</ins> <i>:dictionary</i>, <i>:block</i>
-</pre><h4><a href="#returns" aria-hidden="true" class="anchor" id="returns"></a>Returns</h4><ul><li><em>:dictionary</em> (node)<li><em>:block</em> (of nodes)</ul><h4><a href="#examples" aria-hidden="true" class="anchor" id="examples"></a>Examples</h4><pre class="language-arturo"><code class="language-arturo">put 'person [name: &quot;John&quot; surname: &quot;Doe&quot; birthday: 1986]
-</code></pre><h3><a href="#unput" aria-hidden="true" class="anchor" id="unput"></a>unput</h3><h4><a href="#description-1" aria-hidden="true" class="anchor" id="description-1"></a>Description</h4><p>Remove given node(s) from graph.<h4><a href="#usage-1" aria-hidden="true" class="anchor" id="usage-1"></a>Usage</h4><pre>
-<b>unput</b> <ins>node</ins> <i>:dictionary</i>, <i>:block</i>
-</pre><h4><a href="#examples-1" aria-hidden="true" class="anchor" id="examples-1"></a>Examples</h4><pre class="language-arturo"><code class="language-arturo">x: put 'person [name: &quot;John&quot; surname: &quot;Doe&quot; birthday: 1986]
-unput x
-</code></pre><h3><a href="#link" aria-hidden="true" class="anchor" id="link"></a>link</h3><h4><a href="#description-2" aria-hidden="true" class="anchor" id="description-2"></a>Description</h4><p>Create a connection from source to target node with given name.<h4><a href="#usage-2" aria-hidden="true" class="anchor" id="usage-2"></a>Usage</h4><pre>
-<b>link</b> <ins>source</ins> <i>:dictionary</i> (node), <i>:block</i> (of nodes)
-     <ins>name</ins> <i>:literal</i>, <i>:string</i>
-     <ins>target</ins> <i>:dictionary</i> (node), <i>:block</i> (of nodes)
-</pre><h4><a href="#returns-1" aria-hidden="true" class="anchor" id="returns-1"></a>Returns</h4><ul><li><em>:dictionary</em> (edge)</ul><h4><a href="#examples-2" aria-hidden="true" class="anchor" id="examples-2"></a>Examples</h4><pre class="language-arturo"><code class="language-arturo">link put 'person [name: &quot;John&quot; surname: &quot;Doe&quot; birthday: 1986] 'marriedTo 
-     put 'person [name: &quot;Mary&quot; surname: &quot;Doe&quot; birthday: 1986]
-</code></pre><h3><a href="#unlink" aria-hidden="true" class="anchor" id="unlink"></a>unlink</h3><h4><a href="#description-3" aria-hidden="true" class="anchor" id="description-3"></a>Description</h4><p>Remove connection from source to target node with given name<h4><a href="#usage-3" aria-hidden="true" class="anchor" id="usage-3"></a>Usage</h4><pre>
-<b>unlink</b> <ins>source</ins> <i>:dictionary</i> (node), <i>:block</i> (of nodes)
-       <ins>name</ins> <i>:literal</i>, <i>:string</i>
-       <ins>target</ins> <i>:dictionary</i> (node), <i>:block</i> (of nodes)
-</pre><h4><a href="#examples-3" aria-hidden="true" class="anchor" id="examples-3"></a>Examples</h4><pre class="language-arturo"><code class="language-arturo">x: put 'person [name: &quot;John&quot; surname: &quot;Doe&quot; birthday: 1986]
-y: put 'person [name: &quot;Mary&quot; surname: &quot;Doe&quot; birthday: 1986]
+        <!-- Fonts & Styles -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bulma@0.9.4/css/bulma.min.css,npm/prismjs@1.29.0/themes/prism-okaidia.min.css,npm/protip@1.4.21/protip.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
-link 'marriedTo x y
-unlink 'marriedTo x y
-</code></pre><h3><a href="#fetch" aria-hidden="true" class="anchor" id="fetch"></a>fetch</h3><h4><a href="#description-4" aria-hidden="true" class="anchor" id="description-4"></a>Description</h4><p>Retrieves nodes with name that match all given attributes.<h4><a href="#usage-4" aria-hidden="true" class="anchor" id="usage-4"></a>Usage</h4><pre>
-<b>fetch</b> <ins>name</ins> <i>:literal</i>, <i>:string</i>
-      <ins>properties</ins> <i>:block</i> <i>:dictionary</i> <i>:null</i>
-</pre><h4><a href="#returns-2" aria-hidden="true" class="anchor" id="returns-2"></a>Returns</h4><ul><li><em>:block</em> of <em>:dictionary</em> (node)</ul><h4><a href="#examples-4" aria-hidden="true" class="anchor" id="examples-4"></a>Examples</h4><pre class="language-arturo"><code class="language-arturo">print fetch 'person [surname: &quot;Doe&quot;]
-print fetch 'person [
-	surname: &quot;Doe&quot;
-	marriedTo: fetch'person [name: &quot;Mary&quot;]
-]
-</code></pre><h3><a href="#preview" aria-hidden="true" class="anchor" id="preview"></a>preview</h3><h4><a href="#description-5" aria-hidden="true" class="anchor" id="description-5"></a>Description</h4><p>Preview given array of nodes in Desktop app.<h4><a href="#usage-5" aria-hidden="true" class="anchor" id="usage-5"></a>Usage</h4><pre>
-<b>preview</b> <ins>nodes</ins> <i>:block</i>
-</pre><h4><a href="#examples-5" aria-hidden="true" class="anchor" id="examples-5"></a>Examples</h4><pre class="language-arturo"><code class="language-arturo">preview fetch 'person [surname: &quot;Doe&quot;]
-</code></pre><h2><a href="#filter-reference" aria-hidden="true" class="anchor" id="filter-reference"></a>Filter Reference</h2><p>When querying - e.g. with <code>fetch</code> or <code>what</code> - you can search for results, not only for exact matches, but also using one of the filters below.<pre class="language-arturo"><code class="language-arturo">fetch'person [
-	surname: &quot;Doe&quot; 	; here, we are looking for an exact match
-			; that is: people with the surname Doe
-]
-</code></pre><pre class="language-arturo"><code class="language-arturo">fetch'person [
-	surname: [
-		contains: &quot;D&quot;	; here, we are using the 'contains filter
-			        ; that is: people whose surname contains the letter D
-	]
-]
-</code></pre><p>(The above, using Arturo's powerful syntax, could also be written like:<pre class="language-arturo"><code class="language-arturo">fetch'person [ surname: -&gt; contains: &quot;D&quot; ]
-</code></pre><h3><a href="#contains" aria-hidden="true" class="anchor" id="contains"></a>contains</h3><p>Get rows that <em>contain</em> the given text.<h3><a href="#prefix" aria-hidden="true" class="anchor" id="prefix"></a>prefix</h3><p>Get rows that start with, or &quot;have as prefix&quot;, the given text.<h3><a href="#suffix" aria-hidden="true" class="anchor" id="suffix"></a>suffix</h3><p>Get rows that end with, or &quot;have as suffix&quot;, the given text.<h3><a href="#over" aria-hidden="true" class="anchor" id="over"></a>over</h3><p>Get rows with a numeric value <em>greater than</em> the given one.<h3><a href="#under" aria-hidden="true" class="anchor" id="under"></a>under</h3><p>Get rows with a numeric value <em>less than</em> the given one.<h3><a href="#overorequal" aria-hidden="true" class="anchor" id="overorequal"></a>overOrEqual</h3><p>Get rows with a numeric value <em>greater than or equal to</em> the given one.<h3><a href="#underorequal" aria-hidden="true" class="anchor" id="underorequal"></a>underOrEqual</h3><p>Get rows with a numeric value <em>less than or equal to</em> the given one.<h3><a href="#in" aria-hidden="true" class="anchor" id="in"></a>in</h3><p>Get rows with a numeric value <em>equal</em> to <em>one of those in</em> the given block.<h3><a href="#not" aria-hidden="true" class="anchor" id="not"></a>not</h3><p>Get rows with a value <em>not equal to</em> the given one (or block of given values).<h2><a href="#community" aria-hidden="true" class="anchor" id="community"></a>Community</h2><p>In case you want to ask a question, suggest an idea, or practically anything related to Grafito (or Arturo) - feel free! Everything and everyone is welcome.<p>For that, the most convenient place for me would be the <a rel="nofollow" target="_blank" href="https://github.com/arturo-lang/grafito/issues">GitHub Issues</a> page.<p><a rel="nofollow" target="_blank" href="https://starchart.cc/arturo-lang/grafito"><img src="https://starchart.cc/arturo-lang/grafito.svg" alt="Stargazers over time"></a><h2><a href="#license" aria-hidden="true" class="anchor" id="license"></a>License</h2><p>MIT License<p>Copyright (c) 2023 Yanis Zafirópulos<p>Permission is hereby granted, free of charge, to any person obtaining a copy<br>of this software and associated documentation files (the &quot;Software&quot;), to deal<br>in the Software without restriction, including without limitation the rights<br>to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<br>copies of the Software, and to permit persons to whom the Software is<br>furnished to do so, subject to the following conditions:<p>The above copyright notice and this permission notice shall be included in all<br>copies or substantial portions of the Software.<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br>IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br>FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br>AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<br>LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<br>OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<br>SOFTWARE.</div><div class="version-history is-hidden"><div class="version-summary"><b>Last updated:</b><br><span id="last-version-ago"></span></div><table class="table is-striped is-hoverable"><tr><td><a class="version-link" href="https://grafito.pkgr.art/0.2.11"><b>0.2.11</b></a><td><span class="has-text-grey">10&nbsp;April&nbsp;2024</span><td><span class="has-text-grey repo-size-field">2146021</span><small>&nbsp;/&nbsp;<span class="has-text-grey">78 files</span></small><tr><td><b>0.2.10</b><td><span class="has-text-grey">10&nbsp;April&nbsp;2024</span><td><span class="has-text-grey repo-size-field">2146019</span><small>&nbsp;/&nbsp;<span class="has-text-grey">78 files</span></small><tr><td><a class="version-link" href="https://grafito.pkgr.art/0.2.9"><b>0.2.9</b></a><td><span class="has-text-grey">9&nbsp;April&nbsp;2024</span><td><span class="has-text-grey repo-size-field">2145996</span><small>&nbsp;/&nbsp;<span class="has-text-grey">78 files</span></small></table></div><div class="dependencies is-hidden without-dependencies"><span class="icon"><i class="far fa-laugh-wink"></i></span><br>No dependencies.</div></div></div></div><div class="column is-3 is-10-mobile is-offset-1-mobile info-column"><div class="box info-wrapper"><div class="block stats-wrapper"><div class="download-info"><span class="icon download-icon"><i class="fas fa-download"></i> </span>&nbsp; <span id="grafito-downloads" class="download-count">-</span></div>&nbsp;&nbsp;<div class="star-info"><span class="icon star-icon"><i class="fa fa-star"></i> </span>&nbsp; <span class="star-count" data-package="arturo-lang/grafito">168</span></div></div><div class="package-instructions"><div class="installation-instructions block"><input id="installation-code" class="input copy-code" value="import.version:0.2.10 'grafito" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly="readonly"></div><div class="message is-success codecopied-message is-hidden"><div class="message-body"><b>Copied!</b> Paste into your script to import the package directly &mdash; and/or install the package from your terminal via with:<br><code>arturo -p install grafito 0.2.10</code></div></div></div><div class="block package-author package-subgroup"><div class="subgroup-detail"><b>Author</b><br><a target="_blank" href="https://github.com/arturo-lang" class="repo-user-name">arturo-lang</a></div><span class="icon subgroup-icon"><i class="fas fa-user"></i></span></div><div class="block package-version package-subgroup"><div class="subgroup-detail"><b>Version</b><br><div class="package-version-wrapper"><a target="_blank" href="https://github.com/arturo-lang/grafito/releases/tag/v0.2.10">0.2.10</a></div></div><span class="icon subgroup-icon"><i class="fas fa-code-branch"></i></span></div><div class="block package-license package-subgroup"><div class="subgroup-detail"><b>License</b><br><a target="_blank" href="https://choosealicense.com/licenses/mit/" class="repo-license-name">MIT</a></div><span class="icon subgroup-icon"><i class="fas fa-balance-scale"></i></span></div><hr><div class="block package-executable package-subgroup"><div class="subgroup-detail"><b>Executable?</b><br><span class="icon"><i class="fas fa-check"></i> </span>Yes</div><span class="icon subgroup-icon"><i class="fas fa-bolt"></i></span></div><div class="block package-requires package-subgroup"><div class="subgroup-detail"><b>Requires</b><br>Arturo >&nbsp;0.9.83</div><span class="icon subgroup-icon"><i class="fas fa-exclamation-circle"></i></span></div></div></div></div></div></div></div></section><script>$(document).ready(function(){
+        <!-- Icons -->
+        <script src="https://kit.fontawesome.com/8bfb2fe6f4.js" crossorigin="anonymous"></script>
+
+        <!-- Jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+            
+        <!-- Our main style -->
+        <link rel="stylesheet" type="text/css" href="https://pkgr.art/assets/style.css">
+    </head>
+    <body>
+
+<section class="hero main-hero is-hidden">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4 main-header">
+                
+                <h1 class="title has-text-black main-title">
+                    <a href="https://pkgr.art/">
+                        <!--<b>Arturo</b><br>--><span class="animate-character">Packager</span><br>
+                    </a>
+                </h1>
+                <div class="control has-icons-left">
+                    <input id="search-bar" class="input is-large main-search" type="search" placeholder="I'm looking for...">
+                    <span class="icon is-medium is-left">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <div class="hero search-line" onclick="showSearch()">&nbsp;<i class="showsearch-icon fas fa-caret-square-down" onclick="showSearch()"></i>&nbsp;</div>
+
+<section class="main-section">
+    <div class="container">
+        <div class="columns is-mobile">
+            <div class="column is-8-tablet is-offset-2-tablet is-12-mobile is-offset-0-mobile package-page">
+                <div class="column is-12 is-10-mobile is-offset-1-mobile" style="margin-bottom: 1rem;">
+                    <div class="columns package-title-wrapper">
+                        <div class="column is-8 package-title title-wrapper">
+                            
+                                <h2 class="is-size-2"><b><a href="https://grafito.pkgr.art">grafito</a></b></h2>
+                            
+                            
+                        </div>
+                        <div class="column is-4 package-link">
+                            <div class="is-pulled-right has-text-grey is-hidden-mobile">
+                                <a target="_blank" href="https://github.com/arturo-lang/grafito">
+                                    <span class="icon repo-icon inside-package">
+                                        <i class="fa fa-code"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block package-description">
+                        <h3 class="is-size-5">Portable, Serverless & Lightweight SQLite-based Graph Database in Arturo</h3>
+                    </div>
+                    
+                    
+                        <div class="block package-tags">
+                            
+                                <span class="tag is-info is-light is-medium package-tag">cross platform</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">database</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">database engine</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">graph</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">graph database</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">graphdb</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">portable</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">portable database</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">query language</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">serverless</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">sqlite</span>
+                            
+                                <span class="tag is-info is-light is-medium package-tag">sqlite3</span>
+                            
+                        </div>
+                    
+                </div>
+                <div class="columns">
+                    <div class="column is-9 left-column">
+                        <div class="left-wrapper">
+                            <div class="tabs left-tabs">
+                                <ul>
+                                    <li id="overview-tab" class="is-active"><a onclick="showOverview()">Overview</a></li>
+                                    <li id="version-tab"><a onclick="showVersionHistory()"><span>Versions</span><span class="no-of-versions">3</span></a></li>
+                                    <li id="dependencies-tab"><a onclick="showDependencies()">Dependencies</a></li>
+                                    <li class="maximize-button is-hidden-mobile">
+                                        <a onclick="toggleDocSize()">
+                                            <div class="icon">
+                                                <i class="fas fa-angle-double-right"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box content left-container">
+                                <div class="overview">
+                                    <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:136:in `require': cannot load such file -- commonmarker/commonmarker (LoadError)
+	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:136:in `require'
+	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker/extension.rb:13:in `rescue in <top (required)>'
+	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker/extension.rb:3:in `<top (required)>'
+	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker.rb:3:in `require_relative'
+	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker.rb:3:in `<top (required)>'
+	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:141:in `require'
+	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:141:in `rescue in require'
+	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:135:in `require'
+	from tools/gfm.rb:1:in `<main>'
+/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker/extension.rb:7:in `require_relative': cannot load such file -- /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker/3.3/commonmarker (LoadError)
+	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker/extension.rb:7:in `<top (required)>'
+	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker.rb:3:in `require_relative'
+	from /opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/gems/3.3.0/gems/commonmarker-2.1.0-x86_64-linux/lib/commonmarker.rb:3:in `<top (required)>'
+	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:141:in `require'
+	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:141:in `rescue in require'
+	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:135:in `require'
+	from tools/gfm.rb:1:in `<main>'
+<internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:136:in `require': cannot load such file -- commonmarker (LoadError)
+	from <internal:/opt/hostedtoolcache/Ruby/3.3.7/x64/lib/ruby/3.3.0/rubygems/core_ext/kernel_require.rb>:136:in `require'
+	from tools/gfm.rb:1:in `<main>'
+
+                                </div>
+                                <div class="version-history is-hidden">
+                                    <div class="version-summary">
+                                        <b>Last updated:</b><br><span id="last-version-ago"></span>
+                                    </div>
+                                    <table class="table is-striped is-hoverable">
+                                        <tbody>
+                                            
+                                                
+                                                    <tr>
+                                                        <td>
+                                                            <a class="version-link" href="https://grafito.pkgr.art/0.2.11"><b>0.2.11</b></a>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey">10&nbsp;April&nbsp;2024</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey repo-size-field">2146021</span><small>&nbsp;/&nbsp;<span class="has-text-grey">78 files</span></small>
+                                                        </td>
+                                                    </tr>
+                                                
+                                            
+                                                
+                                                    <tr>
+                                                        <td>
+                                                            <b>0.2.10</b>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey">10&nbsp;April&nbsp;2024</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey repo-size-field">2146019</span><small>&nbsp;/&nbsp;<span class="has-text-grey">78 files</span></small>
+                                                        </td>
+                                                    </tr>
+                                                
+                                            
+                                                
+                                                    <tr>
+                                                        <td>
+                                                            <a class="version-link" href="https://grafito.pkgr.art/0.2.9"><b>0.2.9</b></a>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey">9&nbsp;April&nbsp;2024</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="has-text-grey repo-size-field">2145996</span><small>&nbsp;/&nbsp;<span class="has-text-grey">78 files</span></small>
+                                                        </td>
+                                                    </tr>
+                                                
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="dependencies is-hidden without-dependencies">
+                                    
+                                        <span class="icon">
+                                            <i class="far fa-laugh-wink"></i>
+                                        </span><br>
+                                        No dependencies.
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3 is-10-mobile is-offset-1-mobile info-column">
+                        <div class="box info-wrapper">
+                            <div class="block stats-wrapper">
+                                <div class="download-info">
+                                    <span class="icon download-icon">
+                                        <i class="fas fa-download"></i>
+                                    </span>&nbsp;
+                                    <span id= "grafito-downloads" class="download-count">-</span>
+                                </div>&nbsp;&nbsp;
+                                <div class="star-info">
+                                    <span class="icon star-icon">
+                                        <i class="fa fa-star"></i>
+                                    </span>&nbsp;
+                                    <span class="star-count" data-package="arturo-lang/grafito">172</span>
+                                </div>
+                            </div>
+                            <div class="package-instructions">
+                                <div class="installation-instructions block">
+                                    <input id="installation-code" class="input copy-code" value="import.version:0.2.10 'grafito" data-pt-title="Copied to clipboard!" data-pt-trigger="click" readonly>
+                                </div>
+                                <div class="message is-success codecopied-message is-hidden">
+                                    <div class="message-body">
+                                        <b>Copied!</b> Paste into your script to import the package directly &mdash; and/or install the package from your terminal via with:<br><code>arturo -p install grafito 0.2.10</code>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block package-author package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Author</b>
+                                    <br>
+                                    <a target="_blank" href="https://github.com/arturo-lang" class="repo-user-name">arturo-lang</a>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                            </div>
+                            <div class="block package-version package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Version</b>
+                                    <br>
+                                    <div class="package-version-wrapper">
+                                        <a target="_blank" href="https://github.com/arturo-lang/grafito/releases/tag/v0.2.10">0.2.10</a>
+                                    </div>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-code-branch"></i>
+                                </span>
+                            </div>
+                            <div class="block package-license package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>License</b>
+                                    <br>
+                                    <a target="_blank" href="https://choosealicense.com/licenses/mit/" class="repo-license-name">MIT</a>
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </span>
+                            </div>
+                            <hr>
+                            <div class="block package-executable package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Executable?</b>
+                                    <br>
+                                    
+                                        <span class="icon">
+                                            <i class="fas fa-check"></i>
+                                        </span> Yes
+                                    
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </span>
+                            </div>
+                            <div class="block package-requires package-subgroup">
+                                <div class="subgroup-detail">
+                                    <b>Requires</b>
+                                    <br>
+                                    
+                                        Arturo >&nbsp;0.9.83
+                                    
+                                </div>
+                                <span class="icon subgroup-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
         
             $.get("https://pkgr.art/getdownloads.php?pkg=grafito&ver=0.2.10", function (data, status){
                 $("#grafito-downloads").html(data);
@@ -280,7 +349,34 @@ print fetch 'person [
     });
     document.addEventListener("DOMContentLoaded",()=>{
         TimeAgo.addDefaultLocale({locale:"en",long:{year:{previous:"last year",past:{one:"{0} year ago",other:"{0} years ago"}},quarter:{previous:"last quarter",past:{one:"{0} quarter ago",other:"{0} quarters ago"}},month:{previous:"last month",past:{one:"{0} month ago",other:"{0} months ago"}},week:{previous:"last week",past:{one:"{0} week ago",other:"{0} weeks ago"}},day:{previous:"yesterday",past:{one:"{0} day ago",other:"{0} days ago"}},hour:{past:{one:"{0} hour ago",other:"{0} hours ago"}},minute:{past:{one:"{0} minute ago",other:"{0} minutes ago"}},second:{current:"now",past:{one:"{0} second ago",other:"{0} seconds ago"}}},now:{now:{current:"now",past:"just now"}}}),$("#last-version-ago").html(new TimeAgo("en").format(Date.parse("2024-04-10T16:24:55+00:00"),"long"))
-    });</script><footer class="footer"><div class="content has-text-centered"><p class="block"><a class="footer-icon home" aria-label="home" rel="noopener" href="https://arturo-lang.io" target="_blank"><i class="fas fa-home"></i></a>&nbsp;&nbsp;&nbsp; <a class="footer-icon github" aria-label="github" rel="noopener" href="https://github.com/arturo-lang" target="_blank"><i class="fab fa-github"></i></a>&nbsp;&nbsp;&nbsp; <a class="footer-icon twitter" aria-label="twitter" rel="noopener" href="https://twitter.com/ArturoLanguage" target="_blank"><i class="fab fa-twitter"></i></a>&nbsp;&nbsp; <a class="footer-icon discord" aria-label="discord" rel="noopener" href="https://discord.gg/YdVK2CB" target="_blank"><i class="fab fa-discord"></i></a></div><div class="content has-text-centered"><p class="block"><strong>Arturo Programming Language</strong><br>Copyright &copy; 2019-2024 Yanis Zafirópulos<br><br><small class="is-size-7-touch">Website built and generated using Arturo + Webize.<span class="is-hidden-touch"> Running on <a rel="noopener" href="https://m.do.co/c/d9efb97aa0f2" target="_blank">DigitalOcean</a>.</span></small><br><small class="is-size-7-touch">Source code <span class="is-hidden-touch">licensed </span>under <a href="https://opensource.org/licenses/mit-license.php">MIT</a>. Website <span class="is-hidden-touch">content licensed </span><span class="is-hidden-desktop">under </span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.</small></div></footer><script src="https://cdn.jsdelivr.net/combine/npm/devbridge-autocomplete@1.4.11/dist/jquery.autocomplete.min.js,gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js,npm/fuse.js@7.0.0,npm/protip@1.4.21/protip.min.js,npm/javascript-time-ago@2.5.9/bundle/javascript-time-ago.js"></script><script src="https://pkgr.art/assets/script.js"></script><script>$(document).ready(function(){
+    });
+</script>
+
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p class="block">
+                    <a class="footer-icon home" aria-label="home" rel="noopener" href="https://arturo-lang.io" target="_blank"><i class="fas fa-home"></i></a>&nbsp;&nbsp;&nbsp;
+                    <a class="footer-icon github" aria-label="github" rel="noopener" href="https://github.com/arturo-lang" target="_blank"><i class="fab fa-github"></i></a>&nbsp;&nbsp;&nbsp;
+                    <a class="footer-icon twitter" aria-label="twitter" rel="noopener" href="https://twitter.com/ArturoLanguage" target="_blank"><i class="fab fa-twitter"></i></a>&nbsp;&nbsp;
+                    <a class="footer-icon discord" aria-label="discord" rel="noopener" href="https://discord.gg/YdVK2CB" target="_blank"><i class="fab fa-discord"></i></a>
+                </p>
+            </div>
+            <div class="content has-text-centered">
+                <p class="block">
+                    <strong>Arturo Programming Language</strong><br>Copyright &copy; 2019-2024 Yanis Zafirópulos<br><br>
+                    <small class="is-size-7-touch">Website built and generated using Arturo + Webize.<span class="is-hidden-touch"> Running on <a rel="noopener" href="https://m.do.co/c/d9efb97aa0f2" target="_blank">DigitalOcean</a>.</span></small><br>
+                    <small class="is-size-7-touch">Source code <span class="is-hidden-touch">licensed </span>under <a href="https://opensource.org/licenses/mit-license.php">MIT</a>. Website <span class="is-hidden-touch">content licensed </span><span class="is-hidden-desktop">under </span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.</small>
+                </p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/combine/npm/devbridge-autocomplete@1.4.11/dist/jquery.autocomplete.min.js,gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js,npm/fuse.js@7.0.0,npm/protip@1.4.21/protip.min.js,npm/javascript-time-ago@2.5.9/bundle/javascript-time-ago.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/javascript-time-ago@2.5.9/bundle/javascript-time-ago.js"></script> -->
+        <script src="https://pkgr.art/assets/script.js"></script>
+        <script>
+            $(document).ready(function(){
                 $(".star-count").each(function (idx){
                     var repo = `https://api.github.com/search/repositories?q=${$(this).data("package")}`;
                     var currentElement = $(this);
@@ -288,7 +384,7 @@ print fetch 'person [
                         currentElement.html(got.items[0].stargazers_count);
                     });
                 });
-                var searchables = [{"value":"artsembly","description":"Arturo VM Bytecode assembler","tags":["arturo","arturo-package","assembler","bytecode","bytecode-compiler","vm"],"version":"0.3.0"},{"value":"claude","description":"Claude.ai API client for Arturo","tags":["ai","api","api-client","artificial-intelligence","arturo","arturo-package","claude-ai","claude-api"],"version":"0.0.1"},{"value":"dummy","description":"This package will serve merely as test for Arturo's package manager","tags":["test"],"version":"0.0.5"},{"value":"fianchetto","description":"Chess-aware custom types, FEN/PGN parsing & more","tags":["arturo","arturo-language","arturo-package","chess","chess-programming","fen","fen-parsing","pgn","pgn-parser"],"version":"0.0.1"},{"value":"grace","description":"A minimalistic code editor, inspired by Monaco/VSCode, based on Ace & written in Arturo","tags":["arturo","arturo-package","code","code-editor","editor","syntax-highlighting"],"version":"0.0.2"},{"value":"grafito","description":"Portable, Serverless & Lightweight SQLite-based Graph Database in Arturo","tags":["arturo","cross-platform","database","database-engine","graph","graph-database","graphdb","portable","portable-database","query-language","serverless","sqlite","sqlite3"],"version":"0.2.11"},{"value":"html","description":"HTML generator for Arturo","tags":["arturo","arturo-module","css","css3","html","html-generator","html5","javascript"],"version":"0.0.4"},{"value":"mathjax","description":"A wrapper for using mathjax in Arturo's webview","tags":["arturo","arturo-package","gui","javascript","latex","webview"],"version":"0.0.2"},{"value":"mermaid","description":"A wrapper for using mermaid in Arturo's webview","tags":["arturo","arturo-package","diagrams","gui","javascript","mermaid","mermaid-charting-language","webview"],"version":"0.0.1"},{"value":"mimetypes","description":"MIME content type registry & recognition","tags":["arturo","arturo-language","arturo-package","file","http","mimetype","web-server"],"version":"0.0.4"},{"value":"peregrino","description":"Lightning-fast command-line benchmarking tool & library","tags":["arturo","arturo-package","benchmark","benchmarking-utility","cli","terminal","tool"],"version":"0.0.2"},{"value":"progressive","description":"A customizeable, text-based progress bar generator & library","tags":["arturo","arturo-package","cli","progress-bar","terminal"],"version":"0.0.3"},{"value":"recase","description":"Unicode-friendly string case converter","tags":["arturo","arturo-language","arturo-package","camelcase","casing","kebabcase","snakecase","string-manipulation","titlecase"],"version":"1.0.0"},{"value":"rsv","description":"RSV parser and serializer for Arturo","tags":[],"version":"0.1.1"},{"value":"states","description":":states is a lean Finite State Machine package for the Arturo Programming Language","tags":["arturo","arturo-language","finite-state-machine","fsm","package","pkgr-art"],"version":"0.1.0"},{"value":"tabular","description":"Feature-rich ASCII table generator for the terminal","tags":["arturo","arturo-package","ascii","cli","csv","table","table-generator","terminal"],"version":"0.1.0"},{"value":"tasks","description":"A rake-inspired task system for Arturo","tags":[],"version":"1.0.0"},{"value":"unidecode","description":"Unicode -> ASCII converter","tags":["arturo","arturo-language","arturo-package","ascii","unicode","unicode-converter","unidecode"],"version":"0.0.3"},{"value":"unitt","description":"Unitt is a basic unit-test tool for the Arturo Programming language.","tags":["arturo","arturo-lang","package","unit-tests"],"version":"2.0.1"},{"value":"validator","description":"A batteries-included, supercharged & customizable, string validation library for Arturo","tags":["arturo","arturo-package","credit-card-validator","iban-checker","isbn-validation","validation-library","validator"],"version":"0.7.0"}];
+                var searchables = [{"value":"artsembly","description":"Arturo VM Bytecode assembler","tags":["arturo","arturo-package","assembler","bytecode","bytecode-compiler","vm"],"version":"0.3.0"},{"value":"claude","description":"Claude.ai API client for Arturo","tags":["ai","api","api-client","artificial-intelligence","arturo","arturo-package","claude-ai","claude-api"],"version":"0.0.1"},{"value":"dummy","description":"This package will serve merely as test for Arturo's package manager","tags":["test"],"version":"0.0.5"},{"value":"fianchetto","description":"Chess-aware custom types, FEN/PGN parsing & more","tags":["arturo","arturo-language","arturo-package","chess","chess-programming","fen","fen-parsing","pgn","pgn-parser"],"version":"0.0.1"},{"value":"grace","description":"A minimalistic code editor, inspired by Monaco/VSCode, based on Ace & written in Arturo","tags":["arturo","arturo-package","code","code-editor","editor","syntax-highlighting"],"version":"0.0.2"},{"value":"grafito","description":"Portable, Serverless & Lightweight SQLite-based Graph Database in Arturo","tags":["arturo","cross-platform","database","database-engine","graph","graph-database","graphdb","portable","portable-database","query-language","serverless","sqlite","sqlite3"],"version":"0.2.11"},{"value":"html","description":"HTML generator for Arturo","tags":["arturo","arturo-module","css","css3","html","html-generator","html5","javascript"],"version":"0.0.4"},{"value":"mathjax","description":"A wrapper for using mathjax in Arturo's webview","tags":["arturo","arturo-package","gui","javascript","latex","webview"],"version":"0.0.2"},{"value":"mermaid","description":"A wrapper for using mermaid in Arturo's webview","tags":["arturo","arturo-package","diagrams","gui","javascript","mermaid","mermaid-charting-language","webview"],"version":"0.0.1"},{"value":"mimetypes","description":"MIME content type registry & recognition","tags":["arturo","arturo-language","arturo-package","file","http","mimetype","web-server"],"version":"0.0.4"},{"value":"peregrino","description":"Lightning-fast command-line benchmarking tool & library","tags":["arturo","arturo-package","benchmark","benchmarking-utility","cli","terminal","tool"],"version":"0.0.2"},{"value":"progressive","description":"A customizeable, text-based progress bar generator & library","tags":["arturo","arturo-package","cli","progress-bar","terminal"],"version":"0.0.3"},{"value":"recase","description":"Unicode-friendly string case converter","tags":["arturo","arturo-language","arturo-package","camelcase","casing","kebabcase","snakecase","string-manipulation","titlecase"],"version":"1.0.0"},{"value":"rsv","description":"RSV parser and serializer for Arturo","tags":[],"version":"0.1.1"},{"value":"states","description":":states is a lean Finite State Machine package for the Arturo Programming Language","tags":["arturo","arturo-language","finite-state-machine","fsm","package","pkgr-art"],"version":"0.1.0"},{"value":"tabular","description":"Feature-rich ASCII table generator for the terminal","tags":["arturo","arturo-package","ascii","cli","csv","table","table-generator","terminal"],"version":"0.2.0"},{"value":"tasks","description":"A rake-inspired task system for Arturo","tags":[],"version":"1.0.0"},{"value":"unidecode","description":"Unicode -> ASCII converter","tags":["arturo","arturo-language","arturo-package","ascii","unicode","unicode-converter","unidecode"],"version":"0.0.3"},{"value":"unitt","description":"Unitt is a basic unit-test tool for the Arturo Programming language.","tags":["arturo","arturo-lang","package","unit-tests"],"version":"2.0.1"},{"value":"validator","description":"A batteries-included, supercharged & customizable, string validation library for Arturo","tags":["arturo","arturo-package","credit-card-validator","iban-checker","isbn-validation","validation-library","validator"],"version":"0.7.0"}];
                 var fuseOptions = {
                     isCaseSensitive: true,
                     keys: [
@@ -343,4 +439,8 @@ print fetch 'person [
                         }
                     });
                 }
-            }</script>
+            }
+        </script>
+    </body>
+
+</html>
