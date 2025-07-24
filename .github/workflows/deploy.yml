@@ -45,7 +45,7 @@ jobs:
 
       - name: "Install gems"
         run: |
-          gem install commonmarker
+          gem install commonmarker -v "2.1.0" --platform=ruby
 
       - name: "Setup Arturo"
         uses: arturo-lang/arturo-action@main
