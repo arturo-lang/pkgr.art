@@ -35,10 +35,10 @@ do ::
         targetFolder: "packages"
 
         infoD: getRepoInfo pkg
-        write as.unwrapped.pretty.code infoD ~"|targetFolder|/info/|targetName|" 
+        write express.unwrapped.pretty infoD ~"|targetFolder|/info/|targetName|" 
 
         versionD: getVersions pkg
-        write as.pretty.code versionD ~"|targetFolder|/version/|targetName|" 
+        write express.pretty versionD ~"|targetFolder|/version/|targetName|" 
 
         print color #green "[ ✅  OK   ]"  
 
@@ -50,7 +50,7 @@ do ::
         cnt: cnt + 1
     ]
 
-    write as.unwrapped.pretty.code listWithDescriptions ~"public/list.art" 
+    write express.unwrapped.pretty listWithDescriptions ~"public/list.art" 
 
     print separator
     print ""
