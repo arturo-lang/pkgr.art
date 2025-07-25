@@ -156,7 +156,7 @@ createSpecFile: function [package, versionToProcess, targetFolder][
         requires: versionToProcess\info\requires
     ]
 
-    write replace strip as.pretty.unwrapped.code ret {/\[\n\n\s+\]/} "[]" ~"|targetFolder|/spec" 
+    write replace strip express.pretty.unwrapped ret {/\[\n\n\s+\]/} "[]" ~"|targetFolder|/spec" 
 ]
 
 searchable: new []
