@@ -2,8 +2,8 @@ name: "unitt"
 description: "Unitt is a basic unit-test tool for the Arturo Programming language."
 license: "MIT"
 author: "RickBarretto"
-version: 3.0.0-pre1
-url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v3.0.0-pre1"
+version: 3.0.0-pre0
+url: "https://api.github.com/repos/RickBarretto/unitt/zipball/v3.0.0-pre0"
 entry: "src/unitt.art"
 executable: "src/script.art"
 depends: []
