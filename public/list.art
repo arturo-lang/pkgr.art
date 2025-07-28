@@ -206,7 +206,7 @@ unidecode: #[
                 ]
         ]
 unitt: #[
-        description: "Unitt is a basic unit-test tool for the Arturo Programming language."
+        description: "Unitt is a lean unit-test tool for the Arturo Programming language."
         tags: [
                         "arturo"
                          "arturo-lang"
