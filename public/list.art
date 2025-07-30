@@ -1,4 +1,15 @@
 
+artcism: #[
+        description: "{Art}cism is an Exercism runner for the Arturo Programming Language"
+        tags: [
+                        "arturo"
+                         "arturo-language"
+                         "arturo-package"
+                         "exercism"
+                         "learning"
+                         "learning-by-doing"
+                ]
+        ]
 artsembly: #[
         description: "Arturo VM Bytecode assembler"
         tags: [

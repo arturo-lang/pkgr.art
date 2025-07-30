@@ -1,0 +1,23 @@
+
+name: "Artcism"
+fullName: "RickBarretto/Artcism"
+url: "https://github.com/RickBarretto/Artcism"
+description: "{Art}cism is an Exercism runner for the Arturo Programming Language"
+tags: [
+                "arturo"
+                 "arturo-language"
+                 "arturo-package"
+                 "exercism"
+                 "learning"
+                 "learning-by-doing"
+        ]
+stats: #[
+        stars: 0
+        watch: 0
+        ]
+author: #[
+        name: "RickBarretto"
+        url: "https://github.com/RickBarretto"
+        avatar: "https://avatars.githubusercontent.com/u/78623871?v=4"
+        ]
+

@@ -1,0 +1,46 @@
+[
+        #[
+                version: 0.1.0
+                date: to :date "2025-07-30T18:33:23+00:00"
+                link: "https://github.com/RickBarretto/Artcism/releases/tag/v0.1.0"
+                details: #[
+                        size: 17034
+                        files: 10
+                        readme: "--"
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/RickBarretto/Artcism/zipball/v0.1.0"
+                info: #[
+                        entry: "src/artcism.art"
+                        executable: "src/script.art"
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.9.84
+                        ]
+                        name: "artcism"
+                        description: "Exercism runner for Arturo Programming Language."
+                        license: "MIT"
+                        authors: [
+                                "RickBarretto"
+                        ]
+                        homepage: "https://artcism.pkgr.art"
+                        repository: "https://github.com/RickBarretto/artcism"
+                        keywords: [
+                                arturo
+                                 testing
+                                 unittesting
+                                 cli
+                        ]
+                        categories: [
+                                learning
+                                 tool
+                        ]
+                ]
+        ]
+]
