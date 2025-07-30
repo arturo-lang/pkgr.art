@@ -1,3 +1,4 @@
+artcism:        gh "RickBarretto/Artcism"
 artsembly:      gh "arturo-lang/artsembly"
 claude:         gh "drkameleon/claude.ai.art"
 dummy:          gh "arturo-lang/dummy-package"
