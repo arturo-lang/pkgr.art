@@ -10,8 +10,8 @@ tags: [
                  "unit-tests"
         ]
 stats: #[
-        stars: 2
-        watch: 2
+        stars: 3
+        watch: 3
         ]
 author: #[
         name: "RickBarretto"
