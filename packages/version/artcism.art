@@ -1,5 +1,244 @@
 [
         #[
+                version: 0.2.1
+                date: to :date "2025-09-19T20:51:24+00:00"
+                link: "https://github.com/RickBarretto/Artcism/releases/tag/v0.2.1"
+                details: #[
+                        size: 17676
+                        files: 11
+                        readme: {
+                                <h1 align="center">
+                                    {Art}cism
+                                </h1>
+                                
+                                <p align="center">
+                                    <i>{Art}cism</i> is an Exercism runner for the 
+                                    <a href="https://github.com/arturo-lang/arturo/">
+                                        Arturo Programming language
+                                    </a>
+                                    <br><br>
+                                    <img 
+                                        alt="Arturo logo" 
+                                        width="20" 
+                                        src="https://github.com/arturo-lang/arturo/raw/master/docs/images/logo.png#gh-light-mode-only"
+                                    />
+                                    <img 
+                                        alt="Arturo logo" 
+                                        width="20" 
+                                        src="https://github.com/arturo-lang/arturo/raw/master/docs/images/logo-lightgray.png#gh-dark-mode-only" 
+                                    />
+                                </p>
+                                
+                                ## Trying {Art}cism
+                                
+                                **Installation**
+                                
+                                ```
+                                arturo -p install artcism
+                                ```
+                                
+                                **Running**
+                                
+                                ```
+                                artcism
+                                ```
+                                
+                                ### Testing code
+                                
+                                A real example of tests:
+                                
+                                ```art
+                                import {artcism}!
+                                
+                                describe "simple append" [
+                                
+                                    it "will fail" [
+                                        expects.be: 'equal? [[a] [b]]
+                                    ]
+                                
+                                    it "keeps the order" [
+                                        concat: debug.fmt: "Debugging: |value|" [a] ++ [b c d] 
+                                        expects [equal? [a b c d] concat]
+                                    ]
+                                ]
+                                
+                                suite "append `:string`s" [
+                                
+                                    it "results in :string" [
+                                        expects.be: 'string? @[to :literal "Art" ++ "uro"] 
+                                    ]
+                                   
+                                    it ":char appending results in :string" [
+                                        expects.be: 'string? @['H'  ++ 'i'  ]
+                                    ]
+                                
+                                    it "works with :char" [
+                                        expects.be: 'equal? @["Artur" ++ "o" "Artur" ++ 'o'] 
+                                    ]
+                                    
+                                    test "Arturo can be generated from :string and :char appending" [
+                                        assert.with: 'equal? @["Arturo" "Art" ++ "uro"]
+                                    ]
+                                ]
+                                
+                                describe "append magic-method" [
+                                
+                                    define :container [
+                                        init:   method [ initial ][ this\_block: [] ++ initial ]
+                                        append: method [  value  ][ append this\_block value ]
+                                    ]
+                                
+                                    it "should work for magic-methods" [
+                                        container: to :container [[]]!
+                                        
+                                        expects.be: 'equal? @[[1 2] do -> container\append [1 2]]
+                                    ]
+                                
+                                ]
+                                ```
+                                
+                                This will show you:
+                                
+                                ```json
+                                {
+                                    "version": 2,
+                                    "status": "fail",
+                                    "tests": [
+                                        {
+                                            "name": "will fail",
+                                            "status": "fail",
+                                            "message": "[equal? [a] [b]]",
+                                            "output": "",
+                                            "test_code": "[\n        expects\n         .be:\n         'equal?\n         [\n                [\n                        a\n                ]\n                 [\n                        b\n                ]\n        ]\n]\n"
+                                        },
+                                        {
+                                            "name": "keeps the order",
+                                            "status": "pass",
+                                            "message": "[equal? [a b c d] concat]",
+                                            "output": "Debugging: [a b c d] :block\n",
+                                            "test_code": "[\n        concat:\n         debug\n         .fmt:\n         \"Debugging: |value|\"\n         [\n                a\n        ]\n         ++\n         [\n                b\n                 c\n                 d\n        ]\n         expects\n         [\n                equal?\n                 [\n                        a\n                         b\n                         c\n                         d\n                ]\n                 concat\n        ]\n]\n"
+                                        },
+                                        {
+                                            "name": "results in :string",
+                                            "status": "fail",
+                                            "message": "[string? 'Arturo]",
+                                            "output": "",
+                                            "test_code": "[\n        expects\n         .be:\n         'string?\n         @\n         [\n                to\n                 :literal\n                 \"Art\"\n                 ++\n                 \"uro\"\n        ]\n]\n"
+                                        },
+                                        {
+                                            "name": ":char appending results in :string",
+                                            "status": "pass",
+                                            "message": "[string? \"Hi\"]",
+                                            "output": "",
+                                            "test_code": "[\n        expects\n         .be:\n         'string?\n         @\n         [\n                'H'\n                 ++\n                 'i'\n        ]\n]\n"
+                                        },
+                                        {
+                                            "name": "works with :char",
+                                            "status": "pass",
+                                            "message": "[equal? \"Arturo\" \"Arturo\"]",
+                                            "output": "",
+                                            "test_code": "[\n        expects\n         .be:\n         'equal?\n         @\n         [\n                \"Artur\"\n                 ++\n                 \"o\"\n                 \"Artur\"\n                 ++\n                 'o'\n        ]\n]\n"
+                                        },
+                                        {
+                                            "name": "Arturo can be generated from :string and :char appending",
+                                            "status": "pass",
+                                            "message": "[equal? \"Arturo\" \"Arturo\"]",
+                                            "output": "",
+                                            "test_code": "[\n        assert\n         .with:\n         'equal?\n         @\n         [\n                \"Arturo\"\n                 \"Art\"\n                 ++\n                 \"uro\"\n        ]\n]\n"
+                                        },
+                                        {
+                                            "name": "should work for magic-methods",
+                                            "status": "pass",
+                                            "message": "[equal? [1 2] [1 2]]",
+                                            "output": "",
+                                            "test_code": "[\n        container:\n         to\n         :container\n         [\n                [\n\n                ]\n        ]\n         !\n         expects\n         .be:\n         'equal?\n         @\n         [\n                [\n                        1\n                         2\n                ]\n                 do\n                 ->\n container\\append\n                 [\n                        1\n                         2\n                ]\n        ]\n]\n"
+                                        }
+                                    ]
+                                }
+                                ```
+                                
+                                ## Documentation
+                                
+                                ### *Compatibility*
+                                
+                                {Art}cism has compatibility with [`unitt`](unitt.pkgr.art) by using it behind the scenes by importing it and wrapping some functions. Technically, you can run any {Art}cism learning module with `unitt` wich will display you useful informations and also is suitable for CI/CD pipelining. If you notice some inconsistency between {Art}cism and `unitt`, please open an issue on this repository and let me know.
+                                
+                                While `unitt` is very good for CI integration and run multiple files into a set directory, {Art}cism was intented to be used for single files, with single assertions tests and no terminal output at all.
+                                
+                                Use each one for their own purposes. Don't try to use {Art}cism as testing library, `unitt` is your right choice for those purposes.
+                                
+                                ### *Rpec-ish API*
+                                
+                                - `describe: $[description :string tests :block]`:
+                                    Groups tests around some feature.
+                                - `it: $[description :string, testCase :block]`:
+                                    The test case itself, you need to pass a clear description to it,
+                                    And the logic that you're trying to assert.
+                                    - `.skip :logical`:
+                                        Skips tests for some condition. 
+                                        Will just skip if no condition is provided.
+                                - `expects: $[condition :block]`:
+                                    A function that is only available inside the `it`/`test` case,
+                                    makes an assertion given the `condition`.
+                                    - `.to :literal` (or `.be`)
+                                        Uses some function to evaluate the statement.
+                                        This helps to show the function name on display, 
+                                        instead of a `true`/`false`.
+                                
+                                ### *XUnit-ish API*
+                                
+                                - `test: $[description :string, testCase :block]`:
+                                    The same as `it`. 
+                                    - `.skip :logical`
+                                - `assert: $[condition :block]`:
+                                    The same as `expects`
+                                    - `.with`
+                                        The same as `.to` and `.be`
+                                - `suite: $[description :string tests :block]`:
+                                    The same as `describe`.
+                                
+                                
+                                > [!WARNING]
+                                > Never import this lib as `.lean`, or this will break the current code. This happens due to the nature of Arturo (being concatenative),  and the way we importings are working right now. This may change in future.
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/RickBarretto/Artcism/zipball/v0.2.1"
+                info: #[
+                        entry: "src/artcism.art"
+                        executable: "src/script.art"
+                        depends: [
+
+                        ]
+                        requires: [
+                                >
+                                 0.9.84
+                        ]
+                        name: "artcism"
+                        description: "Exercism runner for Arturo Programming Language."
+                        license: "MIT"
+                        authors: [
+                                "RickBarretto"
+                        ]
+                        homepage: "https://artcism.pkgr.art"
+                        repository: "https://github.com/RickBarretto/artcism"
+                        keywords: [
+                                arturo
+                                 testing
+                                 unittesting
+                                 cli
+                        ]
+                        categories: [
+                                learning
+                                 tool
+                        ]
+                ]
+        ]
+         #[
                 version: 0.2.0
                 date: to :date "2025-07-31T01:24:39+00:00"
                 link: "https://github.com/RickBarretto/Artcism/releases/tag/v0.2.0"
