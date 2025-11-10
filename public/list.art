@@ -132,6 +132,12 @@ mimetypes: #[
                          "web-server"
                 ]
         ]
+mwiki: #[
+        description: "MediaWiki API wrapper for Arturo"
+        tags: [
+
+                ]
+        ]
 peregrino: #[
         description: "Lightning-fast command-line benchmarking tool & library"
         tags: [
