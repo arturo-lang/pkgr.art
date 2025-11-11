@@ -1,3 +1,39 @@
+<|| switch isSearch [||>
+<div class="box package-box is-plain">
+    <div class="package-header">
+        <div class="title-wrapper">
+            <h3 class="is-size-5">
+                <||= entry\info\author\name ||> /
+                <a href="<||= getLink entry\name ø ||>" class="repo-name">
+                    <b><||= entry\name ||></b>
+                </a>&nbsp;
+            </h3>
+            <a href="<||= entry\info\url ||>">
+                <span class="icon repo-icon">
+                    <i class="fa fa-code"></i>
+                </span>
+            </a>
+            <div class="package-mini-description">
+                <||= entry\info\description ||>
+            </div>
+        </div>
+        <div class="is-size-6 is-pulled-right stats-wrapper">
+            <div class="download-info">
+                <span class="icon download-icon">
+                    <i class="fas fa-download"></i>
+                </span>&nbsp;
+                <span id="<||= entry\name ||>-downloads" lass="download-count">-</span>
+            </div>&nbsp;&nbsp;
+            <div class="star-info">
+                <span class="icon star-icon">
+                    <i class="fa fa-star"></i>
+                </span>&nbsp;
+                <span class="star-count" data-package="<||= replace entry\info\url "https://github.com/" "" ||>"><||= entry\info\stats\stars ||></span>
+            </div>
+        </div>
+    </div>
+</div>
+<|| ][||>
 <div class="box package-box<|| if isSearch [||> is-plain<||]||>">
     <div class="package-header">
         <div class="title-wrapper">
@@ -51,6 +87,7 @@
         </div>-->
     </div>
 </div>
+<||]||>
 
 <script>
     $(document).ready(function(){
