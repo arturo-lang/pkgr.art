@@ -1,0 +1,18 @@
+
+name: "rosetta.art"
+fullName: "drkameleon/rosetta.art"
+url: "https://github.com/drkameleon/rosetta.art"
+description: "RosettaCode helper library for Arturo"
+tags: [
+                "rosetta-code"
+        ]
+stats: #[
+        stars: 1
+        watch: 1
+        ]
+author: #[
+        name: "drkameleon"
+        url: "https://github.com/drkameleon"
+        avatar: "https://avatars.githubusercontent.com/u/1265028?v=4"
+        ]
+

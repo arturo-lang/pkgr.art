@@ -1,0 +1,19 @@
+name: "rosetta"
+description: "RosettaCode helper library for Arturo"
+license: "MIT"
+author: "drkameleon"
+version: 0.1.0
+url: "https://api.github.com/repos/drkameleon/rosetta.art/zipball/v0.1.0"
+entry: "src/rosetta.art"
+executable: false
+depends: [
+                [
+                        mwiki
+                         >=
+                         0.3.0
+                ]
+        ]
+requires: [
+                >
+                 0.9.83
+        ]

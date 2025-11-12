@@ -1,0 +1,303 @@
+[
+        #[
+                version: 0.1.0
+                date: to :date "2025-11-12T16:51:59+00:00"
+                link: "https://github.com/drkameleon/rosetta.art/releases/tag/v0.1.0"
+                details: #[
+                        size: 16956
+                        files: 4
+                        readme: {
+                                <h1 align="center">rosetta.art</h1>
+                                <p align="center">
+                                  <b>RosettaCode helper for Arturo</b>
+                                  <br><br>
+                                  <img src="https://img.shields.io/github/license/drkameleon/rosetta.art?style=for-the-badge">
+                                  <img src="https://img.shields.io/badge/language-Arturo-orange.svg?style=for-the-badge">
+                                </p>
+                                
+                                ---
+                                
+                                <!--ts-->
+                                
+                                * [What does this package do?](#what-does-this-package-do)
+                                * [How do I use it?](#how-do-i-use-it)
+                                * [Type Reference](#type-reference)
+                                   * [Rosetta](#-rosetta)
+                                   * [rcTask](#-rctask)
+                                   * [rcSolution](#-rcsolution)
+                                * [License](#license)
+                                
+                                <!--te-->
+                                
+                                ---
+                                
+                                ## What does this package do?
+                                
+                                This package provides a comprehensive RosettaCode API wrapper for Arturo, enabling easy interaction with the RosettaCode wiki. It handles authentication, task retrieval, solution parsing, as well as structured access to task content/categories/examples/etc.
+                                
+                                ## How do I use it?
+                                
+                                Simply `import` it and start exploring RosettaCode tasks:
+                                
+                                ```red
+                                import 'rosetta!
+                                
+                                ; Connect to RosettaCode
+                                rc: to :Rosetta []!
+                                
+                                ; Get all implemented tasks for Arturo
+                                tasks: rc\implemented "Arturo"
+                                print ["Arturo has" size tasks "implementations"]
+                                
+                                ; Get information about a specific task
+                                task: last tasks
+                                print task\description
+                                
+                                ; Get the Arturo solution
+                                if solution: <= task\solution "Arturo" [
+                                    loop solution\code 'code ->
+                                        print code
+                                ]
+                                
+                                ; Find tasks without Arturo implementation
+                                unimpl: rc\unimplemented "Arturo"
+                                print ["Missing implementations:" size unimpl]
+                                
+                                ; Get draft tasks
+                                drafts: rc\drafts
+                                print ["Draft tasks:" size drafts]
+                                ```
+                                
+                                ## Type reference
+                                
+                                ### 🔹 Rosetta
+                                
+                                The main RosettaCode API client
+                                
+                                #### Constructor
+                                
+                                <pre>
+                                <b>to :Rosetta</b> []
+                                </pre>
+                                
+                                #### Fields
+                                
+                                - `\wiki` - underlying MediaWiki API client
+                                - `\loggedIn` - authentication status
+                                
+                                #### Methods
+                                
+                                ##### `login`
+                                
+                                Authenticate with RosettaCode.
+                                
+                                <pre>
+                                <b>login</b> <ins>username</ins> <i>:string</i> <ins>password</ins> <i>:string</i>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:logical* - `true` if authentication successful, `false` otherwise
+                                
+                                ##### `task`
+                                
+                                Retrieve task content.
+                                
+                                <pre>
+                                <b>task</b> <ins>title</ins> <i>:string</i>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:rcTask* - task object with parsed content
+                                - *:null* - task not found or request failure
+                                
+                                ##### `implemented`
+                                
+                                Get all tasks with implementations for given language.
+                                
+                                <pre>
+                                <b>implemented</b> <ins>lang</ins> <i>:string</i>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:block* - array of :rcTask objects
+                                
+                                ##### `unimplemented`
+                                
+                                Find all tasks without implementation for given language.
+                                
+                                <pre>
+                                <b>unimplemented</b> <ins>lang</ins> <i>:string</i>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:block* - array of :rcTask objects
+                                
+                                ##### `drafts`
+                                
+                                Get draft programming tasks.
+                                
+                                <pre>
+                                <b>drafts</b>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:block* - array of :rcTask objects
+                                
+                                ### 🔹 rcTask
+                                
+                                Represents a RosettaCode task with its content, solutions, and metadata
+                                
+                                #### Constructor
+                                
+                                <pre>
+                                <b>to :rcTask</b> [<ins>wiki</ins> <i>:MW</i>, <ins>title</ins> <i>:string</i>]
+                                </pre>
+                                
+                                #### Fields
+                                
+                                - `\wiki` - MediaWiki API client reference
+                                - `\title` - task title
+                                
+                                #### Methods
+                                
+                                ##### `content`
+                                
+                                Get task content, loading from wiki if needed.
+                                
+                                <pre>
+                                <b>content</b>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:string* - task wikitext content
+                                - *:null* - request failure
+                                
+                                ##### `draft?`
+                                
+                                Check if task is a draft.
+                                
+                                <pre>
+                                <b>draft?</b>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:logical* - `true` if task is a draft
+                                - *:null* - content not available
+                                
+                                ##### `description`
+                                
+                                Get task description.
+                                
+                                <pre>
+                                <b>description</b>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:string* - task description (text before first solution)
+                                - *:null* - content not available
+                                
+                                ##### `categories`
+                                
+                                Get task categories.
+                                
+                                <pre>
+                                <b>categories</b>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:block* - array of category names
+                                - *:null* - content not available
+                                
+                                ##### `solutions`
+                                
+                                Get all language solutions.
+                                
+                                <pre>
+                                <b>solutions</b>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:block* - array of :rcSolution objects
+                                - *:null* - content not available
+                                
+                                ##### `solution`
+                                
+                                Get solution for specific language.
+                                
+                                <pre>
+                                <b>solution</b> <ins>lang</ins> <i>:string</i>
+                                </pre>
+                                
+                                ###### Returns
+                                - *:rcSolution* - solution object for the specified language
+                                - *:null* - language not found or content not available
+                                
+                                ### 🔹 rcSolution
+                                
+                                Represents a language solution with extracted code and output
+                                
+                                #### Constructor
+                                
+                                <pre>
+                                <b>to :rcSolution</b> [<ins>language</ins> <i>:string</i>, <ins>content</ins> <i>:string</i>]
+                                </pre>
+                                
+                                #### Fields
+                                
+                                - `\language` - programming language name
+                                - `\code` - array of extracted code blocks (from `<syntaxhighlight>` tags)
+                                - `\output` - extracted output text (from `{{out}}` section)
+                                
+                                > [!TIP]
+                                > All task data is lazily loaded and cached! The first call to `\content`, `\solutions`, etc. fetches and parses the content, then subsequent calls use the cached data. 😉
+                                
+                                <hr/>
+                                
+                                ## License
+                                
+                                MIT License
+                                
+                                Copyright (c) 2025 Yanis Zafirópulos
+                                
+                                Permission is hereby granted, free of charge, to any person obtaining a copy
+                                of this software and associated documentation files (the "Software"), to deal
+                                in the Software without restriction, including without limitation the rights
+                                to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                copies of the Software, and to permit persons to whom the Software is
+                                furnished to do so, subject to the following conditions:
+                                
+                                The above copyright notice and this permission notice shall be included in all
+                                copies or substantial portions of the Software.
+                                
+                                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                                SOFTWARE.
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/drkameleon/rosetta.art/zipball/v0.1.0"
+                info: #[
+                        entry: "src/rosetta.art"
+                        depends: [
+                                [
+                                        mwiki
+                                         >=
+                                         0.3.0
+                                ]
+                        ]
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                        executable: false
+                ]
+        ]
+]
