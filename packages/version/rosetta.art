@@ -1,10 +1,10 @@
 [
         #[
                 version: 0.1.0
-                date: to :date "2025-11-12T16:51:59+00:00"
+                date: to :date "2025-11-12T17:07:38+00:00"
                 link: "https://github.com/drkameleon/rosetta.art/releases/tag/v0.1.0"
                 details: #[
-                        size: 16956
+                        size: 16932
                         files: 4
                         readme: {
                                 <h1 align="center">rosetta.art</h1>
