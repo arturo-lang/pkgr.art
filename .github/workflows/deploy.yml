@@ -49,6 +49,8 @@ jobs:
 
       - name: "Setup Arturo"
         uses: arturo-lang/arturo-action@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Checkout"
         uses: actions/checkout@main
