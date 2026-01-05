@@ -1,9 +1,9 @@
 name: "html"
 description: "HTML generator for Arturo"
 license: "MIT"
-author: "arturo-lang"
+author: "RickBarretto"
 version: 0.0.3
-url: "https://api.github.com/repos/arturo-lang/art-html-module/zipball/v0.0.3"
+url: "https://api.github.com/repos/RickBarretto/html.pkgr.art/zipball/v0.0.3"
 entry: "main.art"
 executable: false
 depends: []

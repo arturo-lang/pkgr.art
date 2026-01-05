@@ -1,7 +1,7 @@
 
-name: "art-html-module"
-fullName: "arturo-lang/art-html-module"
-url: "https://github.com/arturo-lang/art-html-module"
+name: "html.pkgr.art"
+fullName: "RickBarretto/html.pkgr.art"
+url: "https://github.com/RickBarretto/html.pkgr.art"
 description: "HTML generator for Arturo"
 tags: [
                 "arturo"
@@ -18,8 +18,8 @@ stats: #[
         watch: 5
         ]
 author: #[
-        name: "arturo-lang"
-        url: "https://github.com/arturo-lang"
-        avatar: "https://avatars.githubusercontent.com/u/55656888?v=4"
+        name: "RickBarretto"
+        url: "https://github.com/RickBarretto"
+        avatar: "https://avatars.githubusercontent.com/u/78623871?v=4"
         ]
 

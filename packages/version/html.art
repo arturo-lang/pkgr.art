@@ -2,7 +2,7 @@
         #[
                 version: 0.0.4
                 date: to :date "2024-05-10T11:52:20+00:00"
-                link: "https://github.com/arturo-lang/art-html-module/releases/tag/v0.0.4"
+                link: "https://github.com/RickBarretto/html.pkgr.art/releases/tag/v0.0.4"
                 details: #[
                         size: 9556
                         files: 8
@@ -16,7 +16,7 @@
                                 url: "https://choosealicense.com/licenses/mit/"
                         ]
                 ]
-                url: "https://api.github.com/repos/arturo-lang/art-html-module/zipball/v0.0.4"
+                url: "https://api.github.com/repos/RickBarretto/html.pkgr.art/zipball/v0.0.4"
                 info: #[
                         entry: "src/html.art"
                         requires: [
@@ -32,7 +32,7 @@
          #[
                 version: 0.0.3
                 date: to :date "2024-04-16T14:32:07+00:00"
-                link: "https://github.com/arturo-lang/art-html-module/releases/tag/v0.0.3"
+                link: "https://github.com/RickBarretto/html.pkgr.art/releases/tag/v0.0.3"
                 details: #[
                         size: 2183
                         files: 4
@@ -46,7 +46,7 @@
                                 url: "https://choosealicense.com/licenses/mit/"
                         ]
                 ]
-                url: "https://api.github.com/repos/arturo-lang/art-html-module/zipball/v0.0.3"
+                url: "https://api.github.com/repos/RickBarretto/html.pkgr.art/zipball/v0.0.3"
                 info: #[
                         requires: [
                                 >
