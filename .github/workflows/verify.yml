@@ -19,7 +19,9 @@ jobs:
           access_token: ${{ github.token }}
 
       - name: "Setup Arturo"
-        uses: arturo-lang/arturo-action@main
+        uses: arturo-lang/arturo-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Checkout"
         uses: actions/checkout@main

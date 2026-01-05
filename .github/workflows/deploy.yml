@@ -48,7 +48,7 @@ jobs:
           gem install commonmarker -v "2.1.0" --platform=ruby
 
       - name: "Setup Arturo"
-        uses: arturo-lang/arturo-action@main
+        uses: arturo-lang/arturo-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
