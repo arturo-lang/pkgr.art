@@ -1,9 +1,9 @@
 name: "grafito"
 description: "Portable, Serverless & Lightweight SQLite-based Graph Database in Arturo"
 license: "MIT"
-author: "arturo-lang"
+author: "drkameleon"
 version: 0.2.11
-url: "https://api.github.com/repos/arturo-lang/grafito/zipball/v0.2.11"
+url: "https://api.github.com/repos/drkameleon/grafito/zipball/v0.2.11"
 entry: "grafito.art"
 executable: "grafito.art"
 depends: []

@@ -2,7 +2,7 @@
         #[
                 version: 0.1.1
                 date: to :date "2024-04-29T09:44:20+00:00"
-                link: "https://github.com/0komo/art-rsv/releases/tag/v0.1.1"
+                link: "https://github.com/fuzzko/art-rsv/releases/tag/v0.1.1"
                 details: #[
                         size: 3402
                         files: 4
@@ -35,7 +35,7 @@
                                 url: "https://choosealicense.com/licenses/mit/"
                         ]
                 ]
-                url: "https://api.github.com/repos/0komo/art-rsv/zipball/v0.1.1"
+                url: "https://api.github.com/repos/fuzzko/art-rsv/zipball/v0.1.1"
                 info: #[
                         entry: "rsv.art"
                         depends: [
@@ -51,7 +51,7 @@
          #[
                 version: 0.1.0
                 date: to :date "2024-04-29T07:41:36+00:00"
-                link: "https://github.com/0komo/art-rsv/releases/tag/0.1.0"
+                link: "https://github.com/fuzzko/art-rsv/releases/tag/0.1.0"
                 details: #[
                         size: 3416
                         files: 4
@@ -84,7 +84,7 @@
                                 url: "https://choosealicense.com/licenses/mit/"
                         ]
                 ]
-                url: "https://api.github.com/repos/0komo/art-rsv/zipball/0.1.0"
+                url: "https://api.github.com/repos/fuzzko/art-rsv/zipball/0.1.0"
                 info: #[
                         entry: "rsv.art"
                         depends: [

@@ -1,7 +1,7 @@
 
 name: "grafito"
-fullName: "arturo-lang/grafito"
-url: "https://github.com/arturo-lang/grafito"
+fullName: "drkameleon/grafito"
+url: "https://github.com/drkameleon/grafito"
 description: "Portable, Serverless & Lightweight SQLite-based Graph Database in Arturo"
 tags: [
                 "arturo"
@@ -23,8 +23,8 @@ stats: #[
         watch: 196
         ]
 author: #[
-        name: "arturo-lang"
-        url: "https://github.com/arturo-lang"
-        avatar: "https://avatars.githubusercontent.com/u/55656888?v=4"
+        name: "drkameleon"
+        url: "https://github.com/drkameleon"
+        avatar: "https://avatars.githubusercontent.com/u/1265028?v=4"
         ]
 

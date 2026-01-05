@@ -1,7 +1,7 @@
 
 name: "artsembly"
-fullName: "arturo-lang/artsembly"
-url: "https://github.com/arturo-lang/artsembly"
+fullName: "drkameleon/artsembly"
+url: "https://github.com/drkameleon/artsembly"
 description: "Arturo VM Bytecode assembler"
 tags: [
                 "arturo"
@@ -16,8 +16,8 @@ stats: #[
         watch: 5
         ]
 author: #[
-        name: "arturo-lang"
-        url: "https://github.com/arturo-lang"
-        avatar: "https://avatars.githubusercontent.com/u/55656888?v=4"
+        name: "drkameleon"
+        url: "https://github.com/drkameleon"
+        avatar: "https://avatars.githubusercontent.com/u/1265028?v=4"
         ]
 
