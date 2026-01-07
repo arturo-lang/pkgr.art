@@ -224,14 +224,21 @@ getRepoDetails: function [pkg, downloadUrl][
 getVersions: function [pkg][
     [owner, repo]: split.by:"/" pkg\location
     
+    print ["DEBUG: Getting versions for" owner repo]
+    
     greaterThan: (attr 'greaterThan) ?? 0.0.0
     available: new []
     try [
         releases: getGH type pkg ~"repos/|owner|/|repo|/releases"
+        print ["DEBUG: Got" size releases "releases"]
         loop releases 'release [
+            print ["DEBUG: Checking release" release\tag_name]
             if ver: <= extractCorrectVersion release\tag_name [
+                print ["DEBUG: Valid version:" ver]
                 if ver > greaterThan [
+                    print ["DEBUG: Trying getReleaseInfo..."]
                     if releaseInfo: <= getReleaseInfo owner repo ver release\zipball_url [
+                        print ["DEBUG: Got release info, getting repo details..."]
                         'available ++ #[
                             version: ver
                             date: to :date release\published_at
@@ -245,6 +252,7 @@ getVersions: function [pkg][
             ]
         ]
     ]
+    print ["DEBUG: Returning" size available "versions"]
     return available
 ]
 
