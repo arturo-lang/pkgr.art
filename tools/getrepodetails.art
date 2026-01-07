@@ -19,21 +19,25 @@ getGH: function [reqtype, req][
         apiVersion: "2022-11-28"
 
         (IsCI?)?[
-            got: execute ~{!sh
+            result: execute.code ~{!sh
                 gh api -H "Accept: |accepting|" -H "X-GitHub-Api-Version: |apiVersion|" /|req|
             }
-            return read.json got
+            if result\code <> 0 [
+                print "GH API call failed:"
+                print result\output
+                return null
+            ]
+            return read.json result\output
         ][
             got: request.get.headers: #[
                 "Accept": accepting
                 "Authorization": ~"Bearer |AccessToken|"
                 "X-GitHub-Api-Version": apiVersion
             ] ~{https://api.github.com/|req|} ø
-            ;inspect got
             return read.json got\body
         ]
     ]
-
+    
     if reqtype = :codebergLink [
         accepting: "application/json"
 
