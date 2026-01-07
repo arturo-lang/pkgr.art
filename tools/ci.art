@@ -27,17 +27,23 @@ do ::
         
         prints pad.right name 38
  
-        (repoD: <= getRepoInfo pkg)?[
-            (empty? getVersions pkg)?[
-                print color #orange "[ ❓ HMMM  ]" 
-                'problemWithReleases ++ pkg\location
-                hasError?: true
-            ] -> print color #green "[ ✅  OK   ]"                  
-        ][
+        repoD: getRepoInfo pkg
+        
+        (null? repoD)? [
             print color #red "[ ⛔️ ERROR ]"
             'problemWithRepo ++ pkg\location
             hasError?: true
+        ][
+            versions: getVersions pkg
+            (empty? versions)? [
+                print color #orange "[ ❓ HMMM  ]" 
+                'problemWithReleases ++ pkg\location
+                hasError?: true
+            ][
+                print color #green "[ ✅  OK   ]"
+            ]
         ]
+        
         cnt: cnt + 1
     ]
 
