@@ -19,25 +19,21 @@ getGH: function [reqtype, req][
         apiVersion: "2022-11-28"
 
         (IsCI?)?[
-            result: execute.code ~{!sh
+            got: execute ~{!sh
                 gh api -H "Accept: |accepting|" -H "X-GitHub-Api-Version: |apiVersion|" /|req|
             }
-            if result\code <> 0 [
-                print "GH API call failed:"
-                print result\output
-                return null
-            ]
-            return read.json result\output
+            return read.json got
         ][
             got: request.get.headers: #[
                 "Accept": accepting
                 "Authorization": ~"Bearer |AccessToken|"
                 "X-GitHub-Api-Version": apiVersion
             ] ~{https://api.github.com/|req|} ø
+            ;inspect got
             return read.json got\body
         ]
     ]
-    
+
     if reqtype = :codebergLink [
         accepting: "application/json"
 
@@ -224,21 +220,14 @@ getRepoDetails: function [pkg, downloadUrl][
 getVersions: function [pkg][
     [owner, repo]: split.by:"/" pkg\location
     
-    print ["DEBUG: Getting versions for" owner repo]
-    
     greaterThan: (attr 'greaterThan) ?? 0.0.0
     available: new []
     try [
         releases: getGH type pkg ~"repos/|owner|/|repo|/releases"
-        print ["DEBUG: Got" size releases "releases"]
         loop releases 'release [
-            print ["DEBUG: Checking release" release\tag_name]
             if ver: <= extractCorrectVersion release\tag_name [
-                print ["DEBUG: Valid version:" ver]
                 if ver > greaterThan [
-                    print ["DEBUG: Trying getReleaseInfo..."]
                     if releaseInfo: <= getReleaseInfo owner repo ver release\zipball_url [
-                        print ["DEBUG: Got release info, getting repo details..."]
                         'available ++ #[
                             version: ver
                             date: to :date release\published_at
@@ -252,7 +241,6 @@ getVersions: function [pkg][
             ]
         ]
     ]
-    print ["DEBUG: Returning" size available "versions"]
     return available
 ]
 
