@@ -19,7 +19,7 @@ jobs:
           access_token: ${{ github.token }}
 
       - name: "Setup Arturo"
-        uses: arturo-lang/arturo-action@v2
+        uses: arturo-lang/setup-arturo@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
