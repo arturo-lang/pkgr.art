@@ -75,15 +75,12 @@ jobs:
           message: 'CI Package Deployment'
           add: '.'
 
-      - name: Update registry
-        uses: appleboy/ssh-action@v1.0.0
+      - name: "Update registry"
+        uses: burnett01/rsync-deployments@v8
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            cd /var/www/pkgr.art
-            git reset --hard
-            git pull
-            sudo chown -R www-data:www-data /var/www/pkg_stats 
-            sudo chmod -R 777 /var/www/pkg_stats
+          switches: -avzr --delete --exclude='.git' --exclude='.github'
+          path: public/
+          remote_path: /usr/local/www/arturo/packager/public/
+          remote_host: arturo-lang.io
+          remote_user: web
+          remote_key: ${{ secrets.FREEBSD_DEPLOYMENT }}
