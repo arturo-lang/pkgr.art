@@ -5,7 +5,7 @@ $http_origin = $_SERVER['HTTP_ORIGIN'];
 $pkg = $_GET["pkg"];
 
 if ($pkg != "") {
-    if (is_dir("/var/www/pkgr.art/public/_packages/" . $pkg)) {
+    if (is_dir("/usr/local/www/arturo/packager/public/_packages/" . $pkg)) {
         header("Access-Control-Allow-Origin: $http_origin");
 
         $cnt = 0;
