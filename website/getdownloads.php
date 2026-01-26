@@ -1,6 +1,6 @@
 <?php
 
-$http_origin = $_SERVER['HTTP_ORIGIN'];
+$http_origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
 
 $pkg = $_GET["pkg"];
 
