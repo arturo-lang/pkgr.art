@@ -35,3 +35,10 @@ jobs:
                 arturo tools/checkforupdates.art
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: "Trigger deployment"
+              if: hashFiles('needsupdate') != ''
+              run: |
+                gh workflow run deploy.yml
+              env:
+                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
