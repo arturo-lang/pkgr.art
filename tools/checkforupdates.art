@@ -1,0 +1,114 @@
+; tools/check-updates.art
+
+
+do ./"versioncontrol.art"
+
+packages: # "packages/list.art"
+do ./"getrepodetails.art"
+
+do ::
+    cnt: 1
+    total: size packages
+
+    separator: repeat "=" 80
+
+    print separator
+    print " Checking for package updates"
+    print separator
+
+    updatesFound: new []
+
+    loop packages [name, pkg][
+        prints [pad to :string cnt 4 "/" pad.right to :string total 4 "|"]
+        prints color #cyan "Checking: "
+
+        pkgType: "gh"
+        if is? :codebergLink pkg -> pkgType: "cb"
+        prints color #magenta pad.right pkgType 3
+
+        prints pad.right name 38
+
+        ; -------------------------------------------------
+        ; Read the latest version we currently have stored
+        ; -------------------------------------------------
+        storedVersion: null
+        versionFile: ~"packages/version/|name|.art"
+        if exists? versionFile [
+            try [
+                storedVersions: do "@" ++ read versionFile
+                unless empty? storedVersions [
+                    storedVersion: storedVersions\0\version
+                ]
+            ]
+        ]
+
+        ; -------------------------------------------------
+        ; Query the API for the latest release
+        ; -------------------------------------------------
+        [owner, repo]: split.by:"/" pkg\location
+        latestRemoteVersion: null
+
+        try [
+            releases: getGH type pkg ~"repos/|owner|/|repo|/releases"
+            if not? empty? releases [
+                ; Find the highest valid semver tag among releases
+                loop releases 'release [
+                    if ver: <= extractCorrectVersion release\tag_name [
+                        if any? @[null? latestRemoteVersion, ver > latestRemoteVersion] [
+                            latestRemoteVersion: ver
+                        ]
+                    ]
+                ]
+            ]
+        ]
+
+        ; -------------------------------------------------
+        ; Compare
+        ; -------------------------------------------------
+        case @[]
+            when? [null? latestRemoteVersion] [
+                print color #orange "[ ⚠️  NO RELEASES ]"
+            ]
+            when? [null? storedVersion] [
+                print color #yellow ~"[ 🆕  NEW: |latestRemoteVersion| ]"
+                'updatesFound ++ #[
+                    name: name
+                    from: "none"
+                    to: to :string latestRemoteVersion
+                ]
+            ]
+            when? [latestRemoteVersion > storedVersion] [
+                print color #green ~"[ 🔄  UPDATE: |storedVersion| → |latestRemoteVersion| ]"
+                'updatesFound ++ #[
+                    name: name
+                    from: to :string storedVersion
+                    to: to :string latestRemoteVersion
+                ]
+            ]
+            else [
+                print color #gray ~"[ ✅  UP TO DATE: |storedVersion| ]"
+            ]
+
+        cnt: cnt + 1
+    ]
+
+    print separator
+    print ""
+
+    if empty? updatesFound [
+        print [">" color #green "All packages are up to date! 👍"]
+        exit
+    ]
+
+    ; Print summary of packages that need updating
+    print color #cyan ~"Found |size updatesFound| package(s) with new versions:"
+    print ""
+
+    loop updatesFound 'upd [
+        print [" •" color #magenta upd\name ":" upd\from "→" color #green upd\to]
+    ]
+
+    print ""
+    print separator
+
+    exit
