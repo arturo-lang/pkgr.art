@@ -95,9 +95,11 @@ do ::
     print separator
     print ""
 
-    if empty? updatesFound [
+    switch empty? updatesFound [
         print [">" color #green "All packages are up to date! 👍"]
         exit
+    ][
+        "yes" >> "needsupdate"
     ]
 
     ; Print summary of packages that need updating
