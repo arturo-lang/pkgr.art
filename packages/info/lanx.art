@@ -1,0 +1,23 @@
+
+name: "lanx"
+fullName: "drkameleon/lanx"
+url: "https://github.com/drkameleon/lanx"
+description: "A simple, zero-config static file server for Arturo"
+tags: [
+                "arturo"
+                 "arturo-package"
+                 "file-server"
+                 "http"
+                 "server"
+                 "web-server"
+        ]
+stats: #[
+        stars: 2
+        watch: 2
+        ]
+author: #[
+        name: "drkameleon"
+        url: "https://github.com/drkameleon"
+        avatar: "https://avatars.githubusercontent.com/u/1265028?v=4"
+        ]
+
