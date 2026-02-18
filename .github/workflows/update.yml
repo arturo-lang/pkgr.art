@@ -1,4 +1,4 @@
-name: "Check for package updates"
+name: "Update"
 on:
     pull_request:
     schedule:
@@ -11,7 +11,7 @@ defaults:
         shell: bash -l {0}
 
 jobs:
-    CheckUpdates:
+    Check:
         runs-on: ubuntu-latest
         steps:
             - name: "Cancel similar actions in progress"
