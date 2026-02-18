@@ -67,6 +67,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Publish changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: drkameleon
+          author_email: yaniszaf@gmail.com
+          message: 'CI Package Deployment'
+          add: '.'
+
       - name: "Update registry"
         uses: burnett01/rsync-deployments@v8
         with:
