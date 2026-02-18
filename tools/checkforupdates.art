@@ -70,7 +70,7 @@ do ::
                 print color #orange "[ ⚠️  NO RELEASES ]"
             ]
             [null? storedVersion] [
-                print color #yellow ~"[ 🆕  NEW: |latestRemoteVersion| ]"
+                print color #yellow ~"🆕  NEW: |latestRemoteVersion|"
                 'updatesFound ++ #[
                     name: name
                     from: "none"
@@ -78,7 +78,7 @@ do ::
                 ]
             ]
             [latestRemoteVersion > storedVersion] [
-                print color #green ~"[ 🔄  UPDATE: |storedVersion| → |latestRemoteVersion| ]"
+                print color #green ~"🔄  UPDATE: |storedVersion| → |latestRemoteVersion|"
                 'updatesFound ++ #[
                     name: name
                     from: to :string storedVersion
@@ -86,7 +86,7 @@ do ::
                 ]
             ]
             true [
-                print color #gray ~"[ ✅  UP TO DATE: |storedVersion| ]"
+                print "✅"
             ]
         ]
         cnt: cnt + 1
