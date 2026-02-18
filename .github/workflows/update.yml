@@ -1,6 +1,5 @@
 name: "Update"
 on:
-    pull_request:
     schedule:
         # Runs every 6 hours
         - cron: '0 */6 * * *'
