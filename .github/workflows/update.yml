@@ -1,0 +1,37 @@
+name: "Check for package updates"
+on:
+    pull_request:
+    schedule:
+        # Runs every 6 hours
+        - cron: '0 */6 * * *'
+    workflow_dispatch:
+
+defaults:
+    run:
+        shell: bash -l {0}
+
+jobs:
+    CheckUpdates:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Cancel similar actions in progress"
+              uses: styfle/cancel-workflow-action@0.6.0
+              with:
+                access_token: ${{ github.token }}
+
+            - name: "Setup Arturo"
+              uses: arturo-lang/setup-arturo@v2
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: "Checkout"
+              uses: actions/checkout@main
+              with:
+                submodules: recursive
+
+            - name: "Check for new versions"
+              run: |
+                echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+                arturo tools/checkforupdates.art
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
