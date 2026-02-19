@@ -1,0 +1,18 @@
+
+name: "optionally.art"
+fullName: "RickBarretto/optionally.art"
+url: "https://github.com/RickBarretto/optionally.art"
+description: "Supercharged typed optionals interface support for Arturo Programming Language"
+tags: [
+
+        ]
+stats: #[
+        stars: 0
+        watch: 0
+        ]
+author: #[
+        name: "RickBarretto"
+        url: "https://github.com/RickBarretto"
+        avatar: "https://avatars.githubusercontent.com/u/78623871?v=4"
+        ]
+
