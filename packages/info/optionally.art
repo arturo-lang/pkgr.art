@@ -4,11 +4,18 @@ fullName: "RickBarretto/optionally.art"
 url: "https://github.com/RickBarretto/optionally.art"
 description: "Supercharged typed optionals interface support for Arturo Programming Language"
 tags: [
-
+                "arturo"
+                 "arturo-package"
+                 "attributes"
+                 "dsl"
+                 "function"
+                 "metaprogramming"
+                 "optional"
+                 "pkgr-art"
         ]
 stats: #[
-        stars: 0
-        watch: 0
+        stars: 1
+        watch: 1
         ]
 author: #[
         name: "RickBarretto"
