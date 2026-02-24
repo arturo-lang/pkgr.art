@@ -1,5 +1,191 @@
 [
         #[
+                version: 0.8.0
+                date: to :date "2026-02-24T08:34:48+00:00"
+                link: "https://github.com/drkameleon/validator.art/releases/tag/v0.8.0"
+                details: #[
+                        size: 96464
+                        files: 26
+                        readme: {
+                                <h1 align="center">
+                                    Validator
+                                </h1>
+                                
+                                <p align="center">
+                                     <i>A 🔋-included, supercharged & customizable,<br>string validation library for Arturo</i> 
+                                     <br><br>
+                                     <img src="https://img.shields.io/github/license/arturo-lang/grafito?style=for-the-badge">
+                                    <a href="https://github.com/arturo-lang/arturo" style="text-decoration: none; display: inline-block;"><img src="https://img.shields.io/badge/language-Arturo-6A156B.svg?style=for-the-badge" alt="Language"/></a>
+                                </p>
+                                
+                                ---
+                                
+                                <!--ts-->
+                                
+                                - [What does this package do?](#what-does-this-package-do)
+                                - [How do I use it?](#how-do-i-use-it)
+                                - [Function Reference](#function-reference)
+                                - [Contributing](#contributing)
+                                - [License](#license)
+                                
+                                <!--te-->
+                                
+                                ---
+                                
+                                ### What does this package do?
+                                
+                                This package provides a function (`valid?`) that allows to check and validate strings, based on different built-in schemes/patterns, e.g e-mails, urls, etc.
+                                
+                                ### How do I use it?
+                                
+                                Simply `import` it and use the included `valid?` function:
+                                
+                                ```red
+                                import "validator"!
+                                
+                                valid?.url "https://arturo-lang.io"
+                                ; => true
+                                
+                                valid?.email "loremIpsum@"
+                                ; => false
+                                
+                                valid?.iban "GB82 WEST 1234 5698 7654 32"
+                                ; => true
+                                
+                                valid?.ip "127.0.0.1"
+                                ; => true
+                                
+                                valid?.ip.v6 "127.0.0.1"
+                                ; => false
+                                
+                                valid?.sedol "B0SWJX3"
+                                ; => true
+                                ```
+                                
+                                And we may also check more than one strings:
+                                
+                                ```red
+                                valid?.email ["my@email.com", "info@google.com"]
+                                ; => true
+                                ```
+                                
+                                > [!TIP]
+                                > Different type of checks may accept different extra params, so you'd better have a look into the reference first! 😉
+                                
+                                ### Function reference
+                                
+                                #### `valid?`
+                                
+                                ##### Description
+                                
+                                check if given string is valid
+                                
+                                ##### Usage
+                                
+                                <pre>
+                                <b>valid?</b> <ins>str</ins> <i>:string :block</i>
+                                </pre>
+                                
+                                ##### Attributes
+                                
+                                | Option   | Related parameters | Description                                                                                                                    |
+                                | -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+                                | base58   |                    | check base-58 encoding                                                                                                         |
+                                | card     |                    | check credit card number                                                                                                       |
+                                | date     |                    | test if string contains valid date                                                                                             |
+                                |          | .format:           | specify date format (default: `'iso` or `yyyy-MM-dd`) - could also be one of `'iso8601`, `'short`, `'long` or any given string |
+                                | email    |                    | verify e-mail address                                                                                                          |
+                                | floating |                    | test if string contains a parsable floating-point value                                                                        |
+                                | integer  |                    | test if string contains a parsable integer value                                                                               |
+                                | iban     |                    | verify IBAN (International Bank Account Number)                                                                                |
+                                | ip       |                    | verify IP addresses                                                                                                            |
+                                |          | .v4                | look for IPv4 addresses only                                                                                                   |
+                                |          | .v6                | look for IPv6 addresses only                                                                                                   |
+                                | isbn     |                    | verify ISBN code                                                                                                               |
+                                |          | .10                | check for ISBN-10 codes only                                                                                                   |
+                                |          | .13                | check for ISBN-13 codes only                                                                                                   |
+                                | json     |                    | test if string contains valid JSON                                                                                             |
+                                |          | .strict            | enforce stricter, two-way validation                                                                                           |
+                                | md5      |                    | check if valid MD5 hash                                                                                                        |
+                                | password |                    | check if given password is strong enough                                                                                       |
+                                |          | .min:              | minimum length (default: 8)                                                                                                    |
+                                |          | .max:              | maximum length (default: 128)                                                                                                  |
+                                |          | .lower:            | minimum lowercase characters (default: 1)                                                                                      |
+                                |          | .upper:            | minimum uppercase characters (default: 1)                                                                                      |
+                                |          | .num:              | minimum numeric characters (default: 1)                                                                                        |
+                                |          | .special:          | minimum special characters (default: 1)                                                                                        |
+                                |          | .spaces            | allow spaces (default: false)                                                                                                  |
+                                |          | .unicode           | allow unicode characters (default: false)                                                                                      |
+                                | sedol    |                    | verify SEDOL formats                                                                                                           |
+                                | sha      |                    | verify SHA hash                                                                                                                |
+                                |          | .1                 | check for SHA-1 hashes only                                                                                                    |
+                                |          | .224               | check for SHA-224 hashes only                                                                                                  |
+                                |          | .256               | check for SHA-256 hashes only (default)                                                                                        |
+                                |          | .384               | check for SHA-384 hashes only                                                                                                  |
+                                |          | .512               | check for SHA-512 hashes only                                                                                                  |
+                                | tld      |                    | verify TLD (Top-Level Domain)                                                                                                  |
+                                | url      |                    | verify URL                                                                                                                     |
+                                
+                                ##### Returns
+                                
+                                - _:logical_
+                                
+                                ### Contributing
+                                
+                                Validator.art has been designed with flexibility and extensibility in mind.
+                                
+                                - Have you noticed an error and want to fix sth?
+                                - Do you want to add more tests to a given validator to make it more robust?
+                                - Do you want to add a new one (Have a look into the [sample validator](docs/sample.art)!)
+                                
+                                You are 100% welcome! Just make a PR and I'll be more than glad to merge it! 🚀
+                                
+                                <hr/>
+                                
+                                ### License
+                                
+                                MIT License
+                                
+                                Copyright (c) 2026 Yanis Zafirópulos
+                                
+                                Permission is hereby granted, free of charge, to any person obtaining a copy
+                                of this software and associated documentation files (the "Software"), to deal
+                                in the Software without restriction, including without limitation the rights
+                                to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                copies of the Software, and to permit persons to whom the Software is
+                                furnished to do so, subject to the following conditions:
+                                
+                                The above copyright notice and this permission notice shall be included in all
+                                copies or substantial portions of the Software.
+                                
+                                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                                SOFTWARE.
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/drkameleon/validator.art/zipball/v0.8.0"
+                info: #[
+                        entry: "src/validator.art"
+                        requires: [
+                                >
+                                 0.9.83
+                        ]
+                        executable: false
+                        depends: [
+
+                        ]
+                ]
+        ]
+         #[
                 version: 0.7.0
                 date: to :date "2024-12-19T16:42:08+00:00"
                 link: "https://github.com/drkameleon/validator.art/releases/tag/v0.7.0"
