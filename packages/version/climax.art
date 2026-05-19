@@ -1,0 +1,383 @@
+[
+        #[
+                version: 0.1.0
+                date: to :date "2026-05-19T15:14:49+00:00"
+                link: "https://github.com/drkameleon/climax.art/releases/tag/v0.1.0"
+                details: #[
+                        size: 80438
+                        files: 19
+                        readme: {
+                                <h1 align="center">
+                                    Climax
+                                </h1>
+                                
+                                <p align="center">
+                                     <i>Elegant command-line<br>argument parsing for Arturo</i>
+                                     <br><br>
+                                     <img src="https://img.shields.io/github/license/arturo-lang/grafito?style=for-the-badge">
+                                    <a href="https://github.com/arturo-lang/arturo" style="text-decoration: none; display: inline-block;"><img src="https://img.shields.io/badge/language-Arturo-6A156B.svg?style=for-the-badge" alt="Language"/></a>
+                                </p>
+                                
+                                ---
+                                
+                                <!--ts-->
+                                
+                                - [What does this package do?](#what-does-this-package-do)
+                                - [How do I use it?](#how-do-i-use-it)
+                                    - [Basic usage](#basic-usage)
+                                    - [Flag forms](#flag-forms)
+                                    - [Nested subcommands](#nested-subcommands)
+                                    - [Default action](#default-action)
+                                    - [Help templates](#help-templates)
+                                - [Function reference](#function-reference)
+                                    - [`climax`](#climax)
+                                    - [`command`](#command)
+                                    - [`group`](#group)
+                                    - [Declaring options](#declaring-options)
+                                    - [Accessing values](#accessing-values)
+                                - [License](#license)
+                                
+                                <!--te-->
+                                
+                                ---
+                                
+                                ### What does this package do?
+                                
+                                Single entry point: `climax`. Inside its block, `command` and `group` declare leaf commands and nested groups.
+                                
+                                Every CLI you build with it gets:
+                                
+                                - subcommand dispatch (arbitrarily nested via `group`)
+                                - typed positional arguments
+                                - typed options with aliases, defaults, descriptions
+                                - persistent (inherited) group-level options
+                                - a `default:` command that runs when no sub-command is typed
+                                - `--help` / `--version` from the script metadata
+                                - `--` rest-args passthrough
+                                - strict rejection of unknown flags and extra positionals
+                                - coloured help and errors via a pluggable template
+                                
+                                The DSL is built on three first-class types: `:option`, `:command`, `:cli`.
+                                
+                                ### How do I use it?
+                                
+                                #### Basic usage
+                                
+                                Import it, declare your commands, pass them to `climax`:
+                                
+                                ```red
+                                ;; name: webforge
+                                ;; description: « stupid simple static site generator
+                                ;; version: 1.0.0
+                                
+                                import "climax"!
+                                
+                                climax .with: [
+                                    verbose? 'v "verbose output"
+                                ] [
+                                    build: command "Build the site" [path :string :null][
+                                        print ["building" path ?? "."]
+                                    ]
+                                
+                                    serve: command "Build + local server" [path :string :null] .with: [
+                                        watch?
+                                        port   'p  8080       :integer "port number"
+                                        host      "localhost" :string  "bind host"
+                                    ][
+                                        print ["serving" path ?? "." "on" opts\host ":" opts\port]
+                                        if opts\watch? -> print "watching for changes..."
+                                    ]
+                                ]
+                                ```
+                                
+                                Then:
+                                
+                                ```sh
+                                $ webforge --help
+                                $ webforge serve --help
+                                $ webforge serve mysite --watch -p 9000
+                                $ webforge -v build mysite
+                                ```
+                                
+                                > [!TIP]
+                                > Trailing `?` on an option name turns it into a boolean switch. Type defaults to `:logical`, default value to `false`.
+                                
+                                #### Flag forms
+                                
+                                Climax accepts the conventions you'd expect from any POSIX-style CLI:
+                                
+                                | Form | Example |
+                                |---|---|
+                                | space | `--port 8080`, `-p 8080` |
+                                | colon | `--port:8080`, `-p:8080` |
+                                | equals | `--port=8080`, `-p=8080` |
+                                | bundled bools | `-xvf` ≡ `-x -v -f` (when every char is a registered single-char predicate alias) |
+                                
+                                Unknown flags and extra positionals are rejected before dispatch, so typos like `--time` (for `--times`) error out instead of silently doing nothing. Anything after `--` escapes into `rest` unchanged.
+                                
+                                #### Nested subcommands
+                                
+                                Wrap a block of sub-commands in `group` to build `git`-style nesting:
+                                
+                                ```red
+                                climax [
+                                    remote: group "manage remotes" .with: [
+                                        loud? 'l "verbose remote ops"
+                                    ] [
+                                        add: command "add a remote" [name :string :url :string][
+                                            print ["adding" name url "loud?" opts\loud?]
+                                        ]
+                                        rm: command "remove a remote" [name :string][
+                                            print ["removing" name]
+                                        ]
+                                    ]
+                                ]
+                                ```
+                                
+                                ```sh
+                                $ myapp remote --help
+                                $ myapp remote add origin https://example
+                                $ myapp remote --loud add origin https://example   ;; persistent flag
+                                ```
+                                
+                                Group-level options declared via `.with:` are inherited by every descendant. They can be passed anywhere on the command line and stay visible in each leaf's `opts` dict. Groups nest arbitrarily.
+                                
+                                #### Default action
+                                
+                                The reserved key `default:` declares a command that runs when no recognised sub-command is typed. Standalone (flag-only CLI):
+                                
+                                ```red
+                                ;; name: ping
+                                climax [
+                                    default: command "ping a host" [host :string] .with: [
+                                        count 'c 1 :integer "number of pings"
+                                    ][
+                                        loop 1..opts\count 'i -> print ["ping" i "->" host]
+                                    ]
+                                ]
+                                ```
+                                
+                                ```sh
+                                $ ping example.com -c 3
+                                ```
+                                
+                                Or alongside named commands as a fallback:
+                                
+                                ```red
+                                climax [
+                                    default: command "show status" [] [ print "status: nominal" ]
+                                    restart: command "restart service" [] [ print "restarting..." ]
+                                ]
+                                ```
+                                
+                                ```sh
+                                $ myapp           ;; runs default
+                                $ myapp restart   ;; runs restart
+                                ```
+                                
+                                Inside a `group`, a sibling `default:` works the same way. The `default` key is elided from rendered help listings.
+                                
+                                #### Help templates
+                                
+                                Two templates ship in `src/templates/`:
+                                
+                                - `default`: colourful Arturo-style output. Used unless `.template:` says otherwise.
+                                - `plain`: black-and-white, no ANSI escapes. Good for piping and CI logs.
+                                
+                                ```red
+                                climax .template: 'plain [
+                                    serve: command "..." [...] [...]
+                                ]
+                                ```
+                                
+                                To roll your own, define `:xxxTemplate is :climaxTemplate`, import it before calling `climax`, and select with `.template: 'xxx`:
+                                
+                                ```red
+                                ;; my-tmpl.art
+                                define :myTemplate is :climaxTemplate [
+                                    styleApp:     method [s :string] -> color.bold #red s
+                                    styleSection: method [s :string] -> color.bold #yellow s
+                                ]
+                                ```
+                                
+                                ```red
+                                ;; your CLI
+                                import "climax"!
+                                import "./my-tmpl"!
+                                
+                                climax .template: 'my [ serve: command "..." [...] [...] ]
+                                ```
+                                
+                                Override points are layered so you touch only what you need:
+                                
+                                **Style primitives** (wrap a string with colour/bold/etc):
+                                
+                                | Method | Wraps |
+                                |---|---|
+                                | `styleApp` | app name, path label in titles + USAGE |
+                                | `styleSection` | section headings |
+                                | `styleFlag` | option flag labels |
+                                | `styleArg` | positional arg placeholders (`<name>` / `[<name>]`) |
+                                | `styleCommand` | sub-command names in COMMANDS list |
+                                | `styleDim` | tip footer, `(default: ...)` suffix |
+                                | `styleError` | error-message prefix (`Error:`) |
+                                
+                                **Layout** (constants that drive spacing):
+                                
+                                | Method | Default |
+                                |---|---|
+                                | `indent` | `"    "` (4 spaces) |
+                                | `flagColWidth` | `28` |
+                                | `commandColWidth` | `12` |
+                                
+                                **Section titles** (override to translate or rename):
+                                
+                                | Method | Default |
+                                |---|---|
+                                | `headerUsage` | `"USAGE"` |
+                                | `headerOptions` | `"OPTIONS"` |
+                                | `headerGlobalOptions` | `"GLOBAL OPTIONS"` |
+                                | `headerCommands` | `"COMMANDS"` |
+                                
+                                **Inline strings**:
+                                
+                                | Method | Default |
+                                |---|---|
+                                | `titleSeparator` | `"—"` (between name and description in titles) |
+                                | `defaultLabel val` | `" (default: <val>)"` |
+                                | `tipText label` | `"Run `<label> <command> --help` for command-specific help."` (return `""` to drop the line) |
+                                
+                                **Error rendering** (one method per error class):
+                                
+                                | Method | When |
+                                |---|---|
+                                | `renderUnknownCommand name` | top-level unknown command |
+                                | `renderUnknownSubcommand label name` | unknown sub-command of a group |
+                                | `renderUnknownOption label badList` | unknown flag(s) at a leaf |
+                                | `renderTooManyArgs label got max` | more positional args than declared |
+                                | `renderMissingRequired label missing` | required positional omitted |
+                                
+                                **Structural methods** (restructure rather than recolour): `renderRoot`, `renderGroup`, `renderCommand`, `argSig`, `optionLine`, `optionsSection`, `subcommandList`, `usageLine`.
+                                
+                                ### Function reference
+                                
+                                #### `climax`
+                                
+                                Build and dispatch a CLI from the given declarations.
+                                
+                                <pre>
+                                <b>climax</b> <ins>decls</ins> <i>:block</i>
+                                </pre>
+                                
+                                | Attribute | Type(s) | Description |
+                                |----|----|----|
+                                | `with:` | `:block` | global options (row grammar) |
+                                | `template:` | `:literal` | help template: `'default`, `'plain`, or the literal name of any `:xxxTemplate` already in scope |
+                                
+                                <hr/>
+                                
+                                > [!NOTE]
+                                > `command` and `group` are not module-level exports. They only exist as locals inside a `climax` decls block (and recursively inside any `group`'s sub-block). Calling them from anywhere else is an error.
+                                
+                                #### `command`
+                                
+                                Builds a leaf command spec.
+                                
+                                <pre>
+                                <b>command</b> <ins>desc</ins> <i>:string</i> <ins>args</ins> <i>:block</i> <ins>body</ins> <i>:block</i>
+                                </pre>
+                                
+                                | Attribute | Type(s) | Description |
+                                |----|----|----|
+                                | `with:` | `:block` | options block (row grammar) |
+                                
+                                Returns `:command`.
+                                
+                                <hr/>
+                                
+                                #### `group`
+                                
+                                Builds a command group whose body is a block of sub-command declarations.
+                                
+                                <pre>
+                                <b>group</b> <ins>desc</ins> <i>:string</i> <ins>decls</ins> <i>:block</i>
+                                </pre>
+                                
+                                | Attribute | Type(s) | Description |
+                                |----|----|----|
+                                | `with:` | `:block` | group-level options (persistent: inherited by sub-commands) |
+                                
+                                Returns `:command` with sub-commands attached.
+                                
+                                <hr/>
+                                
+                                #### Declaring options
+                                
+                                Inside any `.with:` block, each option row follows a forced order:
+                                
+                                ```
+                                <name>[?]  ['alias]  [<default>]  [:type ...]  ["description"]
+                                ```
+                                
+                                | Slot | Required? | Notes |
+                                |----|----|----|
+                                | `name` | yes | trailing `?` marks a predicate (boolean switch) |
+                                | `alias` | no | quoted single-char literal (e.g. `'v`) |
+                                | `default` | no | any literal; predicates always default to `false` |
+                                | `type` | no | one or more `:type` literals (union); predicates infer `:logical` |
+                                | `description` | no | trailing `:string` |
+                                
+                                #### Accessing values
+                                
+                                Every command body sees three injected locals:
+                                
+                                - `opts`: dict of resolved options (globals + per-command, with defaults applied)
+                                - `rest`: block of raw args after `--`
+                                - each positional arg, bound to its declared name
+                                
+                                ---
+                                
+                                ### License
+                                
+                                MIT License
+                                
+                                Copyright (c) 2026 Yanis Zafirópulos
+                                
+                                Permission is hereby granted, free of charge, to any person obtaining a copy
+                                of this software and associated documentation files (the "Software"), to deal
+                                in the Software without restriction, including without limitation the rights
+                                to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                copies of the Software, and to permit persons to whom the Software is
+                                furnished to do so, subject to the following conditions:
+                                
+                                The above copyright notice and this permission notice shall be included in all
+                                copies or substantial portions of the Software.
+                                
+                                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                                SOFTWARE.
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/drkameleon/climax.art/zipball/v0.1.0"
+                info: #[
+                        entry: "src/climax.art"
+                        requires: [
+                                >=
+                                 0.10.0
+                        ]
+                        executable: false
+                        depends: [
+
+                        ]
+                ]
+        ]
+]

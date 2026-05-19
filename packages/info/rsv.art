@@ -1,7 +1,7 @@
 
 name: "art-rsv"
-fullName: "fuzzko/art-rsv"
-url: "https://github.com/fuzzko/art-rsv"
+fullName: "asumbek/art-rsv"
+url: "https://github.com/asumbek/art-rsv"
 description: "RSV parser and serializer for Arturo"
 tags: [
 
@@ -11,8 +11,8 @@ stats: #[
         watch: 3
         ]
 author: #[
-        name: "fuzzko"
-        url: "https://github.com/fuzzko"
+        name: "asumbek"
+        url: "https://github.com/asumbek"
         avatar: "https://avatars.githubusercontent.com/u/71205197?v=4"
         ]
 
