@@ -4,7 +4,12 @@ fullName: "drkameleon/climax.art"
 url: "https://github.com/drkameleon/climax.art"
 description: "Elegant command-line argument parsing for Arturo"
 tags: [
-
+                "argument-parser"
+                 "arturo"
+                 "arturo-package"
+                 "cli"
+                 "command-line"
+                 "subcommand"
         ]
 stats: #[
         stars: 1
