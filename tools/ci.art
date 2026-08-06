@@ -10,6 +10,7 @@ do ::
     hasError?: false
     problemWithRepo: new []
     problemWithReleases: new []
+    problemWithForge: new []
 
     separator: repeat "=" 80
 
@@ -34,13 +35,22 @@ do ::
             'problemWithRepo ++ pkg\location
             hasError?: true
         ][
+            fetchedBefore: size unreachableSources
             versions: getVersions pkg
-            (empty? versions)? [
-                print color #orange "[ ❓ HMMM  ]" 
-                'problemWithReleases ++ pkg\location
+            couldntFetch?: (size unreachableSources) > fetchedBefore
+
+            (couldntFetch?)? [
+                print color #red "[ 🌐 FORGE ]"
+                'problemWithForge ++ pkg\location
                 hasError?: true
             ][
-                print color #green "[ ✅  OK   ]"
+                (empty? versions)? [
+                    print color #orange "[ ❓ HMMM  ]"
+                    'problemWithReleases ++ pkg\location
+                    hasError?: true
+                ][
+                    print color #green "[ ✅  OK   ]"
+                ]
             ]
         ]
         
@@ -57,6 +67,14 @@ do ::
             print ""
             print "Couldn't find valid release packages for:"
             print.lines problemWithReleases
+        ]
+        unless empty? problemWithForge [
+            print ""
+            print "Couldn't fetch the sources at all - the host is failing, not the package:"
+            print.lines problemWithForge
+            print ""
+            print "Affected releases:"
+            print.lines unreachableSources
         ]
         print separator
         print ""
