@@ -57,6 +57,69 @@ howAreStarsCalled: function [reqtype][
 ]
 
 ;--------------------------------------------------
+; Getting hold of the sources
+;--------------------------------------------------
+
+; Releases whose sources couldn't be fetched by any route. A host that won't
+; serve us is a different problem from a package with nothing published, and
+; ci.art reports the two separately.
+unreachableSources: new []
+
+; How long to wait for a host to build an archive before going round it.
+; Codeberg's gateway takes 600s to give up on itself, per release.
+ArchiveTimeout: 60
+
+; A host that fails to build an archive still answers with a body - Codeberg's
+; 504 returns 92 bytes of HTML, which lands under the .zip name and throws on
+; unzip. Check the signature instead of finding out the hard way.
+validArchive?: function [path][
+    unless exists? path -> return false
+    content: read.binary path
+    if 4 > size content -> return false
+    return [80 75] = @[content\0 content\1]      ; every zip opens with "PK"
+]
+
+; Shallow-clone one tag and drop the .git folder. The size and file counts we
+; publish are measured off this folder, so it has to hold what an unpacked
+; archive would hold and nothing else.
+cloneRelease: function [pkg, tag, target][
+    [owner, repo]: split.by:"/" pkg\location
+    host: (is? :codebergLink pkg)? -> "codeberg.org"
+                                   -> "github.com"
+    remote: ~"https://|host|/|owner|/|repo|.git"
+    into: ~"|target|/|repo|"
+
+    execute ~{!sh
+        git clone --quiet --depth 1 --branch |tag| |remote| |into| && rm -rf |into|/.git
+    }
+
+    if directory? into -> return into
+    return null
+]
+
+; The archive endpoint first, git as the fallback. Returns the unpacked root
+; folder, or null when neither route produced one.
+fetchSource: function [pkg, tag, url, target][
+    archive: ~"|target|.zip"
+    write.directory ø target
+
+    ; --fail keeps an error page off the disk, --max-time keeps a stalled
+    ; endpoint from holding up the rest of the run
+    execute ~{!sh
+        curl --silent --location --fail --max-time |ArchiveTimeout| --output |archive| |url|
+    }
+
+    if validArchive? archive [
+        unzip target archive
+        delete archive
+        return first filter list target => [contains? & ".DS_Store"]
+    ]
+    if exists? archive -> delete archive
+
+    return cloneRelease pkg tag target
+]
+
+;--------------------------------------------------
 ; Main routines
 ;--------------------------------------------------
 
@@ -105,18 +168,8 @@ getRepoInfo: function [pkg][
     ] -> null
 ]
 
-getReleaseInfo: function [owner, repo, version, url][
-    if IsCI? [
-        write.directory ø "tmp" 
-    ]
-
-    tgt: ~{tmp/|owner|-|repo|-|version|.zip}
-    download.as: tgt url
-    unzip "tmp" tgt
-    delete tgt
-
-    tgtFolder: first filter list "tmp" => [contains? & ".DS_Store"]
-    infoFile: ~"|tgtFolder|/info.art"
+getReleaseInfo: function [folder][
+    infoFile: ~"|folder|/info.art"
 
     ret: #[]
 
@@ -143,10 +196,8 @@ getReleaseInfo: function [owner, repo, version, url][
     unless key? ret 'requires ->
         ret\requires: [> 0.0.0]
 
-    unless exists? ~{|tgtFolder|/|ret\entry|} ->
+    unless exists? ~{|folder|/|ret\entry|} ->
         ret: null
-
-    delete.directory tgtFolder
 
     return ret
 ]
@@ -170,32 +221,22 @@ getNoOfFiles: function [folder][
 ]
 
 getReadmeFile: function [folder][
-    tgtF: first list folder
-    if exists? r1: <= join.path @[tgtF "README"] [return read r1]
-    if exists? r2: <= join.path @[tgtF "README.md"] [return read r2]
-    if exists? r3: <= join.path @[tgtF "readme.md"] [return read r3]
+    if exists? r1: <= join.path @[folder "README"] [return read r1]
+    if exists? r2: <= join.path @[folder "README.md"] [return read r2]
+    if exists? r3: <= join.path @[folder "readme.md"] [return read r3]
     return "--"
 ]
 
-getRepoDetails: function [pkg, downloadUrl][
-    [owner, repo]: split.by:"/" pkg\location
-
-    tmpName: ~{|owner|-|repo|}
-    tmpZip: ~"|tmpName|.zip"
-    tmpFolder: ~"|tmpName|"
-    
-    download.as: tmpZip downloadUrl
-    unzip tmpFolder tmpZip
-
-    repoSize: to :integer scalar getFolderSize tmpFolder
-    repoFiles: getNoOfFiles tmpFolder
-    repoReadme: getReadmeFile tmpFolder
+getRepoDetails: function [folder][
+    repoSize: to :integer scalar getFolderSize folder
+    repoFiles: getNoOfFiles folder
+    repoReadme: getReadmeFile folder
 
     licenseName: "--"
     ; (is? :githubLink pkg) ? [
 
     ; ][
-    licensing: first read.json execute (~./{license-detector-|sys\os|}) ++ ~" --format json |first list tmpFolder|"
+    licensing: first read.json execute (~./{license-detector-|sys\os|}) ++ ~" --format json |folder|"
     unless key? licensing 'error [
         firstMatch: first licensing\matches
         licenseName: firstMatch\license
@@ -209,9 +250,6 @@ getRepoDetails: function [pkg, downloadUrl][
         url: licenseUrl
     ]
 
-    delete.directory tmpFolder
-    delete tmpZip
-
     ret: #[size: repoSize, files: repoFiles, readme: repoReadme, license: repoLicense]
 
     return ret
@@ -222,21 +260,34 @@ getVersions: function [pkg][
     
     greaterThan: (attr 'greaterThan) ?? 0.0.0
     available: new []
+    write.directory ø "tmp"
+
     try [
         releases: getGH type pkg ~"repos/|owner|/|repo|/releases"
         loop releases 'release [
             if ver: <= extractCorrectVersion release\tag_name [
                 if ver > greaterThan [
-                    if releaseInfo: <= getReleaseInfo owner repo ver release\zipball_url [
-                        'available ++ #[
-                            version: ver
-                            date: to :date release\published_at
-                            link: release\html_url 
-                            details: getRepoDetails pkg release\zipball_url
-                            url: release\zipball_url
-                            info: releaseInfo
+                    ; one fetch per release, read by both getReleaseInfo
+                    ; and getRepoDetails
+                    workdir: ~{tmp/|owner|-|repo|-|ver|}
+                    folder: fetchSource pkg release\tag_name release\zipball_url workdir
+
+                    (null? folder)? [
+                        'unreachableSources ++ ~"|owner|/|repo| @ |release\tag_name|"
+                    ][
+                        if releaseInfo: <= getReleaseInfo folder [
+                            'available ++ #[
+                                version: ver
+                                date: to :date release\published_at
+                                link: release\html_url
+                                details: getRepoDetails folder
+                                url: release\zipball_url
+                                info: releaseInfo
+                            ]
                         ]
                     ]
+
+                    if directory? workdir -> delete.directory workdir
                 ]
             ]
         ]
