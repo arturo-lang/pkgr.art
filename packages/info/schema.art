@@ -1,0 +1,22 @@
+
+name: "schema.art"
+fullName: "Lulzx/schema.art"
+url: "https://github.com/Lulzx/schema.art"
+description: "Validate whole Arturo values against schemas that are themselves ordinary data"
+tags: [
+                "arturo"
+                 "arturo-lang"
+                 "dialect"
+                 "schema"
+                 "validation"
+        ]
+stats: #[
+        stars: 0
+        watch: 0
+        ]
+author: #[
+        name: "Lulzx"
+        url: "https://github.com/Lulzx"
+        avatar: "https://avatars.githubusercontent.com/u/22330483?v=4"
+        ]
+

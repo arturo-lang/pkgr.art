@@ -1,0 +1,554 @@
+[
+        #[
+                version: 0.1.1
+                date: to :date "2026-08-13T11:37:43+00:00"
+                link: "https://github.com/Lulzx/carpintero/releases/tag/v0.1.1"
+                details: #[
+                        size: 388539
+                        files: 46
+                        readme: {
+                                # Carpintero
+                                
+                                *Documentation: <https://lulzx.com/carpintero/>*
+                                
+                                A PARSE-class grammar dialect for [Arturo](https://arturo-lang.io): rules are
+                                ordinary Arturo blocks that compose, nest, and recurse, and they match
+                                strings *and* blocks, so Arturo can pattern-match its own source.
+                                
+                                ```red
+                                digit: charset "0-9"
+                                
+                                date: [
+                                    capture 'year  [4 digit]  "-"
+                                    capture 'month [2 digit]  "-"
+                                    capture 'day   [2 digit]
+                                ]
+                                
+                                scan "2026-08-03" date
+                                ; => [year: "2026" month: "08" day: "03"]
+                                ```
+                                
+                                `scan` returns a dictionary of captures, or `null` on failure. `scan?`
+                                returns a boolean. `scan.prefix` accepts a prefix match and reports how far
+                                it reached. After a failed scan, `scanError` tells you where and why:
+                                
+                                ```
+                                scan "2026-08-0x" date
+                                print scanError
+                                ; scan failed at line 1, column 10 — expected: digit  (while matching: day)
+                                ;     2026-08-0x
+                                ;              ^
+                                ```
+                                
+                                A terminal that has a rule name is reported by that name, the innermost
+                                enclosing rule or capture becomes the while-matching context, and the
+                                offending line is shown with a caret under the column. For block input
+                                the report gives an index, or a path of indices into the nested
+                                structure when the failure is inside `into`.
+                                
+                                Block input uses the language's own type values as terminals:
+                                
+                                ```red
+                                funcdef: [
+                                    capture 'name :label
+                                    'function
+                                    capture 'params :block
+                                    capture 'body   :block
+                                ]
+                                
+                                scan code [any [funcdef | skip]]
+                                ```
+                                
+                                ## Using it
+                                
+                                Import it by name and Arturo fetches it from
+                                [pkgr.art](https://pkgr.art):
+                                
+                                ```red
+                                import "carpintero"!
+                                
+                                digit: charset "0-9"
+                                scan "2026-08-03" [capture 'year [4 digit] "-" capture 'month [2 digit] "-" capture 'day [2 digit]]
+                                ```
+                                
+                                `arturo -p install carpintero` fetches it ahead of time instead, and
+                                `import.version:0.1.1 "carpintero"!` pins a release.
+                                
+                                Keep the trailing `!`. It imports the package before the rest of the file
+                                is parsed, so `scan` and `charset` are read as calls. Written without it,
+                                those words evaluate to the functions themselves, and `digit: charset "0-9"`
+                                binds `digit` to `charset`.
+                                
+                                One file, no dependencies, nothing to build: copying `carpintero.art` next
+                                to your script and writing `import ./"carpintero.art"!` works too.
+                                Arturo 0.10.0 or later.
+                                
+                                ## Vocabulary
+                                
+                                | Group | Words |
+                                | --- | --- |
+                                | Quantify | `some` (1+), `any` (0+), `opt`, `N rule`, `between N M rule` |
+                                | Choose | `\|` ordered alternation, blocks for grouping |
+                                | Advance | `to` (exclusive), `thru` (inclusive), `skip`, `end` |
+                                | Look | `ahead`, `not` |
+                                | Capture | `capture 'name rule`, `collect 'name rule` + `keep rule` |
+                                | Descend | `into rule` (match a nested block in full with its own rules) |
+                                | Escape | `do [...]` host code, `defer [...]` commit-time host code, `quote value` literal match, `fail "msg"` |
+                                | Commit | `cut` (commit the innermost enclosing choice) |
+                                | Match | strings, chars, charsets, `:type` values, `'word` literals, named rules |
+                                
+                                Charsets are values and compose: `csUnion`, `csIntersect`,
+                                `csComplement` (the unprefixed words belong to core, for blocks).
+                                
+                                Two utilities ride along. `stripComments` removes comments from a source
+                                string with a Carpintero grammar, and `loadSafe` reads a file, strips it,
+                                and returns the lexed block, sidestepping the 0.10.0 lexer bug where a
+                                backslash in a `;;` documentation comment hangs the interpreter
+                                (`examples/safeload.art` runs a file that hangs `arturo` directly).
+                                
+                                ## Two implementations
+                                
+                                `carpintero.art` is the reference: the whole dialect in pure Arturo,
+                                covering the proposal's Phase 0 to 2 and the interpreted half of Phase 3
+                                (`cut`, `defer`, opt-in memoization, benchmarks). It is the specification,
+                                and where the two disagree it is the one that is right.
+                                
+                                [`nim/`](nim/README.md) is the compiled core the proposal asks upstream
+                                for: an LPeg-style instruction set matching text and blocks, built
+                                standalone so it needs no Arturo build to develop. The two share no
+                                matching code, so they are held together by running the same grammar over
+                                the same input and comparing:
+                                
+                                ```
+                                scripts/differential-corpus.sh ../arturo
+                                ```
+                                
+                                Over Arturo's own source both engines find the same 287 definitions in the
+                                same 168 files, with the same captures and no disagreement.
+                                
+                                Reaching that speed from Arturo needs a builtin, which would mean changing
+                                Arturo, so this package does not. `nim/adapter/fast.art` goes through the
+                                FFI instead, which is worth having and still not the engine:
+                                
+                                | | Corpus scan | |
+                                | --- | ---: | --- |
+                                | `scan` | 15.8 s | pure Arturo, the reference |
+                                | `scanFast` | 0.25 s | the shared library, no change to Arturo |
+                                | the core on values it already holds | 0.03 s | what direct access would expose |
+                                
+                                Most of the middle row is serialisation: 0.19 seconds to render the input
+                                against 0.045 to cross the boundary and match, after five rounds of making
+                                the two ends faster. The measurement, and what it argues, is in
+                                [nim/README.md](nim/README.md).
+                                
+                                ## Semantics worth knowing
+                                
+                                Four that surprise people. All deliberate, all argued in
+                                [proposal.md](proposal.md), all covered in full by [MANUAL.md](MANUAL.md).
+                                
+                                - **The whole input must match.** A rule that matches a prefix and stops
+                                  short is a failure. `scan.prefix` is the other mode.
+                                - **A capture survives only if the match consumed the input it names.** One
+                                  made in an alternative that later fails leaves nothing behind, and the same
+                                  goes for `keep`; Rebol and Red do the opposite, on purpose here. Failing is
+                                  not the only way to consume nothing, so `ahead`, `not` and the exclusive
+                                  `to` roll their operand's captures back too, while `thru` keeps what it
+                                  consumed.
+                                - **`do` escapes may run more than once**, on parse paths that are later
+                                  abandoned, so they should compute rather than mutate. `defer` is the sound
+                                  alternative: queued in the capture log, run once on overall success, and
+                                  discarded with a dead branch.
+                                - **Loops cannot spin.** In `some` and `any`, an *optional* pass that
+                                  matches without consuming ends the loop, and is not taken: what it
+                                  captured rolls back with it. Mandatory passes are always taken, which is
+                                  the whole difference between the two, since `some rule` is one mandatory
+                                  pass followed by `any rule`. The counted forms need no guard at all,
+                                  because a bound already terminates them, so `4 rule` and `between 2 5
+                                  rule` run their body whether or not it consumes, and `between 2 2 rule`
+                                  means what `2 rule` means. Left recursion is rejected at scan start with
+                                  the cycle named.
+                                
+                                Matching is case-sensitive and works on characters, not bytes.
+                                
+                                ## Running everything
+                                
+                                ```
+                                scripts/run-tests.sh
+                                ```
+                                
+                                | Suite | What it covers |
+                                | --- | --- |
+                                | `tests.art` | 377 checks over the interpreted matcher |
+                                | `tests-panics.art` | 18 grammar errors, one interpreter each |
+                                | `nim/tests/test_vm.nim` | 51 checks over the compiled core |
+                                | `nim/tests/test_wire.nim` | the FFI input read both ways and compared |
+                                | `nim/tests/differential.nim` | 78 cases run in both engines and compared |
+                                | `demo.art` | 72 checks, written to be read rather than to cover |
+                                
+                                The panic cases need one interpreter apiece: a panic unwound through `try`
+                                leaves the abandoned frames' values behind for the next statements to
+                                misread, so a single process cannot check more than one of them.
+                                
+                                Those suites ask the questions someone thought to ask. `scripts/fuzz.sh`
+                                asks the rest:
+                                
+                                ```
+                                scripts/fuzz.sh 10 100
+                                ```
+                                
+                                Each batch writes random grammars with the interpreted answer attached and
+                                reruns them in the compiled core, which is the differential runner reading
+                                its ordinary case format. Grammars are well formed by construction, so a
+                                batch that dies is a finding rather than noise, and every batch leaves a
+                                listing beside its case file naming the grammar behind each disagreement.
+                                Four semantic disagreements came out of it, each shrunk to a grammar a
+                                line long and now pinned in the tables above: which passes of a loop are
+                                guarded, whether a bounded repeat counts a pass that consumed nothing,
+                                and what the empty string means against a block.
+                                
+                                ## Examples
+                                
+                                [`examples/`](examples/README.md) holds the proposal's three demos, each
+                                runnable on its own: JSON in nine rules over two charsets (`json.art`),
+                                RFC 4180 CSV in seven (`csv.art`), and Arturo scanning its own source, one
+                                rule extracting every function definition from `carpintero.art` itself
+                                (`arturo-scan.art`).
+                                
+                                `arturo-corpus.art` takes that last one all the way. Point it at a checkout
+                                of Arturo and it runs both grammars over every `.art` file in the language's
+                                own tree. On a megabyte of source, stripping comments never once changed the
+                                program the lexer builds, and a five-line block grammar found all 287
+                                function definitions at every nesting depth. [The write-up is in the
+                                manual](MANUAL.md#validation-against-arturos-own-source), including the
+                                interpreter bug it turned up.
+                                
+                                `bench.art` is the Phase 3 benchmark: `scan` losing to the native regex
+                                engine by the expected orders of magnitude, memoization collapsing a
+                                deliberately exponential grammar from a sixth of a second to a millisecond
+                                and a half, and a cost per kilobyte that stays flat as the input doubles.
+                                
+                                ## Interpreter bugs
+                                
+                                Writing the dialect turned up three Arturo 0.10.0 interpreter bugs: a
+                                backslash in a `;;` documentation comment that hangs the lexer, a
+                                value-stack underflow that exits 1 without a word, and a `:symbolliteral`
+                                that is not equal to itself. The first two came from writing the dialect
+                                and the third from running it over Arturo's own test suite. A fourth
+                                candidate is not a bug: a value left unused inside a callee is popped as an
+                                argument by the enclosing call, which is the value stack working as
+                                designed, down to the displaced argument waiting there for the next call
+                                that wants one. Each has an in-language workaround, used in
+                                `carpintero.art`; `examples/hangs-the-lexer.art` is the repro for the
+                                first, and `examples/safeload.art` loads it anyway.
+                                
+                                ## Reading
+                                
+                                - [TUTORIAL.md](TUTORIAL.md), the guided path from a first `scan` to
+                                  walking a source tree.
+                                - [MANUAL.md](MANUAL.md), the full reference: every word, the error report,
+                                  memoization, the PEG pitfalls and their fixes.
+                                - [proposal.md](proposal.md), the design rationale and the case for
+                                  upstreaming.
+                                - [nim/README.md](nim/README.md), the compiled core and what it measured.
+                                
+                                ## Name
+                                
+                                *Carpintero*, the woodpecker: works through material methodically, a piece
+                                at a time. Also *carpenter*: takes structure apart, builds structure up.
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/Lulzx/carpintero/zipball/v0.1.1"
+                info: #[
+                        entry: "carpintero.art"
+                        requires: [
+                                >=
+                                 0.10.0
+                        ]
+                        executable: false
+                        depends: [
+
+                        ]
+                ]
+        ]
+         #[
+                version: 0.1.0
+                date: to :date "2026-08-05T15:40:37+00:00"
+                link: "https://github.com/Lulzx/carpintero/releases/tag/v0.1.0"
+                details: #[
+                        size: 383363
+                        files: 46
+                        readme: {
+                                # Carpintero
+                                
+                                *Documentation: <https://lulzx.com/carpintero/>*
+                                
+                                A PARSE-class grammar dialect for [Arturo](https://arturo-lang.io): rules are
+                                ordinary Arturo blocks that compose, nest, and recurse, and they match
+                                strings *and* blocks, so Arturo can pattern-match its own source.
+                                
+                                ```red
+                                digit: charset "0-9"
+                                
+                                date: [
+                                    capture 'year  [4 digit]  "-"
+                                    capture 'month [2 digit]  "-"
+                                    capture 'day   [2 digit]
+                                ]
+                                
+                                scan "2026-08-03" date
+                                ; => [year: "2026" month: "08" day: "03"]
+                                ```
+                                
+                                `scan` returns a dictionary of captures, or `null` on failure. `scan?`
+                                returns a boolean. `scan.prefix` accepts a prefix match and reports how far
+                                it reached. After a failed scan, `scanError` tells you where and why:
+                                
+                                ```
+                                scan "2026-08-0x" date
+                                print scanError
+                                ; scan failed at line 1, column 10 — expected: digit  (while matching: day)
+                                ;     2026-08-0x
+                                ;              ^
+                                ```
+                                
+                                A terminal that has a rule name is reported by that name, the innermost
+                                enclosing rule or capture becomes the while-matching context, and the
+                                offending line is shown with a caret under the column. For block input
+                                the report gives an index, or a path of indices into the nested
+                                structure when the failure is inside `into`.
+                                
+                                Block input uses the language's own type values as terminals:
+                                
+                                ```red
+                                funcdef: [
+                                    capture 'name :label
+                                    'function
+                                    capture 'params :block
+                                    capture 'body   :block
+                                ]
+                                
+                                scan code [any [funcdef | skip]]
+                                ```
+                                
+                                ## Using it
+                                
+                                Import it by name and Arturo fetches it from
+                                [pkgr.art](https://pkgr.art):
+                                
+                                ```red
+                                import "carpintero"!
+                                
+                                digit: charset "0-9"
+                                scan "2026-08-03" [capture 'year [4 digit] "-" capture 'month [2 digit] "-" capture 'day [2 digit]]
+                                ```
+                                
+                                `arturo -p install carpintero` fetches it ahead of time instead, and
+                                `import.version:0.1.0 "carpintero"!` pins a release.
+                                
+                                Keep the trailing `!`. It imports the package before the rest of the file
+                                is parsed, so `scan` and `charset` are read as calls. Written without it,
+                                those words evaluate to the functions themselves, and `digit: charset "0-9"`
+                                binds `digit` to `charset`.
+                                
+                                One file, no dependencies, nothing to build: copying `carpintero.art` next
+                                to your script and writing `import ./"carpintero.art"!` works too.
+                                Arturo 0.10.0 or later.
+                                
+                                ## Vocabulary
+                                
+                                | Group | Words |
+                                | --- | --- |
+                                | Quantify | `some` (1+), `any` (0+), `opt`, `N rule`, `between N M rule` |
+                                | Choose | `\|` ordered alternation, blocks for grouping |
+                                | Advance | `to` (exclusive), `thru` (inclusive), `skip`, `end` |
+                                | Look | `ahead`, `not` |
+                                | Capture | `capture 'name rule`, `collect 'name rule` + `keep rule` |
+                                | Descend | `into rule` (match a nested block in full with its own rules) |
+                                | Escape | `do [...]` host code, `defer [...]` commit-time host code, `quote value` literal match, `fail "msg"` |
+                                | Commit | `cut` (commit the innermost enclosing choice) |
+                                | Match | strings, chars, charsets, `:type` values, `'word` literals, named rules |
+                                
+                                Charsets are values and compose: `csUnion`, `csIntersect`,
+                                `csComplement` (the unprefixed words belong to core, for blocks).
+                                
+                                Two utilities ride along. `stripComments` removes comments from a source
+                                string with a Carpintero grammar, and `loadSafe` reads a file, strips it,
+                                and returns the lexed block, sidestepping the 0.10.0 lexer bug where a
+                                backslash in a `;;` documentation comment hangs the interpreter
+                                (`examples/safeload.art` runs a file that hangs `arturo` directly).
+                                
+                                ## Two implementations
+                                
+                                `carpintero.art` is the reference: the whole dialect in pure Arturo,
+                                covering the proposal's Phase 0 to 2 and the interpreted half of Phase 3
+                                (`cut`, `defer`, opt-in memoization, benchmarks). It is the specification,
+                                and where the two disagree it is the one that is right.
+                                
+                                [`nim/`](nim/README.md) is the compiled core the proposal asks upstream
+                                for: an LPeg-style instruction set matching text and blocks, built
+                                standalone so it needs no Arturo build to develop. The two share no
+                                matching code, so they are held together by running the same grammar over
+                                the same input and comparing:
+                                
+                                ```
+                                scripts/differential-corpus.sh ../arturo
+                                ```
+                                
+                                Over Arturo's own source both engines find the same 287 definitions in the
+                                same 168 files, with the same captures and no disagreement.
+                                
+                                Reaching that speed from Arturo needs a builtin, which would mean changing
+                                Arturo, so this package does not. `nim/adapter/fast.art` goes through the
+                                FFI instead, which is worth having and still not the engine:
+                                
+                                | | Corpus scan | |
+                                | --- | ---: | --- |
+                                | `scan` | 15.8 s | pure Arturo, the reference |
+                                | `scanFast` | 0.25 s | the shared library, no change to Arturo |
+                                | the core on values it already holds | 0.03 s | what direct access would expose |
+                                
+                                Most of the middle row is serialisation: 0.19 seconds to render the input
+                                against 0.045 to cross the boundary and match, after five rounds of making
+                                the two ends faster. The measurement, and what it argues, is in
+                                [nim/README.md](nim/README.md).
+                                
+                                ## Semantics worth knowing
+                                
+                                Four that surprise people. All deliberate, all argued in
+                                [proposal.md](proposal.md), all covered in full by [MANUAL.md](MANUAL.md).
+                                
+                                - **The whole input must match.** A rule that matches a prefix and stops
+                                  short is a failure. `scan.prefix` is the other mode.
+                                - **A capture survives only if the match consumed the input it names.** One
+                                  made in an alternative that later fails leaves nothing behind, and the same
+                                  goes for `keep`; Rebol and Red do the opposite, on purpose here. Failing is
+                                  not the only way to consume nothing, so `ahead`, `not` and the exclusive
+                                  `to` roll their operand's captures back too, while `thru` keeps what it
+                                  consumed.
+                                - **`do` escapes may run more than once**, on parse paths that are later
+                                  abandoned, so they should compute rather than mutate. `defer` is the sound
+                                  alternative: queued in the capture log, run once on overall success, and
+                                  discarded with a dead branch.
+                                - **Loops cannot spin.** In `some` and `any`, an *optional* pass that
+                                  matches without consuming ends the loop, and is not taken: what it
+                                  captured rolls back with it. Mandatory passes are always taken, which is
+                                  the whole difference between the two, since `some rule` is one mandatory
+                                  pass followed by `any rule`. The counted forms need no guard at all,
+                                  because a bound already terminates them, so `4 rule` and `between 2 5
+                                  rule` run their body whether or not it consumes, and `between 2 2 rule`
+                                  means what `2 rule` means. Left recursion is rejected at scan start with
+                                  the cycle named.
+                                
+                                Matching is case-sensitive and works on characters, not bytes.
+                                
+                                ## Running everything
+                                
+                                ```
+                                scripts/run-tests.sh
+                                ```
+                                
+                                | Suite | What it covers |
+                                | --- | --- |
+                                | `tests.art` | 377 checks over the interpreted matcher |
+                                | `tests-panics.art` | 18 grammar errors, one interpreter each |
+                                | `nim/tests/test_vm.nim` | 48 checks over the compiled core |
+                                | `nim/tests/test_wire.nim` | the FFI input read both ways and compared |
+                                | `nim/tests/differential.nim` | 78 cases run in both engines and compared |
+                                | `demo.art` | 72 checks, written to be read rather than to cover |
+                                
+                                The panic cases need one interpreter apiece: a panic unwound through `try`
+                                leaves the abandoned frames' values behind for the next statements to
+                                misread, so a single process cannot check more than one of them.
+                                
+                                Those suites ask the questions someone thought to ask. `scripts/fuzz.sh`
+                                asks the rest:
+                                
+                                ```
+                                scripts/fuzz.sh 10 100
+                                ```
+                                
+                                Each batch writes random grammars with the interpreted answer attached and
+                                reruns them in the compiled core, which is the differential runner reading
+                                its ordinary case format. Grammars are well formed by construction, so a
+                                batch that dies is a finding rather than noise, and every batch leaves a
+                                listing beside its case file naming the grammar behind each disagreement.
+                                Four semantic disagreements came out of it, each shrunk to a grammar a
+                                line long and now pinned in the tables above: which passes of a loop are
+                                guarded, whether a bounded repeat counts a pass that consumed nothing,
+                                and what the empty string means against a block.
+                                
+                                ## Examples
+                                
+                                [`examples/`](examples/README.md) holds the proposal's three demos, each
+                                runnable on its own: JSON in nine rules over two charsets (`json.art`),
+                                RFC 4180 CSV in seven (`csv.art`), and Arturo scanning its own source, one
+                                rule extracting every function definition from `carpintero.art` itself
+                                (`arturo-scan.art`).
+                                
+                                `arturo-corpus.art` takes that last one all the way. Point it at a checkout
+                                of Arturo and it runs both grammars over every `.art` file in the language's
+                                own tree. On a megabyte of source, stripping comments never once changed the
+                                program the lexer builds, and a five-line block grammar found all 287
+                                function definitions at every nesting depth. [The write-up is in the
+                                manual](MANUAL.md#validation-against-arturos-own-source), including the
+                                interpreter bug it turned up.
+                                
+                                `bench.art` is the Phase 3 benchmark: `scan` losing to the native regex
+                                engine by the expected orders of magnitude, memoization collapsing a
+                                deliberately exponential grammar from a sixth of a second to a millisecond
+                                and a half, and a cost per kilobyte that stays flat as the input doubles.
+                                
+                                ## Interpreter bugs
+                                
+                                Writing the dialect turned up three Arturo 0.10.0 interpreter bugs: a
+                                backslash in a `;;` documentation comment that hangs the lexer, a
+                                value-stack underflow that exits 1 without a word, and a `:symbolliteral`
+                                that is not equal to itself. The first two came from writing the dialect
+                                and the third from running it over Arturo's own test suite. A fourth
+                                candidate is not a bug: a value left unused inside a callee is popped as an
+                                argument by the enclosing call, which is the value stack working as
+                                designed, down to the displaced argument waiting there for the next call
+                                that wants one. Each has an in-language workaround, used in
+                                `carpintero.art`; `examples/hangs-the-lexer.art` is the repro for the
+                                first, and `examples/safeload.art` loads it anyway.
+                                
+                                ## Reading
+                                
+                                - [TUTORIAL.md](TUTORIAL.md), the guided path from a first `scan` to
+                                  walking a source tree.
+                                - [MANUAL.md](MANUAL.md), the full reference: every word, the error report,
+                                  memoization, the PEG pitfalls and their fixes.
+                                - [proposal.md](proposal.md), the design rationale and the case for
+                                  upstreaming.
+                                - [nim/README.md](nim/README.md), the compiled core and what it measured.
+                                
+                                ## Name
+                                
+                                *Carpintero*, the woodpecker: works through material methodically, a piece
+                                at a time. Also *carpenter*: takes structure apart, builds structure up.
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/Lulzx/carpintero/zipball/v0.1.0"
+                info: #[
+                        entry: "carpintero.art"
+                        requires: [
+                                >=
+                                 0.10.0
+                        ]
+                        executable: false
+                        depends: [
+
+                        ]
+                ]
+        ]
+]

@@ -1,0 +1,26 @@
+
+name: "carpintero"
+fullName: "Lulzx/carpintero"
+url: "https://github.com/Lulzx/carpintero"
+description: "PARSE-class grammar dialect for Arturo"
+tags: [
+                "arturo"
+                 "arturo-language"
+                 "arturo-package"
+                 "dialect"
+                 "grammar"
+                 "parse"
+                 "parser"
+                 "peg"
+                 "rebol"
+        ]
+stats: #[
+        stars: 0
+        watch: 0
+        ]
+author: #[
+        name: "Lulzx"
+        url: "https://github.com/Lulzx"
+        avatar: "https://avatars.githubusercontent.com/u/22330483?v=4"
+        ]
+

@@ -1,0 +1,1442 @@
+[
+        #[
+                version: 0.3.0
+                date: to :date "2026-08-05T17:54:48+00:00"
+                link: "https://github.com/Lulzx/schema.art/releases/tag/v0.3.0"
+                details: #[
+                        size: 85328
+                        files: 19
+                        readme: {
+                                <div align="center">
+                                
+                                <img src="docs/logo.svg" width="140" alt="schema"/>
+                                
+                                # schema
+                                
+                                ### Say what a value must be. Get back every field that disagrees.
+                                
+                                [![License](https://img.shields.io/badge/license-MIT-555555.svg?style=for-the-badge)](LICENSE) [![Language](https://img.shields.io/badge/language-Arturo-6A7FC8.svg?style=for-the-badge)](https://arturo-lang.io)
+                                
+                                </div>
+                                
+                                ---
+                                
+                                A schema is an ordinary Arturo dictionary. Constraints are ordinary blocks. Nothing here is a macro or a special form. The dialect is data that `check` knows how to read.
+                                
+                                ```red
+                                import "schema"!
+                                
+                                email: {/[a-z0-9._]+@[a-z0-9]+\.[a-z]{2,}/}
+                                
+                                address: #[
+                                    street: [:string min: 3]
+                                    city:   [:string]
+                                ]
+                                
+                                user: #[
+                                    name: [:string between: 2..64]
+                                    mail: [:string matches: email]
+                                    age:  [:integer opt min: 18]
+                                    role: [:string in: ["admin" "editor" "viewer"]]
+                                    tags: [:block opt of: [:string min: 1]]
+                                    home: [:dictionary of: address]
+                                ]
+                                
+                                check? user #[name: "Ada" mail: "ada@example.com" role: "admin"
+                                              home: #[street: "Main" city: "AKL"]]
+                                ; => true
+                                ```
+                                
+                                Where it fails, it says where and why:
+                                
+                                ```red
+                                print explain check user #[name: "A" mail: "nope" role: "wizard"
+                                                           home: #[street: "X"] extra: 1]
+                                ```
+                                
+                                ```
+                                - name should be within 2..64
+                                - mail should match email
+                                - role should be one of [admin editor viewer]
+                                - home.street should be at least 3
+                                - home.city is required
+                                - extra is not a known field
+                                ```
+                                
+                                ## Install
+                                
+                                ```sh
+                                arturo -p install schema
+                                ```
+                                
+                                Then, from anywhere:
+                                
+                                ```red
+                                import "schema"!
+                                ```
+                                
+                                Arturo 0.10.0 or newer, and nothing else.
+                                
+                                ## Interface
+                                
+                                | | |
+                                |---|---|
+                                | `check schema value` | block of faults; an empty block means valid |
+                                | `check? schema value` | logical |
+                                | `coerce schema value` | a transformed copy; never fails, never judges |
+                                | `conform schema value` | the coerced value, or `null` if it won't do |
+                                | `example schema` | a value the schema accepts |
+                                | `explain faults` | one line per fault, for humans |
+                                
+                                `check`, `check?` and `conform` all take `.open`, which tolerates keys the schema does not mention, at every level of the value rather than only at the root.
+                                
+                                A fault is a plain dictionary, so you can group, filter or reshape it however you like:
+                                
+                                ```red
+                                #[path: ["home" "city"]  code: 'missing]
+                                #[path: ["tags" 1]       code: 'tooSmall  expected: 1  got: ""]
+                                ```
+                                
+                                `path` runs from the root of the checked value to the offending field: strings for dictionary keys, integers for block indices. An empty path is the root itself.
+                                
+                                ## Constraints
+                                
+                                A type is a bare type literal: `:string`, `:integer`, `:block`, `:dictionary`, or any other Arturo type. It is optional; leave it out to accept anything.
+                                
+                                `opt` (also spelled `optional`) makes a field optional. Fields are required by default.
+                                
+                                The rules:
+                                
+                                | | |
+                                |---|---|
+                                | `min:` / `max:` | bounds a number by value, anything else by length |
+                                | `between:` | a range, e.g. `2..64`, applied the same way |
+                                | `in:` | membership in a block |
+                                | `size:` | exact length |
+                                | `matches:` | a regex the whole value must match |
+                                | `of:` | element or sub-schema constraints |
+                                | `example:` | a value for `example` to use; ignored when checking |
+                                
+                                `of:` takes a nested schema when the field is a dictionary, and a constraint block applied to each element when it is a block. Nesting goes as deep as you like.
+                                
+                                `matches:` takes a regex, written out or named:
+                                
+                                ```red
+                                handle: {/[a-z][a-z0-9-]*/}
+                                account: #[ user: [:string matches: handle] ]
+                                
+                                check account #[user: "9lives"]
+                                ; => [#[path: ["user"] code: 'pattern expected: "handle" got: "9lives"]]
+                                ```
+                                
+                                The pattern must cover the **whole** value, not merely occur somewhere inside it. Arturo's own `match?` is a search, so `[a-z]+` alone would accept `"abc123"`. Anchors are therefore optional, and harmless if you prefer them. Name your patterns: the name is what shows up in the fault, and `should match handle` reads better than the expression echoed back.
+                                
+                                Declaring `matches:` on a field typed as anything but `:string` is a schema mistake, and reported once at compile time rather than once per value.
+                                
+                                ## Coercion
+                                
+                                `check` is strict: a field typed `:integer` holding `"42"` is a fault. `conform` parses first and judges the result, which suits values arriving as text: CLI arguments, query strings, CSV rows, environment variables.
+                                
+                                ```red
+                                settings: #[
+                                    port: [:integer between: 1024..65535]
+                                    role: [:string default: "viewer"]
+                                ]
+                                
+                                conform settings #[port: "8080"]
+                                ; => #[port: 8080  role: "viewer"]
+                                
+                                conform settings #[port: "80"]
+                                ; => null
+                                ```
+                                
+                                `coerce` is the transform on its own. It never validates, so it always returns something, which is also how you get the reasons behind a `null`:
+                                
+                                ```red
+                                check schema coerce schema value
+                                ```
+                                
+                                Only text is parsed, and only into scalars: `:integer`, `:floating` and `:logical` from strings that spell them unambiguously, plus `:integer` widening to `:floating`. Nothing is ever coerced *into* a string. `to :string` succeeds on anything, so allowing that direction would launder every type error in the schema into a pass. Anything that can't be converted is passed through untouched for `check` to judge.
+                                
+                                `default:` fills a field that isn't there, and only ever in `coerce` and `conform`. `check` reports on the value as given, so a field with a default is still `missing` to `check`. A default is something you asked for, not something the data claimed.
+                                
+                                Both functions return a copy. Dictionaries alias on assignment in Arturo, so the value you pass in is left unmodified at any depth.
+                                
+                                ## Generating values
+                                
+                                A schema read forwards is a validator. Read backwards it is a generator, which makes it its own test fixture:
+                                
+                                ```red
+                                example account
+                                ; => #[name: "abc"  port: 1024  role: "admin"  tags: ["abc" "abc" "abc"]]
+                                ```
+                                
+                                `example` is deterministic, so you can assert against it. `example.random` varies instead, which turns a schema into a fuzzer for the checker. The property under test is that every example satisfies the schema it came from:
+                                
+                                ```red
+                                loop 1..200 'i [
+                                    v: example.random account
+                                    unless empty? check account v -> print ["counterexample:" v]
+                                ]
+                                ```
+                                
+                                It honours value and length bounds, `in:` sets, exact sizes, nested schemas and block elements. In random mode optional fields are sometimes absent, since that is a distinct shape of value worth generating.
+                                
+                                It cannot invent two things. A regex does not run backwards, and an exotic type is a gap in the generator rather than in the schema. Both come out as `null`, which `check` then reports. The fix in either case is `example:`, a value the generator uses verbatim:
+                                
+                                ```red
+                                #[ handle: [:string matches: handleRule example: "lulzx"] ]
+                                ```
+                                
+                                `example:` is ignored when checking; it exists only to be read backwards.
+                                
+                                The function and the rule share a name because they share an idea: a value the schema accepts. `example:` states one the generator could not have invented, and `example` derives the rest. Two words for that would have been two words for the same thing.
+                                
+                                Not `sample`, which is already an Arturo builtin, and this package splices into the caller's scope. Taking that name would break `sample [1 2 3]` for anyone importing it.
+                                
+                                That reasoning covers the whole package, not just the one name. `import "schema"!` splices exactly six words worth having -- `check`, `check?`, `coerce`, `conform`, `example` and `explain` -- and every internal is prefixed `esc` so that nothing else you import, or name yourself, collides with it. `describe` in particular belongs to [unitt](https://github.com/RickBarretto/unitt); schema's own fault renderer is `schDescribe`.
+                                
+                                ## Design
+                                
+                                Fields are required by default. A schema states what is allowed, so silence means "not allowed". The same reasoning makes the check closed by default: a key the schema does not mention is a fault rather than a shrug, and `.open` is the escape hatch.
+                                
+                                Every fault is collected. Sibling fields are checked independently, so one bad field never hides another. The walk stops only at a value that fails its *type* check, where there is nothing left to descend into and reporting phantom missing fields underneath would be noise.
+                                
+                                `check` mutates nothing and throws nothing, including on a malformed schema, a value no rule can measure, or a schema that is not a dictionary at all. A bad constraint surfaces as a `badSchema` fault at the field's own path rather than an exception from somewhere in the walker, and a rule that cannot hold -- `min:` against a logical, `size:` against a number -- is reported as the ordinary fault it is. `example` reads the same diagnostics: a schema it cannot run backwards yields null rather than a guess.
+                                
+                                Validation and coercion are separate passes. `check` answers a question and changes nothing; `coerce` changes things and answers nothing. Keeping them apart lets you run `check` against a schema you don't trust, and makes the coercion rules auditable on their own. `conform` is the two composed.
+                                
+                                A constraint block is a value, so reuse is ordinary assignment:
+                                
+                                ```red
+                                shortName: [:string min: 2 max: 8]
+                                person: #[ first: shortName  last: shortName ]
+                                ```
+                                
+                                ## Working with inert blocks
+                                
+                                Constraint blocks are never evaluated, which is what makes them inspectable, but it means anything with its own syntax arrives as loose tokens. `schema` folds the shapes that matter back into real values, so they read the way they do in ordinary Arturo:
+                                
+                                - `between: 2..64` arrives as `2`, `..`, `64` and is rebuilt into a range
+                                - `of: #[city: [:string]]` arrives as `#` followed by a block and is rebuilt into a dictionary
+                                - `of: address` arrives as the *word* `address` and is resolved to the schema it names
+                                - `default: false` arrives as the *word* `false` and is folded back into a logical, inside blocks as well, so `in: [true false]` reads the way it looks
+                                
+                                Regex literals need no such handling. They survive a constraint block intact.
+                                
+                                `.open` is read with `attr` rather than `attr?`. In 0.10.0 a refinement seen by `attr?` stays visible to every later call in the process, so a single `check.open` made every subsequent `check` open too. A regression test covers it.
+                                
+                                ## Status
+                                
+                                Types, presence, all the rules, nesting, paths, schema diagnostics, coercion, defaults and generation are implemented. The suite covers them, including a differential pass that fuzzes the checker against its own generator, and a sweep of every rule against every shape of value that holds the walker to its promise of throwing nothing. No dependencies beyond Arturo itself.
+                                
+                                ## Tests
+                                
+                                The suite runs on [unitt](https://github.com/RickBarretto/unitt):
+                                
+                                ```sh
+                                arturo -p install unitt
+                                ~/.arturo/packages/bin/unitt
+                                ```
+                                
+                                Or run the examples directly:
+                                
+                                ```sh
+                                arturo examples/basic.art
+                                arturo examples/conform.art
+                                arturo examples/fuzz.art
+                                ```
+                                
+                                ## License
+                                
+                                MIT
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/Lulzx/schema.art/zipball/v0.3.0"
+                info: #[
+                        entry: "src/schema.art"
+                        executable: false
+                        depends: [
+
+                        ]
+                        requires: [
+                                >=
+                                 0.10.0
+                        ]
+                        name: "schema"
+                        description: "Validate whole Arturo values against schemas that are themselves ordinary data"
+                        version: 0.3.0
+                        license: "MIT"
+                        authors: [
+                                "Lulzx"
+                        ]
+                        homepage: "https://github.com/Lulzx/schema.art"
+                        repository: "https://github.com/Lulzx/schema.art"
+                        keywords: [
+                                arturo
+                                 schema
+                                 validation
+                                 dialect
+                        ]
+                        categories: [
+                                development
+                                 library
+                        ]
+                ]
+        ]
+         #[
+                version: 0.2.1
+                date: to :date "2026-08-05T17:43:01+00:00"
+                link: "https://github.com/Lulzx/schema.art/releases/tag/v0.2.1"
+                details: #[
+                        size: 84799
+                        files: 19
+                        readme: {
+                                <div align="center">
+                                
+                                <img src="docs/logo.svg" width="140" alt="schema"/>
+                                
+                                # schema
+                                
+                                ### Say what a value must be. Get back every field that disagrees.
+                                
+                                [![License](https://img.shields.io/badge/license-MIT-555555.svg?style=for-the-badge)](LICENSE) [![Language](https://img.shields.io/badge/language-Arturo-6A7FC8.svg?style=for-the-badge)](https://arturo-lang.io)
+                                
+                                </div>
+                                
+                                ---
+                                
+                                A schema is an ordinary Arturo dictionary. Constraints are ordinary blocks. Nothing here is a macro or a special form. The dialect is data that `check` knows how to read.
+                                
+                                ```red
+                                import "schema"!
+                                
+                                email: {/[a-z0-9._]+@[a-z0-9]+\.[a-z]{2,}/}
+                                
+                                address: #[
+                                    street: [:string min: 3]
+                                    city:   [:string]
+                                ]
+                                
+                                user: #[
+                                    name: [:string between: 2..64]
+                                    mail: [:string matches: email]
+                                    age:  [:integer opt min: 18]
+                                    role: [:string in: ["admin" "editor" "viewer"]]
+                                    tags: [:block opt of: [:string min: 1]]
+                                    home: [:dictionary of: address]
+                                ]
+                                
+                                check? user #[name: "Ada" mail: "ada@example.com" role: "admin"
+                                              home: #[street: "Main" city: "AKL"]]
+                                ; => true
+                                ```
+                                
+                                Where it fails, it says where and why:
+                                
+                                ```red
+                                print explain check user #[name: "A" mail: "nope" role: "wizard"
+                                                           home: #[street: "X"] extra: 1]
+                                ```
+                                
+                                ```
+                                - name should be within 2..64
+                                - mail should match email
+                                - role should be one of [admin editor viewer]
+                                - home.street should be at least 3
+                                - home.city is required
+                                - extra is not a known field
+                                ```
+                                
+                                ## Install
+                                
+                                ```sh
+                                arturo -p install schema
+                                ```
+                                
+                                Then, from anywhere:
+                                
+                                ```red
+                                import "schema"!
+                                ```
+                                
+                                Arturo 0.10.0 or newer, and nothing else.
+                                
+                                ## Interface
+                                
+                                | | |
+                                |---|---|
+                                | `check schema value` | block of faults; an empty block means valid |
+                                | `check? schema value` | logical |
+                                | `coerce schema value` | a transformed copy; never fails, never judges |
+                                | `conform schema value` | the coerced value, or `null` if it won't do |
+                                | `specimen schema` | a value the schema accepts |
+                                | `explain faults` | one line per fault, for humans |
+                                
+                                `check`, `check?` and `conform` all take `.open`, which tolerates keys the schema does not mention, at every level of the value rather than only at the root.
+                                
+                                A fault is a plain dictionary, so you can group, filter or reshape it however you like:
+                                
+                                ```red
+                                #[path: ["home" "city"]  code: 'missing]
+                                #[path: ["tags" 1]       code: 'tooSmall  expected: 1  got: ""]
+                                ```
+                                
+                                `path` runs from the root of the checked value to the offending field: strings for dictionary keys, integers for block indices. An empty path is the root itself.
+                                
+                                ## Constraints
+                                
+                                A type is a bare type literal: `:string`, `:integer`, `:block`, `:dictionary`, or any other Arturo type. It is optional; leave it out to accept anything.
+                                
+                                `opt` (also spelled `optional`) makes a field optional. Fields are required by default.
+                                
+                                The rules:
+                                
+                                | | |
+                                |---|---|
+                                | `min:` / `max:` | bounds a number by value, anything else by length |
+                                | `between:` | a range, e.g. `2..64`, applied the same way |
+                                | `in:` | membership in a block |
+                                | `size:` | exact length |
+                                | `matches:` | a regex the whole value must match |
+                                | `of:` | element or sub-schema constraints |
+                                | `example:` | a value for `specimen` to use; ignored when checking |
+                                
+                                `of:` takes a nested schema when the field is a dictionary, and a constraint block applied to each element when it is a block. Nesting goes as deep as you like.
+                                
+                                `matches:` takes a regex, written out or named:
+                                
+                                ```red
+                                handle: {/[a-z][a-z0-9-]*/}
+                                account: #[ user: [:string matches: handle] ]
+                                
+                                check account #[user: "9lives"]
+                                ; => [#[path: ["user"] code: 'pattern expected: "handle" got: "9lives"]]
+                                ```
+                                
+                                The pattern must cover the **whole** value, not merely occur somewhere inside it. Arturo's own `match?` is a search, so `[a-z]+` alone would accept `"abc123"`. Anchors are therefore optional, and harmless if you prefer them. Name your patterns: the name is what shows up in the fault, and `should match handle` reads better than the expression echoed back.
+                                
+                                Declaring `matches:` on a field typed as anything but `:string` is a schema mistake, and reported once at compile time rather than once per value.
+                                
+                                ## Coercion
+                                
+                                `check` is strict: a field typed `:integer` holding `"42"` is a fault. `conform` parses first and judges the result, which suits values arriving as text: CLI arguments, query strings, CSV rows, environment variables.
+                                
+                                ```red
+                                settings: #[
+                                    port: [:integer between: 1024..65535]
+                                    role: [:string default: "viewer"]
+                                ]
+                                
+                                conform settings #[port: "8080"]
+                                ; => #[port: 8080  role: "viewer"]
+                                
+                                conform settings #[port: "80"]
+                                ; => null
+                                ```
+                                
+                                `coerce` is the transform on its own. It never validates, so it always returns something, which is also how you get the reasons behind a `null`:
+                                
+                                ```red
+                                check schema coerce schema value
+                                ```
+                                
+                                Only text is parsed, and only into scalars: `:integer`, `:floating` and `:logical` from strings that spell them unambiguously, plus `:integer` widening to `:floating`. Nothing is ever coerced *into* a string. `to :string` succeeds on anything, so allowing that direction would launder every type error in the schema into a pass. Anything that can't be converted is passed through untouched for `check` to judge.
+                                
+                                `default:` fills a field that isn't there, and only ever in `coerce` and `conform`. `check` reports on the value as given, so a field with a default is still `missing` to `check`. A default is something you asked for, not something the data claimed.
+                                
+                                Both functions return a copy. Dictionaries alias on assignment in Arturo, so the value you pass in is left unmodified at any depth.
+                                
+                                ## Generating values
+                                
+                                A schema read forwards is a validator. Read backwards it is a generator, which makes it its own test fixture:
+                                
+                                ```red
+                                specimen account
+                                ; => #[name: "abc"  port: 1024  role: "admin"  tags: ["abc" "abc" "abc"]]
+                                ```
+                                
+                                `specimen` is deterministic, so you can assert against it. `specimen.random` varies instead, which turns a schema into a fuzzer for the checker. The property under test is that every specimen satisfies the schema it came from:
+                                
+                                ```red
+                                loop 1..200 'i [
+                                    v: specimen.random account
+                                    unless empty? check account v -> print ["counterexample:" v]
+                                ]
+                                ```
+                                
+                                It honours value and length bounds, `in:` sets, exact sizes, nested schemas and block elements. In random mode optional fields are sometimes absent, since that is a distinct shape of value worth generating.
+                                
+                                It cannot invent two things. A regex does not run backwards, and an exotic type is a gap in the generator rather than in the schema. Both come out as `null`, which `check` then reports. The fix in either case is `example:`, a value the generator uses verbatim:
+                                
+                                ```red
+                                #[ handle: [:string matches: handleRule example: "lulzx"] ]
+                                ```
+                                
+                                `example:` is ignored when checking; it exists only to be read backwards.
+                                
+                                It is called `specimen` rather than `sample` because `sample` is already an Arturo builtin, and this package splices into the caller's scope. Taking that name would break `sample [1 2 3]` for anyone importing it.
+                                
+                                That reasoning covers the whole package, not just the one name. `import "schema"!` splices exactly six words worth having -- `check`, `check?`, `coerce`, `conform`, `specimen` and `explain` -- and every internal is prefixed `esc` so that nothing else you import, or name yourself, collides with it. `describe` in particular belongs to [unitt](https://github.com/RickBarretto/unitt); schema's own fault renderer is `schDescribe`.
+                                
+                                ## Design
+                                
+                                Fields are required by default. A schema states what is allowed, so silence means "not allowed". The same reasoning makes the check closed by default: a key the schema does not mention is a fault rather than a shrug, and `.open` is the escape hatch.
+                                
+                                Every fault is collected. Sibling fields are checked independently, so one bad field never hides another. The walk stops only at a value that fails its *type* check, where there is nothing left to descend into and reporting phantom missing fields underneath would be noise.
+                                
+                                `check` mutates nothing and throws nothing, including on a malformed schema, a value no rule can measure, or a schema that is not a dictionary at all. A bad constraint surfaces as a `badSchema` fault at the field's own path rather than an exception from somewhere in the walker, and a rule that cannot hold -- `min:` against a logical, `size:` against a number -- is reported as the ordinary fault it is. `specimen` reads the same diagnostics: a schema it cannot run backwards yields null rather than a guess.
+                                
+                                Validation and coercion are separate passes. `check` answers a question and changes nothing; `coerce` changes things and answers nothing. Keeping them apart lets you run `check` against a schema you don't trust, and makes the coercion rules auditable on their own. `conform` is the two composed.
+                                
+                                A constraint block is a value, so reuse is ordinary assignment:
+                                
+                                ```red
+                                shortName: [:string min: 2 max: 8]
+                                person: #[ first: shortName  last: shortName ]
+                                ```
+                                
+                                ## Working with inert blocks
+                                
+                                Constraint blocks are never evaluated, which is what makes them inspectable, but it means anything with its own syntax arrives as loose tokens. `schema` folds the shapes that matter back into real values, so they read the way they do in ordinary Arturo:
+                                
+                                - `between: 2..64` arrives as `2`, `..`, `64` and is rebuilt into a range
+                                - `of: #[city: [:string]]` arrives as `#` followed by a block and is rebuilt into a dictionary
+                                - `of: address` arrives as the *word* `address` and is resolved to the schema it names
+                                - `default: false` arrives as the *word* `false` and is folded back into a logical, inside blocks as well, so `in: [true false]` reads the way it looks
+                                
+                                Regex literals need no such handling. They survive a constraint block intact.
+                                
+                                `.open` is read with `attr` rather than `attr?`. In 0.10.0 a refinement seen by `attr?` stays visible to every later call in the process, so a single `check.open` made every subsequent `check` open too. A regression test covers it.
+                                
+                                ## Status
+                                
+                                Types, presence, all the rules, nesting, paths, schema diagnostics, coercion, defaults and generation are implemented. The suite covers them, including a differential pass that fuzzes the checker against its own generator, and a sweep of every rule against every shape of value that holds the walker to its promise of throwing nothing. No dependencies beyond Arturo itself.
+                                
+                                ## Tests
+                                
+                                The suite runs on [unitt](https://github.com/RickBarretto/unitt):
+                                
+                                ```sh
+                                arturo -p install unitt
+                                ~/.arturo/packages/bin/unitt
+                                ```
+                                
+                                Or run the examples directly:
+                                
+                                ```sh
+                                arturo examples/basic.art
+                                arturo examples/conform.art
+                                arturo examples/fuzz.art
+                                ```
+                                
+                                ## License
+                                
+                                MIT
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/Lulzx/schema.art/zipball/v0.2.1"
+                info: #[
+                        entry: "src/schema.art"
+                        executable: false
+                        depends: [
+
+                        ]
+                        requires: [
+                                >=
+                                 0.10.0
+                        ]
+                        name: "schema"
+                        description: "Validate whole Arturo values against schemas that are themselves ordinary data"
+                        version: 0.2.1
+                        license: "MIT"
+                        authors: [
+                                "Lulzx"
+                        ]
+                        homepage: "https://github.com/Lulzx/schema.art"
+                        repository: "https://github.com/Lulzx/schema.art"
+                        keywords: [
+                                arturo
+                                 schema
+                                 validation
+                                 dialect
+                        ]
+                        categories: [
+                                development
+                                 library
+                        ]
+                ]
+        ]
+         #[
+                version: 0.2.0
+                date: to :date "2026-08-05T17:40:27+00:00"
+                link: "https://github.com/Lulzx/schema.art/releases/tag/v0.2.0"
+                details: #[
+                        size: 84784
+                        files: 19
+                        readme: {
+                                <div align="center">
+                                
+                                <img src="docs/logo.svg" width="140" alt="schema"/>
+                                
+                                # schema
+                                
+                                ### Validation for whole values, not single strings
+                                
+                                [![License](https://img.shields.io/badge/license-MIT-555555.svg?style=for-the-badge)](LICENSE) [![Language](https://img.shields.io/badge/language-Arturo-6A7FC8.svg?style=for-the-badge)](https://arturo-lang.io)
+                                
+                                </div>
+                                
+                                ---
+                                
+                                A schema is an ordinary Arturo dictionary. Constraints are ordinary blocks. Nothing here is a macro or a special form. The dialect is data that `check` knows how to read.
+                                
+                                ```red
+                                import "schema"!
+                                
+                                email: {/[a-z0-9._]+@[a-z0-9]+\.[a-z]{2,}/}
+                                
+                                address: #[
+                                    street: [:string min: 3]
+                                    city:   [:string]
+                                ]
+                                
+                                user: #[
+                                    name: [:string between: 2..64]
+                                    mail: [:string matches: email]
+                                    age:  [:integer opt min: 18]
+                                    role: [:string in: ["admin" "editor" "viewer"]]
+                                    tags: [:block opt of: [:string min: 1]]
+                                    home: [:dictionary of: address]
+                                ]
+                                
+                                check? user #[name: "Ada" mail: "ada@example.com" role: "admin"
+                                              home: #[street: "Main" city: "AKL"]]
+                                ; => true
+                                ```
+                                
+                                Where it fails, it says where and why:
+                                
+                                ```red
+                                print explain check user #[name: "A" mail: "nope" role: "wizard"
+                                                           home: #[street: "X"] extra: 1]
+                                ```
+                                
+                                ```
+                                - name should be within 2..64
+                                - mail should match email
+                                - role should be one of [admin editor viewer]
+                                - home.street should be at least 3
+                                - home.city is required
+                                - extra is not a known field
+                                ```
+                                
+                                ## Install
+                                
+                                ```sh
+                                arturo -p install schema
+                                ```
+                                
+                                Then, from anywhere:
+                                
+                                ```red
+                                import "schema"!
+                                ```
+                                
+                                Arturo 0.10.0 or newer, and nothing else.
+                                
+                                ## Interface
+                                
+                                | | |
+                                |---|---|
+                                | `check schema value` | block of faults; an empty block means valid |
+                                | `check? schema value` | logical |
+                                | `coerce schema value` | a transformed copy; never fails, never judges |
+                                | `conform schema value` | the coerced value, or `null` if it won't do |
+                                | `specimen schema` | a value the schema accepts |
+                                | `explain faults` | one line per fault, for humans |
+                                
+                                `check`, `check?` and `conform` all take `.open`, which tolerates keys the schema does not mention, at every level of the value rather than only at the root.
+                                
+                                A fault is a plain dictionary, so you can group, filter or reshape it however you like:
+                                
+                                ```red
+                                #[path: ["home" "city"]  code: 'missing]
+                                #[path: ["tags" 1]       code: 'tooSmall  expected: 1  got: ""]
+                                ```
+                                
+                                `path` runs from the root of the checked value to the offending field: strings for dictionary keys, integers for block indices. An empty path is the root itself.
+                                
+                                ## Constraints
+                                
+                                A type is a bare type literal: `:string`, `:integer`, `:block`, `:dictionary`, or any other Arturo type. It is optional; leave it out to accept anything.
+                                
+                                `opt` (also spelled `optional`) makes a field optional. Fields are required by default.
+                                
+                                The rules:
+                                
+                                | | |
+                                |---|---|
+                                | `min:` / `max:` | bounds a number by value, anything else by length |
+                                | `between:` | a range, e.g. `2..64`, applied the same way |
+                                | `in:` | membership in a block |
+                                | `size:` | exact length |
+                                | `matches:` | a regex the whole value must match |
+                                | `of:` | element or sub-schema constraints |
+                                | `example:` | a value for `specimen` to use; ignored when checking |
+                                
+                                `of:` takes a nested schema when the field is a dictionary, and a constraint block applied to each element when it is a block. Nesting goes as deep as you like.
+                                
+                                `matches:` takes a regex, written out or named:
+                                
+                                ```red
+                                handle: {/[a-z][a-z0-9-]*/}
+                                account: #[ user: [:string matches: handle] ]
+                                
+                                check account #[user: "9lives"]
+                                ; => [#[path: ["user"] code: 'pattern expected: "handle" got: "9lives"]]
+                                ```
+                                
+                                The pattern must cover the **whole** value, not merely occur somewhere inside it. Arturo's own `match?` is a search, so `[a-z]+` alone would accept `"abc123"`. Anchors are therefore optional, and harmless if you prefer them. Name your patterns: the name is what shows up in the fault, and `should match handle` reads better than the expression echoed back.
+                                
+                                Declaring `matches:` on a field typed as anything but `:string` is a schema mistake, and reported once at compile time rather than once per value.
+                                
+                                ## Coercion
+                                
+                                `check` is strict: a field typed `:integer` holding `"42"` is a fault. `conform` parses first and judges the result, which suits values arriving as text: CLI arguments, query strings, CSV rows, environment variables.
+                                
+                                ```red
+                                settings: #[
+                                    port: [:integer between: 1024..65535]
+                                    role: [:string default: "viewer"]
+                                ]
+                                
+                                conform settings #[port: "8080"]
+                                ; => #[port: 8080  role: "viewer"]
+                                
+                                conform settings #[port: "80"]
+                                ; => null
+                                ```
+                                
+                                `coerce` is the transform on its own. It never validates, so it always returns something, which is also how you get the reasons behind a `null`:
+                                
+                                ```red
+                                check schema coerce schema value
+                                ```
+                                
+                                Only text is parsed, and only into scalars: `:integer`, `:floating` and `:logical` from strings that spell them unambiguously, plus `:integer` widening to `:floating`. Nothing is ever coerced *into* a string. `to :string` succeeds on anything, so allowing that direction would launder every type error in the schema into a pass. Anything that can't be converted is passed through untouched for `check` to judge.
+                                
+                                `default:` fills a field that isn't there, and only ever in `coerce` and `conform`. `check` reports on the value as given, so a field with a default is still `missing` to `check`. A default is something you asked for, not something the data claimed.
+                                
+                                Both functions return a copy. Dictionaries alias on assignment in Arturo, so the value you pass in is left unmodified at any depth.
+                                
+                                ## Generating values
+                                
+                                A schema read forwards is a validator. Read backwards it is a generator, which makes it its own test fixture:
+                                
+                                ```red
+                                specimen account
+                                ; => #[name: "abc"  port: 1024  role: "admin"  tags: ["abc" "abc" "abc"]]
+                                ```
+                                
+                                `specimen` is deterministic, so you can assert against it. `specimen.random` varies instead, which turns a schema into a fuzzer for the checker. The property under test is that every specimen satisfies the schema it came from:
+                                
+                                ```red
+                                loop 1..200 'i [
+                                    v: specimen.random account
+                                    unless empty? check account v -> print ["counterexample:" v]
+                                ]
+                                ```
+                                
+                                It honours value and length bounds, `in:` sets, exact sizes, nested schemas and block elements. In random mode optional fields are sometimes absent, since that is a distinct shape of value worth generating.
+                                
+                                It cannot invent two things. A regex does not run backwards, and an exotic type is a gap in the generator rather than in the schema. Both come out as `null`, which `check` then reports. The fix in either case is `example:`, a value the generator uses verbatim:
+                                
+                                ```red
+                                #[ handle: [:string matches: handleRule example: "lulzx"] ]
+                                ```
+                                
+                                `example:` is ignored when checking; it exists only to be read backwards.
+                                
+                                It is called `specimen` rather than `sample` because `sample` is already an Arturo builtin, and this package splices into the caller's scope. Taking that name would break `sample [1 2 3]` for anyone importing it.
+                                
+                                That reasoning covers the whole package, not just the one name. `import "schema"!` splices exactly six words worth having -- `check`, `check?`, `coerce`, `conform`, `specimen` and `explain` -- and every internal is prefixed `esc` so that nothing else you import, or name yourself, collides with it. `describe` in particular belongs to [unitt](https://github.com/RickBarretto/unitt); schema's own fault renderer is `schDescribe`.
+                                
+                                ## Design
+                                
+                                Fields are required by default. A schema states what is allowed, so silence means "not allowed". The same reasoning makes the check closed by default: a key the schema does not mention is a fault rather than a shrug, and `.open` is the escape hatch.
+                                
+                                Every fault is collected. Sibling fields are checked independently, so one bad field never hides another. The walk stops only at a value that fails its *type* check, where there is nothing left to descend into and reporting phantom missing fields underneath would be noise.
+                                
+                                `check` mutates nothing and throws nothing, including on a malformed schema, a value no rule can measure, or a schema that is not a dictionary at all. A bad constraint surfaces as a `badSchema` fault at the field's own path rather than an exception from somewhere in the walker, and a rule that cannot hold -- `min:` against a logical, `size:` against a number -- is reported as the ordinary fault it is. `specimen` reads the same diagnostics: a schema it cannot run backwards yields null rather than a guess.
+                                
+                                Validation and coercion are separate passes. `check` answers a question and changes nothing; `coerce` changes things and answers nothing. Keeping them apart lets you run `check` against a schema you don't trust, and makes the coercion rules auditable on their own. `conform` is the two composed.
+                                
+                                A constraint block is a value, so reuse is ordinary assignment:
+                                
+                                ```red
+                                shortName: [:string min: 2 max: 8]
+                                person: #[ first: shortName  last: shortName ]
+                                ```
+                                
+                                ## Working with inert blocks
+                                
+                                Constraint blocks are never evaluated, which is what makes them inspectable, but it means anything with its own syntax arrives as loose tokens. `schema` folds the shapes that matter back into real values, so they read the way they do in ordinary Arturo:
+                                
+                                - `between: 2..64` arrives as `2`, `..`, `64` and is rebuilt into a range
+                                - `of: #[city: [:string]]` arrives as `#` followed by a block and is rebuilt into a dictionary
+                                - `of: address` arrives as the *word* `address` and is resolved to the schema it names
+                                - `default: false` arrives as the *word* `false` and is folded back into a logical, inside blocks as well, so `in: [true false]` reads the way it looks
+                                
+                                Regex literals need no such handling. They survive a constraint block intact.
+                                
+                                `.open` is read with `attr` rather than `attr?`. In 0.10.0 a refinement seen by `attr?` stays visible to every later call in the process, so a single `check.open` made every subsequent `check` open too. A regression test covers it.
+                                
+                                ## Status
+                                
+                                Types, presence, all the rules, nesting, paths, schema diagnostics, coercion, defaults and generation are implemented. The suite covers them, including a differential pass that fuzzes the checker against its own generator, and a sweep of every rule against every shape of value that holds the walker to its promise of throwing nothing. No dependencies beyond Arturo itself.
+                                
+                                ## Tests
+                                
+                                The suite runs on [unitt](https://github.com/RickBarretto/unitt):
+                                
+                                ```sh
+                                arturo -p install unitt
+                                ~/.arturo/packages/bin/unitt
+                                ```
+                                
+                                Or run the examples directly:
+                                
+                                ```sh
+                                arturo examples/basic.art
+                                arturo examples/conform.art
+                                arturo examples/fuzz.art
+                                ```
+                                
+                                ## License
+                                
+                                MIT
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/Lulzx/schema.art/zipball/v0.2.0"
+                info: #[
+                        entry: "src/schema.art"
+                        executable: false
+                        depends: [
+
+                        ]
+                        requires: [
+                                >=
+                                 0.10.0
+                        ]
+                        name: "schema"
+                        description: "Validate whole Arturo values against schemas that are themselves ordinary data"
+                        version: 0.2.0
+                        license: "MIT"
+                        authors: [
+                                "Lulzx"
+                        ]
+                        homepage: "https://github.com/Lulzx/schema.art"
+                        repository: "https://github.com/Lulzx/schema.art"
+                        keywords: [
+                                arturo
+                                 schema
+                                 validation
+                                 dialect
+                        ]
+                        categories: [
+                                development
+                                 library
+                        ]
+                ]
+        ]
+         #[
+                version: 0.1.1
+                date: to :date "2026-08-05T17:35:34+00:00"
+                link: "https://github.com/Lulzx/schema.art/releases/tag/v0.1.1"
+                details: #[
+                        size: 84717
+                        files: 19
+                        readme: {
+                                <div align="center">
+                                
+                                <img src="docs/logo.svg" width="140" alt="escuadra"/>
+                                
+                                # escuadra
+                                
+                                ### Schema validation for Arturo
+                                
+                                [![License](https://img.shields.io/badge/license-MIT-555555.svg?style=for-the-badge)](LICENSE) [![Language](https://img.shields.io/badge/language-Arturo-6A7FC8.svg?style=for-the-badge)](https://arturo-lang.io)
+                                
+                                </div>
+                                
+                                ---
+                                
+                                A schema is an ordinary Arturo dictionary. Constraints are ordinary blocks. Nothing here is a macro or a special form. The dialect is data that `check` knows how to read.
+                                
+                                ```red
+                                import "escuadra"!
+                                
+                                email: {/[a-z0-9._]+@[a-z0-9]+\.[a-z]{2,}/}
+                                
+                                address: #[
+                                    street: [:string min: 3]
+                                    city:   [:string]
+                                ]
+                                
+                                user: #[
+                                    name: [:string between: 2..64]
+                                    mail: [:string matches: email]
+                                    age:  [:integer opt min: 18]
+                                    role: [:string in: ["admin" "editor" "viewer"]]
+                                    tags: [:block opt of: [:string min: 1]]
+                                    home: [:dictionary of: address]
+                                ]
+                                
+                                check? user #[name: "Ada" mail: "ada@example.com" role: "admin"
+                                              home: #[street: "Main" city: "AKL"]]
+                                ; => true
+                                ```
+                                
+                                Where it fails, it says where and why:
+                                
+                                ```red
+                                print explain check user #[name: "A" mail: "nope" role: "wizard"
+                                                           home: #[street: "X"] extra: 1]
+                                ```
+                                
+                                ```
+                                - name should be within 2..64
+                                - mail should match email
+                                - role should be one of [admin editor viewer]
+                                - home.street should be at least 3
+                                - home.city is required
+                                - extra is not a known field
+                                ```
+                                
+                                ## Install
+                                
+                                ```sh
+                                arturo -p install escuadra
+                                ```
+                                
+                                Then, from anywhere:
+                                
+                                ```red
+                                import "escuadra"!
+                                ```
+                                
+                                Arturo 0.10.0 or newer, and nothing else.
+                                
+                                ## Interface
+                                
+                                | | |
+                                |---|---|
+                                | `check schema value` | block of faults; an empty block means valid |
+                                | `check? schema value` | logical |
+                                | `coerce schema value` | a transformed copy; never fails, never judges |
+                                | `conform schema value` | the coerced value, or `null` if it won't do |
+                                | `specimen schema` | a value the schema accepts |
+                                | `explain faults` | one line per fault, for humans |
+                                
+                                `check`, `check?` and `conform` all take `.open`, which tolerates keys the schema does not mention, at every level of the value rather than only at the root.
+                                
+                                A fault is a plain dictionary, so you can group, filter or reshape it however you like:
+                                
+                                ```red
+                                #[path: ["home" "city"]  code: 'missing]
+                                #[path: ["tags" 1]       code: 'tooSmall  expected: 1  got: ""]
+                                ```
+                                
+                                `path` runs from the root of the checked value to the offending field: strings for dictionary keys, integers for block indices. An empty path is the root itself.
+                                
+                                ## Constraints
+                                
+                                A type is a bare type literal: `:string`, `:integer`, `:block`, `:dictionary`, or any other Arturo type. It is optional; leave it out to accept anything.
+                                
+                                `opt` (also spelled `optional`) makes a field optional. Fields are required by default.
+                                
+                                The rules:
+                                
+                                | | |
+                                |---|---|
+                                | `min:` / `max:` | bounds a number by value, anything else by length |
+                                | `between:` | a range, e.g. `2..64`, applied the same way |
+                                | `in:` | membership in a block |
+                                | `size:` | exact length |
+                                | `matches:` | a regex the whole value must match |
+                                | `of:` | element or sub-schema constraints |
+                                | `example:` | a value for `specimen` to use; ignored when checking |
+                                
+                                `of:` takes a nested schema when the field is a dictionary, and a constraint block applied to each element when it is a block. Nesting goes as deep as you like.
+                                
+                                `matches:` takes a regex, written out or named:
+                                
+                                ```red
+                                handle: {/[a-z][a-z0-9-]*/}
+                                account: #[ user: [:string matches: handle] ]
+                                
+                                check account #[user: "9lives"]
+                                ; => [#[path: ["user"] code: 'pattern expected: "handle" got: "9lives"]]
+                                ```
+                                
+                                The pattern must cover the **whole** value, not merely occur somewhere inside it. Arturo's own `match?` is a search, so `[a-z]+` alone would accept `"abc123"`. Anchors are therefore optional, and harmless if you prefer them. Name your patterns: the name is what shows up in the fault, and `should match handle` reads better than the expression echoed back.
+                                
+                                Declaring `matches:` on a field typed as anything but `:string` is a schema mistake, and reported once at compile time rather than once per value.
+                                
+                                ## Coercion
+                                
+                                `check` is strict: a field typed `:integer` holding `"42"` is a fault. `conform` parses first and judges the result, which suits values arriving as text: CLI arguments, query strings, CSV rows, environment variables.
+                                
+                                ```red
+                                settings: #[
+                                    port: [:integer between: 1024..65535]
+                                    role: [:string default: "viewer"]
+                                ]
+                                
+                                conform settings #[port: "8080"]
+                                ; => #[port: 8080  role: "viewer"]
+                                
+                                conform settings #[port: "80"]
+                                ; => null
+                                ```
+                                
+                                `coerce` is the transform on its own. It never validates, so it always returns something, which is also how you get the reasons behind a `null`:
+                                
+                                ```red
+                                check schema coerce schema value
+                                ```
+                                
+                                Only text is parsed, and only into scalars: `:integer`, `:floating` and `:logical` from strings that spell them unambiguously, plus `:integer` widening to `:floating`. Nothing is ever coerced *into* a string. `to :string` succeeds on anything, so allowing that direction would launder every type error in the schema into a pass. Anything that can't be converted is passed through untouched for `check` to judge.
+                                
+                                `default:` fills a field that isn't there, and only ever in `coerce` and `conform`. `check` reports on the value as given, so a field with a default is still `missing` to `check`. A default is something you asked for, not something the data claimed.
+                                
+                                Both functions return a copy. Dictionaries alias on assignment in Arturo, so the value you pass in is left unmodified at any depth.
+                                
+                                ## Generating values
+                                
+                                A schema read forwards is a validator. Read backwards it is a generator, which makes it its own test fixture:
+                                
+                                ```red
+                                specimen account
+                                ; => #[name: "abc"  port: 1024  role: "admin"  tags: ["abc" "abc" "abc"]]
+                                ```
+                                
+                                `specimen` is deterministic, so you can assert against it. `specimen.random` varies instead, which turns a schema into a fuzzer for the checker. The property under test is that every specimen satisfies the schema it came from:
+                                
+                                ```red
+                                loop 1..200 'i [
+                                    v: specimen.random account
+                                    unless empty? check account v -> print ["counterexample:" v]
+                                ]
+                                ```
+                                
+                                It honours value and length bounds, `in:` sets, exact sizes, nested schemas and block elements. In random mode optional fields are sometimes absent, since that is a distinct shape of value worth generating.
+                                
+                                It cannot invent two things. A regex does not run backwards, and an exotic type is a gap in the generator rather than in the schema. Both come out as `null`, which `check` then reports. The fix in either case is `example:`, a value the generator uses verbatim:
+                                
+                                ```red
+                                #[ handle: [:string matches: handleRule example: "lulzx"] ]
+                                ```
+                                
+                                `example:` is ignored when checking; it exists only to be read backwards.
+                                
+                                It is called `specimen` rather than `sample` because `sample` is already an Arturo builtin, and escuadra splices into the caller's scope. Taking that name would break `sample [1 2 3]` for anyone importing this.
+                                
+                                That reasoning covers the whole package, not just the one name. `import "escuadra"!` splices exactly six words worth having -- `check`, `check?`, `coerce`, `conform`, `specimen` and `explain` -- and every internal is prefixed `esc` so that nothing else you import, or name yourself, collides with it. `describe` in particular belongs to [unitt](https://github.com/RickBarretto/unitt); escuadra's own fault renderer is `escDescribe`.
+                                
+                                ## Design
+                                
+                                Fields are required by default. A schema states what is allowed, so silence means "not allowed". The same reasoning makes the check closed by default: a key the schema does not mention is a fault rather than a shrug, and `.open` is the escape hatch.
+                                
+                                Every fault is collected. Sibling fields are checked independently, so one bad field never hides another. The walk stops only at a value that fails its *type* check, where there is nothing left to descend into and reporting phantom missing fields underneath would be noise.
+                                
+                                `check` mutates nothing and throws nothing, including on a malformed schema, a value no rule can measure, or a schema that is not a dictionary at all. A bad constraint surfaces as a `badSchema` fault at the field's own path rather than an exception from somewhere in the walker, and a rule that cannot hold -- `min:` against a logical, `size:` against a number -- is reported as the ordinary fault it is. `specimen` reads the same diagnostics: a schema it cannot run backwards yields null rather than a guess.
+                                
+                                Validation and coercion are separate passes. `check` answers a question and changes nothing; `coerce` changes things and answers nothing. Keeping them apart lets you run `check` against a schema you don't trust, and makes the coercion rules auditable on their own. `conform` is the two composed.
+                                
+                                A constraint block is a value, so reuse is ordinary assignment:
+                                
+                                ```red
+                                shortName: [:string min: 2 max: 8]
+                                person: #[ first: shortName  last: shortName ]
+                                ```
+                                
+                                ## Working with inert blocks
+                                
+                                Constraint blocks are never evaluated, which is what makes them inspectable, but it means anything with its own syntax arrives as loose tokens. `escuadra` folds the shapes that matter back into real values, so they read the way they do in ordinary Arturo:
+                                
+                                - `between: 2..64` arrives as `2`, `..`, `64` and is rebuilt into a range
+                                - `of: #[city: [:string]]` arrives as `#` followed by a block and is rebuilt into a dictionary
+                                - `of: address` arrives as the *word* `address` and is resolved to the schema it names
+                                - `default: false` arrives as the *word* `false` and is folded back into a logical, inside blocks as well, so `in: [true false]` reads the way it looks
+                                
+                                Regex literals need no such handling. They survive a constraint block intact.
+                                
+                                `.open` is read with `attr` rather than `attr?`. In 0.10.0 a refinement seen by `attr?` stays visible to every later call in the process, so a single `check.open` made every subsequent `check` open too. A regression test covers it.
+                                
+                                ## Status
+                                
+                                Types, presence, all the rules, nesting, paths, schema diagnostics, coercion, defaults and generation are implemented. The suite covers them, including a differential pass that fuzzes the checker against its own generator, and a sweep of every rule against every shape of value that holds the walker to its promise of throwing nothing. No dependencies beyond Arturo itself.
+                                
+                                ## Tests
+                                
+                                The suite runs on [unitt](https://github.com/RickBarretto/unitt):
+                                
+                                ```sh
+                                arturo -p install unitt
+                                ~/.arturo/packages/bin/unitt
+                                ```
+                                
+                                Or run the examples directly:
+                                
+                                ```sh
+                                arturo examples/basic.art
+                                arturo examples/conform.art
+                                arturo examples/fuzz.art
+                                ```
+                                
+                                ## License
+                                
+                                MIT
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/Lulzx/schema.art/zipball/v0.1.1"
+                info: #[
+                        entry: "src/escuadra.art"
+                        executable: false
+                        depends: [
+
+                        ]
+                        requires: [
+                                >=
+                                 0.10.0
+                        ]
+                        name: "escuadra"
+                        description: "Schema validation for Arturo"
+                        version: 0.1.1
+                        license: "MIT"
+                        authors: [
+                                "Lulzx"
+                        ]
+                        homepage: "https://github.com/Lulzx/escuadra"
+                        repository: "https://github.com/Lulzx/escuadra"
+                        keywords: [
+                                arturo
+                                 schema
+                                 validation
+                                 dialect
+                        ]
+                        categories: [
+                                development
+                                 library
+                        ]
+                ]
+        ]
+         #[
+                version: 0.1.0
+                date: to :date "2026-08-05T17:26:37+00:00"
+                link: "https://github.com/Lulzx/schema.art/releases/tag/v0.1.0"
+                details: #[
+                        size: 83923
+                        files: 19
+                        readme: {
+                                <div align="center">
+                                
+                                <img src="docs/logo.svg" width="140" alt="escuadra"/>
+                                
+                                # escuadra
+                                
+                                ### Schema validation for Arturo
+                                
+                                [![License](https://img.shields.io/badge/license-MIT-555555.svg?style=for-the-badge)](LICENSE) [![Language](https://img.shields.io/badge/language-Arturo-6A7FC8.svg?style=for-the-badge)](https://arturo-lang.io)
+                                
+                                </div>
+                                
+                                ---
+                                
+                                A schema is an ordinary Arturo dictionary. Constraints are ordinary blocks. Nothing here is a macro or a special form. The dialect is data that `check` knows how to read.
+                                
+                                ```red
+                                import "escuadra"!
+                                
+                                email: {/[a-z0-9._]+@[a-z0-9]+\.[a-z]{2,}/}
+                                
+                                address: #[
+                                    street: [:string min: 3]
+                                    city:   [:string]
+                                ]
+                                
+                                user: #[
+                                    name: [:string between: 2..64]
+                                    mail: [:string matches: email]
+                                    age:  [:integer opt min: 18]
+                                    role: [:string in: ["admin" "editor" "viewer"]]
+                                    tags: [:block opt of: [:string min: 1]]
+                                    home: [:dictionary of: address]
+                                ]
+                                
+                                check? user #[name: "Ada" mail: "ada@example.com" role: "admin"
+                                              home: #[street: "Main" city: "AKL"]]
+                                ; => true
+                                ```
+                                
+                                Where it fails, it says where and why:
+                                
+                                ```red
+                                print explain check user #[name: "A" mail: "nope" role: "wizard"
+                                                           home: #[street: "X"] extra: 1]
+                                ```
+                                
+                                ```
+                                - name should be within 2..64
+                                - mail should match email
+                                - role should be one of [admin editor viewer]
+                                - home.street should be at least 3
+                                - home.city is required
+                                - extra is not a known field
+                                ```
+                                
+                                ## Install
+                                
+                                ```sh
+                                arturo -p install escuadra
+                                ```
+                                
+                                Then, from anywhere:
+                                
+                                ```red
+                                import "escuadra"!
+                                ```
+                                
+                                Arturo 0.10.0 or newer, and nothing else.
+                                
+                                ## Interface
+                                
+                                | | |
+                                |---|---|
+                                | `check schema value` | block of faults; an empty block means valid |
+                                | `check? schema value` | logical |
+                                | `coerce schema value` | a transformed copy; never fails, never judges |
+                                | `conform schema value` | the coerced value, or `null` if it won't do |
+                                | `specimen schema` | a value the schema accepts |
+                                | `explain faults` | one line per fault, for humans |
+                                
+                                `check`, `check?` and `conform` all take `.open`, which tolerates keys the schema does not mention, at every level of the value rather than only at the root.
+                                
+                                A fault is a plain dictionary, so you can group, filter or reshape it however you like:
+                                
+                                ```red
+                                #[path: ["home" "city"]  code: 'missing]
+                                #[path: ["tags" 1]       code: 'tooSmall  expected: 1  got: ""]
+                                ```
+                                
+                                `path` runs from the root of the checked value to the offending field: strings for dictionary keys, integers for block indices. An empty path is the root itself.
+                                
+                                ## Constraints
+                                
+                                A type is a bare type literal: `:string`, `:integer`, `:block`, `:dictionary`, or any other Arturo type. It is optional; leave it out to accept anything.
+                                
+                                `opt` (also spelled `optional`) makes a field optional. Fields are required by default.
+                                
+                                The rules:
+                                
+                                | | |
+                                |---|---|
+                                | `min:` / `max:` | bounds a number by value, anything else by length |
+                                | `between:` | a range, e.g. `2..64`, applied the same way |
+                                | `in:` | membership in a block |
+                                | `size:` | exact length |
+                                | `matches:` | a regex the whole value must match |
+                                | `of:` | element or sub-schema constraints |
+                                | `example:` | a value for `specimen` to use; ignored when checking |
+                                
+                                `of:` takes a nested schema when the field is a dictionary, and a constraint block applied to each element when it is a block. Nesting goes as deep as you like.
+                                
+                                `matches:` takes a regex, written out or named:
+                                
+                                ```red
+                                handle: {/[a-z][a-z0-9-]*/}
+                                account: #[ user: [:string matches: handle] ]
+                                
+                                check account #[user: "9lives"]
+                                ; => [#[path: ["user"] code: 'pattern expected: "handle" got: "9lives"]]
+                                ```
+                                
+                                The pattern must cover the **whole** value, not merely occur somewhere inside it. Arturo's own `match?` is a search, so `[a-z]+` alone would accept `"abc123"`. Anchors are therefore optional, and harmless if you prefer them. Name your patterns: the name is what shows up in the fault, and `should match handle` reads better than the expression echoed back.
+                                
+                                Declaring `matches:` on a field typed as anything but `:string` is a schema mistake, and reported once at compile time rather than once per value.
+                                
+                                ## Coercion
+                                
+                                `check` is strict: a field typed `:integer` holding `"42"` is a fault. `conform` parses first and judges the result, which suits values arriving as text: CLI arguments, query strings, CSV rows, environment variables.
+                                
+                                ```red
+                                settings: #[
+                                    port: [:integer between: 1024..65535]
+                                    role: [:string default: "viewer"]
+                                ]
+                                
+                                conform settings #[port: "8080"]
+                                ; => #[port: 8080  role: "viewer"]
+                                
+                                conform settings #[port: "80"]
+                                ; => null
+                                ```
+                                
+                                `coerce` is the transform on its own. It never validates, so it always returns something, which is also how you get the reasons behind a `null`:
+                                
+                                ```red
+                                check schema coerce schema value
+                                ```
+                                
+                                Only text is parsed, and only into scalars: `:integer`, `:floating` and `:logical` from strings that spell them unambiguously, plus `:integer` widening to `:floating`. Nothing is ever coerced *into* a string. `to :string` succeeds on anything, so allowing that direction would launder every type error in the schema into a pass. Anything that can't be converted is passed through untouched for `check` to judge.
+                                
+                                `default:` fills a field that isn't there, and only ever in `coerce` and `conform`. `check` reports on the value as given, so a field with a default is still `missing` to `check`. A default is something you asked for, not something the data claimed.
+                                
+                                Both functions return a copy. Dictionaries alias on assignment in Arturo, so the value you pass in is left unmodified at any depth.
+                                
+                                ## Generating values
+                                
+                                A schema read forwards is a validator. Read backwards it is a generator, which makes it its own test fixture:
+                                
+                                ```red
+                                specimen account
+                                ; => #[name: "abc"  port: 1024  role: "admin"  tags: ["abc" "abc" "abc"]]
+                                ```
+                                
+                                `specimen` is deterministic, so you can assert against it. `specimen.random` varies instead, which turns a schema into a fuzzer for the checker. The property under test is that every specimen satisfies the schema it came from:
+                                
+                                ```red
+                                loop 1..200 'i [
+                                    v: specimen.random account
+                                    unless empty? check account v -> print ["counterexample:" v]
+                                ]
+                                ```
+                                
+                                It honours value and length bounds, `in:` sets, exact sizes, nested schemas and block elements. In random mode optional fields are sometimes absent, since that is a distinct shape of value worth generating.
+                                
+                                It cannot invent two things. A regex does not run backwards, and an exotic type is a gap in the generator rather than in the schema. Both come out as `null`, which `check` then reports. The fix in either case is `example:`, a value the generator uses verbatim:
+                                
+                                ```red
+                                #[ handle: [:string matches: handleRule example: "lulzx"] ]
+                                ```
+                                
+                                `example:` is ignored when checking; it exists only to be read backwards.
+                                
+                                It is called `specimen` rather than `sample` because `sample` is already an Arturo builtin, and escuadra splices into the caller's scope. Taking that name would break `sample [1 2 3]` for anyone importing this.
+                                
+                                ## Design
+                                
+                                Fields are required by default. A schema states what is allowed, so silence means "not allowed". The same reasoning makes the check closed by default: a key the schema does not mention is a fault rather than a shrug, and `.open` is the escape hatch.
+                                
+                                Every fault is collected. Sibling fields are checked independently, so one bad field never hides another. The walk stops only at a value that fails its *type* check, where there is nothing left to descend into and reporting phantom missing fields underneath would be noise.
+                                
+                                `check` mutates nothing and throws nothing, including on a malformed schema, a value no rule can measure, or a schema that is not a dictionary at all. A bad constraint surfaces as a `badSchema` fault at the field's own path rather than an exception from somewhere in the walker, and a rule that cannot hold -- `min:` against a logical, `size:` against a number -- is reported as the ordinary fault it is. `specimen` reads the same diagnostics: a schema it cannot run backwards yields null rather than a guess.
+                                
+                                Validation and coercion are separate passes. `check` answers a question and changes nothing; `coerce` changes things and answers nothing. Keeping them apart lets you run `check` against a schema you don't trust, and makes the coercion rules auditable on their own. `conform` is the two composed.
+                                
+                                A constraint block is a value, so reuse is ordinary assignment:
+                                
+                                ```red
+                                shortName: [:string min: 2 max: 8]
+                                person: #[ first: shortName  last: shortName ]
+                                ```
+                                
+                                ## Working with inert blocks
+                                
+                                Constraint blocks are never evaluated, which is what makes them inspectable, but it means anything with its own syntax arrives as loose tokens. `escuadra` folds the shapes that matter back into real values, so they read the way they do in ordinary Arturo:
+                                
+                                - `between: 2..64` arrives as `2`, `..`, `64` and is rebuilt into a range
+                                - `of: #[city: [:string]]` arrives as `#` followed by a block and is rebuilt into a dictionary
+                                - `of: address` arrives as the *word* `address` and is resolved to the schema it names
+                                - `default: false` arrives as the *word* `false` and is folded back into a logical, inside blocks as well, so `in: [true false]` reads the way it looks
+                                
+                                Regex literals need no such handling. They survive a constraint block intact.
+                                
+                                `.open` is read with `attr` rather than `attr?`. In 0.10.0 a refinement seen by `attr?` stays visible to every later call in the process, so a single `check.open` made every subsequent `check` open too. A regression test covers it.
+                                
+                                ## Status
+                                
+                                Types, presence, all the rules, nesting, paths, schema diagnostics, coercion, defaults and generation are implemented. The suite covers them, including a differential pass that fuzzes the checker against its own generator, and a sweep of every rule against every shape of value that holds the walker to its promise of throwing nothing. No dependencies beyond Arturo itself.
+                                
+                                ## Tests
+                                
+                                The suite runs on [unitt](https://github.com/RickBarretto/unitt):
+                                
+                                ```sh
+                                arturo -p install unitt
+                                ~/.arturo/packages/bin/unitt
+                                ```
+                                
+                                Or run the examples directly:
+                                
+                                ```sh
+                                arturo examples/basic.art
+                                arturo examples/conform.art
+                                arturo examples/fuzz.art
+                                ```
+                                
+                                ## License
+                                
+                                MIT
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/Lulzx/schema.art/zipball/v0.1.0"
+                info: #[
+                        entry: "src/escuadra.art"
+                        executable: false
+                        depends: [
+
+                        ]
+                        requires: [
+                                >=
+                                 0.10.0
+                        ]
+                        name: "escuadra"
+                        description: "Schema validation for Arturo"
+                        version: 0.1.0
+                        license: "MIT"
+                        authors: [
+                                "Lulzx"
+                        ]
+                        homepage: "https://github.com/Lulzx/escuadra"
+                        repository: "https://github.com/Lulzx/escuadra"
+                        keywords: [
+                                arturo
+                                 schema
+                                 validation
+                                 dialect
+                        ]
+                        categories: [
+                                development
+                                 library
+                        ]
+                ]
+        ]
+]
