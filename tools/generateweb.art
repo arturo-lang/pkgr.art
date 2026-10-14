@@ -66,6 +66,23 @@ compressCSS: function [file][
     }
 ]
 
+fixRelativeLinks: function [htm, entry, version][
+    tag: last split.by:"/releases/tag/" version\link
+    repoUrl: entry\info\url
+
+    rawUrl: ~"https://raw.githubusercontent.com/|entry\info\fullName|/|tag|/"
+    blobUrl: ~"|repoUrl|/blob/|tag|/"
+    if prefix? repoUrl "https://codeberg.org" [
+        rawUrl: ~"|repoUrl|/raw/tag/|tag|/"
+        blobUrl: ~"|repoUrl|/src/tag/|tag|/"
+    ]
+
+    ; point relative srcs & hrefs (= no scheme, no leading // or #)
+    ; to the repo itself, at the given release
+    htm: replace htm {/(<[^>]+\ssrc\s*=\s*["']?)(?![a-zA-Z][a-zA-Z0-9+.-]*:|//|#|["'\s>])(?:\.?\/)?/} ~"$1|rawUrl|"
+    replace htm {/(<[^>]+\shref\s*=\s*["']?)(?![a-zA-Z][a-zA-Z0-9+.-]*:|//|#|["'\s>])(?:\.?\/)?/} ~"$1|blobUrl|"
+]
+
 getProperMarkdown: function [md][
     md >> "tmp.md" 
     ret: execute ~{ruby |relative "gfm.rb"| tmp.md}
