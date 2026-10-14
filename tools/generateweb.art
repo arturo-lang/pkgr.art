@@ -146,18 +146,8 @@ postprocessAlerts: function [src][
      ]
 ]
 
-postprocessImages: function [src,repoName][
-    replace src [
-        {#gh-dark-mode-only"}
-        {src="./}
-    ]@[
-        {#gh-dark-mode-only" style="display:none"}
-        ~{src="https://raw.githubusercontent.com/|repoName|/master/}
-    ]
-]
-
-postprocessHTML: function [htm, repoName][
-    postprocessImages postprocessAlerts htm repoName
+postprocessHTML: function [htm][
+    postprocessAlerts htm
 ]
 
 createSpecFile: function [package, versionToProcess, targetFolder][
@@ -213,7 +203,7 @@ loop packages [k,v][
 
 processPackagePage: function [entry][
     packageTitle: entry\name ++ " &bull; "
-    postprocessHTML render.template read "website/package.html" entry\info\fullName
+    postprocessHTML render.template read "website/package.html"
 ]
 
 searchable: write.compact.json searchable ø 
