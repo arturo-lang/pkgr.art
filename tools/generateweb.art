@@ -280,6 +280,10 @@ execute ~"sass website/style.scss |assetsFolder|/style.css"
 ; and compress it too
 compressCSS ~"|assetsFolder|/style.css"
 
+; make sure we actually have a stylesheet
+unless exists? ~"|assetsFolder|/style.css" ->
+    panic.code:1 "Couldn't compile the stylesheet!"
+
 ; copy resources
 loop list "website/images" 'file [
     if contains? [".jpg", ".png"] extract.extension file [
