@@ -12,7 +12,7 @@ defaults:
 jobs:
   Automation:
     if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: "Cancel similar actions in progress"
         uses: styfle/cancel-workflow-action@0.6.0
