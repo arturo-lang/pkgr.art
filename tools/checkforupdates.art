@@ -35,7 +35,7 @@ do ::
         versionFile: ~"packages/version/|name|.art"
         if exists? versionFile [
             try [
-                storedVersions: do "@" ++ read versionFile
+                storedVersions: do to :block "@" ++ read versionFile
                 unless empty? storedVersions [
                     storedVersion: storedVersions\0\version
                 ]
