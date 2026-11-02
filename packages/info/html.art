@@ -2,20 +2,24 @@
 name: "html.pkgr.art"
 fullName: "RickBarretto/html.pkgr.art"
 url: "https://github.com/RickBarretto/html.pkgr.art"
-description: "HTML generator for Arturo"
+description: "<html/>. Write HTML in Arturo. Skip the string juggling."
 tags: [
-                "arturo"
-                 "arturo-module"
-                 "css"
-                 "css3"
+                "artruro"
+                 "arturo-lang"
+                 "arturo-language"
+                 "arturo-package"
+                 "dsl"
                  "html"
-                 "html-generator"
+                 "html-builder"
+                 "html-generation"
                  "html5"
-                 "javascript"
+                 "pkgr-art"
+                 "serialization"
+                 "zero-dependency"
         ]
 stats: #[
-        stars: 5
-        watch: 5
+        stars: 6
+        watch: 6
         ]
 author: #[
         name: "RickBarretto"
