@@ -180,7 +180,7 @@ loop packages [k,v][
     print ~"- Processing main package: |k|"
     inf: # ~"packages/info/|k|.art"
     generateThumbnail k inf\author\name inf\description
-    vers: do "@" ++ read ~"packages/version/|k|.art" 
+    vers: do to :block "@" ++ read ~"packages/version/|k|.art" 
     ;--------------------------------
     ; DEBUGGING!
     ;--------------------------------
