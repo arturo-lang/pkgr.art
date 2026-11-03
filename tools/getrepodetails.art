@@ -269,6 +269,9 @@ getVersions: function [pkg][
     [owner, repo]: split.by:"/" pkg\location
     
     greaterThan: (attr 'greaterThan) ?? 0.0.0
+    ; when verifying, all we need to know is that there's at least one
+    ; valid release - no details, and no need to go through the rest
+    verifying?: true = attr 'verify
     available: new []
     write.directory ø "tmp"
 
@@ -290,7 +293,7 @@ getVersions: function [pkg][
                                 version: ver
                                 date: to :date release\published_at
                                 link: release\html_url
-                                details: getRepoDetails folder
+                                details: (verifying?)? -> ø -> getRepoDetails folder
                                 url: release\zipball_url
                                 info: releaseInfo
                             ]
@@ -298,6 +301,7 @@ getVersions: function [pkg][
                     ]
 
                     if directory? workdir -> delete.directory workdir
+                    if and? verifying? not? empty? available -> break
                 ]
             ]
         ]
