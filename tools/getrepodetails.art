@@ -7,6 +7,16 @@ IsCI?: key? env 'GITHUB_ACTION      ; if it's set, we're inside a GitHub workflo
 ; Helper methods
 ;--------------------------------------------------
 
+; `read` first checks whether a string is a URL - and in Arturo 0.10.0
+; anything containing "localhost:" is one (e.g. release notes mentioning
+; it). Going through a file keeps the response from being fetched as one.
+readJson: function [content][
+    write content "response.json"
+    ret: read.json "response.json"
+    delete "response.json"
+    return ret
+]
+
 getLicenseUrl: function [lc][
     if lc = "MIT" -> return "https://choosealicense.com/licenses/mit/"
     if lc = "Beerware" -> return "https://fedoraproject.org/wiki/Licensing/Beerware"
@@ -22,7 +32,7 @@ getGH: function [reqtype, req][
             got: execute ~{!sh
                 gh api -H "Accept: |accepting|" -H "X-GitHub-Api-Version: |apiVersion|" /|req|
             }
-            return read.json got
+            return readJson got
         ][
             got: request.get.headers: #[
                 "Accept": accepting
@@ -30,7 +40,7 @@ getGH: function [reqtype, req][
                 "X-GitHub-Api-Version": apiVersion
             ] ~{https://api.github.com/|req|} ø
             ;inspect got
-            return read.json got\body
+            return readJson got\body
         ]
     ]
 
@@ -40,7 +50,7 @@ getGH: function [reqtype, req][
         got: request.get.headers: #[
             "Accept": accepting
         ] ~{https://codeberg.org/api/v1/|req|} ø
-        return read.json got\body
+        return readJson got\body
     ]
 ]
 
