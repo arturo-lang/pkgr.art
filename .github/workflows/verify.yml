@@ -28,6 +28,12 @@ jobs:
         with:
           submodules: recursive
 
+      - name: "Get base package list"
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --depth=1 origin ${{ github.base_ref }}
+          git show FETCH_HEAD:packages/list.art > base-list.art
+
       - name: Run unit tests
         run: |
           echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
