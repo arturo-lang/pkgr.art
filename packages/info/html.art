@@ -2,7 +2,7 @@
 name: "html.pkgr.art"
 fullName: "RickBarretto/html.pkgr.art"
 url: "https://github.com/RickBarretto/html.pkgr.art"
-description: "<html/>. Write HTML in Arturo. Skip the string juggling."
+description: "Arturo HTML builder DSL. Tags become functions. Text is escaped for you. The result is compact HTML5, ready to print or write to a file."
 tags: [
                 "artruro"
                  "arturo-lang"
