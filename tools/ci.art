@@ -3,6 +3,19 @@ do ./"versioncontrol.art"
 packages: # "packages/list.art"
 do relative "getrepodetails.art"
 
+; on a PR, only verify the packages it adds or changes - the rest
+; have already been verified when they got in (if it changes none,
+; e.g. it touches the tools, verify everything)
+if exists? "base-list.art" [
+    base: # "base-list.art"
+    changed: select keys packages 'k -> or? not? key? base k [packages\[k] <> base\[k]]
+    unless empty? changed [
+        selected: #[]
+        loop changed 'k -> selected\[k]: packages\[k]
+        packages: selected
+    ]
+]
+
 do ::
     cnt: 1
     total: size packages
@@ -36,7 +49,7 @@ do ::
             hasError?: true
         ][
             fetchedBefore: size unreachableSources
-            versions: getVersions pkg
+            versions: getVersions.verify pkg
             couldntFetch?: (size unreachableSources) > fetchedBefore
 
             (couldntFetch?)? [
