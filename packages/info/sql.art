@@ -1,0 +1,28 @@
+
+name: "sql.pkgr.art"
+fullName: "RickBarretto/sql.pkgr.art"
+url: "https://github.com/RickBarretto/sql.pkgr.art"
+description: "Build SQL with Arturo blocks, compile it for SQLite or PostgreSQL, and keep SQL text separate from parameter values."
+tags: [
+                "arturo"
+                 "arturo-package"
+                 "dsl"
+                 "mysql"
+                 "postgres"
+                 "postgresql"
+                 "query"
+                 "query-builder"
+                 "sql"
+                 "sqlite"
+                 "sqlite3"
+        ]
+stats: #[
+        stars: 1
+        watch: 1
+        ]
+author: #[
+        name: "RickBarretto"
+        url: "https://github.com/RickBarretto"
+        avatar: "https://avatars.githubusercontent.com/u/78623871?v=4"
+        ]
+

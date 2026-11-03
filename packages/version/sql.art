@@ -1,0 +1,224 @@
+[
+        #[
+                version: 1.0.0
+                date: to :date "2026-11-03T01:21:52+00:00"
+                link: "https://github.com/RickBarretto/sql.pkgr.art/releases/tag/v1.0.0"
+                details: #[
+                        size: 2870373
+                        files: 117
+                        readme: {
+                                <h1 align="center"><i><b>SELECT</b> sql <b>AS</b> "À la Arturo"<b>;</b></i></h1>
+                                
+                                <p align="center">
+                                    <i>Build queries with expression.</i>
+                                    <br><br><br>
+                                    <img
+                                        src=./docs/icons/arturo-light-mode.png#gh-light-mode-only
+                                        alt=Arturo logo
+                                        width=20
+                                    />
+                                    <img
+                                        src=./docs/icons/arturo-dark-mode.png#gh-dark-mode-only
+                                        alt=Arturo logo
+                                        width=20
+                                    />
+                                    <br>
+                                    <b>~ CODE IS ART ~</b>
+                                    <br><br>
+                                </p>
+                                
+                                <p align="center">
+                                    <a href="https://www.arturo-lang.io"><img src="https://img.shields.io/badge/language-Arturo-6A156B.svg?&style=flat&colorA=000000&colorB=000000" alt="Language: Arturo"/></a>
+                                    &nbsp;
+                                    <a href="https://github.com/RickBarretto/pkgr.sql.art/blob/main/LICENSE"><img src="https://img.shields.io/github/license/RickBarretto/pkgr.sql.art?&style=flat&colorA=000000&colorB=000000" alt="License"/></a>
+                                    &nbsp;
+                                    <a href="https://github.com/RickBarretto/pkgr.sql.art/actions"><img src="https://img.shields.io/github/actions/workflow/status/RickBarretto/pkgr.sql.art/test.yml?branch=main&style=flat&colorA=000000&colorB=000000" alt="CI Status"/></a>
+                                </p>
+                                
+                                Build SQL with Arturo blocks, compile it for SQLite or PostgreSQL, and keep
+                                SQL text separate from parameter values.
+                                
+                                - **Query:** filters, joins, aggregates, subqueries, CTEs, and set operations.
+                                - **Write:** insert, update, and delete rows; define tables, views, and triggers.
+                                - **Inspect:** build a statement once, then choose a dialect when compiling.
+                                
+                                > [!IMPORTANT]
+                                > Requires **Arturo 0.10.0+**. SQLite execution is included. For PostgreSQL,
+                                > compile the statement and pass the output to your own driver.
+                                
+                                [Quick start](#quick-start) · [Run a query](#run-a-query) ·
+                                [Documentation](#documentation) · [Development](#development)
+                                
+                                ## At a glance
+                                
+                                <p align="center">
+                                    <img src="./docs/images/terminal.png" width="720" alt="Arturo SQL query filtering programming languages released since 2000, with Arturo, Rust and Go displayed in a tabular terminal table." />
+                                </p>
+                                
+                                Try this SQLite example with `arturo examples/languages.art`.
+                                It queries programming languages and formats the results with `tabular`.
+                                
+                                ## Installation
+                                
+                                ```sh
+                                arturo -p install sql
+                                ```
+                                
+                                ## Command-line interface
+                                
+                                The `sql` CLI lets you execute Arturo SQL DSL statements against SQLite databases or compile them into SQL without establishing a database connection.
+                                
+                                ### Usage
+                                
+                                ```sh
+                                # Display available commands and options
+                                sql --help
+                                
+                                # Execute a query (table output by default)
+                                sql query books.db 'from :books select title'
+                                
+                                # Execute a query and return JSON
+                                sql query books.db 'from :books select title' -o json
+                                
+                                # Read a DSL statement from a file
+                                sql query books.db --file examples/query.art
+                                
+                                # Compile a statement into PostgreSQL SQL
+                                sql compile 'from :books select title' -d postgres
+                                ```
+                                
+                                ### Commands
+                                
+                                - **`query`**: Executes a DSL statement against a SQLite database. Pass the expression directly, no `sql` statement needed.
+                                - **`compile`**: Generates SQL text and bound parameters without connecting to a database.
+                                
+                                Statements are privided directly in the CLI, but you may also load from files using `--file`/`-f`.
+                                
+                                Files must contain a single statement using our DSL.
+                                
+                                Run `sql <command> --help` for additional options and usage details.
+                                
+                                ## Quick start
+                                
+                                Import the package, build a statement, and compile it:
+                                
+                                ```art
+                                import {sql}!
+                                
+                                minimumAge: 18
+                                statement: sql [
+                                    from :users
+                                    select [id name]
+                                    where [age >= @minimumAge]
+                                    order 'name
+                                    limit 20
+                                ]
+                                
+                                compiled: to :sqliteQuery statement
+                                print compiled\text
+                                inspect compiled\params
+                                ```
+                                
+                                Inside `sql [...]`, names such as `age` refer to columns. Use `@minimumAge`
+                                to capture an Arturo variable as a parameter value.
+                                
+                                `sql` returns an inspectable statement dictionary. Conversion gives you
+                                `text` and `params` without executing the query. To target PostgreSQL instead,
+                                use `to :postgresQuery statement`.
+                                
+                                ## Run a query
+                                
+                                Use `sql.query:` with an open SQLite connection:
+                                
+                                ```art
+                                import {sql}!
+                                
+                                db: open.sqlite ":memory:"
+                                failure: try [
+                                    ignored: sql.query: db [create :books [column 'title :string]]
+                                    ignored: sql.query: db [insert.columns: 'title :books -> row ["River Atlas"]]
+                                    rows: sql.query: db [from :books select 'title]
+                                    print tabular.header: ["Title"] rows
+                                ]
+                                close db
+                                unless null? failure -> throw to :string failure
+                                ```
+                                
+                                You own the connection. This pattern closes it even if a query fails, then
+                                rethrows the error. For return values and formatting options, see
+                                [execution and formatting](api/API.md#execution-and-formatting).
+                                
+                                ## Documentation
+                                
+                                | Looking for… | Read |
+                                | --- | --- |
+                                | Commands, arguments, and validation rules | [API reference](api/API.md) |
+                                | Query layout and naming conventions | [Style guide](api/STYLE.md) |
+                                | Examples of a particular SQL feature | [Feature catalog](api/README.md) |
+                                | Dialect differences and driver output | [Compiled output](api/API.md#compiled-output) |
+                                | Planned features and dialect support | [Roadmap](TODO.md) |
+                                
+                                For runnable scripts, browse [examples/](examples/). From a local checkout:
+                                
+                                ```sh
+                                arturo src/main.art
+                                arturo examples/sqlite.art
+                                arturo examples/postgres.art
+                                ```
+                                
+                                The PostgreSQL example compiles SQL without opening a database.
+                                
+                                ## Development
+                                
+                                From the repository root:
+                                
+                                ```sh
+                                arturo -p install unitt
+                                unitt
+                                ```
+                                
+                                Use **Unitt 3.1.1+** and add `~/.arturo/packages/bin` to `PATH`.
+                                CI runs the suite on Linux, macOS, FreeBSD, and Windows.
+                                
+                                The suite covers statement construction, compilation, SQLite execution, and
+                                all feature catalog examples. The self-testing scripts in `examples/` provide
+                                additional usage checks; `examples/api.art` uses an in-memory database.
+                                
+                                ## License
+                                
+                                Released under the [MIT License](LICENSE).
+                                
+                        }
+                        license: #[
+                                name: "MIT"
+                                url: "https://choosealicense.com/licenses/mit/"
+                        ]
+                ]
+                url: "https://api.github.com/repos/RickBarretto/sql.pkgr.art/zipball/v1.0.0"
+                info: #[
+                        entry: "src/lib.art"
+                        executable: "src/main.art"
+                        depends: [
+                                [
+                                        climax
+                                         >=
+                                         0.1.0
+                                ]
+                                 [
+                                        tabular
+                                         >=
+                                         0.2.0
+                                ]
+                                 [
+                                        unitt
+                                         >=
+                                         3.1.1
+                                ]
+                        ]
+                        requires: [
+                                >=
+                                 0.10.0
+                        ]
+                ]
+        ]
+]
